@@ -1,4 +1,5 @@
 import re
+import json
 import networkx as nx
 from rdflib import URIRef,Graph,RDF
 
@@ -6,6 +7,8 @@ class NVGraph:
     def __init__(self,graph):
         self._graph = graph
         if len(self._graph) > 0:
+            for node in self._graph.nodes:
+                pass#print(node)
             self._max_key = max([node for node in self._graph.nodes])
         else:
             self._max_key = 1
@@ -35,6 +38,11 @@ class NVGraph:
         self._max_key += 1
         return self._max_key
     
+    def save(self,output):
+        g_json = nx.readwrite.json_graph.node_link_data(self._graph)
+        with open(output,'w') as f:
+            json.dump(g_json,f,indent=2)
+
     @max_key.setter
     def max_key(self,increase):
         self._max_key += increase
@@ -174,7 +182,7 @@ class NVGraph:
 
         for n,v,k,e in self.edges(keys=True,data=True):
             if "display_name" not in e.keys():
-                e["display_name"] = self._get_name(k[1])
+                e["display_name"] = self._get_name(k)
 
 
 def _isfloat(x):

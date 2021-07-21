@@ -1,5 +1,5 @@
 import networkx as nx
-from rdflib import Graph,RDF
+from rdflib import Graph,RDF,URIRef
 from utility.nv_identifiers import identifiers as nv_ids
 from converters.sbol.identifiers import identifiers as sbol_ids
 
@@ -17,7 +17,13 @@ def convert(filename):
             n_key = node_count
             node_map[entity] = n_key
             node_count += 1
-        graph.add_node(n_key, key=entity)
+        
+        if isinstance(entity, URIRef):
+            e_type = "URI"
+        else:
+            e_type = "Literal"
+
+        graph.add_node(n_key, key=entity,type=e_type)
         return n_key,node_count
 
     entities = sbol_graph.triples((None,RDF.type,sbol_ids.objects.component_definition))
@@ -26,25 +32,25 @@ def convert(filename):
         o = nv_ids.objects.entity
         n,node_count = _add_node(s,node_count)
         v,node_count = _add_node(o,node_count)
-        graph.add_edge(n, v, key=(s,p,o), weight=1)
+        graph.add_edge(n, v, key=p, weight=1)
         for s,p1,o1 in sbol_graph.triples((s,None,None)):
             if p1 in sbol_ids.predicates.prune:
                 continue
             if p1 == RDF.type:
                 continue
-            v,node_count = _add_node(o1,node_count)
-            graph.add_edge(n, v, key=(s,p1,o1), weight=1)
+            v1,node_count = _add_node(o1,node_count)
+            graph.add_edge(n, v1, key=p1, weight=1)
 
     for s,p,o in interactions:
         o = nv_ids.objects.interaction
         n,node_count = _add_node(s,node_count)
         v,node_count = _add_node(o,node_count)
-        graph.add_edge(n, v, key=(s,p,o), weight=1)
+        graph.add_edge(n, v, key=p, weight=1)
         for s,p1,o1 in sbol_graph.triples((s,None,None)):
             if p1 in sbol_ids.predicates.prune:
                 continue
             if p1 == RDF.type:
                 continue
-            v,node_count = _add_node(o1,node_count)
-            graph.add_edge(n, v, key=(s,p1,o1), weight=1)
+            v1,node_count = _add_node(o1,node_count)
+            graph.add_edge(n, v1, key=p1, weight=1)
     return graph

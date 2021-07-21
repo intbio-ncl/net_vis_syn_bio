@@ -9,7 +9,7 @@ sys.path.insert(0, os.path.join("..","..","..",".."))
 sys.path.insert(0, os.path.join("..","..",".."))
 sys.path.insert(0, os.path.join("..",".."))
 curr_dir = os.path.dirname(os.path.realpath(__file__))
-from graph.graph import NVGraph
+from converters.converter import convert
 from utility.nv_identifiers import identifiers
 
 class TestNVGraph(unittest.TestCase):
@@ -18,7 +18,9 @@ class TestNVGraph(unittest.TestCase):
         None
 
     def tearDown(self):
-        None
+        for filename in os.listdir("."):
+            if filename.endswith(".json"):
+                os.remove(filename)
 
     def _graph_element_check(self,graph):
         node_id_map = {}
@@ -37,7 +39,16 @@ class TestNVGraph(unittest.TestCase):
                 node_id_map[v] = v_data["key"]
 
     def test_read_write(self):
-        pass
+        filename = os.path.join(curr_dir,"files","test_graph.xml")
+        nv_file = "nv_design.json"
+        graph = convert(filename)
+        graph.save(nv_file)
+        reload_graph = convert(nv_file)
+        orig_list = list(graph.edges(data=True,keys=True))
+        reload_list = list(reload_graph.edges(data=True,keys=True))            
+        g_diff = diff(orig_list,reload_list)
+        self.assertEqual(len(g_diff), 0)
+
 
     def test_sub_tree(self):
         rand_sample_num = 20
@@ -120,6 +131,15 @@ class TestNVGraph(unittest.TestCase):
                 orig_node_id = orig_node_id[0]
                 self.assertEqual(tree_graph.nodes[orig_node_id],v_data)
 
+def diff(list1,list2):
+    diff = []
+    for n,v,e,k in list1:
+        for n1,v1,e1,k1 in list2:
+            if n == n1 and v == v1 and e == e1 and k == k1:
+                break
+        else:
+            diff.append((n,v,e,k))
+    return diff
 
 if __name__ == '__main__':
     unittest.main()
