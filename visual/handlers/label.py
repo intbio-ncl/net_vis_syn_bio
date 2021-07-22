@@ -11,56 +11,55 @@ class LabelHandler:
     class NodeLabelHandler:
         def __init__(self):
             pass
-        def none(self,view):
-            return [None] * len(view.nodes())
+        def none(self,builder):
+            return [None] * len(builder.nodes())
         
-        def adjacency(self,view):
+        def adjacency(self,builder):
             node_text = []
-            for node in view.nodes:
-                num_in = len(view.in_edges(node))
-                num_out = len(view.out_edges(node)) 
+            for node in builder.nodes:
+                num_in = len(builder.in_edges(node))
+                num_out = len(builder.out_edges(node)) 
                 node_text.append(f"# IN: {str(num_in)}, # OUT: {str(num_out)}")
             return node_text
 
-        def name(self,view):
+        def name(self,builder):
             node_text = []
-            names = nx.get_node_attributes(view,"display_name")
+            names = nx.get_node_attributes(builder,"display_name")
             for v in names.values():
                 node_text.append(v)
             return node_text
 
-        def type(self,view,graph):
+        def type(self,builder):
             node_text = []
-            for node in view.nodes:
-                for n,v,e in graph.edges(node,keys=True):
-                    if e[1] == RDF.type:
-                        node_text.append(_get_name(str(e[2])))
-                        break
+            for node,data in builder.nodes(data=True):
+                key = data["key"]
+                if builder.get_rdf_type(node) is not None:
+                    node_text.append(_get_name(key))
                 else:
-                    if isinstance(e[2],Literal):
+                    if isinstance(key,Literal):
                         node_text.append("Literal")
-                    elif isinstance(e[2],URIRef):
+                    elif isinstance(key,URIRef):
                         node_text.append("Identifier")
                     else:
                         node_text.append("?")
             return node_text
 
-        def role(self,view,graph):
+        def role(self,builder):
             print("WARN:: Not Implemented")
             node_text = []
-            for node in view.nodes:
+            for node in builder.nodes:
                 node_text.append(None)
             return node_text
 
     class EdgeLabelHandler:
         def __init__(self):
             pass
-        def none(self,view):
-            return [None] * len(view.edges())
+        def none(self,builder):
+            return [None] * len(builder.edges())
 
-        def name(self,view):
+        def name(self,builder):
             edge_names = []
-            for edge in view.edges(data=True):
+            for edge in builder.edges(data=True):
                 edge_names.append(edge[2]["display_name"])
             return edge_names
 

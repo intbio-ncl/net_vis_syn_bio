@@ -22,7 +22,6 @@ def convert(filename):
             e_type = "URI"
         else:
             e_type = "Literal"
-
         graph.add_node(n_key, key=entity,type=e_type)
         return n_key,node_count
 

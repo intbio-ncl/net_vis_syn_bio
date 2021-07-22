@@ -9,81 +9,78 @@ class ColorHandler:
         def __init__(self):
             pass
         
-        def standard(self,view):
-            return [{"standard" : StandardPalette.primary.value} for node in view.nodes()]
+        def standard(self,builder):
+            return [{"standard" : StandardPalette.primary.value} for node in builder.nodes()]
 
-        def rdf_type(self,view,graph):
+        def rdf_type(self,builder):
             colors = []
-            for node,data in view.nodes(data=True):
-                if graph.graph.get_rdf_type(node) is not None:
+            for node,data in builder.nodes(data=True):
+                if builder.get_rdf_type(node) is not None:
                     color = {"rdf_type" : StandardPalette.primary.value}
                 else:
                     color = {"no_type" : StandardPalette.secondary.value}
                 colors.append(color)
             return colors
 
-        def nv_class(self,view,graph):
+        def nv_class(self,builder):
             print("WARN:: Not implemented.")
             colors = []
-            for node,data in view.nodes(data=True):
+            for node,data in builder.nodes(data=True):
                 colors.append({"standard" : StandardPalette.primary.value})
             return colors
         
-        def type(self,view,graph):
+        def type(self,builder):
             print("WARN:: Not implemented.")
             colors = []
-            for node,data in view.nodes(data=True):
+            for node,data in builder.nodes(data=True):
                 colors.append({"standard" : StandardPalette.primary.value})
             return colors
         
-        def role(self,view,graph):
+        def role(self,builder):
             print("WARN:: Not implemented.")
             colors = []
-            for node,data in view.nodes(data=True):
+            for node,data in builder.nodes(data=True):
                 colors.append({"standard" : StandardPalette.primary.value})
             return colors
 
-        def genetic(self,view,graph):
+        def genetic(self,builder):
             print("WARN:: Not implemented.")
             colors = []
-            for node,data in view.nodes(data=True):
+            for node,data in builder.nodes(data=True):
                 colors.append({"standard" : StandardPalette.primary.value})
             return colors
 
-        def hierarchy(self,view,graph):
+        def hierarchy(self,builder):
             print("WARN:: Not implemented.")
             colors = []
-            for node,data in view.nodes(data=True):
+            for node,data in builder.nodes(data=True):
                 colors.append({"standard" : StandardPalette.primary.value})
             return colors
             
-        def collection(self,view,graph):
+        def collection(self,builder):
             print("WARN:: Not implemented.")
             colors = []
-            for node,data in view.nodes(data=True):
+            for node,data in builder.nodes(data=True):
                 colors.append({"standard" : StandardPalette.primary.value})
             return colors
-
-
-
 
     class EdgeColorHandler:
         def __init__(self):
             pass
 
-        def standard(self,view):
-            return [{"standard" : "#888"} for e in view.edges]
+        def standard(self,builder):
+            return [{"standard" : "#888"} for e in builder.edges]
         
-        def nv_class(self,view):
+        def nv_class(self,builder):
             print("WARN:: Not Implemented")
             colors = []
-            for n,v,k,e in view.edges(keys=True,data=True):
+            for n,v,k,e in builder.edges(keys=True,data=True):
                 colors.append({"standard" : "#888"})
             return colors
         
-        def type(self,view):
+        def type(self,builder):
             print("WARN:: Not Implemented")
             colors = []
-            for n,v,k,e in view.edges(keys=True,data=True):
+            for n,v,k,e in builder.edges(keys=True,data=True):
                 colors.append({"standard" : "#888"})
             return colors

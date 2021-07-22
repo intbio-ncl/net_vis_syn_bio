@@ -16,13 +16,11 @@ default_stylesheet_fn = os.path.join(os.path.dirname(os.path.realpath(__file__))
 class NVisualiser:
     def __init__(self,graph=None):
         if graph is None:
-            self._graph = None
+            self._builder = None
         elif isinstance(graph,NVBuilder):
-            self._graph = graph
-            self.graph_view = self._graph.graph
+            self._builder = graph
         else:
-            self._graph = NVBuilder(graph)
-            self.graph_view = self._graph.graph
+            self._builder = NVBuilder(graph)
 
         self._layout_h = LayoutHandler()
         self._label_h = LabelHandler()
@@ -181,75 +179,66 @@ class NVisualiser:
         '''
         Renders the Full graph. 
         '''
-        self.graph_view = self._graph.produce_full_graph()
+        self._builder.set_full_view()
 
     def set_pruned_view(self):
         '''
         Sub graph viewing the raw graph with specific edges removed 
         that are deemed not useful for visualisation.
         '''
-        pruned_graph = self._graph.produce_pruned_graph()
-        self.graph_view = pruned_graph
+        self._builder.set_pruned_view()
 
     def set_interaction_verbose_view(self):
         '''
         Sub graph viewing all interactions within the graph including explicit 
         visualisation to participants. 
         '''
-        interaction_graph = self._graph.produce_interaction_verbose_graph()
-        self.graph_view = interaction_graph
+        self._builder.set_interaction_verbose_view()
 
     def set_interaction_view(self):
         '''
         Sub graph viewing all interactions within the graph implicitly visualises 
         participants by merging interaction node and participant edges into a single edge. 
         '''
-        interaction_graph = self._graph.produce_interaction_graph()
-        self.graph_view = interaction_graph
+        self._builder.set_interaction_view()
 
     def set_genetic_interaction_view(self):
         '''
         Sub graph viewing genetic interactions within the graph.
         Abstracts proteins and non-genetic actors.
         '''
-        interaction_graph = self._graph.produce_genetic_interaction_graph()
-        self.graph_view = interaction_graph
+        self._builder.set_genetic_interaction_view()
 
     def set_protein_protein_interaction_view(self):
         '''
         Sub graph viewing interactions between proteins. Abstracts DNA + Non-genetic actors. 
         Only visulises what the effect the presence of a protein has upon other proteins.
         '''
-        ppi_graph = self._graph.produce_protein_protein_interaction_graph()
-        self.graph_view = ppi_graph
+        self._builder.set_protein_protein_interaction_view()
 
     def set_heirarchy_view(self):
         '''
         Sub graph viewing the design as a heirachy of entities.
         '''
-        heirarchy_view = self._graph.produce_heirarchy_graph()
-        self.graph_view = heirarchy_view
+        self._builder.set_heirarchy_view()
 
     def set_components_view(self):
         '''
         Sub graph viewing the Components both heirarchical and functional within the design.
         '''
-        component_view = self._graph.produce_components_graph()
-        self.graph_view = component_view
+        self._builder.set_components_view()
 
     def set_module_view(self):
         '''
         Sub graph viewing the connection between modules within the design.
         '''
-        module_view = self._graph.produce_module_graph()
-        self.graph_view = module_view
+        self._builder.set_module_view()
 
     def set_maps_view(self):
         '''
         Sub graph viewing both heirarchy and module views with maps between.
         '''
-        maps_view = self._graph.produce_maps_graph()
-        self.graph_view = maps_view
+        self._builder.set_maps_view()
 
     # ---------------------- View Mode ------------------------------------
     def set_network_mode(self):
@@ -258,7 +247,7 @@ class NVisualiser:
         Duplicates are merged into the same node leading to connectedness.
         '''
         if self.mode == self.set_network_mode:
-            self.graph_view = self.graph_view.get_network()
+            self._builder.set_network_mode()
         else:
             self.mode = self.set_network_mode
 
@@ -269,10 +258,9 @@ class NVisualiser:
         This will result in a tree/heirarchy structure within a graph.
         '''
         if self.mode == self.set_tree_mode:
-            self.graph_view = self.graph_view.get_tree()
+            self._builder.set_tree_mode()
         else:
             self.mode = self.set_tree_mode
-
 
 # ---------------------- Pick a layout ----------------------
     def set_spring_layout(self):
@@ -280,7 +268,7 @@ class NVisualiser:
         Position nodes using Fruchterman-Reingold force-directed algorithm.
         '''
         if self.layout == self.set_spring_layout:
-            self.pos = self._layout_h.spring(self.graph_view.graph)
+            self.pos = self._layout_h.spring(self._builder.view._graph)
         else:
             self.layout = self.set_spring_layout
 
@@ -289,7 +277,7 @@ class NVisualiser:
         Position nodes on a circle.
         '''
         if self.layout == self.set_circular_layout:
-            self.pos = self._layout_h.circular(self.graph_view.graph)
+            self.pos = self._layout_h.circular(self._builder.view._graph)
         else:
             self.layout = self.set_circular_layout
 
@@ -298,7 +286,7 @@ class NVisualiser:
         Position nodes using Kamada-Kawai path-length cost-function.
         '''
         if self.layout == self.set_kamada_kawai_layout:
-            self.pos = self._layout_h.kamada_kawai(self.graph_view.graph)
+            self.pos = self._layout_h.kamada_kawai(self._builder.view._graph)
         else:
             self.layout = self.set_kamada_kawai_layout
 
@@ -307,7 +295,7 @@ class NVisualiser:
         Position nodes without edge intersections.
         '''
         if self.layout == self.set_planar_layout:
-            self.pos = self._layout_h.planar(self.graph_view.graph)
+            self.pos = self._layout_h.planar(self._builder.view._graph)
         else:
             self.layout = self.set_planar_layout
 
@@ -435,7 +423,7 @@ class NVisualiser:
         Textual data pertaining to a node is not rendered.
         '''
         if self.node_text == self.add_node_no_labels:
-            return self._label_h.node.none(self.graph_view)
+            return self._label_h.node.none(self._builder)
         else:
             self.node_text = self.add_node_no_labels
 
@@ -445,7 +433,7 @@ class NVisualiser:
         to number of incoming and outgoing edges.
         '''
         if self.node_text == self.add_node_adjacency_labels:
-            return self._label_h.node.adjacency(self.graph_view)
+            return self._label_h.node.adjacency(self._builder)
         else:
             self.node_text = self.add_node_adjacency_labels
 
@@ -455,7 +443,7 @@ class NVisualiser:
         name the node was provided during building of the graph.
         '''
         if self.node_text == self.add_node_name_labels:
-            return self._label_h.node.name(self.graph_view)
+            return self._label_h.node.name(self._builder)
         else:
             self.node_text = self.add_node_name_labels
 
@@ -464,7 +452,7 @@ class NVisualiser:
         Textual data pertaining to a node is of the RDF type.
         '''
         if self.node_text == self.add_node_type_labels:
-            return self._label_h.node.type(self.graph_view,self._graph)
+            return self._label_h.node.type(self._builder)
         else:
             self.node_text = self.add_node_type_labels
 
@@ -474,7 +462,7 @@ class NVisualiser:
         Role of the node if said node has this property.
         '''
         if self.node_text == self.add_node_role_labels:
-            return self._label_h.node.role(self.graph_view,self._graph)
+            return self._label_h.node.role(self._builder)
         else:
             self.node_text = self.add_node_role_labels
 
@@ -484,7 +472,7 @@ class NVisualiser:
         Textual data pertaining to a egde is not rendered.
         '''
         if self.edge_text == self.add_edge_no_labels:
-            return self._label_h.edge.none(self.graph_view)
+            return self._label_h.edge.none(self._builder)
         else:
             self.edge_text = self.add_edge_no_labels
 
@@ -494,7 +482,7 @@ class NVisualiser:
         name provides when building the graph.
         '''
         if self.edge_text == self.add_edge_name_labels:
-            return self._label_h.edge.name(self.graph_view)
+            return self._label_h.edge.name(self._builder)
         else:
             self.edge_text = self.add_edge_name_labels
 
@@ -504,7 +492,7 @@ class NVisualiser:
         All node colors are the same standard color.
         '''
         if self.node_color == self.add_standard_node_color:
-            return self._color_h.node.standard(self.graph_view)
+            return self._color_h.node.standard(self._builder)
         else:
             self.node_color = self.add_standard_node_color
 
@@ -513,7 +501,7 @@ class NVisualiser:
         Di-color, Objects and Properties have a unique color.
         '''
         if self.node_color == self.add_rdf_type_node_color:
-            return self._color_h.node.rdf_type(self.graph_view,self._graph)
+            return self._color_h.node.rdf_type(self._builder)
         else:
             self.node_color = self.add_rdf_type_node_color
 
@@ -522,7 +510,7 @@ class NVisualiser:
         Each class is set to a unique color i.e. a color per object rdf-type.
         '''
         if self.node_color == self.add_class_node_color:
-            return self._color_h.node.nv_class(self.graph_view,self._graph)
+            return self._color_h.node.nv_class(self._builder)
         else:
             self.node_color = self.add_class_node_color
 
@@ -531,7 +519,7 @@ class NVisualiser:
         Each type is given a unique color (a color per NV type).
         '''
         if self.node_color == self.add_type_node_color:
-            return self._color_h.node.type(self.graph_view,self._graph)
+            return self._color_h.node.type(self._builder)
         else:
             self.node_color = self.add_type_node_color
     
@@ -541,7 +529,7 @@ class NVisualiser:
         each role of said type is given a shade of that color.
         '''
         if self.node_color == self.add_role_node_color:
-            return self._color_h.node.role(self.graph_view,self._graph)
+            return self._color_h.node.role(self._builder)
         else:
             self.node_color = self.add_role_node_color
 
@@ -550,7 +538,7 @@ class NVisualiser:
         Each SBOL role ascociated with genetic/DNA entities are given a color.
         '''
         if self.node_color == self.add_genetic_node_color:
-            return self._color_h.node.genetic(self.graph_view,self._graph)
+            return self._color_h.node.genetic(self._builder)
         else:
             self.node_color = self.add_genetic_node_color
 
@@ -559,7 +547,7 @@ class NVisualiser:
         Each level of heirarchy has a colour.
         '''
         if self.node_color == self.add_hierarchy_node_color:
-            return self._color_h.node.hierarchy(self.graph_view,self._graph)
+            return self._color_h.node.hierarchy(self._builder)
         else:
             self.node_color = self.add_hierarchy_node_color
 
@@ -568,7 +556,7 @@ class NVisualiser:
         Nodes are grouped into collections and has colours based on collection.
         '''
         if self.node_color == self.add_collection_node_color:
-            return self._color_h.node.collection(self.graph_view,self._graph)
+            return self._color_h.node.collection(self._builder)
         else:
             self.node_color = self.add_collection_node_color
 
@@ -578,7 +566,7 @@ class NVisualiser:
         The color pertaining to each edge is uniform. 
         '''
         if self.edge_color == self.add_standard_edge_color:
-            return self._color_h.edge.standard(self.graph_view)
+            return self._color_h.edge.standard(self._builder)
         else:
             self.edge_color = self.add_standard_edge_color
 
@@ -589,7 +577,7 @@ class NVisualiser:
         than number of distinguishable colors.
         '''
         if self.edge_color == self.add_class_edge_color:
-            return self._color_h.edge.nv_class(self.graph_view)
+            return self._color_h.edge.nv_class(self._builder)
         else:
             self.edge_color = self.add_class_edge_color
 
@@ -598,7 +586,7 @@ class NVisualiser:
         Color for each Interaction predicate.
         '''
         if self.edge_color == self.add_type_edge_color:
-            return self._color_h.edge.type(self.graph_view)
+            return self._color_h.edge.type(self._builder)
         else:
             self.edge_color = self.add_type_edge_color
 
@@ -608,7 +596,7 @@ class NVisualiser:
         The Node size for each node is equal.
         '''
         if self.node_size == self.add_standard_node_size:
-            return self._size_h.standard(self.graph_view)
+            return self._size_h.standard(self._builder)
         else:
             self.node_size = self.add_standard_node_size
 
@@ -618,7 +606,7 @@ class NVisualiser:
         a Object or a property i.e. does the node has an RDF type.
         '''
         if self.node_size == self.add_type_node_size:
-            return self._size_h.type(self.graph_view,self._graph)
+            return self._size_h.type(self._builder)
         else:
             self.node_size = self.add_type_node_size
 
@@ -628,7 +616,7 @@ class NVisualiser:
         incoming + outgoing edges of said node. 
         '''
         if self.node_size == self.add_centrality_node_size:
-            return self._size_h.centrality(self.graph_view)
+            return self._size_h.centrality(self._builder)
         else:
             self.node_size = self.add_centrality_node_size
 
@@ -639,7 +627,7 @@ class NVisualiser:
         incoming edges of said node. 
         '''
         if self.node_size == self.add_in_centrality_node_size:
-            return self._size_h.in_centrality(self.graph_view)
+            return self._size_h.in_centrality(self._builder)
         else:
             self.node_size = self.add_in_centrality_node_size
 
@@ -650,7 +638,7 @@ class NVisualiser:
         outgoing edges of said node. 
         '''
         if self.node_size == self.add_out_centrality_node_size:
-            return self._size_h.out_centrality(self.graph_view)
+            return self._size_h.out_centrality(self._builder)
         else:
             self.node_size = self.add_out_centrality_node_size
 
@@ -659,7 +647,7 @@ class NVisualiser:
         The lower a node in the graph as a heirachy the smaller the node.
         '''
         if self.node_size == self.add_hierarchy_node_size:
-            return self._size_h.hierarchy(self.graph_view)
+            return self._size_h.hierarchy(self._builder)
         else:
             self.node_size = self.add_hierarchy_node_size
 
@@ -670,7 +658,7 @@ class NVisualiser:
         Sets the shape of each node based on the RDF type of given node.
         '''
         if self.node_shape == self.set_adaptive_node_shape:
-            return self._shape_h.node.adaptive(self.graph_view,self._graph)
+            return self._shape_h.node.adaptive(self._builder)
         else:
             self.node_shape = self.set_adaptive_node_shape
 
@@ -679,7 +667,7 @@ class NVisualiser:
         Sets the shape of each node to a circle.
         '''
         if self.node_shape == self.set_circle_node_shape:
-            return self._shape_h.node.circle(self.graph_view)
+            return self._shape_h.node.circle(self._builder)
         else:
             self.node_shape = self.set_circle_node_shape
 
@@ -688,7 +676,7 @@ class NVisualiser:
         Sets the shape of each node to a square.
         '''
         if self.node_shape == self.set_square_node_shape:
-            return self._shape_h.node.square(self.graph_view)
+            return self._shape_h.node.square(self._builder)
         else:
             self.node_shape = self.set_square_node_shape
 
@@ -697,7 +685,7 @@ class NVisualiser:
         Sets the shape of each node to a triangle.
         '''
         if self.node_shape == self.set_triangle_node_shape:
-            return self._shape_h.node.triangle(self.graph_view)
+            return self._shape_h.node.triangle(self._builder)
         else:
             self.node_shape = self.set_triangle_node_shape
 
@@ -706,7 +694,7 @@ class NVisualiser:
         Sets the shape of each node to a rectangle.
         '''
         if self.node_shape == self.set_rectangle_node_shape:
-            return self._shape_h.node.rectangle(self.graph_view)
+            return self._shape_h.node.rectangle(self._builder)
         else:
             self.node_shape = self.set_rectangle_node_shape
 
@@ -715,7 +703,7 @@ class NVisualiser:
         Sets the shape of each node to a diamond.
         '''
         if self.node_shape == self.set_diamond_node_shape:
-            return self._shape_h.node.diamond(self.graph_view)
+            return self._shape_h.node.diamond(self._builder)
         else:
             self.node_shape = self.set_diamond_node_shape
 
@@ -724,7 +712,7 @@ class NVisualiser:
         Sets the shape of each node to a hexagon.
         '''
         if self.node_shape == self.set_hexagon_node_shape:
-            return self._shape_h.node.hexagon(self.graph_view)
+            return self._shape_h.node.hexagon(self._builder)
         else:
             self.node_shape = self.set_hexagon_node_shape
 
@@ -733,7 +721,7 @@ class NVisualiser:
         Sets the shape of each node to a octagon.
         '''
         if self.node_shape == self.set_octagon_node_shape:
-            return self._shape_h.node.octagon(self.graph_view)
+            return self._shape_h.node.octagon(self._builder)
         else:
             self.node_shape = self.set_octagon_node_shape
             
@@ -742,7 +730,7 @@ class NVisualiser:
         Sets the shape of each node to a vee.
         '''
         if self.node_shape == self.set_vee_node_shape:
-            return self._shape_h.node.vee(self.graph_view)
+            return self._shape_h.node.vee(self._builder)
         else:
             self.node_shape = self.set_vee_node_shape
 
@@ -797,6 +785,8 @@ class NVisualiser:
         edges = []
         node_selectors = []
         edge_selectors = []
+
+        self.mode()
         node_color = self.node_color()
         node_shapes = self.node_shape()
         node_sizes = self.node_size()
@@ -806,9 +796,7 @@ class NVisualiser:
 
         if self.layout is not None:
             layout = self.layout()
-
-        self.mode()
-        for index,(node,label) in enumerate(self.graph_view.nodes(data=True)):
+        for index,(node,label) in enumerate(self._builder.view.nodes(data=True)):
             text = node_text[index]
             color_key = list(node_color[index].keys())[0]
             shape = node_shapes[index]
@@ -821,7 +809,7 @@ class NVisualiser:
                 node_selectors.append(color_key)
             nodes.append(node)
 
-        for index,(n,v) in enumerate(self.graph_view.edges()):
+        for index,(n,v) in enumerate(self._builder.view.edges()):
             color_key = list(edge_color[index].keys())[0]
             e_color = edge_color[index][color_key]
             edge,e_style = self._build_edge(n,v,edge_text[index],color_key,e_color)

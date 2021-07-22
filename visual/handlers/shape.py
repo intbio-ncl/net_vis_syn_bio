@@ -20,14 +20,14 @@ class ShapeHandler:
                         "roundrect",
                         "ellipse"]
         
-        def adaptive(self,view,graph):
+        def adaptive(self,builder):
             default_shape = self.shapes[0]
             shapes = self.shapes[1:]
             node_shapes = []
             shape_map = {"no_type" : default_shape}
             counter = 0
-            for node in view.nodes():
-                obj_type = graph.graph.get_rdf_type(node)
+            for node in builder.nodes():
+                obj_type = builder.get_rdf_type(node)
                 if obj_type is None:
                     shape = shape_map["no_type"]
                     obj_type = "No Type"
@@ -45,29 +45,29 @@ class ShapeHandler:
                 node_shapes.append({obj_type : shape})
             return node_shapes
 
-        def circle(self,view):
-            return [{"standard" : "circle"} for node in view.nodes]
+        def circle(self,builder):
+            return [{"standard" : "circle"} for node in builder.nodes]
             
-        def square(self,view):
-            return [{"standard" : "square"} for node in view.nodes]
+        def square(self,builder):
+            return [{"standard" : "square"} for node in builder.nodes]
             
-        def triangle(self,view):
-            return [{"standard" : "triangle"} for node in view.nodes]
+        def triangle(self,builder):
+            return [{"standard" : "triangle"} for node in builder.nodes]
             
-        def rectangle(self,view):
-            return [{"standard" : "rectangle"} for node in view.nodes]
+        def rectangle(self,builder):
+            return [{"standard" : "rectangle"} for node in builder.nodes]
             
-        def diamond(self,view):
-            return [{"standard" : "diamond"} for node in view.nodes]
+        def diamond(self,builder):
+            return [{"standard" : "diamond"} for node in builder.nodes]
             
-        def hexagon(self,view):
-            return [{"standard" : "hexagon"} for node in view.nodes]
+        def hexagon(self,builder):
+            return [{"standard" : "hexagon"} for node in builder.nodes]
             
-        def octagon(self,view):
-            return [{"standard" : "octagon"} for node in view.nodes]
+        def octagon(self,builder):
+            return [{"standard" : "octagon"} for node in builder.nodes]
             
-        def vee(self,view):
-            return [{"standard" : "vee"} for node in view.nodes]
+        def vee(self,builder):
+            return [{"standard" : "vee"} for node in builder.nodes]
             
     class EdgeShapeHandler:
         def __init__(self):

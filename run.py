@@ -5,12 +5,14 @@ from dashboard.result_dash import NVResultDash
 assets_dir = "assets"
 def process_input(filename,summary):
     server = Flask(__name__)
+
     if summary:
         dashboard = NVResultDash(__name__,server)
     else:
         dashboard = NVFullDash(__name__,server)
     dashboard.load_graph(filename)
-    dashboard.run()
+    server.run()
+    #dashboard.run()
 
 
 

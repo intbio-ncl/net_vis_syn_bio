@@ -3,22 +3,22 @@ class SizeHandler:
         self._standard_node_size = 30
 
 
-    def standard(self,view):
-        return [self._standard_node_size for node in view.nodes()]
+    def standard(self,builder):
+        return [self._standard_node_size for node in builder.nodes()]
 
-    def type(self,view,graph):
+    def type(self,builder):
         node_sizes = []
-        for node in view.nodes():
-            if graph.graph.get_rdf_type(node) is None:
+        for node in builder.nodes():
+            if builder.get_rdf_type(node) is None:
                 node_sizes.append(self._standard_node_size/2)
             else:
                 node_sizes.append(self._standard_node_size)
         return node_sizes
 
-    def centrality(self,view):
+    def centrality(self,builder):
         node_sizes = []
-        for node in view.nodes():
-            node_size = 1 + len(view.in_edges(node)) + len(view.out_edges(node))
+        for node in builder.nodes():
+            node_size = 1 + len(builder.in_edges(node)) + len(builder.out_edges(node))
             node_size = int((node_size * self._standard_node_size) / 4)
             if node_size > 100:
                 node_size = 100
@@ -27,10 +27,10 @@ class SizeHandler:
             node_sizes.append(node_size)
         return node_sizes
 
-    def in_centrality(self,view):
+    def in_centrality(self,builder):
         node_sizes = []
-        for node in view.nodes():
-            node_size = 1 + len(view.in_edges(node))
+        for node in builder.nodes():
+            node_size = 1 + len(builder.in_edges(node))
             node_size = int((node_size * self._standard_node_size) / 2)
             if node_size > 100:
                 node_size = 100
@@ -39,10 +39,10 @@ class SizeHandler:
             node_sizes.append(node_size)
         return node_sizes
 
-    def out_centrality(self,view):
+    def out_centrality(self,builder):
         node_sizes = []
-        for node in view.nodes():
-            node_size = 1 + len(view.out_edges(node))
+        for node in builder.nodes():
+            node_size = 1 + len(builder.out_edges(node))
             node_size = int((node_size * self._standard_node_size) / 2)
             if node_size > 100:
                 node_size = 100
@@ -51,10 +51,10 @@ class SizeHandler:
             node_sizes.append(node_size)
         return node_sizes
 
-    def hierarchy(self,view):
+    def hierarchy(self,builder):
         print("Warn:: Not implemented")
         sizes = []
-        for node in view.nodes():
+        for node in builder.nodes():
             sizes.append(10)
         return sizes
 
