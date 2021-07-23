@@ -12,26 +12,25 @@ class LabelHandler:
         def __init__(self):
             pass
         def none(self,builder):
-            return [None] * len(builder.nodes())
+            return [None] * len(builder.v_nodes())
         
         def adjacency(self,builder):
             node_text = []
-            for node in builder.nodes:
+            for node in builder.v_nodes:
                 num_in = len(builder.in_edges(node))
                 num_out = len(builder.out_edges(node)) 
                 node_text.append(f"# IN: {str(num_in)}, # OUT: {str(num_out)}")
             return node_text
 
         def name(self,builder):
-            node_text = []
-            names = nx.get_node_attributes(builder,"display_name")
-            for v in names.values():
-                node_text.append(v)
-            return node_text
+            names = []
+            for node,data in builder.v_nodes(data=True):
+                names.append(data["display_name"])
+            return names
 
         def type(self,builder):
             node_text = []
-            for node,data in builder.nodes(data=True):
+            for node,data in builder.v_nodes(data=True):
                 key = data["key"]
                 if builder.get_rdf_type(node) is not None:
                     node_text.append(_get_name(key))
@@ -47,7 +46,7 @@ class LabelHandler:
         def role(self,builder):
             print("WARN:: Not Implemented")
             node_text = []
-            for node in builder.nodes:
+            for node in builder.v_nodes:
                 node_text.append(None)
             return node_text
 
@@ -55,11 +54,11 @@ class LabelHandler:
         def __init__(self):
             pass
         def none(self,builder):
-            return [None] * len(builder.edges())
+            return [None] * len(builder.v_edges())
 
         def name(self,builder):
             edge_names = []
-            for edge in builder.edges(data=True):
+            for edge in builder.v_edges(data=True):
                 edge_names.append(edge[2]["display_name"])
             return edge_names
 

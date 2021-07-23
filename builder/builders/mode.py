@@ -1,32 +1,32 @@
 import re 
 
 class ModeBuilder:
-    def __init__(self,graph):
-        self._graph = graph
+    def __init__(self,builder):
+        self._builder = builder
 
     def tree(self):
         tree_edges = []
         node_attrs = {}
         seen = []
-        max_key = max([node for node in self._graph.nodes])
-        for n,v,e in self._graph.edges:
-            node_attrs[v] = self._graph.nodes[v]
-            node_attrs[n] = self._graph.nodes[n]
+        max_key = max([node for node in self._builder.v_nodes])
+        for n,v,e in self._builder.v_edges:
+            node_attrs[v] = self._builder.nodes[v]
+            node_attrs[n] = self._builder.nodes[n]
             v_copy = v
             if v in seen:
                 max_key +=1
                 v = max_key
-                node_attrs[v] = self._graph.nodes[v_copy]
+                node_attrs[v] = self._builder.nodes[v_copy]
                 seen.append(v)
             else:
                 seen.append(v)
             edge = self._create_edge_dict(e)
             tree_edges.append((n,v,e,edge))       
-        tree_graph = self._graph.sub_graph(tree_edges,node_attrs)
+        tree_graph = self._builder.sub_graph(tree_edges,node_attrs)
         return tree_graph
 
     def network(self):
-        return self._graph
+        return self._builder.view
 
     def _create_edge_dict(self,key,weight=1):
         edge = {'weight': weight, 

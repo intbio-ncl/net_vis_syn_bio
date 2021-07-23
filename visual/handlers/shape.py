@@ -26,7 +26,7 @@ class ShapeHandler:
             node_shapes = []
             shape_map = {"no_type" : default_shape}
             counter = 0
-            for node in builder.nodes():
+            for node in builder.v_nodes():
                 obj_type = builder.get_rdf_type(node)
                 if obj_type is None:
                     shape = shape_map["no_type"]
@@ -46,28 +46,28 @@ class ShapeHandler:
             return node_shapes
 
         def circle(self,builder):
-            return [{"standard" : "circle"} for node in builder.nodes]
+            return [{"standard" : "circle"} for node in builder.v_nodes]
             
         def square(self,builder):
-            return [{"standard" : "square"} for node in builder.nodes]
+            return [{"standard" : "square"} for node in builder.v_nodes]
             
         def triangle(self,builder):
-            return [{"standard" : "triangle"} for node in builder.nodes]
+            return [{"standard" : "triangle"} for node in builder.v_nodes]
             
         def rectangle(self,builder):
-            return [{"standard" : "rectangle"} for node in builder.nodes]
+            return [{"standard" : "rectangle"} for node in builder.v_nodes]
             
         def diamond(self,builder):
-            return [{"standard" : "diamond"} for node in builder.nodes]
+            return [{"standard" : "diamond"} for node in builder.v_nodes]
             
         def hexagon(self,builder):
-            return [{"standard" : "hexagon"} for node in builder.nodes]
+            return [{"standard" : "hexagon"} for node in builder.v_nodes]
             
         def octagon(self,builder):
-            return [{"standard" : "octagon"} for node in builder.nodes]
+            return [{"standard" : "octagon"} for node in builder.v_nodes]
             
         def vee(self,builder):
-            return [{"standard" : "vee"} for node in builder.nodes]
+            return [{"standard" : "vee"} for node in builder.v_nodes]
             
     class EdgeShapeHandler:
         def __init__(self):

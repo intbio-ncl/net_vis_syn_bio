@@ -12,9 +12,6 @@ def process_input(filename,summary):
         dashboard = NVFullDash(__name__,server)
     dashboard.load_graph(filename)
     server.run()
-    #dashboard.run()
-
-
 
 def language_processor_args():
     parser = argparse.ArgumentParser(description="Network Visualisation Tool")

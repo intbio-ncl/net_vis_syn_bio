@@ -16,15 +16,16 @@ class Namespace:
         self.biopax = URIRef('http://www.biopax.org/release/biopax-level3.owl#')
         self.dc = URIRef('http://purl.org/dc/terms/')
         self.edam = URIRef('http://edamontology.org/format')
-        self.nv = URIRef('http://knowledge_graph/')
+        self.nv = URIRef('http://nv_ontology/')
 
 class Predicates:
     def __init__(self, namespaces):
         self.namespaces = namespaces
         self.rdf_type = URIRef(RDF.type)
+
         self.role = URIRef(self.namespaces.nv + "role")
-        self.input = URIRef(self.namespaces.nv + "input")
-        self.output = URIRef(self.namespaces.nv + "output")
+        self.contains = URIRef(self.namespaces.nv + "contains")
+        
         self.alias = URIRef(self.namespaces.dc + 'title')
         self.description = URIRef(self.namespaces.dc + 'description')
 

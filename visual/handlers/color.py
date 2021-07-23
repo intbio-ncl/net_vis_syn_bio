@@ -10,11 +10,11 @@ class ColorHandler:
             pass
         
         def standard(self,builder):
-            return [{"standard" : StandardPalette.primary.value} for node in builder.nodes()]
+            return [{"standard" : StandardPalette.primary.value} for node in builder.v_nodes()]
 
         def rdf_type(self,builder):
             colors = []
-            for node,data in builder.nodes(data=True):
+            for node,data in builder.v_nodes(data=True):
                 if builder.get_rdf_type(node) is not None:
                     color = {"rdf_type" : StandardPalette.primary.value}
                 else:
@@ -25,42 +25,42 @@ class ColorHandler:
         def nv_class(self,builder):
             print("WARN:: Not implemented.")
             colors = []
-            for node,data in builder.nodes(data=True):
+            for node,data in builder.v_nodes(data=True):
                 colors.append({"standard" : StandardPalette.primary.value})
             return colors
         
         def type(self,builder):
             print("WARN:: Not implemented.")
             colors = []
-            for node,data in builder.nodes(data=True):
+            for node,data in builder.v_nodes(data=True):
                 colors.append({"standard" : StandardPalette.primary.value})
             return colors
         
         def role(self,builder):
             print("WARN:: Not implemented.")
             colors = []
-            for node,data in builder.nodes(data=True):
+            for node,data in builder.v_nodes(data=True):
                 colors.append({"standard" : StandardPalette.primary.value})
             return colors
 
         def genetic(self,builder):
             print("WARN:: Not implemented.")
             colors = []
-            for node,data in builder.nodes(data=True):
+            for node,data in builder.v_nodes(data=True):
                 colors.append({"standard" : StandardPalette.primary.value})
             return colors
 
         def hierarchy(self,builder):
             print("WARN:: Not implemented.")
             colors = []
-            for node,data in builder.nodes(data=True):
+            for node,data in builder.v_nodes(data=True):
                 colors.append({"standard" : StandardPalette.primary.value})
             return colors
             
         def collection(self,builder):
             print("WARN:: Not implemented.")
             colors = []
-            for node,data in builder.nodes(data=True):
+            for node,data in builder.v_nodes(data=True):
                 colors.append({"standard" : StandardPalette.primary.value})
             return colors
 
@@ -69,18 +69,18 @@ class ColorHandler:
             pass
 
         def standard(self,builder):
-            return [{"standard" : "#888"} for e in builder.edges]
+            return [{"standard" : "#888"} for e in builder.v_edges]
         
         def nv_class(self,builder):
             print("WARN:: Not Implemented")
             colors = []
-            for n,v,k,e in builder.edges(keys=True,data=True):
+            for n,v,k,e in builder.v_edges(keys=True,data=True):
                 colors.append({"standard" : "#888"})
             return colors
         
         def type(self,builder):
             print("WARN:: Not Implemented")
             colors = []
-            for n,v,k,e in builder.edges(keys=True,data=True):
+            for n,v,k,e in builder.v_edges(keys=True,data=True):
                 colors.append({"standard" : "#888"})
             return colors

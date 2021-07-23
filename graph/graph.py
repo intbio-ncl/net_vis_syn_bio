@@ -20,7 +20,6 @@ class NVGraph:
         for n in self._graph.nodes:
             yield n
 
-
     @property
     def nodes(self):
         return self._graph.nodes
@@ -65,21 +64,6 @@ class NVGraph:
                     matches.append(([n,n_data],[v,v_data],k))
         return matches
 
-    def sub_graph(self,edges,node_attrs = {}):
-        new_graph = nx.MultiDiGraph()
-        new_graph.add_edges_from(edges)
-        for subject,node,edge in new_graph.edges:
-            try:
-                new_graph.nodes[subject].update(node_attrs[subject])
-            except (KeyError,ValueError):
-                pass
-            try:
-                new_graph.nodes[node].update(node_attrs[node])
-            except (KeyError,ValueError):
-                pass
-        new_graph = self.__class__(new_graph)
-        return new_graph
-
     def add_edge(self,n1,n2,key,**kwargs):
         self._graph.add_edge(n1,n2,key=key,**kwargs)
     
@@ -104,7 +88,6 @@ class NVGraph:
                 else:
                     name = str(identity)
                 self.nodes[node]["display_name"] = name
-
         for n,v,k,e in self.edges(keys=True,data=True):
             if "display_name" not in e.keys():
                 e["display_name"] = self._get_name(k)

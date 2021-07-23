@@ -29,6 +29,7 @@ class NVisualiser:
         self._shape_h = ShapeHandler()
 
         self.pos = []
+        self.view = self.set_full_graph_view
         self.mode = self.set_network_mode
         self.layout = self.set_spring_layout
         self.node_text = self.add_node_no_labels
@@ -179,27 +180,40 @@ class NVisualiser:
         '''
         Renders the Full graph. 
         '''
-        self._builder.set_full_view()
+        if self.view == self.set_full_graph_view:
+            self._builder.set_full_view()
+        else:
+           self.view =self.set_full_graph_view
 
     def set_pruned_view(self):
         '''
         Sub graph viewing the raw graph with specific edges removed 
         that are deemed not useful for visualisation.
         '''
-        self._builder.set_pruned_view()
+        if self.view == self.set_pruned_view:
+            self._builder.set_pruned_view()
+        else:
+           self.view =self.set_pruned_view
 
     def set_interaction_verbose_view(self):
         '''
         Sub graph viewing all interactions within the graph including explicit 
         visualisation to participants. 
         '''
-        self._builder.set_interaction_verbose_view()
+        if self.view == self.set_interaction_verbose_view:
+            self._builder.set_interaction_verbose_view()
+        else:
+           self.view =self.set_interaction_verbose_view
 
     def set_interaction_view(self):
         '''
         Sub graph viewing all interactions within the graph implicitly visualises 
         participants by merging interaction node and participant edges into a single edge. 
         '''
+        if self.view == self.set_interaction_view:
+            self._builder.set_interaction_verbose_view()
+        else:
+           self.view =self.set_interaction_view
         self._builder.set_interaction_view()
 
     def set_genetic_interaction_view(self):
@@ -207,38 +221,38 @@ class NVisualiser:
         Sub graph viewing genetic interactions within the graph.
         Abstracts proteins and non-genetic actors.
         '''
-        self._builder.set_genetic_interaction_view()
+        if self.view == self.set_genetic_interaction_view:
+            self._builder.set_genetic_interaction_view()
+        else:
+           self.view =self.set_genetic_interaction_view
 
     def set_protein_protein_interaction_view(self):
         '''
         Sub graph viewing interactions between proteins. Abstracts DNA + Non-genetic actors. 
         Only visulises what the effect the presence of a protein has upon other proteins.
         '''
-        self._builder.set_protein_protein_interaction_view()
+        if self.view == self.set_protein_protein_interaction_view:
+            self._builder.set_protein_protein_interaction_view()
+        else:
+           self.view =self.set_protein_protein_interaction_view
 
     def set_heirarchy_view(self):
         '''
         Sub graph viewing the design as a heirachy of entities.
         '''
-        self._builder.set_heirarchy_view()
-
-    def set_components_view(self):
-        '''
-        Sub graph viewing the Components both heirarchical and functional within the design.
-        '''
-        self._builder.set_components_view()
+        if self.view == self.set_heirarchy_view:
+            self._builder.set_heirarchy_view()
+        else:
+           self.view =self.set_heirarchy_view
 
     def set_module_view(self):
         '''
         Sub graph viewing the connection between modules within the design.
         '''
-        self._builder.set_module_view()
-
-    def set_maps_view(self):
-        '''
-        Sub graph viewing both heirarchy and module views with maps between.
-        '''
-        self._builder.set_maps_view()
+        if self.view == self.set_module_view:
+            self._builder.set_module_view()
+        else:
+           self.view =self.set_module_view
 
     # ---------------------- View Mode ------------------------------------
     def set_network_mode(self):
@@ -785,7 +799,7 @@ class NVisualiser:
         edges = []
         node_selectors = []
         edge_selectors = []
-
+        self.view()
         self.mode()
         node_color = self.node_color()
         node_shapes = self.node_shape()
@@ -793,7 +807,6 @@ class NVisualiser:
         edge_color = self.edge_color()  
         node_text = self.node_text()
         edge_text = self.edge_text()
-
         if self.layout is not None:
             layout = self.layout()
         for index,(node,label) in enumerate(self._builder.view.nodes(data=True)):

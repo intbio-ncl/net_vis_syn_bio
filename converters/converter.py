@@ -1,6 +1,3 @@
-import networkx as nx
-from rdflib import Graph,RDF
-
 from converters.sbol import convert as sbol_convert
 from converters.nv import convert as nv_convert
 from graph.graph import NVGraph

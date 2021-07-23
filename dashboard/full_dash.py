@@ -227,6 +227,7 @@ class NVFullDash(AbstractDash):
     def _generate_options(self,visualiser):
         visualiser = visualiser()
         blacklist_functions = ["build",
+                                "view",
                                 "mode",
                                 "edge_pos",
                                 "node_text",

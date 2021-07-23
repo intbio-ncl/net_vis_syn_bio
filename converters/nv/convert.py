@@ -13,12 +13,10 @@ def convert(input_fn):
             continue
         n_id = node["id"]
         key = node["key"]
-        display_name = node["display_name"]
         if node["type"] == "URI":
             key = URIRef(key)
         else:
             key = Literal(key)
-        
         del node["id"]
         del node["key"]
         del node["type"]
@@ -31,6 +29,5 @@ def convert(input_fn):
         del edge["source"]
         del edge["target"]
         del edge["key"]
-
         graph.add_edge(source,target,key=key,**edge)
     return graph

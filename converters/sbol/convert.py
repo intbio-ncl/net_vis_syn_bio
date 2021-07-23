@@ -1,12 +1,11 @@
 import networkx as nx
-from rdflib import Graph,RDF,URIRef
+from rdflib import RDF,URIRef
 from utility.nv_identifiers import identifiers as nv_ids
-from converters.sbol.identifiers import identifiers as sbol_ids
+from converters.sbol.utility.graph import SBOLGraph
 
 def convert(filename):
     graph = nx.MultiDiGraph()
-    sbol_graph = Graph()
-    sbol_graph.load(filename)
+    sbol_graph = SBOLGraph(filename)
     node_count = 1
     node_map = {}
 
@@ -25,31 +24,15 @@ def convert(filename):
         graph.add_node(n_key, key=entity,type=e_type)
         return n_key,node_count
 
-    entities = sbol_graph.triples((None,RDF.type,sbol_ids.objects.component_definition))
-    interactions = sbol_graph.triples((None,RDF.type,sbol_ids.objects.interaction))
-    for s,p,o in entities:
+    for cd in sbol_graph.get_component_definitions():
+        p = RDF.type
         o = nv_ids.objects.entity
-        n,node_count = _add_node(s,node_count)
+        n,node_count = _add_node(cd,node_count)
         v,node_count = _add_node(o,node_count)
         graph.add_edge(n, v, key=p, weight=1)
-        for s,p1,o1 in sbol_graph.triples((s,None,None)):
-            if p1 in sbol_ids.predicates.prune:
-                continue
-            if p1 == RDF.type:
-                continue
-            v1,node_count = _add_node(o1,node_count)
-            graph.add_edge(n, v1, key=p1, weight=1)
 
-    for s,p,o in interactions:
-        o = nv_ids.objects.interaction
-        n,node_count = _add_node(s,node_count)
-        v,node_count = _add_node(o,node_count)
-        graph.add_edge(n, v, key=p, weight=1)
-        for s,p1,o1 in sbol_graph.triples((s,None,None)):
-            if p1 in sbol_ids.predicates.prune:
-                continue
-            if p1 == RDF.type:
-                continue
-            v1,node_count = _add_node(o1,node_count)
-            graph.add_edge(n, v1, key=p1, weight=1)
+        for c in sbol_graph.get_components(cd):
+            definition = sbol_graph.get_definition(c)
+            c,node_count = _add_node(definition,node_count)
+            graph.add_edge(n,c,key=nv_ids.predicates.contains,weight=1)
     return graph
