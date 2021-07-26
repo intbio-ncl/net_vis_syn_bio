@@ -6,7 +6,7 @@ class SizeHandler:
     def standard(self,builder):
         return [self._standard_node_size for node in builder.v_nodes()]
 
-    def type(self,builder):
+    def class_type(self,builder):
         node_sizes = []
         for node in builder.v_nodes():
             if builder.get_rdf_type(node) is None:

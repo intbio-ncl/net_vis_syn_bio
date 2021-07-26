@@ -28,27 +28,32 @@ class LabelHandler:
                 names.append(data["display_name"])
             return names
 
-        def type(self,builder):
+        def class_type(self,builder):
             node_text = []
             for node,data in builder.v_nodes(data=True):
                 key = data["key"]
-                if builder.get_rdf_type(node) is not None:
-                    node_text.append(_get_name(key))
+                n_type = builder.get_rdf_type(node)
+                if n_type is not None:
+                    node_text.append(_get_name(n_type[1]["key"]))
+                elif isinstance(key,Literal):
+                    node_text.append("Literal")
+                elif isinstance(key,URIRef):
+                    node_text.append("Identifier")
                 else:
-                    if isinstance(key,Literal):
-                        node_text.append("Literal")
-                    elif isinstance(key,URIRef):
-                        node_text.append("Identifier")
-                    else:
-                        node_text.append("?")
+                    node_text.append("?")
             return node_text
 
         def role(self,builder):
             print("WARN:: Not Implemented")
-            node_text = []
-            for node in builder.v_nodes:
-                node_text.append(None)
-            return node_text
+            role_names = []
+            for node,data in builder.v_nodes(data=True):
+                roles = builder.get_roles(node)
+                if builder.get_role(node) == []:
+                    role_names.append("No Role")
+                else:
+                    name = ""#identifiers.translate_roles(data["key"])
+                    role_names.append(name)
+            return role_names
 
     class EdgeLabelHandler:
         def __init__(self):

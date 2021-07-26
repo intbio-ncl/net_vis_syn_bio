@@ -29,35 +29,7 @@ class ColorHandler:
                 colors.append({"standard" : StandardPalette.primary.value})
             return colors
         
-        def type(self,builder):
-            print("WARN:: Not implemented.")
-            colors = []
-            for node,data in builder.v_nodes(data=True):
-                colors.append({"standard" : StandardPalette.primary.value})
-            return colors
-        
         def role(self,builder):
-            print("WARN:: Not implemented.")
-            colors = []
-            for node,data in builder.v_nodes(data=True):
-                colors.append({"standard" : StandardPalette.primary.value})
-            return colors
-
-        def genetic(self,builder):
-            print("WARN:: Not implemented.")
-            colors = []
-            for node,data in builder.v_nodes(data=True):
-                colors.append({"standard" : StandardPalette.primary.value})
-            return colors
-
-        def hierarchy(self,builder):
-            print("WARN:: Not implemented.")
-            colors = []
-            for node,data in builder.v_nodes(data=True):
-                colors.append({"standard" : StandardPalette.primary.value})
-            return colors
-            
-        def collection(self,builder):
             print("WARN:: Not implemented.")
             colors = []
             for node,data in builder.v_nodes(data=True):
@@ -71,14 +43,14 @@ class ColorHandler:
         def standard(self,builder):
             return [{"standard" : "#888"} for e in builder.v_edges]
         
-        def nv_class(self,builder):
+        def predicate(self,builder):
             print("WARN:: Not Implemented")
             colors = []
             for n,v,k,e in builder.v_edges(keys=True,data=True):
                 colors.append({"standard" : "#888"})
             return colors
         
-        def type(self,builder):
+        def interaction(self,builder):
             print("WARN:: Not Implemented")
             colors = []
             for n,v,k,e in builder.v_edges(keys=True,data=True):

@@ -466,7 +466,7 @@ class NVisualiser:
         Textual data pertaining to a node is of the RDF type.
         '''
         if self.node_text == self.add_node_type_labels:
-            return self._label_h.node.type(self._builder)
+            return self._label_h.node.class_type(self._builder)
         else:
             self.node_text = self.add_node_type_labels
 
@@ -527,15 +527,6 @@ class NVisualiser:
             return self._color_h.node.nv_class(self._builder)
         else:
             self.node_color = self.add_class_node_color
-
-    def add_type_node_color(self):
-        '''
-        Each type is given a unique color (a color per NV type).
-        '''
-        if self.node_color == self.add_type_node_color:
-            return self._color_h.node.type(self._builder)
-        else:
-            self.node_color = self.add_type_node_color
     
     def add_role_node_color(self):
         '''
@@ -547,33 +538,6 @@ class NVisualiser:
         else:
             self.node_color = self.add_role_node_color
 
-    def add_genetic_node_color(self):
-        '''
-        Each SBOL role ascociated with genetic/DNA entities are given a color.
-        '''
-        if self.node_color == self.add_genetic_node_color:
-            return self._color_h.node.genetic(self._builder)
-        else:
-            self.node_color = self.add_genetic_node_color
-
-    def add_hierarchy_node_color(self):
-        '''
-        Each level of heirarchy has a colour.
-        '''
-        if self.node_color == self.add_hierarchy_node_color:
-            return self._color_h.node.hierarchy(self._builder)
-        else:
-            self.node_color = self.add_hierarchy_node_color
-
-    def add_collection_node_color(self):
-        '''
-        Nodes are grouped into collections and has colours based on collection.
-        '''
-        if self.node_color == self.add_collection_node_color:
-            return self._color_h.node.collection(self._builder)
-        else:
-            self.node_color = self.add_collection_node_color
-
     # ---------------------- Edge Color ----------------------
     def add_standard_edge_color(self):
         '''
@@ -584,25 +548,25 @@ class NVisualiser:
         else:
             self.edge_color = self.add_standard_edge_color
 
-    def add_class_edge_color(self):
+    def add_predicate_edge_color(self):
         '''
         A static color set for common/interesting SBOL predicates.
         Note, not all predicates given color as number of predicates greater 
         than number of distinguishable colors.
         '''
-        if self.edge_color == self.add_class_edge_color:
-            return self._color_h.edge.nv_class(self._builder)
+        if self.edge_color == self.add_predicate_edge_color:
+            return self._color_h.edge.predicate(self._builder)
         else:
-            self.edge_color = self.add_class_edge_color
+            self.edge_color = self.add_predicate_edge_color
 
-    def add_type_edge_color(self):
+    def add_interaction_edge_color(self):
         '''
         Color for each Interaction predicate.
         '''
-        if self.edge_color == self.add_type_edge_color:
-            return self._color_h.edge.type(self._builder)
+        if self.edge_color == self.add_interaction_edge_color:
+            return self._color_h.edge.interaction(self._builder)
         else:
-            self.edge_color = self.add_type_edge_color
+            self.edge_color = self.add_interaction_edge_color
 
     # ---------------------- Node Size ----------------------
     def add_standard_node_size(self):
@@ -614,15 +578,15 @@ class NVisualiser:
         else:
             self.node_size = self.add_standard_node_size
 
-    def add_type_node_size(self):
+    def add_rdf_type_node_size(self):
         '''
         The Node size for each node is based on whether it is 
         a Object or a property i.e. does the node has an RDF type.
         '''
-        if self.node_size == self.add_type_node_size:
-            return self._size_h.type(self._builder)
+        if self.node_size == self.add_rdf_type_node_size:
+            return self._size_h.class_type(self._builder)
         else:
-            self.node_size = self.add_type_node_size
+            self.node_size = self.add_rdf_type_node_size
 
     def add_centrality_node_size(self):
         '''

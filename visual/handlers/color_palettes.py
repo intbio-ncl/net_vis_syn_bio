@@ -1,4 +1,5 @@
 from enum import Enum 
+from utility.nv_identifiers import identifiers 
 
 class StandardPalette(Enum):
     primary = "#7DF5DF"
@@ -29,16 +30,15 @@ palette_list = [
         "#FC427B",
         "#F97F51",]
 
-
 '''
 TypePalette = Enum("TypePalette",{
-    identifiers.external.component_definition_DNA : "#86E078",
-    identifiers.external.component_definition_DNARegion : "#86E078" ,
-    identifiers.external.component_definition_RNA : "#8C5EE0",
-    identifiers.external.component_definition_RNARegion : "#8C5EE0",
-    identifiers.external.component_definition_protein : "#FF675D",
-    identifiers.external.component_definition_smallMolecule : "#FAC57D",
-    identifiers.external.component_definition_complex : "#5779E0",
+    identifiers.external.DNA : "#86E078",
+    identifiers.external.DNARegion : "#86E078" ,
+    identifiers.external.RNA : "#8C5EE0",
+    identifiers.external.RNARegion : "#8C5EE0",
+    identifiers.external.protein : "#FF675D",
+    identifiers.external.smallMolecule : "#FAC57D",
+    identifiers.external.complex : "#5779E0",
 
     identifiers.external.interaction_inhibition : "#87c459", 
     identifiers.external.interaction_stimulation : "#2f4f4f",
@@ -50,55 +50,57 @@ TypePalette = Enum("TypePalette",{
     "default" : "#7DF5DF"
 })
 DNAPalette = Enum("DNAPalette",{
-    identifiers.external.component_definition_promoter : "#79dd69",
-    identifiers.external.component_definition_rbs : "#4fd23b",
-    identifiers.external.component_definition_cds : "#3aad28",
-    identifiers.external.component_definition_terminator : "#2a7f1d",
-    identifiers.external.component_definition_gene : "#1b5113",
-    identifiers.external.component_definition_engineeredGene : "#1b5113",
-    identifiers.external.component_definition_engineeredRegion : "#1b5113",
-    identifiers.external.component_definition_tag : "#64d752",
-    identifiers.external.component_definition_engineeredTag : "#64d752",
-    identifiers.external.component_definition_operator : "#8de280",
-    identifiers.external.component_definition_nonCovBindingSite : "#b7ecae",
-    identifiers.external.component_definition_startCodon : "#e0f7dc",
+    identifiers.external.promoter : "#79dd69",
+    identifiers.external.rbs : "#4fd23b",
+    identifiers.external.cds : "#3aad28",
+    identifiers.external.terminator : "#2a7f1d",
+    identifiers.external.gene : "#1b5113",
+    identifiers.external.engineeredGene : "#1b5113",
+    identifiers.external.engineeredRegion : "#1b5113",
+    identifiers.external.tag : "#64d752",
+    identifiers.external.engineeredTag : "#64d752",
+    identifiers.external.operator : "#8de280",
+    identifiers.external.nonCovBindingSite : "#b7ecae",
+    identifiers.external.startCodon : "#e0f7dc",
 })
 RNAPalette = Enum("RNAPalette",{
-    identifiers.external.component_definition_mRNA : "#b394ea",
-    identifiers.external.component_definition_sgRNA: "#33156b"
+    identifiers.external.mRNA : "#b394ea",
+    identifiers.external.sgRNA: "#33156b"
 })
 ProteinPalette = Enum("ProteinPalette",{
-    identifiers.external.component_definition_effector : "#ff5a50"
+    identifiers.external.effector : "#ff5a50"
 })
 SmallMoleculePalette = Enum("SmallMoleculePalette",{
 })
 ComplexPalette = Enum("ComplexPalette",{
-    identifiers.external.component_definition_transcriptionFactor : "#a1b4ee"
+    identifiers.external.transcriptionFactor : "#a1b4ee"
 })
 RolePalette = Enum("RolePalette",{
-    identifiers.external.component_definition_DNA : DNAPalette,
-    identifiers.external.component_definition_DNARegion : DNAPalette,
-    identifiers.external.component_definition_RNA : RNAPalette,
-    identifiers.external.component_definition_RNARegion : RNAPalette,
-    identifiers.external.component_definition_protein : ProteinPalette,
-    identifiers.external.component_definition_smallMolecule : SmallMoleculePalette,
-    identifiers.external.component_definition_complex : ComplexPalette
+    identifiers.external.DNA : DNAPalette,
+    identifiers.external.DNARegion : DNAPalette,
+    identifiers.external.RNA : RNAPalette,
+    identifiers.external.RNARegion : RNAPalette,
+    identifiers.external.protein : ProteinPalette,
+    identifiers.external.smallMolecule : SmallMoleculePalette,
+    identifiers.external.complex : ComplexPalette
 })
 GeneticRolePalette = Enum("GeneticRolePalette",{
-    identifiers.external.component_definition_promoter : "#86E078",
-    identifiers.external.component_definition_rbs : "#8C5EE0",
-    identifiers.external.component_definition_cds : "#FF675D",
-    identifiers.external.component_definition_terminator : "#FAC57D",
-    identifiers.external.component_definition_gene : "#5779E0",
-    identifiers.external.component_definition_engineeredGene : "#5779E0",
-    identifiers.external.component_definition_engineeredRegion : "#E54EF0",
-    identifiers.external.component_definition_tag : "#EBD357",
-    identifiers.external.component_definition_engineeredTag : "#EBD357",
-    identifiers.external.component_definition_operator : "#E07747",
-    identifiers.external.component_definition_nonCovBindingSite : "#2f4f4f",
-    identifiers.external.component_definition_startCodon : "#F5556F",
+    identifiers.external.promoter : "#86E078",
+    identifiers.external.rbs : "#8C5EE0",
+    identifiers.external.cds : "#FF675D",
+    identifiers.external.terminator : "#FAC57D",
+    identifiers.external.gene : "#5779E0",
+    identifiers.external.engineeredGene : "#5779E0",
+    identifiers.external.engineeredRegion : "#E54EF0",
+    identifiers.external.tag : "#EBD357",
+    identifiers.external.engineeredTag : "#EBD357",
+    identifiers.external.operator : "#E07747",
+    identifiers.external.nonCovBindingSite : "#2f4f4f",
+    identifiers.external.startCodon : "#F5556F",
     "default" : "#7DF5DF"
 })
+
+
 ClassPalette = Enum("ClassPalette",{
     identifiers.objects.component_definition : "#b03060",
     identifiers.objects.component : "#86E078",
@@ -141,12 +143,10 @@ PredicatePalette = Enum("PredicatePalette",{
     identifiers.predicates.sequence_constraint : "#1e90ff",
     "default" : "7DF5DF"
 })
-
-
-
 KGClassPalette = Enum("KGClassPalette",{
     kg_identifiers.objects.entity_type : "#b03060",
     kg_identifiers.objects.descriptor_type : "#86E078",
     "default" : "#7DF5DF"
 }) 
+
 '''
