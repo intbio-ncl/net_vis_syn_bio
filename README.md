@@ -7,7 +7,7 @@ Graph Visualiser specialising SBOL designs in graph format.
 1. `python run.py <sbol_filename>` executes fullscreen visualisation to visualise. 
 2.  Open http://127.0.0.1:8050/full_graph/ in a browser.
 3.  Use the toolbar on the left side of the screen to customise the visualisation.
-  3.1. Presets are special collection of data and visual processes to accentuate a certain feature of the graph.
+    Presets are special collection of data and visual processes to accentuate a certain feature of the graph.
 
 
 # Help
