@@ -3,13 +3,11 @@ import os
 import sys
 import json
 from rdflib import RDF
-import networkx as nx
 from networkx.readwrite import json_graph
-
 sys.path.insert(0, os.path.join(".."))
-
 from converters.converter import convert
 from graph.graph import NVGraph
+from graph.ufabo import UFABGraph
 from converters.sbol.utility.graph import SBOLGraph
 from utility.nv_identifiers import identifiers as nv_ids
 
@@ -44,13 +42,10 @@ class TestConvert(unittest.TestCase):
         self.assertTrue(graph == expected_g)
 
     def test_convert_sbol(self):
-        '''
-        Might need another look over when the underlying dm is worked on ...
-        '''
         filename = os.path.join(curr_dir,"files","multiplexer.xml")
-        graph = convert(filename,"sbol")
+        ufab_graph = UFABGraph()
+        graph = convert(filename,ufab_graph)
         rdf_graph = SBOLGraph(filename)
-        
         rdf_cds =  rdf_graph.get_component_definitions()
         for cd in rdf_cds:
             self.assertTrue(is_node(graph,cd))

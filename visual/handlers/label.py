@@ -44,7 +44,6 @@ class LabelHandler:
             return node_text
 
         def role(self,builder):
-            print("WARN:: Not Implemented")
             role_names = []
             for node,data in builder.v_nodes(data=True):
                 roles = builder.get_roles(node)

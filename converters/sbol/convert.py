@@ -3,7 +3,7 @@ from rdflib import RDF,URIRef
 from utility.nv_identifiers import identifiers as nv_ids
 from converters.sbol.utility.graph import SBOLGraph
 
-def convert(filename):
+def convert(filename,ufab_graph):
     graph = nx.MultiDiGraph()
     sbol_graph = SBOLGraph(filename)
     node_count = 1

@@ -1,8 +1,11 @@
 import unittest
 import os
 import sys
+
+from rdflib.term import URIRef
 sys.path.insert(0, os.path.join(".."))
 curr_dir = os.path.dirname(os.path.realpath(__file__))
+from graph.ufabo import UFABGraph
 from converters.converter import convert
 from utility.nv_identifiers import identifiers
 
