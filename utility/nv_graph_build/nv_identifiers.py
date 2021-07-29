@@ -1,4 +1,5 @@
-from rdflib import URIRef, RDF
+from rdflib import URIRef,RDF
+from rdflib import Namespace as RDFNamespace
 
 class KnowledgeGraphIdentifiers:
     def __init__(self):
@@ -9,7 +10,7 @@ class KnowledgeGraphIdentifiers:
     
 class Namespace:  
     def __init__(self):
-        self.nv = URIRef('http://nv_ontology/')
+        self.nv = RDFNamespace('http://nv_ontology/')
         identifiers = URIRef('http://identifiers.org/')
         self.sequence_ontology = URIRef(identifiers + 'so/SO:')
         self.sbo_biomodels = URIRef(identifiers + 'biomodels.sbo/SBO:') 
@@ -46,15 +47,16 @@ class Roles:
         self.terminator     = URIRef(namespaces.sequence_ontology + "0000141")
         self.gene           = URIRef(namespaces.sequence_ontology + "0000704")
         self.operator       = URIRef(namespaces.sequence_ontology + "0000057")
-        self.engineeredGene = URIRef(namespaces.sequence_ontology + "0000280")
         self.mRNA           = URIRef(namespaces.sequence_ontology + "0000234")
         self.engineeredRegion = URIRef(namespaces.sequence_ontology + "0000804")
-        self.nonCovBindingSite = URIRef(namespaces.sequence_ontology + "0001091")
         self.effector       = URIRef("http://identifiers.org/chebi/CHEBI:35224") 
+        self.transcriptionFactor = URIRef("http://identifiers.org/go/GO:0003700")
+        
+        self.sgRNA          = URIRef(namespaces.sequence_ontology + "0001998")
+        self.engineeredTag  = URIRef(namespaces.sequence_ontology + "0000807")
         self.startCodon     = URIRef(namespaces.sequence_ontology + "0000318")
         self.tag            = URIRef(namespaces.sequence_ontology + "0000324")
-        self.engineeredTag  = URIRef(namespaces.sequence_ontology + "0000807")
-        self.sgRNA          = URIRef(namespaces.sequence_ontology + "0001998")
-        self.transcriptionFactor = URIRef("http://identifiers.org/go/GO:0003700")
+        self.nonCovBindingSite = URIRef(namespaces.sequence_ontology + "0001091")
+        self.engineeredGene = URIRef(namespaces.sequence_ontology + "0000280")
 
 identifiers = KnowledgeGraphIdentifiers()
