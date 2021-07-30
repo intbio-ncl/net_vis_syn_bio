@@ -6,19 +6,18 @@ I dont think this affects the output.
 
 import warnings
 warnings.filterwarnings("ignore")
-
 import sys, inspect
 
 from rdflib import Graph,RDF,OWL
 from rdflib.extras.infixowl import Class,Restriction
 
-from nv_identifiers import identifiers
+from identifiers import nv_namespace
 from entities.entity import *
 from entities.physcial_entities import *
 
 def produce_ontology_graph():
     graph = Graph()
-    graph.bind('nv', identifiers.namespaces.nv)
+    graph.bind('nv', nv_namespace)
     for name, obj in inspect.getmembers(sys.modules[__name__]):
         if not _is_subclass(obj):
             continue

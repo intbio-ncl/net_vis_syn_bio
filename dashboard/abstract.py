@@ -1,3 +1,4 @@
+
 import dash
 import dash_core_components as dcc
 import dash_bootstrap_components as dbc
@@ -34,18 +35,15 @@ style_sheet = [
         'crossorigin': 'anonymous'
     }
 ]
-
 class AbstractDash:
-    def __init__(self,name,server,pathname,**kwargs):
-        self.app = dash.Dash(name,server=server,url_base_pathname=pathname,
+    def __init__(self,graph_visualiser,name,server,pathname,**kwargs):
+        self.app = dash.Dash(name, server = server, url_base_pathname=pathname,
                    external_stylesheets=style_sheet,external_scripts=external_scripts,**kwargs)
         self.pathname = pathname
+        self.visualiser = graph_visualiser
         self.children = []
         self.parameters_calls = []
         self.callbacks = {}
-
-    def run(self):
-        self.app.run_server(debug=True)
 
     def build(self):
         for k,v in self.callbacks.items():
@@ -167,6 +165,7 @@ class AbstractDash:
             else:
                 return [checklist]
 
+
     def create_slider(self,identifier,name,min_val, max_val, default_val = None, step=None, marks = None, add=False,**kwargs):
         label = html.Label(name)
         if default_val is None:
@@ -246,6 +245,7 @@ class AbstractDash:
             return self._create_element(switch)
         else:
             return [switch]
+
     
     def create_color_picker(self,identifier,name,add=False,**kwargs):
         picker = daq.ColorPicker(id=identifier,label=name,**kwargs)
@@ -253,6 +253,7 @@ class AbstractDash:
             return self._create_element(picker)
         else:
             return [picker]
+
 
     def create_indicator(self,identifier,name,color="green",add=False,**kwargs):
         indicator = daq.Indicator(id=identifier,label=name,color=color,**kwargs)
@@ -336,6 +337,7 @@ class AbstractDash:
         else:
             return [sum_tag]
 
+
     def create_modal(self,identifier,close_identifier,name,contents,add=False,**kwargs):
         modal_header = dbc.ModalHeader(name)
         modal_body = dbc.ModalBody(contents)
@@ -353,7 +355,8 @@ class AbstractDash:
         else:
             return [q_mark]
 
-    def create_legend(self,legend_dict,add=False):
+    
+    def create_legend(self,legend_dict,add=False,**kwargs):
         legend_body = [] 
         for name,legend_items in legend_dict.items():
             l_children = self.create_heading_5(name,name) 
@@ -361,6 +364,7 @@ class AbstractDash:
                 style = {"background" : item_val}
                 l_children.append(html.Li(children=[html.Span(style=style),item_name]))
             legend_body.append(html.Ul(children=l_children,className="legend-labels"))
+
         legend_body_div = self.create_div("legend_body",legend_body,className="legend-scale")
         if add:
             return self.create_div("sb",legend_body_div,add=True,className="graph-legend")

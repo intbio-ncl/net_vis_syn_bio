@@ -1,5 +1,5 @@
 import networkx as nx
-class LayoutHandler:
+class AbstractLayoutHandler:
     def __init__(self):
         pass
     

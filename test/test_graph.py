@@ -2,12 +2,39 @@ import unittest
 import os
 import sys
 
-from rdflib.term import URIRef
+from rdflib import RDF,OWL
 sys.path.insert(0, os.path.join(".."))
-curr_dir = os.path.dirname(os.path.realpath(__file__))
-from graph.ufabo import UFABGraph
-from converters.converter import convert
+
+from converters.instance import convert as i_convert
+from converters.model import convert as m_convert
 from utility.nv_identifiers import identifiers
+
+curr_dir = os.path.dirname(os.path.realpath(__file__))
+model_fn = os.path.join(curr_dir,"..","utility","nv_model.xml")
+
+class TestModelGraph(unittest.TestCase):
+    def setUp(self):
+        self.mg = m_convert(model_fn)
+
+    def tearDown(self):
+        pass
+
+    def test_labels(self):
+        for n,v,k,e in self.mg.edges(data=True,keys=True):
+            edge_label = e["display_name"]
+            self.assertIn(edge_label,k)
+
+    def test_search(self):
+        all_edges = self.mg.edges(data=True,keys=True)
+        res = list(self.mg.search((None,None,None)))
+        self.assertEqual(len(res),len(all_edges))
+        for n,v,k,e in all_edges:
+            n_data = self.mg.nodes[n]
+            v_data = self.mg.nodes[v]
+            expected_res_val = ([n,n_data],[v,v_data],k)
+            self.assertIn(expected_res_val,res)
+
+
 
 class TestNVGraph(unittest.TestCase):
 
@@ -34,19 +61,21 @@ class TestNVGraph(unittest.TestCase):
                 node_id_map[v] = v_data["key"]
 
     def test_read_write(self):
+        self.fail("Not-Updated")
         filename = os.path.join(curr_dir,"files","0x87.xml")
         nv_file = "nv_design.json"
-        graph = convert(filename)
+        graph = i_convert(filename)
         graph.save(nv_file)
-        reload_graph = convert(nv_file)
+        reload_graph = i_convert(nv_file)
         orig_list = list(graph.edges(data=True,keys=True))
         reload_list = list(reload_graph.edges(data=True,keys=True))            
         g_diff = diff(orig_list,reload_list)
         self.assertEqual(len(g_diff), 0)
 
     def test_search(self):
+        self.fail("Not-Updated")
         filename = os.path.join(curr_dir,"files","0xF6.xml")
-        graph = convert(filename)
+        graph = i_convert(filename)
         results = graph.search((None,identifiers.predicates.rdf_type,identifiers.objects.entity))
         self.assertGreater(len(results),0)
         for n,v,e in results:

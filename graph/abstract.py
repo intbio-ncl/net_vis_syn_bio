@@ -3,7 +3,7 @@ import json
 import networkx as nx
 from rdflib import URIRef
 
-class NVGraph:
+class AbstractGraph:
     def __init__(self,graph):
         self._graph = graph
         self._generate_labels()
@@ -12,9 +12,11 @@ class NVGraph:
         return len(self._graph)
 
     def __eq__(self, obj):
-        if not isinstance(obj,self.__class__):
-            return False
-        return nx.is_isomorphic(self._graph,obj._graph)
+        if isinstance(obj,self.__class__):
+            return nx.is_isomorphic(self._graph,obj._graph)
+        if isinstance(obj,nx.MultiDiGraph):
+            return nx.is_isomorphic(self._graph,obj)
+        return False
 
     def __iter__(self):
         for n in self._graph.nodes:

@@ -1,33 +1,13 @@
 import os
-import re
 import json
 
 import dash_cytoscape as cyto
 cyto.load_extra_layouts()
-from builder.builder import NVBuilder
-from visual.handlers.layout import LayoutHandler
-from visual.handlers.label import LabelHandler
-from visual.handlers.color import ColorHandler
-from visual.handlers.size import SizeHandler
-from visual.handlers.shape import ShapeHandler
 
 default_stylesheet_fn = os.path.join(os.path.dirname(os.path.realpath(__file__)),"default_stylesheet.txt")
 
-class NVisualiser:
+class AbstractVisual:
     def __init__(self,graph=None):
-        if graph is None:
-            self._builder = None
-        elif isinstance(graph,NVBuilder):
-            self._builder = graph
-        else:
-            self._builder = NVBuilder(graph)
-
-        self._layout_h = LayoutHandler()
-        self._label_h = LabelHandler()
-        self._color_h = ColorHandler()
-        self._size_h = SizeHandler()
-        self._shape_h = ShapeHandler()
-
         self.pos = []
         self.view = self.set_full_graph_view
         self.mode = self.set_network_mode
@@ -38,8 +18,7 @@ class NVisualiser:
         self.edge_color = self.add_standard_edge_color
         self.node_size = self.add_standard_node_size
         self.node_shape = self.set_circle_node_shape
-        self.edge_shape = self.set_straight_edge_shape()
-        self.default_stylesheet = self._build_default_stylesheet()
+        self.edge_shape = self.set_straight_edge_shape
 
     def copy_settings(self):
         current_settings = [
@@ -52,129 +31,6 @@ class NVisualiser:
             self.node_shape]
         return current_settings
     
-    # ---------------------- Preset ------------------------------------
-    def set_prune_preset(self):
-        '''
-        Pre-set methods with an affinity for displaying the pruned graph view.
-        '''
-        preset_functions = [self.set_tree_mode,
-                            self.set_pruned_view,
-                            self.set_cose_layout,
-                            self.add_centrality_node_size,
-                            self.add_class_edge_color,
-                            self.add_node_name_labels,
-                            self.add_edge_no_labels]
-        return self._set_preset(preset_functions)
-
-    def set_interaction_verbose_preset(self):
-        '''
-        Pre-set methods with an affinity for displaying the verbose interaction view.
-        '''
-        preset_functions = [self.set_network_mode,
-                            self.set_interaction_verbose_view,
-                            self.set_dagre_layout,
-                            self.add_type_edge_color,
-                            self.add_type_node_color,
-                            self.add_edge_no_labels,
-                            self.add_node_name_labels]
-        return self._set_preset(preset_functions)
-
-    def set_interaction_preset(self):
-        '''
-        Pre-set methods with an affinity for displaying the interaction view.
-        '''
-        preset_functions = [self.set_network_mode,
-                            self.set_interaction_view,
-                            self.set_dagre_layout,
-                            self.add_type_edge_color,
-                            self.add_role_node_color,
-                            self.add_edge_no_labels,
-                            self.add_node_name_labels]
-        return self._set_preset(preset_functions)
-
-    def set_protein_protein_interaction_preset(self):
-        '''
-        Pre-set methods with an affinity for displaying the ppi interaction view.
-        '''
-        preset_functions = [self.set_network_mode,
-                            self.set_protein_protein_interaction_view,
-                            self.set_dagre_layout,
-                            self.add_type_edge_color,
-                            self.add_standard_node_color,
-                            self.add_node_name_labels,
-                            self.add_edge_no_labels,
-                            self.set_bezier_edge_shape]
-        return self._set_preset(preset_functions)
-
-    def set_interaction_genetic_preset(self):
-        '''
-        Pre-set methods with an affinity for displaying the genetic interaction view.
-        '''
-        preset_functions = [self.set_network_mode,
-                            self.set_genetic_interaction_view,
-                            self.set_dagre_layout,
-                            self.add_type_edge_color,
-                            self.add_genetic_node_color,
-                            self.add_edge_no_labels,
-                            self.add_node_name_labels,
-                            self.set_bezier_edge_shape]
-        return self._set_preset(preset_functions)
-
-    def set_heirarchy_preset(self):
-        '''
-        Pre-set methods with an affinity for displaying the heirarchy view.
-        '''
-        preset_functions = [self.set_tree_mode,
-                            self.set_heirarchy_view,
-                            self.set_dagre_layout,
-                            self.add_standard_edge_color,
-                            self.add_role_node_color,
-                            self.add_edge_no_labels,
-                            self.add_node_name_labels]
-        return self._set_preset(preset_functions)
-
-    def set_component_preset(self):
-        '''
-        Pre-set methods with an affinity for displaying the component view.
-        '''
-        preset_functions = [self.set_tree_mode,
-                            self.set_components_view,
-                            self.set_cose_layout,
-                            self.add_standard_edge_color,
-                            self.add_centrality_node_size,
-                            self.add_collection_node_color,
-                            self.add_edge_no_labels,
-                            self.add_node_name_labels]
-        return self._set_preset(preset_functions)
-
-    def set_module_preset(self):
-        '''
-        Pre-set methods with an affinity for displaying the module view.
-        '''
-        preset_functions = [self.set_network_mode,
-                            self.set_module_view,
-                            self.set_dagre_layout,
-                            self.add_standard_edge_color,
-                            self.add_standard_node_color,
-                            self.add_edge_no_labels,
-                            self.add_node_name_labels]
-        return self._set_preset(preset_functions)
-
-    def set_maps_preset(self):
-        '''
-        Pre-set methods with an affinity for displaying the maps view.
-        '''
-        preset_functions = [self.set_network_mode,
-                            self.set_maps_view,
-                            self.set_cose_layout,
-                            self.add_centrality_node_size,
-                            self.add_standard_edge_color,
-                            self.add_class_node_color,
-                            self.add_edge_no_labels,
-                            self.add_node_name_labels]
-        return self._set_preset(preset_functions)
-
-
     # ---------------------- View ------------------------------------
     def set_full_graph_view(self):
         '''
@@ -184,75 +40,6 @@ class NVisualiser:
             self._builder.set_full_view()
         else:
            self.view =self.set_full_graph_view
-
-    def set_pruned_view(self):
-        '''
-        Sub graph viewing the raw graph with specific edges removed 
-        that are deemed not useful for visualisation.
-        '''
-        if self.view == self.set_pruned_view:
-            self._builder.set_pruned_view()
-        else:
-           self.view =self.set_pruned_view
-
-    def set_interaction_verbose_view(self):
-        '''
-        Sub graph viewing all interactions within the graph including explicit 
-        visualisation to participants. 
-        '''
-        if self.view == self.set_interaction_verbose_view:
-            self._builder.set_interaction_verbose_view()
-        else:
-           self.view =self.set_interaction_verbose_view
-
-    def set_interaction_view(self):
-        '''
-        Sub graph viewing all interactions within the graph implicitly visualises 
-        participants by merging interaction node and participant edges into a single edge. 
-        '''
-        if self.view == self.set_interaction_view:
-            self._builder.set_interaction_verbose_view()
-        else:
-           self.view =self.set_interaction_view
-        self._builder.set_interaction_view()
-
-    def set_genetic_interaction_view(self):
-        '''
-        Sub graph viewing genetic interactions within the graph.
-        Abstracts proteins and non-genetic actors.
-        '''
-        if self.view == self.set_genetic_interaction_view:
-            self._builder.set_genetic_interaction_view()
-        else:
-           self.view =self.set_genetic_interaction_view
-
-    def set_protein_protein_interaction_view(self):
-        '''
-        Sub graph viewing interactions between proteins. Abstracts DNA + Non-genetic actors. 
-        Only visulises what the effect the presence of a protein has upon other proteins.
-        '''
-        if self.view == self.set_protein_protein_interaction_view:
-            self._builder.set_protein_protein_interaction_view()
-        else:
-           self.view =self.set_protein_protein_interaction_view
-
-    def set_heirarchy_view(self):
-        '''
-        Sub graph viewing the design as a heirachy of entities.
-        '''
-        if self.view == self.set_heirarchy_view:
-            self._builder.set_heirarchy_view()
-        else:
-           self.view =self.set_heirarchy_view
-
-    def set_module_view(self):
-        '''
-        Sub graph viewing the connection between modules within the design.
-        '''
-        if self.view == self.set_module_view:
-            self._builder.set_module_view()
-        else:
-           self.view =self.set_module_view
 
     # ---------------------- View Mode ------------------------------------
     def set_network_mode(self):
@@ -470,16 +257,6 @@ class NVisualiser:
         else:
             self.node_text = self.add_node_type_labels
 
-    def add_node_role_labels(self):
-        '''
-        Textual data pertaining to a node relates to the 
-        Role of the node if said node has this property.
-        '''
-        if self.node_text == self.add_node_role_labels:
-            return self._label_h.node.role(self._builder)
-        else:
-            self.node_text = self.add_node_role_labels
-
     # ---------------------- Edge Labels ----------------------
     def add_edge_no_labels(self):
         '''
@@ -519,24 +296,6 @@ class NVisualiser:
         else:
             self.node_color = self.add_rdf_type_node_color
 
-    def add_class_node_color(self):
-        '''
-        Each class is set to a unique color i.e. a color per object rdf-type.
-        '''
-        if self.node_color == self.add_class_node_color:
-            return self._color_h.node.nv_class(self._builder)
-        else:
-            self.node_color = self.add_class_node_color
-    
-    def add_role_node_color(self):
-        '''
-        Each SBOL type is given a distinct number, 
-        each role of said type is given a shade of that color.
-        '''
-        if self.node_color == self.add_role_node_color:
-            return self._color_h.node.role(self._builder)
-        else:
-            self.node_color = self.add_role_node_color
 
     # ---------------------- Edge Color ----------------------
     def add_standard_edge_color(self):
@@ -547,26 +306,6 @@ class NVisualiser:
             return self._color_h.edge.standard(self._builder)
         else:
             self.edge_color = self.add_standard_edge_color
-
-    def add_predicate_edge_color(self):
-        '''
-        A static color set for common/interesting SBOL predicates.
-        Note, not all predicates given color as number of predicates greater 
-        than number of distinguishable colors.
-        '''
-        if self.edge_color == self.add_predicate_edge_color:
-            return self._color_h.edge.predicate(self._builder)
-        else:
-            self.edge_color = self.add_predicate_edge_color
-
-    def add_interaction_edge_color(self):
-        '''
-        Color for each Interaction predicate.
-        '''
-        if self.edge_color == self.add_interaction_edge_color:
-            return self._color_h.edge.interaction(self._builder)
-        else:
-            self.edge_color = self.add_interaction_edge_color
 
     # ---------------------- Node Size ----------------------
     def add_standard_node_size(self):
@@ -619,16 +358,6 @@ class NVisualiser:
             return self._size_h.out_centrality(self._builder)
         else:
             self.node_size = self.add_out_centrality_node_size
-
-    def add_hierarchy_node_size(self):
-        '''
-        The lower a node in the graph as a heirachy the smaller the node.
-        '''
-        if self.node_size == self.add_hierarchy_node_size:
-            return self._size_h.hierarchy(self._builder)
-        else:
-            self.node_size = self.add_hierarchy_node_size
-
 
     # ---------------------- Node Shape ----------------------
     def set_adaptive_node_shape(self):
@@ -717,48 +446,69 @@ class NVisualiser:
         '''
         Sets the shape of each edge to a straight line.
         '''
-        self.edge_shape = self._shape_h.edge.straight()
+        if self.edge_shape == self.set_straight_edge_shape:
+            return self._shape_h.edge.straight()
+        else:
+            self.edge_shape = self.set_straight_edge_shape
 
     def set_bezier_edge_shape(self):
         '''
         Sets the shape of each edge to a straight line.
         Overlapping edges are curved.
         '''
-        self.edge_shape = self._shape_h.edge.bezier()
+        if self.edge_shape == self.set_bezier_edge_shape:
+            return self._shape_h.edge.bezier()
+        else:
+            self.edge_shape = self.set_bezier_edge_shape
 
     def set_taxi_edge_shape(self):
         '''
         Sets the shape of each edge to a two straight 
         lines with a right angle.
         '''
-        self.edge_shape = self._shape_h.edge.taxi()
+        if self.edge_shape == self.set_taxi_edge_shape:
+            return self._shape_h.edge.taxi()
+        else:
+            self.edge_shape = self.set_taxi_edge_shape
 
     def set_unbundled_bezier_edge_shape(self):
         '''
         Sets the shape of each edge based on the unbundled_bezier algorithm.
         '''
-        self.edge_shape = self._shape_h.edge.unbundled_bezier()
+        if self.edge_shape == self.set_unbundled_bezier_edge_shape:
+            return self._shape_h.edge.unbundled_bezier()
+        else:
+            self.edge_shape = self.set_unbundled_bezier_edge_shape
         
     def set_loop_edge_shape(self):
         '''
         Sets the shape of each edge to a loop .
         '''
-        self.edge_shape = self._shape_h.edge.loop()
+        if self.edge_shape == self.set_loop_edge_shape:
+            return self._shape_h.edge.loop()
+        else:
+            self.edge_shape = self.set_loop_edge_shape
 
     def set_haystack_edge_shape(self):
         '''
         Sets the shape of each edge based on the haystack algorithm.
         '''
-        self.edge_shape = self._shape_h.edge.haystack()
+        if self.edge_shape == self.set_haystack_edge_shape:
+            return self._shape_h.edge.haystack()
+        else:
+            self.edge_shape = self.set_haystack_edge_shape
 
     def set_segments_edge_shape(self):
         '''
         Sets the shape of each edge to a set of segments. 
         '''
-        self.edge_shape = self._shape_h.edge.segments()
+        if self.edge_shape == self.set_segments_edge_shape:
+            return self._shape_h.edge.segments()
+        else:
+            self.edge_shape = self.set_segments_edge_shape
 
     def build(self,graph_id="cytoscape_graph", legend=False, width=100,height=100):
-        stylesheet = self.default_stylesheet.copy()
+        stylesheet = self._build_default_stylesheet()
         nodes = []
         edges = []
         node_selectors = []
@@ -771,6 +521,8 @@ class NVisualiser:
         edge_color = self.edge_color()  
         node_text = self.node_text()
         edge_text = self.edge_text()
+        edge_shape = self.edge_shape()
+
         if self.layout is not None:
             layout = self.layout()
         for index,(node,label) in enumerate(self._builder.view.nodes(data=True)):
@@ -789,7 +541,7 @@ class NVisualiser:
         for index,(n,v) in enumerate(self._builder.view.edges()):
             color_key = list(edge_color[index].keys())[0]
             e_color = edge_color[index][color_key]
-            edge,e_style = self._build_edge(n,v,edge_text[index],color_key,e_color)
+            edge,e_style = self._build_edge(n,v,edge_text[index],color_key,e_color,edge_shape)
             if color_key not in edge_selectors:
                 stylesheet.append(e_style)    
                 edge_selectors.append(color_key)
@@ -818,11 +570,11 @@ class NVisualiser:
         style = {"selector" : "." + c_key, "style" : {"background-color" : color}}
         return node,style
 
-    def _build_edge(self,n,v,label,c_key,color):
+    def _build_edge(self,n,v,label,c_key,color,edge_shape):
         edge = {'data': {'source': n, 'target': v, 'label': label},
                 'classes' : f'center-right {c_key}'}
         style = {"selector" : "." + c_key,"style" : {"line-color" : color,
-                                                    'curve-style': self.edge_shape,
+                                                    'curve-style': edge_shape,
                                                     "mid-target-arrow-color": color,
                                                     "mid-target-arrow-shape": "triangle"}}
         return edge,style

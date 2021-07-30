@@ -1,6 +1,6 @@
 import re 
 
-class ModeBuilder:
+class AbstractModeBuilder:
     def __init__(self,builder):
         self._builder = builder
 

@@ -1,16 +1,16 @@
 import os
 from utility.summarise import get_all_views
-from dashboard.abstract_dash import AbstractDash
-from visual.visualiser import NVisualiser
+from dashboard.abstract import AbstractDash
+from visual.instance import InstanceVisual
 
 
 button_class = "btn btn-light dash-toolbar"
 graph_col_class = "col sub_graph"
 text_col_class = "col accordian"
-class NVResultDash(AbstractDash):
+class ResultDash(AbstractDash):
     def __init__(self,name,server):
         super().__init__(name,server,"/full_graph/")
-        self.visualiser = NVisualiser()
+        self.visualiser = InstanceVisual()
         self._build_app()
 
 
@@ -22,7 +22,7 @@ class NVResultDash(AbstractDash):
         '''
         Seems silly to load the graph for each function...
         '''
-        self.visualiser = NVisualiser(filename)
+        self.visualiser = InstanceVisual(filename)
         download = os.path.basename(filename)
         name = download.split(".")[0]
         s_view,t_view,f_view = get_all_views(filename) 

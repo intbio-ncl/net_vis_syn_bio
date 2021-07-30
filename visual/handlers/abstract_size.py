@@ -1,4 +1,4 @@
-class SizeHandler:
+class AbstractSizeHandler:
     def __init__(self):
         self._standard_node_size = 30
 
@@ -50,13 +50,6 @@ class SizeHandler:
                 node_size = self._standard_node_size
             node_sizes.append(node_size)
         return node_sizes
-
-    def hierarchy(self,builder):
-        print("Warn:: Not implemented")
-        sizes = []
-        for node in builder.v_nodes():
-            sizes.append(10)
-        return sizes
 
 
     

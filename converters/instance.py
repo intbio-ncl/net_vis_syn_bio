@@ -1,15 +1,15 @@
 from converters.sbol import convert as sbol_convert
 from converters.nv import convert as nv_convert
-from graph.graph import NVGraph
+from graph.instance import InstanceGraph
 
 convert_dict = {"sbol" : sbol_convert,
                 "nv"   : nv_convert}
 
-def convert(filename,nv_graph,convert_type=None):
+def convert(filename,convert_type=None):
     if convert_type is None:
         convert_type = derive_convert_type(filename)
-    graph = convert_dict[convert_type].convert(filename,nv_graph)
-    return NVGraph(graph)
+    graph = convert_dict[convert_type].convert(filename)
+    return InstanceGraph(graph)
 
 def get_converter_names():
     return list(convert_dict.keys())

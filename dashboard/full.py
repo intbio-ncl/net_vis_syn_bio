@@ -1,11 +1,12 @@
+
 from inspect import signature
 from dash.dependencies import Input, Output,State
 from dash.exceptions import PreventUpdate
 from dash import callback_context
 from collections import OrderedDict 
 
-from dashboard.abstract_dash import AbstractDash
-from visual.visualiser import NVisualiser
+from visual.abstract import AbstractVisual
+from dashboard.abstract import AbstractDash
 
 id_prefix = "cyto"
 graph_id = "full_graph"
@@ -14,32 +15,48 @@ preset_inputs = OrderedDict()
 preset_outputs = OrderedDict()
 update_inputs = OrderedDict()
 
+
 docs_modal_inputs = {"open_doc" : Input("open_doc", "n_clicks"), 
                     "close_doc" : Input("close_doc", "n_clicks")}
+
 export_inputs              = [Input("png","n_clicks"),
                               Input("jpg","n_clicks"),
                               Input("svg","n_clicks")]
+
 not_modifier_identifiers = {"sidebar_id" : "sidebar-left",
                             "utility_id" : "utility"}
+
 update_outputs =           {"graph_id"   : Output("content","children"),
                             "legend_id"  : Output("sidebar-right","children")}
-graph_type_outputs =       {"options_id" : Output("optionss","style"),
+
+graph_type_outputs =       {"options_id" : Output("options","style"),
                             "div"        : Output("div","children")}
+
 docs_modal_outputs =       {"doc_modal_id" : Output("doc_modal", "is_open")}
 doc_modal_states =         State("doc_modal", "is_open")
+
 export_outputs =           Output(graph_id, "generateImage")
 
-a_ignore ='.*bootstrap.*'
-
-class NVFullDash(AbstractDash):
-    def __init__(self,name,server):
-        super().__init__(name,server,"/full_graph/",assets_ignore=a_ignore)
-        self.visualiser = NVisualiser()
+assets_ignore='.*bootstrap.*'
+class FullDash(AbstractDash):
+    def __init__(self,graph_visualiser,name,server,pathname):
+        super().__init__(graph_visualiser,name,server,pathname,assets_ignore=assets_ignore)
         self._build_app()
 
+    def _load_graph(self):
+        figure,legend = self.visualiser.build(graph_id=graph_id,legend=True)
+        graph_div = self.create_div(update_outputs["graph_id"].component_id,[figure],className="col-10")
+        legend = self.create_div(update_outputs["legend_id"].component_id,self.create_legend(legend),className="col sidebar")
+        self.replace(graph_div[0])
+        self.replace(legend[0])
+        container = self.create_div("row-main",self.children,className="row")
+        self.app.layout = self.create_div("main",container,className="container-fluid")[0]
+
     def _build_app(self):
+        # Add Options
         visual_class = self.visualiser.__class__
-        form_elements,identifiers,maps = self._create_form_elements(visual_class,id_prefix=id_prefix)
+        form_elements,identifiers,maps = self._create_form_elements(visual_class,default_vals=default_options,id_prefix=id_prefix)
+
         del maps["cyto_preset"]
         preset_identifiers,identifiers,preset_output,preset_state = self._generate_inputs_outputs(identifiers)
         
@@ -67,16 +84,6 @@ class NVFullDash(AbstractDash):
         self.add_callback(export_graph_inner,export_inputs,export_outputs)
         self.build()
 
-    def load_graph(self,filename):
-        self.visualiser = NVisualiser(filename)
-        figure,legend = self.visualiser.build(graph_id=graph_id,legend=True)
-        graph_div = self.create_div(update_outputs["graph_id"].component_id,[figure],className="col-10")
-        legend = self.create_div(update_outputs["legend_id"].component_id,self.create_legend(legend),className="col sidebar")
-        self.replace(graph_div[0])
-        self.replace(legend[0])
-        container = self.create_div("row-main",self.children,className="row")
-        self.app.layout = self.create_div("main",container,className="container-fluid")[0]
-
     def update_preset(self,preset_name,mappings,*states):
         if preset_name is None:
             raise PreventUpdate()
@@ -101,9 +108,8 @@ class NVFullDash(AbstractDash):
         return final_outputs
 
     def update_graph(self,*args):
-        if not isinstance(self.visualiser,NVisualiser):
+        if not isinstance(self.visualiser,AbstractVisual):
             raise PreventUpdate()
-
         args = args[0]
         old_settings = self.visualiser.copy_settings()
         for index,setter_str in enumerate(args):
@@ -227,25 +233,32 @@ class NVFullDash(AbstractDash):
     def _generate_options(self,visualiser):
         visualiser = visualiser()
         blacklist_functions = ["build",
-                                "view",
-                                "mode",
-                                "edge_pos",
-                                "node_text",
-                                "edge_text",
-                                "node_color",
-                                "edge_color",
-                                "node_size",
-                                "node_shape",
-                                "layout",
-                                "copy_settings"]
+                            "mode",
+                            "view",
+                            "edge_pos",
+                            "node_text",
+                            "edge_text",
+                            "node_color",
+                            "edge_color",
+                            "edge_shape",
+                            "node_size",
+                            "node_shape",
+                            "layout",
+                            "copy_settings"]
 
-        options = {"preset" : {},"mode" : {},"view" : {},"layout" : {}}
+        options = {"preset" : {},
+                "mode" : {},
+                "view" : {},
+                "layout" : {}}
+
         for func_str in dir(visualiser):
             if func_str[0] == "_":
                 continue
             func = getattr(visualiser,func_str,None)
+
             if func is None or func_str in blacklist_functions or not callable(func):
                 continue
+            
             if len(signature(func).parameters) > 0:
                 # When there is parameters a slider will be used.
                 # Some Paramterised setters will return there default val if one isnt provided.
@@ -257,12 +270,16 @@ class NVFullDash(AbstractDash):
                 # When no params radiobox.
                 if func_str.split("_")[-1] == "preset":
                     option_name = "preset"
+
                 elif func_str.split("_")[-1] == "view":
                     option_name = "view"
+
                 elif func_str.split("_")[-1] == "mode":
                     option_name = "mode"
+
                 elif func_str.split("_")[-1] == "layout":
                     option_name = "layout"
+
                 elif "node" in func_str:
                     option_name = "node" + "_" + func_str.split("_")[-1]
                     
@@ -270,6 +287,7 @@ class NVFullDash(AbstractDash):
                     option_name = "edge" + "_" + func_str.split("_")[-1]
                 else:
                     option_name = "misc"
+                
                 if option_name not in options.keys():
                     options[option_name] = {func_str : func}
                 else:
@@ -283,6 +301,7 @@ class NVFullDash(AbstractDash):
         states = {k:State(v.component_id,v.component_property) for k,v in identifiers.items()}
         return preset_identifiers,identifiers,outputs,states
 
+
     def _build_docstring(self,doc_name,functions):
         doc_body = self.create_heading_4(doc_name,doc_name)
         for name,function in functions.items():
@@ -293,5 +312,6 @@ class NVFullDash(AbstractDash):
             func_doc = func_doc.lstrip().rstrip().replace("    ","")
             func_data += self.create_paragraph(func_doc)
             doc_body += self.create_div(name + "_doc",func_data) + self.create_line_break()
+
         doc_body += self.create_horizontal_row(False)
         return self.create_div(doc_name + "_container",doc_body)

@@ -1,9 +1,8 @@
 import networkx as nx
 from rdflib import RDF,URIRef
-from utility.nv_identifiers import identifiers as nv_ids
 from converters.sbol.utility.graph import SBOLGraph
 
-def convert(filename,ufab_graph):
+def convert(filename):
     graph = nx.MultiDiGraph()
     sbol_graph = SBOLGraph(filename)
     node_count = 1
