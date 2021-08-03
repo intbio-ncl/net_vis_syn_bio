@@ -27,21 +27,19 @@ class Roles:
 def produce_identifiers(graph):
     namespaces = [OWL,RDF.uri,RDFS.uri]
     for n,v,e in graph.search((None,None,None)):
+        n,n_data = n
+        v,v_data = v
+        n_key = n_data["key"]
+        v_key = v_data["key"]
+        if e == RDF.type and v_key == OWL.Class and not isinstance(n_key, BNode):
+            _apply_var_variants(Objects,n_key)
+        if v_key == OWL.hasValue:
+            _apply_var_variants(Roles,v_key)
         for ns in namespaces:
             if ns in e:
                 break
         else:
-            _apply_var_variants(Predicates,e)
-
-    for n,v,e in graph.search((None,RDF.type,OWL.Class)):
-        key = n[1]["key"]
-        if isinstance(key,BNode):
-            continue
-        _apply_var_variants(Objects,key)
-        
-    for n,v,e in graph.search((None,OWL.hasValue,None)):
-        key = v[1]["key"]
-        _apply_var_variants(Roles,key)
+            _apply_var_variants(Predicates,e)        
     return KnowledgeGraphIdentifiers()
 
 def _apply_var_variants(class_name,key):

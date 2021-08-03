@@ -60,7 +60,7 @@ class AbstractGraph:
             if not p or k in p:
                 n_data = self.nodes[n]
                 v_data = self.nodes[v]
-                if not o or v_data["key"] in o:
+                if not o or v_data["key"] in o or v in o:
                     if lazy:
                         return ([n,n_data],[v,v_data],k)
                     matches.append(([n,n_data],[v,v_data],k))
