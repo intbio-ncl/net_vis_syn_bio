@@ -11,13 +11,13 @@ import sys, inspect
 from rdflib import Graph,RDF,OWL
 from rdflib.extras.infixowl import Class,Restriction
 
-from identifiers import nv_namespace
+from identifiers import identifiers
 from entities.entity import *
 from entities.physcial_entities import *
 
 def produce_ontology_graph():
     graph = Graph()
-    graph.bind('nv', nv_namespace)
+    graph.bind('nv', identifiers.namespaces.nv)
     for name, obj in inspect.getmembers(sys.modules[__name__]):
         if not _is_subclass(obj):
             continue
@@ -32,7 +32,7 @@ def produce_ontology_graph():
         Class(obj.uri,graph=graph,disjointWith=disjointed,
               subClassOf=parents,equivalentClass=equivalents)
 
-    graph.serialize("nv_model.xml",format="pretty-xml")
+    graph.serialize("nv_model.nt",format="ntriples")
 
 def _get_parents(obj):
     parents = obj.__class__.__bases__

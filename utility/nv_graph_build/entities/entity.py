@@ -1,5 +1,5 @@
 from rdflib import URIRef,RDF,OWL,RDFS,BNode
-from nv_identifiers import identifiers
+from identifiers import identifiers
 class Entity:
     def __init__(self,disjoint=False,requirements=[]):
         class_name = self.__class__.__name__

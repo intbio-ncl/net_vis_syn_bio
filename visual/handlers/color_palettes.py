@@ -1,5 +1,5 @@
 from enum import Enum 
-from utility.nv_identifiers import identifiers 
+#from utility.nv_identifiers import identifiers 
 
 class StandardPalette(Enum):
     primary = "#7DF5DF"

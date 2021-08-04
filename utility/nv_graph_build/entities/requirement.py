@@ -1,4 +1,4 @@
-from nv_identifiers import identifiers
+from identifiers import identifiers
 
 class Requirement:
     def __init__(self,property):

@@ -80,6 +80,13 @@ class TestModelBuilder(unittest.TestCase):
                 expected_children = [c[0] for c in self.builder.get_child_classes(n)]
                 self.assertEqual(expected_children, actual_children)
 
+        def test_requirements(self):
+            self.builder.set_requirements_view()
+            graph = self.builder.view
+            for n,v,e,k in graph.edges(data=True,keys=True):
+                pass#print(n,v,e,k)
+
+
     class TestModelModes(unittest.TestCase):
         def setUp(self):
             self.builder = ModelBuilder(model_file)
