@@ -1,11 +1,14 @@
 import networkx as nx
 from rdflib import RDF
 
+from utility.identifiers import produce_identifiers
+
 class AbstractBuilder:
     def __init__(self,graph):
         self._graph = graph
         self.view = self._graph
-
+        self._identifiers = produce_identifiers(self._graph)
+        
     @property
     def nodes(self):
         return self._graph.nodes

@@ -1,7 +1,6 @@
 from rdflib import RDFS,OWL,RDF,BNode
 import networkx as nx
 
-from utility.identifiers import produce_identifiers
 from converters.model import convert
 from builder.abstract import AbstractBuilder
 from builder.builders.model.view import ViewBuilder
@@ -12,7 +11,7 @@ class ModelBuilder(AbstractBuilder):
         super().__init__(convert(graph))
         self._view_h = ViewBuilder(self)
         self._mode_h = ModeBuilder(self)
-        self._identifiers = produce_identifiers(self._graph)
+
 
     def set_heirarchy_view(self):
         self.view = self._view_h.heirarchy()
@@ -40,6 +39,17 @@ class ModelBuilder(AbstractBuilder):
         class_id = self._resolve_subject(class_id)
         return [c[0] for c in self._graph.search((None,RDFS.subClassOf,class_id))]
 
+    def get_class_depth(self,class_id):
+        class_id = self._resolve_subject(class_id)
+        def _get_class_depth(c_identifier,depth):
+            parent = self.get_parent_classes(c_identifier)
+            if parent == []:
+                return depth
+            depth += 1
+            c_identifier = parent[0][0]
+            return _get_class_depth(c_identifier,depth)
+        return _get_class_depth(class_id,0)
+                
     def get_base_class(self):
         bases = []
         for c,data in self.get_classes():

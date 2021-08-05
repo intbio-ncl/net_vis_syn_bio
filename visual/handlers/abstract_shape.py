@@ -1,7 +1,8 @@
 import re
 
 class AbstractNodeShapeHandler:
-    def __init__(self):
+    def __init__(self,builder):
+        self._builder = builder
         self.shapes = ["circle",
                     "square",
                     "triangle",
@@ -14,14 +15,14 @@ class AbstractNodeShapeHandler:
                     "roundrect",
                     "ellipse"]
     
-    def adaptive(self,builder):
+    def adaptive(self):
         default_shape = self.shapes[0]
         shapes = self.shapes[1:]
         node_shapes = []
         shape_map = {"no_type" : default_shape}
         counter = 0
-        for node in builder.v_nodes():
-            obj_type = builder.get_rdf_type(node)
+        for node in self._builder.v_nodes():
+            obj_type = self._builder.get_rdf_type(node)
             if obj_type is None:
                 shape = shape_map["no_type"]
                 obj_type = "No Type"
@@ -39,29 +40,29 @@ class AbstractNodeShapeHandler:
             node_shapes.append({obj_type : shape})
         return node_shapes
 
-    def circle(self,builder):
-        return [{"standard" : "circle"} for node in builder.v_nodes]
+    def circle(self):
+        return [{"standard" : "circle"} for node in self._builder.v_nodes]
         
-    def square(self,builder):
-        return [{"standard" : "square"} for node in builder.v_nodes]
+    def square(self):
+        return [{"standard" : "square"} for node in self._builder.v_nodes]
         
-    def triangle(self,builder):
-        return [{"standard" : "triangle"} for node in builder.v_nodes]
+    def triangle(self):
+        return [{"standard" : "triangle"} for node in self._builder.v_nodes]
         
-    def rectangle(self,builder):
-        return [{"standard" : "rectangle"} for node in builder.v_nodes]
+    def rectangle(self):
+        return [{"standard" : "rectangle"} for node in self._builder.v_nodes]
         
-    def diamond(self,builder):
-        return [{"standard" : "diamond"} for node in builder.v_nodes]
+    def diamond(self):
+        return [{"standard" : "diamond"} for node in self._builder.v_nodes]
         
-    def hexagon(self,builder):
-        return [{"standard" : "hexagon"} for node in builder.v_nodes]
+    def hexagon(self):
+        return [{"standard" : "hexagon"} for node in self._builder.v_nodes]
         
-    def octagon(self,builder):
-        return [{"standard" : "octagon"} for node in builder.v_nodes]
+    def octagon(self):
+        return [{"standard" : "octagon"} for node in self._builder.v_nodes]
         
-    def vee(self,builder):
-        return [{"standard" : "vee"} for node in builder.v_nodes]
+    def vee(self):
+        return [{"standard" : "vee"} for node in self._builder.v_nodes]
         
 class AbstractEdgeShapeHandler:
     def __init__(self):

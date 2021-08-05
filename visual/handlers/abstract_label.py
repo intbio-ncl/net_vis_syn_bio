@@ -2,30 +2,31 @@ import re
 from rdflib import URIRef,Literal,RDF
 
 class AbstractNodeLabelHandler:
-    def __init__(self):
-        pass
-    def none(self,builder):
-        return [None] * len(builder.v_nodes())
+    def __init__(self,builder):
+        self._builder = builder
+
+    def none(self):
+        return [None] * len(self._builder.v_nodes())
     
-    def adjacency(self,builder):
+    def adjacency(self):
         node_text = []
-        for node in builder.v_nodes:
-            num_in = len(builder.in_edges(node))
-            num_out = len(builder.out_edges(node)) 
+        for node in self._builder.v_nodes:
+            num_in = len(self._builder.in_edges(node))
+            num_out = len(self._builder.out_edges(node)) 
             node_text.append(f"# IN: {str(num_in)}, # OUT: {str(num_out)}")
         return node_text
 
-    def name(self,builder):
+    def name(self):
         names = []
-        for node,data in builder.v_nodes(data=True):
+        for node,data in self._builder.v_nodes(data=True):
             names.append(data["display_name"])
         return names
 
-    def class_type(self,builder):
+    def class_type(self):
         node_text = []
-        for node,data in builder.v_nodes(data=True):
+        for node,data in self._builder.v_nodes(data=True):
             key = data["key"]
-            n_type = builder.get_rdf_type(node)
+            n_type = self._builder.get_rdf_type(node)
             if n_type is not None:
                 node_text.append(_get_name(n_type[1]["key"]))
             elif isinstance(key,Literal):
@@ -37,14 +38,15 @@ class AbstractNodeLabelHandler:
         return node_text
 
 class AbstractEdgeLabelHandler:
-    def __init__(self):
-        pass
-    def none(self,builder):
-        return [None] * len(builder.v_edges())
+    def __init__(self,builder):
+        self._builder = builder
+        
+    def none(self):
+        return [None] * len(self._builder.v_edges())
 
-    def name(self,builder):
+    def name(self):
         edge_names = []
-        for edge in builder.v_edges(data=True):
+        for edge in self._builder.v_edges(data=True):
             edge_names.append(edge[2]["display_name"])
         return edge_names
 

@@ -1,46 +1,50 @@
-from visual.handlers.color_palettes import StandardPalette
+color_list = [
+        "#7DF5DF",
+        "#86E078",
+        "#8C5EE0",
+        "#FF675D",
+        "#FAC57D",
+        "#25CCF7",
+        "#CAD3C8",
+        "#1B9CFC",
+        "#F8EFBA",
+        "#58B19F",
+        "#2C3A47",
+        "#B33771",
+        "#3B3B98",
+        "#D6A2E8",
+        "#6D214F",
+        "#BDC581",
+        "#EAB543",
+        "#FEA47F",
+        "#FC427B",
+        "#F97F51",]
+    
 
 class AbstractNodeColorHandler:
-    def __init__(self):
-        pass
+    def __init__(self,builder):
+        self._builder = builder
+        self._color_list = color_list
     
-    def standard(self,builder):
-        return [{"standard" : StandardPalette.primary.value} for node in builder.v_nodes()]
+    def standard(self):
+        return [{"standard" : color_list[0]} for node in self._builder.v_nodes()]
 
-    def rdf_type(self,builder):
+    def rdf_type(self):
         colors = []
-        for node,data in builder.v_nodes(data=True):
-            if builder.get_rdf_type(node) is not None:
-                color = {"rdf_type" : StandardPalette.primary.value}
+        for node,data in self._builder.v_nodes(data=True):
+            if self._builder.get_rdf_type(node) is not None:
+                color = {"rdf_type" : color_list[0]}
             else:
-                color = {"no_type" : StandardPalette.secondary.value}
+                color = {"no_type" : color_list[1]}
             colors.append(color)
-        return colors
-
-    def nv_class(self,builder):
-        print("WARN:: Not implemented.")
-        colors = []
-        for node,data in builder.v_nodes(data=True):
-            colors.append({"standard" : StandardPalette.primary.value})
         return colors
     
 class AbstractEdgeColorHandler:
-    def __init__(self):
-        pass
+    def __init__(self,builder):
+        self._builder = builder
 
-    def standard(self,builder):
-        return [{"standard" : "#888"} for e in builder.v_edges]
+    def standard(self):
+        return [{"standard" : "#888"} for e in self._builder.v_edges]
     
-    def predicate(self,builder):
-        print("WARN:: Not Implemented")
-        colors = []
-        for n,v,k,e in builder.v_edges(keys=True,data=True):
-            colors.append({"standard" : "#888"})
-        return colors
+
     
-    def interaction(self,builder):
-        print("WARN:: Not Implemented")
-        colors = []
-        for n,v,k,e in builder.v_edges(keys=True,data=True):
-            colors.append({"standard" : "#888"})
-        return colors

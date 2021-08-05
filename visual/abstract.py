@@ -224,7 +224,7 @@ class AbstractVisual:
         Textual data pertaining to a node is not rendered.
         '''
         if self.node_text == self.add_node_no_labels:
-            return self._label_h.node.none(self._builder)
+            return self._label_h.node.none()
         else:
             self.node_text = self.add_node_no_labels
 
@@ -234,7 +234,7 @@ class AbstractVisual:
         to number of incoming and outgoing edges.
         '''
         if self.node_text == self.add_node_adjacency_labels:
-            return self._label_h.node.adjacency(self._builder)
+            return self._label_h.node.adjacency()
         else:
             self.node_text = self.add_node_adjacency_labels
 
@@ -244,7 +244,7 @@ class AbstractVisual:
         name the node was provided during building of the graph.
         '''
         if self.node_text == self.add_node_name_labels:
-            return self._label_h.node.name(self._builder)
+            return self._label_h.node.name()
         else:
             self.node_text = self.add_node_name_labels
 
@@ -253,7 +253,7 @@ class AbstractVisual:
         Textual data pertaining to a node is of the RDF type.
         '''
         if self.node_text == self.add_node_type_labels:
-            return self._label_h.node.class_type(self._builder)
+            return self._label_h.node.class_type()
         else:
             self.node_text = self.add_node_type_labels
 
@@ -263,7 +263,7 @@ class AbstractVisual:
         Textual data pertaining to a egde is not rendered.
         '''
         if self.edge_text == self.add_edge_no_labels:
-            return self._label_h.edge.none(self._builder)
+            return self._label_h.edge.none()
         else:
             self.edge_text = self.add_edge_no_labels
 
@@ -273,7 +273,7 @@ class AbstractVisual:
         name provides when building the graph.
         '''
         if self.edge_text == self.add_edge_name_labels:
-            return self._label_h.edge.name(self._builder)
+            return self._label_h.edge.name()
         else:
             self.edge_text = self.add_edge_name_labels
 
@@ -283,7 +283,7 @@ class AbstractVisual:
         All node colors are the same standard color.
         '''
         if self.node_color == self.add_standard_node_color:
-            return self._color_h.node.standard(self._builder)
+            return self._color_h.node.standard()
         else:
             self.node_color = self.add_standard_node_color
 
@@ -292,7 +292,7 @@ class AbstractVisual:
         Di-color, Objects and Properties have a unique color.
         '''
         if self.node_color == self.add_rdf_type_node_color:
-            return self._color_h.node.rdf_type(self._builder)
+            return self._color_h.node.rdf_type()
         else:
             self.node_color = self.add_rdf_type_node_color
 
@@ -303,7 +303,7 @@ class AbstractVisual:
         The color pertaining to each edge is uniform. 
         '''
         if self.edge_color == self.add_standard_edge_color:
-            return self._color_h.edge.standard(self._builder)
+            return self._color_h.edge.standard()
         else:
             self.edge_color = self.add_standard_edge_color
 
@@ -313,7 +313,7 @@ class AbstractVisual:
         The Node size for each node is equal.
         '''
         if self.node_size == self.add_standard_node_size:
-            return self._size_h.standard(self._builder)
+            return self._size_h.standard()
         else:
             self.node_size = self.add_standard_node_size
 
@@ -323,7 +323,7 @@ class AbstractVisual:
         a Object or a property i.e. does the node has an RDF type.
         '''
         if self.node_size == self.add_rdf_type_node_size:
-            return self._size_h.class_type(self._builder)
+            return self._size_h.class_type()
         else:
             self.node_size = self.add_rdf_type_node_size
 
@@ -333,7 +333,7 @@ class AbstractVisual:
         incoming + outgoing edges of said node. 
         '''
         if self.node_size == self.add_centrality_node_size:
-            return self._size_h.centrality(self._builder)
+            return self._size_h.centrality()
         else:
             self.node_size = self.add_centrality_node_size
 
@@ -344,7 +344,7 @@ class AbstractVisual:
         incoming edges of said node. 
         '''
         if self.node_size == self.add_in_centrality_node_size:
-            return self._size_h.in_centrality(self._builder)
+            return self._size_h.in_centrality()
         else:
             self.node_size = self.add_in_centrality_node_size
 
@@ -355,7 +355,7 @@ class AbstractVisual:
         outgoing edges of said node. 
         '''
         if self.node_size == self.add_out_centrality_node_size:
-            return self._size_h.out_centrality(self._builder)
+            return self._size_h.out_centrality()
         else:
             self.node_size = self.add_out_centrality_node_size
 
@@ -365,7 +365,7 @@ class AbstractVisual:
         Sets the shape of each node based on the RDF type of given node.
         '''
         if self.node_shape == self.set_adaptive_node_shape:
-            return self._shape_h.node.adaptive(self._builder)
+            return self._shape_h.node.adaptive()
         else:
             self.node_shape = self.set_adaptive_node_shape
 
@@ -374,7 +374,7 @@ class AbstractVisual:
         Sets the shape of each node to a circle.
         '''
         if self.node_shape == self.set_circle_node_shape:
-            return self._shape_h.node.circle(self._builder)
+            return self._shape_h.node.circle()
         else:
             self.node_shape = self.set_circle_node_shape
 
@@ -383,7 +383,7 @@ class AbstractVisual:
         Sets the shape of each node to a square.
         '''
         if self.node_shape == self.set_square_node_shape:
-            return self._shape_h.node.square(self._builder)
+            return self._shape_h.node.square()
         else:
             self.node_shape = self.set_square_node_shape
 
@@ -392,7 +392,7 @@ class AbstractVisual:
         Sets the shape of each node to a triangle.
         '''
         if self.node_shape == self.set_triangle_node_shape:
-            return self._shape_h.node.triangle(self._builder)
+            return self._shape_h.node.triangle()
         else:
             self.node_shape = self.set_triangle_node_shape
 
@@ -401,7 +401,7 @@ class AbstractVisual:
         Sets the shape of each node to a rectangle.
         '''
         if self.node_shape == self.set_rectangle_node_shape:
-            return self._shape_h.node.rectangle(self._builder)
+            return self._shape_h.node.rectangle()
         else:
             self.node_shape = self.set_rectangle_node_shape
 
@@ -410,7 +410,7 @@ class AbstractVisual:
         Sets the shape of each node to a diamond.
         '''
         if self.node_shape == self.set_diamond_node_shape:
-            return self._shape_h.node.diamond(self._builder)
+            return self._shape_h.node.diamond()
         else:
             self.node_shape = self.set_diamond_node_shape
 
@@ -419,7 +419,7 @@ class AbstractVisual:
         Sets the shape of each node to a hexagon.
         '''
         if self.node_shape == self.set_hexagon_node_shape:
-            return self._shape_h.node.hexagon(self._builder)
+            return self._shape_h.node.hexagon()
         else:
             self.node_shape = self.set_hexagon_node_shape
 
@@ -428,7 +428,7 @@ class AbstractVisual:
         Sets the shape of each node to a octagon.
         '''
         if self.node_shape == self.set_octagon_node_shape:
-            return self._shape_h.node.octagon(self._builder)
+            return self._shape_h.node.octagon()
         else:
             self.node_shape = self.set_octagon_node_shape
             
@@ -437,7 +437,7 @@ class AbstractVisual:
         Sets the shape of each node to a vee.
         '''
         if self.node_shape == self.set_vee_node_shape:
-            return self._shape_h.node.vee(self._builder)
+            return self._shape_h.node.vee()
         else:
             self.node_shape = self.set_vee_node_shape
 

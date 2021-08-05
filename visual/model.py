@@ -20,12 +20,12 @@ class ModelVisual(AbstractVisual):
             self._builder = graph
         else:
             self._builder = ModelBuilder(graph)
-
+        
         self._layout_h = LayoutHandler()
-        self._label_h = LabelHandler()
-        self._color_h = ColorHandler()
-        self._size_h = SizeHandler()
-        self._shape_h = ShapeHandler()
+        self._label_h = LabelHandler(self._builder)
+        self._color_h = ColorHandler(self._builder)
+        self._size_h = SizeHandler(self._builder)
+        self._shape_h = ShapeHandler(self._builder)
 
 
     # ---------------------- Preset ----------------------------
@@ -72,12 +72,21 @@ class ModelVisual(AbstractVisual):
 
 
     # ---------------------- Node Color -----------------------
+    def add_class_node_color(self):
+        '''
+        Each Class is mapped to a distinct color.
+        '''
+        if self.node_color == self.add_class_node_color:
+            return self._color_h.node.nv_class()
+        else:
+            self.node_color = self.add_class_node_color
+
     def add_branch_node_color(self):
         '''
         Each branch from the root node is a different color (Increased tint).
         '''
         if self.node_color == self.add_role_node_color:
-            return self._color_h.node.branch(self._builder)
+            return self._color_h.node.branch()
         else:
             self.node_color = self.add_role_node_color
 
@@ -87,7 +96,7 @@ class ModelVisual(AbstractVisual):
         Further from the root, shade is decreased.
         '''
         if self.node_color == self.add_heirarchy_node_color:
-            return self._color_h.node.heirarchy(self._builder)
+            return self._color_h.node.heirarchy()
         else:
             self.node_color = self.add_heirarchy_node_color
 
@@ -96,10 +105,10 @@ class ModelVisual(AbstractVisual):
     # ---------------------- Edge Color ----------------------
     def add_type_edge_color(self):
         '''
-        All proprietary edge types are colored.
+        All proprietary edge types are mapped to distinct color.
         ''' 
         if self.edge_color == self.add_type_edge_color:
-            return self._color_h.edge.predicate(self._builder)
+            return self._color_h.edge.predicate()
         else:
             self.edge_color = self.add_type_edge_color
 
@@ -109,7 +118,7 @@ class ModelVisual(AbstractVisual):
         '''
         Each level from the root node is smaller than parent.
         '''
-        if self.node_size == self.add_hierarchy_node_size:
-            return self._size_h.hierarchy(self._builder)
+        if self.node_size == self.add_heirachy_node_size:
+            return self._size_h.hierarchy()
         else:
-            self.node_size = self.add_hierarchy_node_size
+            self.node_size = self.add_heirachy_node_size

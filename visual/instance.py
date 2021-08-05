@@ -24,10 +24,10 @@ class InstanceVisual(AbstractVisual):
             self._builder = InstanceBuilder(graph)
 
         self._layout_h = LayoutHandler()
-        self._label_h = LabelHandler()
-        self._color_h = ColorHandler()
-        self._size_h = SizeHandler()
-        self._shape_h = ShapeHandler()
+        self._label_h = LabelHandler(self._builder)
+        self._color_h = ColorHandler(self._builder)
+        self._size_h = SizeHandler(self._builder)
+        self._shape_h = ShapeHandler(self._builder)
 
 
         # ---------------------- Preset ------------------------------------
@@ -230,7 +230,7 @@ class InstanceVisual(AbstractVisual):
         Role of the node if said node has this property.
         '''
         if self.node_text == self.add_node_role_labels:
-            return self._label_h.node.role(self._builder)
+            return self._label_h.node.role()
         else:
             self.node_text = self.add_node_role_labels
 
@@ -244,7 +244,7 @@ class InstanceVisual(AbstractVisual):
         each role of said type is given a shade of that color.
         '''
         if self.node_color == self.add_role_node_color:
-            return self._color_h.node.role(self._builder)
+            return self._color_h.node.role()
         else:
             self.node_color = self.add_role_node_color
 
@@ -256,7 +256,7 @@ class InstanceVisual(AbstractVisual):
         than number of distinguishable colors.
         '''
         if self.edge_color == self.add_predicate_edge_color:
-            return self._color_h.edge.predicate(self._builder)
+            return self._color_h.edge.predicate()
         else:
             self.edge_color = self.add_predicate_edge_color
 
@@ -265,7 +265,7 @@ class InstanceVisual(AbstractVisual):
         Color for each Interaction predicate.
         '''
         if self.edge_color == self.add_interaction_edge_color:
-            return self._color_h.edge.interaction(self._builder)
+            return self._color_h.edge.interaction()
         else:
             self.edge_color = self.add_interaction_edge_color
 
@@ -275,6 +275,6 @@ class InstanceVisual(AbstractVisual):
         The lower a node in the graph as a heirachy the smaller the node.
         '''
         if self.node_size == self.add_hierarchy_node_size:
-            return self._size_h.hierarchy(self._builder)
+            return self._size_h.hierarchy()
         else:
             self.node_size = self.add_hierarchy_node_size

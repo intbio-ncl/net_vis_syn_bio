@@ -1,7 +1,18 @@
 from visual.handlers.abstract_size import AbstractSizeHandler
 class SizeHandler(AbstractSizeHandler):
-    def __init__(self):
-        super().__init__()
+    def __init__(self,builder):
+        super().__init__(builder)
+
+    def hierarchy(self):
+        node_sizes = []
+        for node in self._builder.v_nodes():
+            depth = self._builder.get_class_depth(node)
+            if depth == 0:
+                node_sizes.append(self._standard_node_size)
+            else:
+                node_sizes.append(self._standard_node_size / depth)
+        return node_sizes
+
 
 
 
