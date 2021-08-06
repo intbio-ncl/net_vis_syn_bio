@@ -7,7 +7,7 @@ from rdflib import BNode
 
 sys.path.insert(0, os.path.join(".."))
 
-from visual.handlers.abstract_color import color_list
+from visual.handlers.color_producer import build_color
 from visual.instance import InstanceVisual
 from visual.model import ModelVisual
 curr_dir = os.path.dirname(os.path.realpath(__file__))
@@ -43,6 +43,7 @@ class TestModel(unittest.TestCase):
         class TestNode(unittest.TestCase):
             def setUp(self):
                 self.visual = ModelVisual(model_fn)
+                self._color_list = build_color()
 
             def tearDown(self):
                 pass
@@ -52,16 +53,15 @@ class TestModel(unittest.TestCase):
                 colors = self.visual.add_standard_node_color()
                 self.assertEqual(len(colors), len(view.nodes))
                 for index,(node,data) in enumerate(view.nodes(data=True)):
-                    self.assertEqual(colors[index], {"standard" : color_list[0]})
+                    self.assertEqual(colors[index], {"standard" : self._color_list[0]})
 
                 self.visual.set_heirarchy_view()
                 self.visual.set_heirarchy_view()
-
                 view = self.visual._builder.view
                 colors = self.visual.add_standard_node_color()
                 self.assertEqual(len(colors), len(view.nodes))
                 for index,(node,data) in enumerate(view.nodes(data=True)):
-                    self.assertEqual(colors[index], {"standard" : color_list[0]})
+                    self.assertEqual(colors[index], {"standard" : self._color_list[0]})
 
             def test_rdf_type(self):
                 view = self.visual._builder.view
@@ -72,31 +72,132 @@ class TestModel(unittest.TestCase):
                 self.assertEqual(len(colors), len(view.nodes))
                 for index,(node,data) in enumerate(view.nodes(data=True)):
                     if self.visual._builder.get_rdf_type(node) is None:
-                        self.assertEqual(colors[index], {"no_type" : color_list[1]} )
+                        self.assertEqual(colors[index], {"no_type" : self._color_list[1]} )
                     else:
-                        self.assertEqual(colors[index], {"rdf_type" :  color_list[0]} )
-                self.visual.set_heirarchy_view()
-                self.visual.set_heirarchy_view()
+                        self.assertEqual(colors[index], {"rdf_type" :  self._color_list[0]} )
 
+
+                self.visual.set_heirarchy_view()
+                self.visual.set_heirarchy_view()
                 view = self.visual._builder.view
                 colors = self.visual.add_rdf_type_node_color()
                 self.assertEqual(len(colors), len(view.nodes))
                 for index,(node,data) in enumerate(view.nodes(data=True)):
                     if self.visual._builder.get_rdf_type(node) is None:
-                        self.assertEqual(colors[index], {"no_type" :  color_list[1]} )
+                        self.assertEqual(colors[index], {"no_type" :  self._color_list[1]} )
                     else:
-                        self.assertEqual(colors[index], {"rdf_type" :  color_list[0]} )
+                        self.assertEqual(colors[index], {"rdf_type" :  self._color_list[0]} )
 
             def test_class(self):
                 view = self.visual._builder.view
                 ret_val = self.visual.add_class_node_color()
                 self.assertIsNone(ret_val)
-                colors = self.visual.add_class_node_color()
 
-                print(colors)
+                colors = self.visual.add_class_node_color()
+                for color in colors:
+                    key = list(color.keys())[0]
+                    val = list(color.values())[0]
+                    for c in colors:
+                        try:
+                            self.assertEqual(c[key],val)
+                        except KeyError:
+                            self.assertNotEqual(list(c.values())[0],val)
+
+                self.assertEqual(len(colors), len(view.nodes))
+                all_classes = [c[1]["key"] for c in self.visual._builder.get_classes()]
+                for index,(node,data) in enumerate(view.nodes(data=True)):
+                    if isinstance(data["key"],BNode):
+                        self.assertEqual(colors[index], {"BNode" :  self._color_list[1]} )
+                    elif data["key"] not in all_classes:
+                        self.assertEqual(colors[index], {"No_Class" : self._color_list[0]} )
+                    else:
+                        color = colors[index]
+                        key = list(color.keys())[0]
+                        val = list(color.values())[0]
+                        self.assertIn(key,data["key"])
+                        self.assertIn(val,self._color_list)
+
+                self.visual.set_heirarchy_view()
+                self.visual.set_heirarchy_view()
+                view = self.visual._builder.view
+                colors = self.visual.add_class_node_color()
+                for color in colors:
+                    key = list(color.keys())[0]
+                    val = list(color.values())[0]
+                    for c in colors:
+                        try:
+                            self.assertEqual(c[key],val)
+                        except KeyError:
+                            self.assertNotEqual(list(c.values())[0],val)
+
+                self.assertEqual(len(colors), len(view.nodes))
+                all_classes = [c[1]["key"] for c in self.visual._builder.get_classes()]
+                for index,(node,data) in enumerate(view.nodes(data=True)):
+                    if isinstance(data["key"],BNode):
+                        self.assertEqual(colors[index], {"BNode" :  self._color_list[1]} )
+                    elif data["key"] not in all_classes:
+                        self.assertEqual(colors[index], {"No_Class" : self._color_list[0]} )
+                    else:
+                        color = colors[index]
+                        key = list(color.keys())[0]
+                        val = list(color.values())[0]
+                        self.assertIn(key,data["key"])
+                        self.assertIn(val,self._color_list)
 
             def test_branch(self):
-                self.fail("Untested.")
+                view = self.visual._builder.view
+                ret_val = self.visual.add_branch_node_color()
+                self.assertIsNone(ret_val)
+
+                colors = self.visual.add_branch_node_color()
+                for color in colors:
+                    key = list(color.keys())[0]
+                    val = list(color.values())[0]
+                    for c in colors:
+                        try:
+                            self.assertEqual(c[key],val)
+                        except KeyError:
+                            pass
+
+                self.assertEqual(len(colors), len(view.nodes))
+                all_classes = [c[1]["key"] for c in self.visual._builder.get_classes()]
+                for index,(node,data) in enumerate(view.nodes(data=True)):
+                    if isinstance(data["key"],BNode):
+                        self.assertEqual(colors[index], {"BNode" :  self._color_list[1]} )
+                    elif data["key"] not in all_classes:
+                        self.assertEqual(colors[index], {"No_Class" : self._color_list[0]} )
+                    else:
+                        color = colors[index]
+                        key = list(color.keys())[0]
+                        val = list(color.values())[0]
+                        self.assertIn(val,self._color_list)
+
+                self.visual.set_heirarchy_view()
+                self.visual.set_heirarchy_view()
+                view = self.visual._builder.view
+                colors = self.visual.add_branch_node_color()
+                for color in colors:
+                    key = list(color.keys())[0]
+                    val = list(color.values())[0]
+                    for c in colors:
+                        try:
+                            self.assertEqual(c[key],val)
+                        except KeyError:
+                            self.assertNotEqual(list(c.values())[0],val)
+
+                self.assertEqual(len(colors), len(view.nodes))
+                all_classes = [c[1]["key"] for c in self.visual._builder.get_classes()]
+                for index,(node,data) in enumerate(view.nodes(data=True)):
+                    if isinstance(data["key"],BNode):
+                        self.assertEqual(colors[index], {"BNode" :  self._color_list[1]} )
+                    elif data["key"] not in all_classes:
+                        self.assertEqual(colors[index], {"No_Class" : self._color_list[0]} )
+                    else:
+                        color = colors[index]
+                        key = list(color.keys())[0]
+                        val = list(color.values())[0]
+                        self.assertIn(val,self._color_list)
+
 
             def test_heirarchy(self):
                 self.fail("Untested.")

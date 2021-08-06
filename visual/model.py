@@ -83,23 +83,22 @@ class ModelVisual(AbstractVisual):
 
     def add_branch_node_color(self):
         '''
-        Each branch from the root node is a different color (Increased tint).
+        Each branch from the root node is a different color.
         '''
-        if self.node_color == self.add_role_node_color:
+        if self.node_color == self.add_branch_node_color:
             return self._color_h.node.branch()
         else:
-            self.node_color = self.add_role_node_color
+            self.node_color = self.add_branch_node_color
 
     
     def add_heirarchy_node_color(self):
         '''
-        Further from the root, shade is decreased.
+        Increases the shade of each level of nodes in relation to depth.
         '''
         if self.node_color == self.add_heirarchy_node_color:
             return self._color_h.node.heirarchy()
         else:
             self.node_color = self.add_heirarchy_node_color
-
 
 
     # ---------------------- Edge Color ----------------------
