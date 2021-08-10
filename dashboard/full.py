@@ -39,9 +39,9 @@ export_outputs =           Output(graph_id, "generateImage")
 
 assets_ignore='.*bootstrap.*'
 class FullDash(AbstractDash):
-    def __init__(self,graph_visualiser,name,server,pathname):
-        super().__init__(graph_visualiser,name,server,pathname,assets_ignore=assets_ignore)
-        self._build_app()
+    def __init__(self,visualiser,name,server,pathname):
+        super().__init__(visualiser,name,server,pathname,assets_ignore=assets_ignore)
+        self._build_app(visualiser)
 
     def _load_graph(self):
         figure,legend = self.visualiser.build(graph_id=graph_id,legend=True)
@@ -52,10 +52,9 @@ class FullDash(AbstractDash):
         container = self.create_div("row-main",self.children,className="row")
         self.app.layout = self.create_div("main",container,className="container-fluid")[0]
 
-    def _build_app(self):
+    def _build_app(self,visualiser):
         # Add Options
-        visual_class = self.visualiser.__class__
-        form_elements,identifiers,maps = self._create_form_elements(visual_class,default_vals=default_options,id_prefix=id_prefix)
+        form_elements,identifiers,maps = self._create_form_elements(visualiser,default_vals=default_options,id_prefix=id_prefix)
 
         del maps["cyto_preset"]
         preset_identifiers,identifiers,preset_output,preset_state = self._generate_inputs_outputs(identifiers)
@@ -171,6 +170,7 @@ class FullDash(AbstractDash):
                         visualiser.add_edge_no_labels,
                         visualiser.add_standard_node_color,
                         visualiser.add_standard_edge_color]
+
         options = self._generate_options(visualiser)
         removal_words = ["Add","Set"]
         elements = []
@@ -231,7 +231,6 @@ class FullDash(AbstractDash):
         return name
 
     def _generate_options(self,visualiser):
-        visualiser = visualiser()
         blacklist_functions = ["build",
                             "mode",
                             "view",

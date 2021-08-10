@@ -14,21 +14,17 @@ from visual.handlers.instance.shape import ShapeHandler
 default_stylesheet_fn = os.path.join(os.path.dirname(os.path.realpath(__file__)),"default_stylesheet.txt")
 
 class InstanceVisual(AbstractVisual):
-    def __init__(self,graph=None):
+    def __init__(self,model,graph=None):
         super().__init__()
-        if graph is None:
-            self._builder = None
-        elif isinstance(graph,InstanceBuilder):
-            self._builder = graph
-        else:
-            self._builder = InstanceBuilder(graph)
-
+        self._builder = InstanceBuilder(model,graph)
         self._layout_h = LayoutHandler()
         self._label_h = LabelHandler(self._builder)
         self._color_h = ColorHandler(self._builder)
         self._size_h = SizeHandler(self._builder)
         self._shape_h = ShapeHandler(self._builder)
 
+    def _load_graph(self,fn):
+        return self._builder.load(fn)
 
         # ---------------------- Preset ------------------------------------
     def set_prune_preset(self):
@@ -98,12 +94,12 @@ class InstanceVisual(AbstractVisual):
                             self.set_bezier_edge_shape]
         return self._set_preset(preset_functions)
 
-    def set_heirarchy_preset(self):
+    def set_hierarchy_preset(self):
         '''
-        Pre-set methods with an affinity for displaying the heirarchy view.
+        Pre-set methods with an affinity for displaying the hierarchy view.
         '''
         preset_functions = [self.set_tree_mode,
-                            self.set_heirarchy_view,
+                            self.set_hierarchy_view,
                             self.set_dagre_layout,
                             self.add_standard_edge_color,
                             self.add_role_node_color,
@@ -205,14 +201,14 @@ class InstanceVisual(AbstractVisual):
         else:
            self.view =self.set_protein_protein_interaction_view
 
-    def set_heirarchy_view(self):
+    def set_hierarchy_view(self):
         '''
         Sub graph viewing the design as a heirachy of entities.
         '''
-        if self.view == self.set_heirarchy_view:
-            self._builder.set_heirarchy_view()
+        if self.view == self.set_hierarchy_view:
+            self._builder.set_hierarchy_view()
         else:
-           self.view =self.set_heirarchy_view
+           self.view =self.set_hierarchy_view
 
     def set_module_view(self):
         '''

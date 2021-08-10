@@ -7,7 +7,7 @@ class ViewBuilder(AbstractViewBuilder):
     def __init__(self,builder):
         super().__init__(builder)
 
-    def heirarchy(self):
+    def hierarchy(self):
         edges = []
         node_attrs = {}
         def _handle_branch(child):
@@ -26,23 +26,20 @@ class ViewBuilder(AbstractViewBuilder):
         node_attrs = {}
         for c,c_data in self._builder.get_classes(bnodes=False):
             node_attrs[c] = c_data
-            print(c_data["key"])
             e_classes = self._builder.get_equivalent_classes(c)
             for e_class in e_classes:
                 for operation in e_class:
                     operation_type = operation[0]
                     data = operation[1]
-                    print(operation_type)
                     for d in data:
+                        print(d)
                         if isinstance(d,tuple):
                             pass
                         if operation_type == OWL.intersectionOf:
-                            print(d)
+                            pass
                         elif operation_type == OWL.unionOf:
                             pass
         return self._builder.sub_graph(edges,node_attrs)
-
-
 
 def _get_name(subject):
     split_subject = _split(subject)

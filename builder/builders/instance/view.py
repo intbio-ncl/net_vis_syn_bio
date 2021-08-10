@@ -20,7 +20,7 @@ class ViewBuilder:
             edges.append((n,v,k,e))
         return self._builder.sub_graph(edges,node_attrs)
          
-    def heirarchy(self):
+    def hierarchy(self):
         edges = []
         node_attrs = {}
         for entity,data in self._builder.get_entities():

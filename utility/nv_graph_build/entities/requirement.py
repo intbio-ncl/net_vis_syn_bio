@@ -1,15 +1,20 @@
+from rdflib.extras.infixowl import Property
 from identifiers import identifiers
+from entities.property import Property,Role
 
 class Requirement:
     def __init__(self,property):
+        if not isinstance(property,Property):
+            property = Property(property)
         self.property = property
 
 class RoleRequirement(Requirement):
     def __init__(self,values):
-        super().__init__(identifiers.predicates.role)
+        super().__init__(Role())
         if not isinstance(values,(list,tuple,set)):
             values = [values]
         self.values = values
+        
 
 class DNARoleRequirement(RoleRequirement):
     def __init__(self):

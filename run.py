@@ -14,10 +14,9 @@ def process_input(filename,summary,model):
         dashboard = ModelDash(__name__,server)
         filename = model_fn
     elif summary:
-        dashboard = ResultDash(__name__,server)
+        dashboard = ResultDash(__name__,server,model_fn)
     else:
-        dashboard = InstanceDash(__name__,server)
-
+        dashboard = InstanceDash(__name__,server,model_fn)
     dashboard.load_graph(filename)
     server.run()
 

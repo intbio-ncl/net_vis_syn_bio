@@ -29,12 +29,12 @@ class ModelVisual(AbstractVisual):
 
 
     # ---------------------- Preset ----------------------------
-    def set_heirarchy_preset(self):
+    def set_hierarchy_preset(self):
         '''
         Pre-set methods with an affinity for displaying the pruned graph view.
         '''
         preset_functions = [self.set_tree_mode,
-                            self.set_heirarchy_view,
+                            self.set_hierarchy_view,
                             self.set_dagre_layout,
                             self.add_node_name_labels,
                             self.add_edge_no_labels,
@@ -46,14 +46,14 @@ class ModelVisual(AbstractVisual):
         return self._set_preset(preset_functions)
 
     # ---------------------- View -----------------------------
-    def set_heirarchy_view(self):
+    def set_hierarchy_view(self):
         '''
         View of the heirachy of Classes taken from the ontology.
         '''
-        if self.view == self.set_heirarchy_view:
-            self._builder.set_heirarchy_view()
+        if self.view == self.set_hierarchy_view:
+            self._builder.set_hierarchy_view()
         else:
-           self.view =self.set_heirarchy_view
+           self.view =self.set_hierarchy_view
     
     def set_requirements_view(self):
         '''
@@ -91,26 +91,34 @@ class ModelVisual(AbstractVisual):
             self.node_color = self.add_branch_node_color
 
     
-    def add_heirarchy_node_color(self):
+    def add_hierarchy_node_color(self):
         '''
         Increases the shade of each level of nodes in relation to depth.
         '''
-        if self.node_color == self.add_heirarchy_node_color:
-            return self._color_h.node.heirarchy()
+        if self.node_color == self.add_hierarchy_node_color:
+            return self._color_h.node.hierarchy()
         else:
-            self.node_color = self.add_heirarchy_node_color
+            self.node_color = self.add_hierarchy_node_color
 
 
     # ---------------------- Edge Color ----------------------
-    def add_type_edge_color(self):
+    def add_branch_edge_color(self):
         '''
-        All proprietary edge types are mapped to distinct color.
-        ''' 
-        if self.edge_color == self.add_type_edge_color:
-            return self._color_h.edge.predicate()
+        Each branch from the root node is a different color.
+        '''
+        if self.edge_color == self.add_branch_edge_color:
+            return self._color_h.edge.branch()
         else:
-            self.edge_color = self.add_type_edge_color
+            self.edge_color = self.add_branch_edge_color
 
+    def add_hierarchy_edge_color(self):
+        '''
+        Each increases shade of edge as depth increases.
+        '''
+        if self.edge_color == self.add_hierarchy_edge_color:
+            return self._color_h.edge.hierarchy()
+        else:
+            self.edge_color = self.add_hierarchy_edge_color
 
     # ---------------------- Node Size ----------------------
     def add_heirachy_node_size(self):

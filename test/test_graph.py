@@ -7,7 +7,6 @@ sys.path.insert(0, os.path.join(".."))
 
 from converters.instance import convert as i_convert
 from converters.model import convert as m_convert
-from utility.nv_identifiers import identifiers
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))
 model_fn = os.path.join(curr_dir,"..","utility","nv_model.xml")

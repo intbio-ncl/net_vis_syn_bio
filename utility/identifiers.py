@@ -2,7 +2,7 @@ import re
 
 from rdflib import RDF,OWL,RDFS
 from rdflib import Namespace as RDFNamespace
-from rdflib.term import BNode
+from rdflib.term import BNode, URIRef
 
 nv_namespace = RDFNamespace('http://nv_ontology/')
 
@@ -33,8 +33,10 @@ def produce_identifiers(graph):
         v_key = v_data["key"]
         if e == RDF.type and v_key == OWL.Class and not isinstance(n_key, BNode):
             _apply_var_variants(Objects,n_key)
-        if v_key == OWL.hasValue:
+        if v_key == OWL.hasValue :
             _apply_var_variants(Roles,v_key)
+        if v_key == OWL.ObjectProperty:
+            _apply_var_variants(Predicates,n_key)  
         for ns in namespaces:
             if ns in e:
                 break
@@ -64,7 +66,6 @@ def _get_name(subject):
         return split_subject[-2]
     else:
         return split_subject[-1]
-
 
 def _split(uri):
     return re.split('#|\/|:', uri)

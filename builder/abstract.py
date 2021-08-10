@@ -1,13 +1,10 @@
 import networkx as nx
 from rdflib import RDF
 
-from utility.identifiers import produce_identifiers
-
 class AbstractBuilder:
     def __init__(self,graph):
         self._graph = graph
         self.view = self._graph
-        self._identifiers = produce_identifiers(self._graph)
         
     @property
     def nodes(self):
@@ -61,9 +58,7 @@ class AbstractBuilder:
 
     def get_rdf_type(self,subject):
         subject = self._resolve_subject(subject)
-        rdf_type = self._graph.search((subject,RDF.type,None),lazy=True)
-        if rdf_type != []:
-            return rdf_type[1]
+        return self._graph.get_rdf_type(subject)
 
     def _resolve_subject(self,subject):
         if subject in self._graph:

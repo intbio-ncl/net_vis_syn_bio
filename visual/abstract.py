@@ -307,6 +307,15 @@ class AbstractVisual:
         else:
             self.edge_color = self.add_standard_edge_color
 
+    def add_type_edge_color(self):
+        '''
+        All edge types are mapped to distinct color.
+        ''' 
+        if self.edge_color == self.add_type_edge_color:
+            return self._color_h.edge.nv_type()
+        else:
+            self.edge_color = self.add_type_edge_color
+
     # ---------------------- Node Size ----------------------
     def add_standard_node_size(self):
         '''

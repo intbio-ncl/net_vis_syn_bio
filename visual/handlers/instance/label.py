@@ -8,7 +8,7 @@ class LabelHandler:
 
     class NodeLabelHandler(AbstractNodeLabelHandler):
         def __init__(self,builder):
-            super().__init__()
+            super().__init__(builder)
 
         def role(self):
             role_names = []

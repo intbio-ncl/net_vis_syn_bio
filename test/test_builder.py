@@ -36,7 +36,7 @@ class TestModelBuilder(unittest.TestCase):
     def tearDown(self):
         pass
     
-    class TestModelSearch(unittest.TestCase):
+    class TestSearch(unittest.TestCase):
         def setUp(self):
             self.builder = ModelBuilder(model_file)
 
@@ -65,7 +65,7 @@ class TestModelBuilder(unittest.TestCase):
             bases = bases[0]
             self.assertEqual(bases[1]["key"], self.builder._identifiers.objects.entity)
 
-    class TestModelViews(unittest.TestCase):
+    class TestViews(unittest.TestCase):
         def setUp(self):
             self.builder = ModelBuilder(model_file)
 
@@ -73,7 +73,7 @@ class TestModelBuilder(unittest.TestCase):
             pass
 
         def test_heirachy(self):
-            self.builder.set_heirarchy_view()
+            self.builder.set_hierarchy_view()
             graph = self.builder.view
             for n,data in graph.nodes(data=True):
                 actual_children = [c[1] for c in graph.edges(n)]
@@ -86,8 +86,7 @@ class TestModelBuilder(unittest.TestCase):
             for n,v,e,k in graph.edges(data=True,keys=True):
                 pass#print(n,v,e,k)
 
-
-    class TestModelModes(unittest.TestCase):
+    class TestModes(unittest.TestCase):
         def setUp(self):
             self.builder = ModelBuilder(model_file)
 

@@ -24,8 +24,7 @@ class Predicates:
         self.namespaces = namespaces
         self.rdf_type = URIRef(RDF.type)
         self.role = URIRef(namespaces.nv + "role")
-
-
+        self.partOf = URIRef(namespaces.nv + "partOf")
 
 class Roles:
     def __init__(self, namespaces):

@@ -1,10 +1,10 @@
 import re
 import json
 import networkx as nx
-from rdflib import URIRef
+from rdflib import URIRef,RDF
 
 class AbstractGraph:
-    def __init__(self,graph):
+    def __init__(self,graph=None):
         self._graph = graph
         self._generate_labels()
 
@@ -69,6 +69,11 @@ class AbstractGraph:
     def add_edge(self,n1,n2,key,**kwargs):
         self._graph.add_edge(n1,n2,key=key,**kwargs)
     
+    def get_rdf_type(self,subject):
+        rdf_type = self.search((subject,RDF.type,None),lazy=True)
+        if rdf_type != []:
+            return rdf_type[1]
+
     def _get_name(self,subject):
         split_subject = self._split(subject)
         if len(split_subject[-1]) == 1 and split_subject[-1].isdigit():

@@ -2,8 +2,8 @@ from entities.entity import Entity
 from entities.requirement import *
 
 class PhysicalEntity(Entity):
-    def __init__(self,disjoint=True,requirements=[]):
-        super().__init__(disjoint,requirements)  
+    def __init__(self,disjoint=True,properties=[],requirements=[]):
+        super().__init__(disjoint,properties=properties,requirements=requirements)  
 
 # -------------- DNA --------------
 class DNA(PhysicalEntity):

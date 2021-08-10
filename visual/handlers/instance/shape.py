@@ -3,7 +3,7 @@ from visual.handlers.abstract_shape import AbstractNodeShapeHandler,AbstractEdge
 class ShapeHandler:
     def __init__(self,builder):
         self.node = self.NodeShapeHandler(builder)
-        self.edge = self.EdgeShapeHandler(builder)
+        self.edge = self.EdgeShapeHandler()
 
 
     class NodeShapeHandler(AbstractNodeShapeHandler):
@@ -12,5 +12,5 @@ class ShapeHandler:
 
             
     class EdgeShapeHandler(AbstractEdgeShapeHandler):
-        def __init__(self,builder):
-            super().__init__(builder)
+        def __init__(self):
+            super().__init__()
