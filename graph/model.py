@@ -1,4 +1,4 @@
-from rdflib import RDFS,OWL,RDF,BNode
+from rdflib import RDFS,OWL,RDF,BNode,URIRef
 
 from graph.abstract import AbstractGraph
 from utility.identifiers import produce_identifiers
@@ -7,6 +7,7 @@ class ModelGraph(AbstractGraph):
     def __init__(self,graph):
         super().__init__(graph)
         self.identifiers = produce_identifiers(self)
+        self._generate_labels()
         
     def get_classes(self,bnodes=True):
         classes = self.search((None,RDF.type,OWL.Class))
@@ -56,7 +57,6 @@ class ModelGraph(AbstractGraph):
     def get_requirements(self,class_id):
         requirements = []
         c_triples = self.search((class_id,None,None))
-
         # IntersectionOf + UnionOf are still classes so 
         # their type triples is added to direct equivalence (Direct propery check.)
         pruned_triples = []
@@ -108,9 +108,22 @@ class ModelGraph(AbstractGraph):
                     raise ValueError("Wut")
             elif f in [c[0] for c in self.get_classes(False)]:
                 requirements.append((RDF.type,[f,f_data]))
-
             if r_data["key"] == RDF.nil:
                 break
         return requirements
+
+    def _generate_labels(self):
+        for node,data in self.nodes(data=True):
+            if "display_name" not in data.keys():
+                identity = data["key"]
+                if isinstance(identity,URIRef):
+                    name = (self.identifiers.namespaces.get_code(identity) + 
+                            self._get_name(identity))
+                else:
+                    name = str(identity)
+                self.nodes[node]["display_name"] = name
+        for n,v,k,e in self.edges(keys=True,data=True):
+            if "display_name" not in e.keys():
+                e["display_name"] = self._get_name(k)
 
 

@@ -4,8 +4,7 @@ import sys
 import re
 import json
 
-from rdflib import RDF,Graph
-from rdflib.extras.external_graph_libs import rdflib_to_networkx_multidigraph
+from rdflib import RDF
 from networkx.readwrite import json_graph
 from rdflib.term import URIRef
 
@@ -16,45 +15,8 @@ from converters.sbol.utility.graph import SBOLGraph
 from graph.instance import InstanceGraph
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))
-model_fn = os.path.join(curr_dir,"..","utility","nv_model.xml")
-
-class TestConvertModel(unittest.TestCase):
-
-    def setUp(self):
-        pass
-
-    def tearDown(self):
-        None
-
-    def _graph_element_check(self,graph):
-        '''
-        Checks no keys are mapping correctly.
-        '''
-        node_id_map = {}
-        for n,v,e in graph.edges(keys=True):
-            n_data = graph.nodes[n]
-            v_data = graph.nodes[v]
-            if n in node_id_map.keys():
-                self.assertEqual(node_id_map[n],n_data["key"])
-            else:
-                node_id_map[n] = n_data["key"]
-            if v in node_id_map.keys():
-                self.assertEqual(node_id_map[v],v_data["key"])
-            else:
-                node_id_map[v] = v_data["key"]
-
-    def test_convert(self):
-        rdf_g = Graph()
-        rdf_g.load(model_fn)
-
-        nx_graph = model_convert(rdf_g)
-        for s,p,o in rdf_g.triples((None,None,None)):
-            self.assertTrue(is_node(nx_graph,s))
-            self.assertTrue(is_node(nx_graph,o))
-            self.assertTrue(is_edge(nx_graph,s,p,o))
-        rdf_conv_g = rdflib_to_networkx_multidigraph(rdf_g)
-        self.assertTrue(nx_graph == rdf_conv_g)
-        self._graph_element_check(nx_graph)
+model_fn = os.path.join(curr_dir,"..","..","utility","nv_model.xml")
+test_dir = os.path.join(curr_dir,"..","files")
 
 class TestConvertInstance(unittest.TestCase):
 
@@ -65,7 +27,7 @@ class TestConvertInstance(unittest.TestCase):
         None
 
     def test_sbol_cds(self):
-        filename = os.path.join(curr_dir,"files","test_convert_sbol_cds.xml")
+        filename = os.path.join(test_dir,"test_convert_sbol_cds.xml")
         model_graph = model_convert(model_fn)
         graph = instance_convert(model_graph,filename)
         rdf_graph = SBOLGraph(filename)
@@ -82,7 +44,7 @@ class TestConvertInstance(unittest.TestCase):
                 self.assertEqual(a_t,e_t)
 
     def test_sbol_entity_entity(self):
-        filename = os.path.join(curr_dir,"files","test_convert_sbol_entity_entity.xml")
+        filename = os.path.join(test_dir,"test_convert_sbol_entity_entity.xml")
         model_graph = model_convert(model_fn)
         graph = instance_convert(model_graph,filename)
         rdf_graph = SBOLGraph(filename)
@@ -105,14 +67,14 @@ class TestConvertInstance(unittest.TestCase):
             self.assertIn(actual_edge,expected_edges)
 
     def test_convert_sbol(self):
-        filename = os.path.join(curr_dir,"files","multiplexer.xml")
+        filename = os.path.join(test_dir,"multiplexer.xml")
         model_graph = model_convert(model_fn)
         graph = instance_convert(model_graph,filename)
         rdf_graph = SBOLGraph(filename)
         rdf_cds =  rdf_graph.get_component_definitions()
 
     def test_convert_nv(self):
-        filename = os.path.join(curr_dir,"files","multiplexer.xml")
+        filename = os.path.join(test_dir,"multiplexer.xml")
         json_file = os.path.join(curr_dir,"files","multiplexer.json")
         graph = instance_convert(filename)
         
@@ -124,7 +86,7 @@ class TestConvertInstance(unittest.TestCase):
         self.assertTrue(graph == expected_g)
 
     def test_convert_combined(self):
-        filename = os.path.join(curr_dir,"files","multiplexer.xml")
+        filename = os.path.join(test_dir,"multiplexer.xml")
         json_file = os.path.join(curr_dir,"files","multiplexer.json")
         sbol_graph = instance_convert(filename)
         sbol_graph.save(json_file)

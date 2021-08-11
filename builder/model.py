@@ -8,6 +8,7 @@ class ModelBuilder(AbstractBuilder):
         super().__init__(convert(graph))
         self._view_h = ViewBuilder(self)
         self._mode_h = ModeBuilder(self)
+        self.identifiers = self._graph.identifiers
 
 
     def set_hierarchy_view(self):

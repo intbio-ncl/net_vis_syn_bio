@@ -6,34 +6,9 @@ from rdflib import RDF,OWL
 sys.path.insert(0, os.path.join(".."))
 
 from converters.instance import convert as i_convert
-from converters.model import convert as m_convert
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))
-model_fn = os.path.join(curr_dir,"..","utility","nv_model.xml")
-
-class TestModelGraph(unittest.TestCase):
-    def setUp(self):
-        self.mg = m_convert(model_fn)
-
-    def tearDown(self):
-        pass
-
-    def test_labels(self):
-        for n,v,k,e in self.mg.edges(data=True,keys=True):
-            edge_label = e["display_name"]
-            self.assertIn(edge_label,k)
-
-    def test_search(self):
-        all_edges = self.mg.edges(data=True,keys=True)
-        res = list(self.mg.search((None,None,None)))
-        self.assertEqual(len(res),len(all_edges))
-        for n,v,k,e in all_edges:
-            n_data = self.mg.nodes[n]
-            v_data = self.mg.nodes[v]
-            expected_res_val = ([n,n_data],[v,v_data],k)
-            self.assertIn(expected_res_val,res)
-
-
+model_fn = os.path.join(curr_dir,"..","..","utility","nv_model.xml")
 
 class TestNVGraph(unittest.TestCase):
 

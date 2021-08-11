@@ -46,7 +46,14 @@ class ColorHandler():
                     colors.append({"BNode" : color_map[BNode]})
                     continue
                 if key not in all_classes:
-                    colors.append({"No_Class" : color_map[None]})
+                    for o in [c[0] for c in self._builder.in_edges(node)]:
+                        o = self._builder.nodes[o]["key"]
+                        if o in color_map.keys():   
+                            name = _get_name(o)
+                            colors.append({f'Child_of_{name}' : color_map[o]})
+                            break
+                    else:
+                        colors.append({"No_Class" : color_map[None]})
                     continue
                 if key in color_map.keys():
                     name = _get_name(key)
@@ -63,7 +70,14 @@ class ColorHandler():
             for n,data in self._builder.v_nodes(data=True):
                 key = data["key"]
                 if key not in colors_map.keys():
-                    colors.append({"Non-Hierarchical" : colors_map[None]})
+                    for o in [c[0] for c in self._builder.in_edges(n)]:
+                        o = self._builder.nodes[o]["key"]
+                        if o in colors_map.keys():
+                            color,depth = colors_map[o]
+                            colors.append({f'Depth-{depth}' : color})
+                            break
+                    else:
+                        colors.append({"Non-Hierarchical" : colors_map[None]})
                 else:
                     color,depth = colors_map[key]
                     colors.append({f"Depth-{depth}" : color})
@@ -78,7 +92,6 @@ class ColorHandler():
             colors = []
             color_map = _init_branch_map(self)
             all_classes = [c[1]["key"] for c in self._builder.get_classes()]
-
             for n,v,k in self._builder.v_edges(keys=True):
                 n_data = self._builder.v_nodes[n]
                 key = n_data["key"]
@@ -86,8 +99,16 @@ class ColorHandler():
                     colors.append({"BNode" : color_map[BNode]})
                     continue
                 if key not in all_classes:
-                    colors.append({"No_Class" : color_map[None]})
+                    for o in [c[0] for c in self._builder.in_edges(n)]:
+                        o = self._builder.nodes[o]["key"]
+                        if o in color_map.keys():   
+                            name = _get_name(o)
+                            colors.append({f'Child_of_{name}' : color_map[o]})
+                            break
+                    else:
+                        colors.append({"No_Class" : color_map[None]})
                     continue
+
                 if key in color_map.keys():
                     name = _get_name(key)
                     colors.append({name : color_map[key]})
@@ -104,7 +125,14 @@ class ColorHandler():
                 n_data = self._builder.v_nodes[n]
                 key = n_data["key"]
                 if key not in color_map.keys():
-                    colors.append({"Non-Hierarchical" : color_map[None]})
+                    for o in [c[0] for c in self._builder.in_edges(n)]:
+                        o = self._builder.nodes[o]["key"]
+                        if o in color_map.keys():
+                            color,depth = color_map[o]
+                            colors.append({f'Depth-{depth}' : color})
+                            break
+                    else:
+                        colors.append({"Non-Hierarchical" : color_map[None]})
                 else:
                     color,depth = color_map[key]
                     colors.append({f"Depth-{depth}" : color})

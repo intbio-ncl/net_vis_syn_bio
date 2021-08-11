@@ -129,3 +129,13 @@ class ModelVisual(AbstractVisual):
             return self._size_h.hierarchy()
         else:
             self.node_size = self.add_heirachy_node_size
+
+    # ---------------------- Node Size ----------------------
+    def add_logic_node_shape(self):
+        '''
+        Sets shapes based on logical operators (OR/AND) specified within OWL ontology.
+        '''
+        if self.node_shape == self.add_logic_node_shape:
+            return self._shape_h.node.logical()
+        else:
+            self.node_shape = self.add_logic_node_shape

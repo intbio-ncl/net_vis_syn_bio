@@ -6,7 +6,6 @@ from rdflib import URIRef,RDF
 class AbstractGraph:
     def __init__(self,graph=None):
         self._graph = graph
-        self._generate_labels()
 
     def __len__(self):
         return len(self._graph)
@@ -56,6 +55,8 @@ class AbstractGraph:
             p = [p]
         if o and not isinstance(o,(list,set,tuple)):
             o = [o]
+        if s and s not in self.nodes:
+            return []
         for n,v,k in self.edges(s,keys=True):
             if not p or k in p:
                 n_data = self.nodes[n]
@@ -95,6 +96,7 @@ class AbstractGraph:
                 else:
                     name = str(identity)
                 self.nodes[node]["display_name"] = name
+
         for n,v,k,e in self.edges(keys=True,data=True):
             if "display_name" not in e.keys():
                 e["display_name"] = self._get_name(k)

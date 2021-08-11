@@ -25,6 +25,9 @@ class AbstractBuilder:
     @property
     def graph(self):
         return self.view
+    
+    def get_next_index(self):
+        return max([i for i in self._graph.nodes])
 
     def in_edges(self,node = None,keys = False):
         return self.view.in_edges(node,keys=keys)
@@ -68,4 +71,6 @@ class AbstractBuilder:
             for n,data in self._graph.nodes(data=True):
                 if data["key"] == key:
                     return n
+            else:
+                return subject
         raise ValueError(f'{subject} Not in either graph or viewgraph.')

@@ -1,4 +1,4 @@
-from rdflib import RDFS,OWL
+from rdflib import RDFS,OWL,RDF
 import re
 
 from builder.builders.abstract_view import AbstractViewBuilder
@@ -24,22 +24,55 @@ class ViewBuilder(AbstractViewBuilder):
     def requirements(self):
         edges = []
         node_attrs = {}
+        node_index = self._builder.get_next_index() + 1
+        
+        def _requirements_inner(subject,equiv_type,requirements):
+            nonlocal node_index
+            
+            if equiv_type == OWL.intersectionOf:
+                node_index += 1
+                and_node = node_index
+                node_attrs[and_node] = _node_label(OWL.intersectionOf)
+                for r in requirements:
+                    _requirements_inner(and_node,*r)
+                edge = _edge_label("product")
+                edges.append((and_node,subject,OWL.intersectionOf,edge))
+
+            elif equiv_type == OWL.unionOf:
+                node_index += 1
+                or_node = node_index 
+                node_attrs[or_node] = _node_label(OWL.unionOf)
+                for r in requirements:
+                    _requirements_inner(or_node,*r)
+                edge = _edge_label("product")
+                edges.append((or_node,subject,OWL.unionOf,edge))
+
+            elif equiv_type == RDF.type:
+                node_attrs[requirements[0]] = requirements[1]
+                edge = _edge_label("isClass")
+                edges.append((requirements[0],subject,RDFS.subClassOf,edge))
+
+            else:
+                node_attrs[requirements[0]] = requirements[1]
+                edge = _edge_label("hasRole")
+                edges.append((requirements[0],subject,self._builder.identifiers.predicates.role,edge))
+
+
         for c,c_data in self._builder.get_classes(bnodes=False):
             node_attrs[c] = c_data
             e_classes = self._builder.get_equivalent_classes(c)
             for e_class in e_classes:
-                for operation in e_class:
-                    operation_type = operation[0]
-                    data = operation[1]
-                    for d in data:
-                        print(d)
-                        if isinstance(d,tuple):
-                            pass
-                        if operation_type == OWL.intersectionOf:
-                            pass
-                        elif operation_type == OWL.unionOf:
-                            pass
+                for equiv_type,requirements in e_class:
+                    _requirements_inner(c,equiv_type,requirements)
         return self._builder.sub_graph(edges,node_attrs)
+
+
+
+def _node_label(key):
+    return {"key" : key, "display_name" : _get_name(key)}
+
+def _edge_label(name):
+    return {"display_name" : name}
 
 def _get_name(subject):
     split_subject = _split(subject)

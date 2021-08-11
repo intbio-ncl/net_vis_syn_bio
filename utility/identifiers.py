@@ -1,17 +1,39 @@
+import string 
 import re
 
 from rdflib import RDF,OWL,RDFS
-from rdflib import Namespace as RDFNamespace
 from rdflib.term import BNode, URIRef
 
-nv_namespace = RDFNamespace('http://nv_ontology/')
+
 
 class KnowledgeGraphIdentifiers:
     def __init__(self):
         self.objects = Objects()
         self.predicates = Predicates()
         self.roles = Roles()
-    
+        self.namespaces = Namespaces()
+
+class Namespaces:
+    def __init__(self):
+        identifiers = URIRef('http://identifiers.org/')
+        self.nv = URIRef("http://www.nv_ontology.org/")
+        self.so = URIRef(identifiers + 'so/SO:')
+        self.sbo = URIRef(identifiers + 'biomodels.sbo/SBO:') 
+        self.i_edam = URIRef(identifiers + 'edam/')
+        self.go = URIRef(identifiers + "go/GO:")
+        self.chebi = URIRef(identifiers + "chebi/CHEBI:")
+        self.biopax = URIRef('http://www.biopax.org/release/biopax-level3.owl#')
+        self.dc = URIRef('http://purl.org/dc/terms/')
+        self.edam = URIRef('http://edamontology.org/format')
+        self.prov = URIRef('http://www.w3.org/ns/prov#')
+
+
+    def get_code(self,identity):
+        for code,identifier in vars(self).items():
+            if identifier in identity:
+                return code + ":"
+        return ""
+
 class Predicates:
     def __init__(self):
         pass
@@ -41,8 +63,27 @@ def produce_identifiers(graph):
             if ns in e:
                 break
         else:
-            _apply_var_variants(Predicates,e)        
+            _apply_var_variants(Predicates,e)       
+        _extract_namespaces((n_key,v_data,e),namespaces)
     return KnowledgeGraphIdentifiers()
+
+
+def _extract_namespaces(triple,known_namespaces):
+    for code,ns in vars(Namespaces()).items():
+        if "__" in ns:
+            continue
+        known_namespaces.append(ns)
+    known_namespaces = list(set(known_namespaces))
+    for t in triple:
+        if not isinstance(t,URIRef):
+            continue
+        if any(ns in t for ns in known_namespaces):
+            continue
+        namespace = t[0:len(t) - len(_get_name(t))]
+        nv_code = _split(namespace)[-2]
+        nv_code = re.split('\W+', nv_code)[0]
+        setattr(Namespaces, nv_code, URIRef(namespace))
+
 
 def _apply_var_variants(class_name,key):
     var_name = _get_name(key)
