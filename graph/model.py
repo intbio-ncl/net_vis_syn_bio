@@ -9,6 +9,9 @@ class ModelGraph(AbstractGraph):
         self.identifiers = produce_identifiers(self)
         self._generate_labels()
         
+    def get_child_predicate(self):
+        return self.identifiers.predicates.partOf
+
     def get_classes(self,bnodes=True):
         classes = self.search((None,RDF.type,OWL.Class))
         f_classes = []

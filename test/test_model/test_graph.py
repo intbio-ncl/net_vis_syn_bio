@@ -35,7 +35,6 @@ class TestModelGraph(unittest.TestCase):
             self.assertIn(expected_res_val,res)
 
     def test_get_rdf_type(self):
-        a_result = self.mg.get_classes()
         for n,v,e in self.mg.search((None,RDF.type,None)):
             n,n_data = n
             self.assertEqual(self.mg.get_rdf_type(n),v)

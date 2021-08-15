@@ -1,3 +1,5 @@
+from rdflib import RDF
+
 from converters.instance import convert as i_convert
 from converters.model import convert as m_convert
 
@@ -36,3 +38,34 @@ class InstanceBuilder(AbstractBuilder):
 
     def set_module_view(self):
         self.view = self._view_h.module_view()
+
+    def get_entities(self):
+        classes = [c[1]["key"] for c in self._model_graph.get_classes(False)]
+        return [c[0] for c in self._graph.search((None,RDF.type,classes))]
+
+    def get_children(self,subject):
+        subject = self._resolve_subject(subject)
+        cp = self._model_graph.get_child_predicate()
+        return [c[1:3] for c in self._graph.search((subject,cp,None))]
+    
+    def get_parents(self,subject):
+        subject = self._resolve_subject(subject)
+        cp = self._model_graph.get_child_predicate()
+        return [c[0:3:2] for c in self._graph.search((None,cp,subject))]
+
+    def get_entity_depth(self,subject):
+        def _get_class_depth(s,depth):
+            parent = self.get_parents(s)
+            if parent == []:
+                return depth
+            depth += 1
+            c_identifier = parent[0][0][0]
+            return _get_class_depth(c_identifier,depth)
+        return _get_class_depth(subject,0)
+
+    def get_root_entities(self):
+        roots = []
+        for entity in self.get_entities():
+            if self.get_parents(entity[0]) == []:
+                roots.append(entity)
+        return roots

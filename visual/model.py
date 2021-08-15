@@ -38,10 +38,26 @@ class ModelVisual(AbstractVisual):
                             self.set_dagre_layout,
                             self.add_node_name_labels,
                             self.add_edge_no_labels,
-                            self.add_branch_node_color,
-                            self.add_standard_edge_color,
-                            self.add_standard_node_size,
+                            self.add_hierarchy_node_color,
+                            self.add_hierarchy_edge_color,
+                            self.add_hierarchy_node_size,
                             self.set_circle_node_shape,
+                            self.set_straight_edge_shape]
+        return self._set_preset(preset_functions)
+
+    def set_requirements_preset(self):
+        '''
+        Pre-set methods with an affinity for displaying the pruned graph view.
+        '''
+        preset_functions = [self.set_network_mode,
+                            self.set_requirements_view,
+                            self.set_cola_layout,
+                            self.add_node_name_labels,
+                            self.add_edge_no_labels,
+                            self.add_branch_node_color,
+                            self.add_branch_edge_color,
+                            self.add_standard_node_size,
+                            self.add_logic_node_shape,
                             self.set_straight_edge_shape]
         return self._set_preset(preset_functions)
 
@@ -121,14 +137,14 @@ class ModelVisual(AbstractVisual):
             self.edge_color = self.add_hierarchy_edge_color
 
     # ---------------------- Node Size ----------------------
-    def add_heirachy_node_size(self):
+    def add_hierarchy_node_size(self):
         '''
         Each level from the root node is smaller than parent.
         '''
-        if self.node_size == self.add_heirachy_node_size:
+        if self.node_size == self.add_hierarchy_node_size:
             return self._size_h.hierarchy()
         else:
-            self.node_size = self.add_heirachy_node_size
+            self.node_size = self.add_hierarchy_node_size
 
     # ---------------------- Node Size ----------------------
     def add_logic_node_shape(self):

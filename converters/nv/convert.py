@@ -2,7 +2,7 @@ import json
 import networkx as nx
 from rdflib import Literal,URIRef
 
-def convert(input_fn):
+def convert(input_fn,model_graph):
     graph = nx.MultiDiGraph()
     
     with open(input_fn) as f:

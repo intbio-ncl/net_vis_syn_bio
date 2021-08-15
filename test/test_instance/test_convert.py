@@ -9,6 +9,9 @@ from networkx.readwrite import json_graph
 from rdflib.term import URIRef
 
 sys.path.insert(0, os.path.join(".."))
+sys.path.insert(0, os.path.join("..",".."))
+sys.path.insert(0, os.path.join("..","..",".."))
+
 from converters.instance import convert as instance_convert
 from converters.model import convert as model_convert
 from converters.sbol.utility.graph import SBOLGraph
@@ -71,26 +74,44 @@ class TestConvertInstance(unittest.TestCase):
         model_graph = model_convert(model_fn)
         graph = instance_convert(model_graph,filename)
         rdf_graph = SBOLGraph(filename)
-        rdf_cds =  rdf_graph.get_component_definitions()
+        expected_edges = []
+
+        for cd in rdf_graph.get_component_definitions():
+            related_cds = [rdf_graph.get_definition(c) for c in rdf_graph.get_components(cd)]
+            [expected_edges.append((cd,None,rc)) for rc in related_cds]
+        
+        part_of_pred = URIRef("http://www.nv_ontology.org/partOf")
+        edge_keys = [k for n,v,k in graph.edges(keys=True)]
+        e_e_edges = [k for k in edge_keys if k == part_of_pred]
+        self.assertEqual(len(e_e_edges),len(expected_edges))
+        for n,v,k in graph.edges(keys=True):
+            if k != part_of_pred:
+                continue
+            n_data = graph.nodes[n]
+            v_data = graph.nodes[v]
+            actual_edge = (n_data["key"],None,v_data["key"])
+            self.assertIn(actual_edge,expected_edges)
 
     def test_convert_nv(self):
+        model_graph = model_convert(model_fn)
         filename = os.path.join(test_dir,"multiplexer.xml")
-        json_file = os.path.join(curr_dir,"files","multiplexer.json")
-        graph = instance_convert(filename)
+        json_file = os.path.join(test_dir,"multiplexer.json")
+        graph = instance_convert(model_graph,filename)
         
         graph.save(json_file)
-        graph = instance_convert(json_file)
+        graph = instance_convert(model_graph,json_file)
         with open(json_file) as f:
             data = json.load(f)
         expected_g = InstanceGraph(json_graph.node_link_graph(data))
         self.assertTrue(graph == expected_g)
 
     def test_convert_combined(self):
+        model_graph = model_convert(model_fn)
         filename = os.path.join(test_dir,"multiplexer.xml")
-        json_file = os.path.join(curr_dir,"files","multiplexer.json")
-        sbol_graph = instance_convert(filename)
+        json_file = os.path.join(test_dir,"multiplexer.json")
+        sbol_graph = instance_convert(model_graph,filename)
         sbol_graph.save(json_file)
-        nv_graph = instance_convert(json_file)
+        nv_graph = instance_convert(model_graph,json_file)
         self.assertTrue(nv_graph == sbol_graph)
 
 

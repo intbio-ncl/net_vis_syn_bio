@@ -5,6 +5,7 @@ from random import sample
 
 from rdflib import RDF,BNode
 sys.path.insert(0, os.path.join(".."))
+sys.path.insert(0, os.path.join("..",".."))
 
 from builder.model import ModelBuilder
 from builder.instance import InstanceBuilder

@@ -1,4 +1,3 @@
-#from utility.nv_identifiers import identifiers
 import re
 
 class ViewBuilder:
@@ -24,17 +23,15 @@ class ViewBuilder:
         edges = []
         node_attrs = {}
         for entity,data in self._builder.get_entities():
-            sub_entities = self._builder.get_entities(entity)
-            if len(sub_entities) == 0:
+            children = self._builder.get_children(entity)
+            if len(children) == 0:
                 continue
             node_attrs[entity] = data
-
-            for s_entity in sub_entities:
-                key = identifiers.predicates.contains
-                s_entity,s_e_data = s_entity
-                node_attrs[s_entity] = s_e_data
+            for child,key in children:
+                child,c_data = child
+                node_attrs[child] = c_data
                 edge = self._build_edge_attr(key)
-                edges.append((entity,s_entity,key,edge))
+                edges.append((entity,child,key,edge))
         return self._builder.sub_graph(edges,node_attrs)
 
     def interaction_verbose(self):
