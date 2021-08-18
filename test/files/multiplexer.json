@@ -4,9 +4,9 @@
   "graph": {},
   "nodes": [
     {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/LacI/1",
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/SrpR/1",
       "type": "URI",
-      "display_name": "LacI",
+      "display_name": "SrpR",
       "id": 1
     },
     {
@@ -16,388 +16,634 @@
       "id": 2
     },
     {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/ECK120033736/1",
-      "type": "URI",
-      "display_name": "ECK120033736",
-      "id": 3
-    },
-    {
-      "key": "http://www.nv_ontology.org/Terminator",
-      "type": "URI",
-      "display_name": "Terminator",
-      "id": 4
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/circuit_multiplexer_environment__Ara/1",
-      "type": "URI",
-      "display_name": "circuit_multiplexer_environment__Ara",
-      "id": 5
-    },
-    {
-      "key": "http://www.nv_ontology.org/Protein",
-      "type": "URI",
-      "display_name": "Protein",
-      "id": 6
-    },
-    {
       "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/pSrpR/1",
       "type": "URI",
       "display_name": "pSrpR",
-      "id": 7
+      "id": 3
     },
     {
       "key": "http://www.nv_ontology.org/Promoter",
       "type": "URI",
       "display_name": "Promoter",
-      "id": 8
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/PhlF_protein/1",
-      "type": "URI",
-      "display_name": "PhlF_protein",
-      "id": 9
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/circuit_multiplexer_environment__IPTG/1",
-      "type": "URI",
-      "display_name": "circuit_multiplexer_environment__IPTG",
-      "id": 10
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/pPhlF/1",
-      "type": "URI",
-      "display_name": "pPhlF",
-      "id": 11
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/L3S2P21_terminator/1",
-      "type": "URI",
-      "display_name": "L3S2P21_terminator",
-      "id": 12
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/pCONST/1",
-      "type": "URI",
-      "display_name": "pCONST",
-      "id": 13
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/P3/1",
-      "type": "URI",
-      "display_name": "P3",
-      "id": 14
-    },
-    {
-      "key": "http://www.nv_ontology.org/RBS",
-      "type": "URI",
-      "display_name": "RBS",
-      "id": 15
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/PhlF/1",
-      "type": "URI",
-      "display_name": "PhlF",
-      "id": 16
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/ECK120029600/1",
-      "type": "URI",
-      "display_name": "ECK120029600",
-      "id": 17
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/pTet/1",
-      "type": "URI",
-      "display_name": "pTet",
-      "id": 18
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_6_pTac/1",
-      "type": "URI",
-      "display_name": "v2_circuit_multiplexer_6_pTac",
-      "id": 19
-    },
-    {
-      "key": "http://www.nv_ontology.org/EngineeredRegion",
-      "type": "URI",
-      "display_name": "EngineeredRegion",
-      "id": 20
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/RiboJ/1",
-      "type": "URI",
-      "display_name": "RiboJ",
-      "id": 21
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/BBa_B0064_rbs/1",
-      "type": "URI",
-      "display_name": "BBa_B0064_rbs",
-      "id": 22
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/LacI_protein/1",
-      "type": "URI",
-      "display_name": "LacI_protein",
-      "id": 23
-    },
-    {
-      "key": "http://www.nv_ontology.org/DNA",
-      "type": "URI",
-      "display_name": "DNA",
-      "id": 24
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/aTc/1",
-      "type": "URI",
-      "display_name": "aTc",
-      "id": 25
-    },
-    {
-      "key": "http://www.nv_ontology.org/SmallMolecule",
-      "type": "URI",
-      "display_name": "SmallMolecule",
-      "id": 26
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/YFP_protein/1",
-      "type": "URI",
-      "display_name": "YFP_protein",
-      "id": 27
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/IPTG/1",
-      "type": "URI",
-      "display_name": "IPTG",
-      "id": 28
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/TetR_protein/1",
-      "type": "URI",
-      "display_name": "TetR_protein",
-      "id": 29
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/circuit_multiplexer_environment__aTc/1",
-      "type": "URI",
-      "display_name": "circuit_multiplexer_environment__aTc",
-      "id": 30
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/IPTG_LacI_protein/1",
-      "type": "URI",
-      "display_name": "IPTG_LacI_protein",
-      "id": 31
-    },
-    {
-      "key": "http://www.nv_ontology.org/Complex",
-      "type": "URI",
-      "display_name": "Complex",
-      "id": 32
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/AmtR_protein/1",
-      "type": "URI",
-      "display_name": "AmtR_protein",
-      "id": 33
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/RiboJ10/1",
-      "type": "URI",
-      "display_name": "RiboJ10",
-      "id": 34
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/YFP/1",
-      "type": "URI",
-      "display_name": "YFP",
-      "id": 35
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_5_pTet/1",
-      "type": "URI",
-      "display_name": "v2_circuit_multiplexer_5_pTet",
-      "id": 36
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/TetR/1",
-      "type": "URI",
-      "display_name": "TetR",
-      "id": 37
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/pHlyIIR/1",
-      "type": "URI",
-      "display_name": "pHlyIIR",
-      "id": 38
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/Ara_AraC_protein/1",
-      "type": "URI",
-      "display_name": "Ara_AraC_protein",
-      "id": 39
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/pAmtR/1",
-      "type": "URI",
-      "display_name": "pAmtR",
-      "id": 40
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/RiboJ53/1",
-      "type": "URI",
-      "display_name": "RiboJ53",
-      "id": 41
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_4_A1_AmtR/1",
-      "type": "URI",
-      "display_name": "v2_circuit_multiplexer_4_A1_AmtR",
-      "id": 42
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/AmtR/1",
-      "type": "URI",
-      "display_name": "AmtR",
-      "id": 43
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/A1/1",
-      "type": "URI",
-      "display_name": "A1",
-      "id": 44
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/BydvJ/1",
-      "type": "URI",
-      "display_name": "BydvJ",
-      "id": 45
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/L3S2P55/1",
-      "type": "URI",
-      "display_name": "L3S2P55",
-      "id": 46
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_0_YFP/1",
-      "type": "URI",
-      "display_name": "v2_circuit_multiplexer_0_YFP",
-      "id": 47
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/Ara/1",
-      "type": "URI",
-      "display_name": "Ara",
-      "id": 48
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_2_H1_HlyIIR/1",
-      "type": "URI",
-      "display_name": "v2_circuit_multiplexer_2_H1_HlyIIR",
-      "id": 49
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/HlyIIR/1",
-      "type": "URI",
-      "display_name": "HlyIIR",
-      "id": 50
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/pTac/1",
-      "type": "URI",
-      "display_name": "pTac",
-      "id": 51
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/RiboJ51/1",
-      "type": "URI",
-      "display_name": "RiboJ51",
-      "id": 52
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/H1/1",
-      "type": "URI",
-      "display_name": "H1",
-      "id": 53
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_7_pBAD/1",
-      "type": "URI",
-      "display_name": "v2_circuit_multiplexer_7_pBAD",
-      "id": 54
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/AraC/1",
-      "type": "URI",
-      "display_name": "AraC",
-      "id": 55
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/S4/1",
-      "type": "URI",
-      "display_name": "S4",
-      "id": 56
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/aTc_TetR_protein/1",
-      "type": "URI",
-      "display_name": "aTc_TetR_protein",
-      "id": 57
-    },
-    {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/SrpR_protein/1",
-      "type": "URI",
-      "display_name": "SrpR_protein",
-      "id": 58
+      "id": 4
     },
     {
       "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_1_P3_PhlF/1",
       "type": "URI",
       "display_name": "v2_circuit_multiplexer_1_P3_PhlF",
-      "id": 59
+      "id": 5
+    },
+    {
+      "key": "http://www.nv_ontology.org/EngineeredRegion",
+      "type": "URI",
+      "display_name": "EngineeredRegion",
+      "id": 6
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/RiboJ53/1",
+      "type": "URI",
+      "display_name": "RiboJ53",
+      "id": 7
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/pHlyIIR/1",
+      "type": "URI",
+      "display_name": "pHlyIIR",
+      "id": 8
     },
     {
       "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/ECK120033737/1",
       "type": "URI",
       "display_name": "ECK120033737",
-      "id": 60
+      "id": 9
     },
     {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_3_S4_SrpR/1",
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/P3/1",
       "type": "URI",
-      "display_name": "v2_circuit_multiplexer_3_S4_SrpR",
-      "id": 61
+      "display_name": "P3",
+      "id": 10
     },
     {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/pBAD/1",
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/PhlF/1",
       "type": "URI",
-      "display_name": "pBAD",
-      "id": 62
+      "display_name": "PhlF",
+      "id": 11
     },
     {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/SrpR/1",
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/Ara/1",
       "type": "URI",
-      "display_name": "SrpR",
-      "id": 63
+      "display_name": "Ara",
+      "id": 12
     },
     {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/AraC_protein/1",
+      "key": "http://www.nv_ontology.org/SmallMolecule",
       "type": "URI",
-      "display_name": "AraC_protein",
-      "id": 64
+      "display_name": "SmallMolecule",
+      "id": 13
     },
     {
-      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/circuit_multiplexer_environment__YFP/1",
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/Ara_AraC_protein/1",
       "type": "URI",
-      "display_name": "circuit_multiplexer_environment__YFP",
-      "id": 65
+      "display_name": "Ara_AraC_protein",
+      "id": 14
+    },
+    {
+      "key": "http://www.nv_ontology.org/Complex",
+      "type": "URI",
+      "display_name": "Complex",
+      "id": 15
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/aTc/1",
+      "type": "URI",
+      "display_name": "aTc",
+      "id": 16
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_2_H1_HlyIIR/1",
+      "type": "URI",
+      "display_name": "v2_circuit_multiplexer_2_H1_HlyIIR",
+      "id": 17
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/H1/1",
+      "type": "URI",
+      "display_name": "H1",
+      "id": 18
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/RiboJ51/1",
+      "type": "URI",
+      "display_name": "RiboJ51",
+      "id": 19
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/ECK120033736/1",
+      "type": "URI",
+      "display_name": "ECK120033736",
+      "id": 20
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/HlyIIR/1",
+      "type": "URI",
+      "display_name": "HlyIIR",
+      "id": 21
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/pAmtR/1",
+      "type": "URI",
+      "display_name": "pAmtR",
+      "id": 22
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/pTac/1",
+      "type": "URI",
+      "display_name": "pTac",
+      "id": 23
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/AmtR_protein/1",
+      "type": "URI",
+      "display_name": "AmtR_protein",
+      "id": 24
+    },
+    {
+      "key": "http://www.nv_ontology.org/Protein",
+      "type": "URI",
+      "display_name": "Protein",
+      "id": 25
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/AmtR/1",
+      "type": "URI",
+      "display_name": "AmtR",
+      "id": 26
+    },
+    {
+      "key": "http://www.nv_ontology.org/DNA",
+      "type": "URI",
+      "display_name": "DNA",
+      "id": 27
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/YFP_protein/1",
+      "type": "URI",
+      "display_name": "YFP_protein",
+      "id": 28
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_0_YFP/1",
+      "type": "URI",
+      "display_name": "v2_circuit_multiplexer_0_YFP",
+      "id": 29
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/YFP/1",
+      "type": "URI",
+      "display_name": "YFP",
+      "id": 30
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/pPhlF/1",
+      "type": "URI",
+      "display_name": "pPhlF",
+      "id": 31
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/RiboJ/1",
+      "type": "URI",
+      "display_name": "RiboJ",
+      "id": 32
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/BBa_B0064_rbs/1",
+      "type": "URI",
+      "display_name": "BBa_B0064_rbs",
+      "id": 33
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/L3S2P21_terminator/1",
+      "type": "URI",
+      "display_name": "L3S2P21_terminator",
+      "id": 34
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/PhlF_protein/1",
+      "type": "URI",
+      "display_name": "PhlF_protein",
+      "id": 35
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/TetR_protein/1",
+      "type": "URI",
+      "display_name": "TetR_protein",
+      "id": 36
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/RiboJ10/1",
+      "type": "URI",
+      "display_name": "RiboJ10",
+      "id": 37
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/AraC/1",
+      "type": "URI",
+      "display_name": "AraC",
+      "id": 38
+    },
+    {
+      "key": "http://www.nv_ontology.org/RBS",
+      "type": "URI",
+      "display_name": "RBS",
+      "id": 39
     },
     {
       "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/HlyIIR_protein/1",
       "type": "URI",
       "display_name": "HlyIIR_protein",
+      "id": 40
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/IPTG/1",
+      "type": "URI",
+      "display_name": "IPTG",
+      "id": 41
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_6_pTac/1",
+      "type": "URI",
+      "display_name": "v2_circuit_multiplexer_6_pTac",
+      "id": 42
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/pCONST/1",
+      "type": "URI",
+      "display_name": "pCONST",
+      "id": 43
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/LacI/1",
+      "type": "URI",
+      "display_name": "LacI",
+      "id": 44
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_7_pBAD/1",
+      "type": "URI",
+      "display_name": "v2_circuit_multiplexer_7_pBAD",
+      "id": 45
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/aTc_TetR_protein/1",
+      "type": "URI",
+      "display_name": "aTc_TetR_protein",
+      "id": 46
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/LacI_protein/1",
+      "type": "URI",
+      "display_name": "LacI_protein",
+      "id": 47
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/ECK120029600/1",
+      "type": "URI",
+      "display_name": "ECK120029600",
+      "id": 48
+    },
+    {
+      "key": "http://www.nv_ontology.org/Terminator",
+      "type": "URI",
+      "display_name": "Terminator",
+      "id": 49
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/pTet/1",
+      "type": "URI",
+      "display_name": "pTet",
+      "id": 50
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/circuit_multiplexer_environment__YFP/1",
+      "type": "URI",
+      "display_name": "circuit_multiplexer_environment__YFP",
+      "id": 51
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/A1/1",
+      "type": "URI",
+      "display_name": "A1",
+      "id": 52
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_4_A1_AmtR/1",
+      "type": "URI",
+      "display_name": "v2_circuit_multiplexer_4_A1_AmtR",
+      "id": 53
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/BydvJ/1",
+      "type": "URI",
+      "display_name": "BydvJ",
+      "id": 54
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/L3S2P55/1",
+      "type": "URI",
+      "display_name": "L3S2P55",
+      "id": 55
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/circuit_multiplexer_environment__IPTG/1",
+      "type": "URI",
+      "display_name": "circuit_multiplexer_environment__IPTG",
+      "id": 56
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/circuit_multiplexer_environment__aTc/1",
+      "type": "URI",
+      "display_name": "circuit_multiplexer_environment__aTc",
+      "id": 57
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/IPTG_LacI_protein/1",
+      "type": "URI",
+      "display_name": "IPTG_LacI_protein",
+      "id": 58
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/TetR/1",
+      "type": "URI",
+      "display_name": "TetR",
+      "id": 59
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/SrpR_protein/1",
+      "type": "URI",
+      "display_name": "SrpR_protein",
+      "id": 60
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/circuit_multiplexer_environment__Ara/1",
+      "type": "URI",
+      "display_name": "circuit_multiplexer_environment__Ara",
+      "id": 61
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_3_S4_SrpR/1",
+      "type": "URI",
+      "display_name": "v2_circuit_multiplexer_3_S4_SrpR",
+      "id": 62
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/pBAD/1",
+      "type": "URI",
+      "display_name": "pBAD",
+      "id": 63
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/S4/1",
+      "type": "URI",
+      "display_name": "S4",
+      "id": 64
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_5_pTet/1",
+      "type": "URI",
+      "display_name": "v2_circuit_multiplexer_5_pTet",
+      "id": 65
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_Parts/AraC_protein/1",
+      "type": "URI",
+      "display_name": "AraC_protein",
       "id": 66
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer/PhlF_degradation_interaction/1",
+      "type": "URI",
+      "display_name": "PhlF_degradation_interaction",
+      "id": 67
+    },
+    {
+      "key": "http://www.nv_ontology.org/Degradation",
+      "type": "URI",
+      "display_name": "Degradation",
+      "id": 68
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer/YFP_degradation_interaction/1",
+      "type": "URI",
+      "display_name": "YFP_degradation_interaction",
+      "id": 69
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer/aTc_TetR_protein_fc_1_stimulates_v2_circuit_multiplexer_4_A1_AmtR_fc/1",
+      "type": "URI",
+      "display_name": "aTc_TetR_protein_fc_1_stimulates_v2_circuit_multiplexer_4_A1_AmtR_fc",
+      "id": 70
+    },
+    {
+      "key": "http://www.nv_ontology.org/Activation",
+      "type": "URI",
+      "display_name": "Activation",
+      "id": 71
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_1_P3_PhlF_module/PhlF_protein_interaction/1",
+      "type": "URI",
+      "display_name": "PhlF_protein_interaction",
+      "id": 72
+    },
+    {
+      "key": "http://www.nv_ontology.org/GeneticProduction",
+      "type": "URI",
+      "display_name": "GeneticProduction",
+      "id": 73
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer/AraC_degradation_interaction/1",
+      "type": "URI",
+      "display_name": "AraC_degradation_interaction",
+      "id": 74
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_1_P3_PhlF_module/HlyIIR_pHlyIIR_repression/1",
+      "type": "URI",
+      "display_name": "HlyIIR_pHlyIIR_repression",
+      "id": 75
+    },
+    {
+      "key": "http://www.nv_ontology.org/Repression",
+      "type": "URI",
+      "display_name": "Repression",
+      "id": 76
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_2_H1_HlyIIR_module/HlyIIR_protein_interaction/1",
+      "type": "URI",
+      "display_name": "HlyIIR_protein_interaction",
+      "id": 77
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_4_A1_AmtR_module/AmtR_protein_interaction/1",
+      "type": "URI",
+      "display_name": "AmtR_protein_interaction",
+      "id": 78
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer/Ara_AraC_protein_degradation_interaction/1",
+      "type": "URI",
+      "display_name": "Ara_AraC_protein_degradation_interaction",
+      "id": 79
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_3_S4_SrpR_module/Ara_AraC_protein_pBAD_activation/1",
+      "type": "URI",
+      "display_name": "Ara_AraC_protein_pBAD_activation",
+      "id": 80
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/circuit_multiplexer_environment_md/Degradation_YFP/1",
+      "type": "URI",
+      "display_name": "Degradation_YFP",
+      "id": 81
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_4_A1_AmtR_module/aTc_TetR_protein_fc_stimulates_circuit_multiplexer_4_A1_AmtR/1",
+      "type": "URI",
+      "display_name": "aTc_TetR_protein_fc_stimulates_circuit_multiplexer_4_A1_AmtR",
+      "id": 82
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_0_YFP_module/PhlF_pPhlF_repression/1",
+      "type": "URI",
+      "display_name": "PhlF_pPhlF_repression",
+      "id": 83
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer/IPTG_LacI_protein_degradation_interaction/1",
+      "type": "URI",
+      "display_name": "IPTG_LacI_protein_degradation_interaction",
+      "id": 84
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer/aTc_TetR_protein_stimulates_v2_circuit_multiplexer_4_A1_AmtR_fc/1",
+      "type": "URI",
+      "display_name": "aTc_TetR_protein_stimulates_v2_circuit_multiplexer_4_A1_AmtR_fc",
+      "id": 85
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_7_pBAD_module/AraC_protein_interaction/1",
+      "type": "URI",
+      "display_name": "AraC_protein_interaction",
+      "id": 86
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer/HlyIIR_degradation_interaction/1",
+      "type": "URI",
+      "display_name": "HlyIIR_degradation_interaction",
+      "id": 87
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_2_H1_HlyIIR_module/AmtR_pAmtR_repression/1",
+      "type": "URI",
+      "display_name": "AmtR_pAmtR_repression",
+      "id": 88
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_2_H1_HlyIIR_module/LacI_pTac_repression/1",
+      "type": "URI",
+      "display_name": "LacI_pTac_repression",
+      "id": 89
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_5_pTet_module/TetR_protein_interaction/1",
+      "type": "URI",
+      "display_name": "TetR_protein_interaction",
+      "id": 90
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer/TetR_degradation_interaction/1",
+      "type": "URI",
+      "display_name": "TetR_degradation_interaction",
+      "id": 91
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer/IPTG_LacI_protein_complex_formation/1",
+      "type": "URI",
+      "display_name": "IPTG_LacI_protein_complex_formation",
+      "id": 92
+    },
+    {
+      "key": "http://www.nv_ontology.org/NonCovalentBonding",
+      "type": "URI",
+      "display_name": "NonCovalentBonding",
+      "id": 93
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer/AmtR_degradation_interaction/1",
+      "type": "URI",
+      "display_name": "AmtR_degradation_interaction",
+      "id": 94
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer/Ara_AraC_protein_complex_formation/1",
+      "type": "URI",
+      "display_name": "Ara_AraC_protein_complex_formation",
+      "id": 95
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer/IPTG_LacI_protein_stimulates_v2_circuit_multiplexer_2_H1_HlyIIR_fc/1",
+      "type": "URI",
+      "display_name": "IPTG_LacI_protein_stimulates_v2_circuit_multiplexer_2_H1_HlyIIR_fc",
+      "id": 96
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_4_A1_AmtR_module/TetR_pTet_repression/1",
+      "type": "URI",
+      "display_name": "TetR_pTet_repression",
+      "id": 97
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_3_S4_SrpR_module/SrpR_protein_interaction/1",
+      "type": "URI",
+      "display_name": "SrpR_protein_interaction",
+      "id": 98
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_1_P3_PhlF_module/SrpR_pSrpR_repression/1",
+      "type": "URI",
+      "display_name": "SrpR_pSrpR_repression",
+      "id": 99
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer/SrpR_degradation_interaction/1",
+      "type": "URI",
+      "display_name": "SrpR_degradation_interaction",
+      "id": 100
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer/LacI_degradation_interaction/1",
+      "type": "URI",
+      "display_name": "LacI_degradation_interaction",
+      "id": 101
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer/aTc_TetR_protein_degradation_interaction/1",
+      "type": "URI",
+      "display_name": "aTc_TetR_protein_degradation_interaction",
+      "id": 102
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_0_YFP_module/YFP_protein_interaction/1",
+      "type": "URI",
+      "display_name": "YFP_protein_interaction",
+      "id": 103
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer/AraC_protein_inhibits_v2_circuit_multiplexer_3_S4_SrpR_fc/1",
+      "type": "URI",
+      "display_name": "AraC_protein_inhibits_v2_circuit_multiplexer_3_S4_SrpR_fc",
+      "id": 104
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer/aTc_TetR_protein_complex_formation/1",
+      "type": "URI",
+      "display_name": "aTc_TetR_protein_complex_formation",
+      "id": 105
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_3_S4_SrpR_module/TetR_pTet_repression/1",
+      "type": "URI",
+      "display_name": "TetR_pTet_repression",
+      "id": 106
+    },
+    {
+      "key": "https://synbiohub.programmingbiology.org/public/Cello_VPRGeneration_Paper/v2_circuit_multiplexer_6_pTac_module/LacI_protein_interaction/1",
+      "type": "URI",
+      "display_name": "LacI_protein_interaction",
+      "id": 107
     }
   ],
   "links": [
@@ -423,45 +669,93 @@
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 5,
+      "target": 7,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 5,
+      "target": 3,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 5,
+      "target": 8,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 5,
+      "target": 9,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 5,
+      "target": 10,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 5,
+      "target": 11,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
       "display_name": "type",
       "weight": 1,
       "source": 7,
-      "target": 8,
+      "target": 27,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
       "display_name": "type",
       "weight": 1,
-      "source": 9,
-      "target": 6,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 10,
-      "target": 6,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 11,
-      "target": 8,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 12,
+      "source": 8,
       "target": 4,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
       "display_name": "type",
       "weight": 1,
-      "source": 13,
-      "target": 8,
+      "source": 9,
+      "target": 49,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 10,
+      "target": 39,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 11,
+      "target": 2,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 12,
+      "target": 13,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
@@ -475,43 +769,45 @@
       "display_name": "type",
       "weight": 1,
       "source": 16,
-      "target": 2,
+      "target": 13,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
       "display_name": "type",
       "weight": 1,
       "source": 17,
-      "target": 4,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 18,
-      "target": 8,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 19,
-      "target": 20,
+      "target": 6,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
       "dislay_name": "partOf",
       "weight": 1,
       "display_name": "partOf",
-      "source": 19,
-      "target": 12,
+      "source": 17,
+      "target": 18,
       "key": "http://www.nv_ontology.org/partOf"
     },
     {
       "dislay_name": "partOf",
       "weight": 1,
       "display_name": "partOf",
-      "source": 19,
+      "source": 17,
+      "target": 19,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 17,
+      "target": 20,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 17,
       "target": 21,
       "key": "http://www.nv_ontology.org/partOf"
     },
@@ -519,66 +815,79 @@
       "dislay_name": "partOf",
       "weight": 1,
       "display_name": "partOf",
-      "source": 19,
-      "target": 13,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 19,
-      "target": 1,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 19,
+      "source": 17,
       "target": 22,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 17,
+      "target": 23,
       "key": "http://www.nv_ontology.org/partOf"
     },
     {
       "display_name": "type",
       "weight": 1,
+      "source": 18,
+      "target": 39,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 19,
+      "target": 27,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 20,
+      "target": 49,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
       "source": 21,
-      "target": 24,
+      "target": 2,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
       "display_name": "type",
       "weight": 1,
       "source": 22,
-      "target": 15,
+      "target": 4,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
       "display_name": "type",
       "weight": 1,
       "source": 23,
-      "target": 6,
+      "target": 4,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
       "display_name": "type",
       "weight": 1,
-      "source": 25,
-      "target": 26,
+      "source": 24,
+      "target": 25,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
       "display_name": "type",
       "weight": 1,
-      "source": 27,
-      "target": 6,
+      "source": 26,
+      "target": 2,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
       "display_name": "type",
       "weight": 1,
       "source": 28,
-      "target": 26,
+      "target": 25,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
@@ -589,128 +898,136 @@
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 29,
+      "target": 30,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 29,
+      "target": 31,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 29,
+      "target": 32,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 29,
+      "target": 33,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 29,
+      "target": 34,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
       "display_name": "type",
       "weight": 1,
       "source": 30,
-      "target": 6,
+      "target": 2,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
       "display_name": "type",
       "weight": 1,
       "source": 31,
-      "target": 32,
+      "target": 4,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 32,
+      "target": 27,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
       "display_name": "type",
       "weight": 1,
       "source": 33,
-      "target": 6,
+      "target": 39,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
       "display_name": "type",
       "weight": 1,
       "source": 34,
-      "target": 24,
+      "target": 49,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
       "display_name": "type",
       "weight": 1,
       "source": 35,
-      "target": 2,
+      "target": 25,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
       "display_name": "type",
       "weight": 1,
       "source": 36,
-      "target": 20,
+      "target": 25,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 36,
-      "target": 12,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 36,
-      "target": 13,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 36,
-      "target": 22,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 36,
-      "target": 21,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 36,
-      "target": 37,
-      "key": "http://www.nv_ontology.org/partOf"
     },
     {
       "display_name": "type",
       "weight": 1,
       "source": 37,
-      "target": 2,
+      "target": 27,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
       "display_name": "type",
       "weight": 1,
       "source": 38,
-      "target": 8,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 39,
-      "target": 32,
+      "target": 2,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
       "display_name": "type",
       "weight": 1,
       "source": 40,
-      "target": 8,
+      "target": 25,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
       "display_name": "type",
       "weight": 1,
       "source": 41,
-      "target": 24,
+      "target": 13,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
       "display_name": "type",
       "weight": 1,
       "source": 42,
-      "target": 20,
+      "target": 6,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 42,
+      "target": 33,
+      "key": "http://www.nv_ontology.org/partOf"
     },
     {
       "dislay_name": "partOf",
@@ -725,379 +1042,14 @@
       "weight": 1,
       "display_name": "partOf",
       "source": 42,
-      "target": 44,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 42,
-      "target": 18,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 42,
-      "target": 45,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 42,
-      "target": 46,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 43,
-      "target": 2,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 44,
-      "target": 15,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 45,
-      "target": 24,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 46,
-      "target": 4,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 47,
-      "target": 20,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 47,
-      "target": 21,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 47,
-      "target": 12,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 47,
-      "target": 11,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 47,
-      "target": 35,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 47,
-      "target": 22,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 48,
-      "target": 26,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 49,
-      "target": 20,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 49,
-      "target": 50,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 49,
-      "target": 51,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 49,
-      "target": 52,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 49,
-      "target": 53,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 49,
-      "target": 3,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 49,
-      "target": 40,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 50,
-      "target": 2,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 51,
-      "target": 8,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 52,
-      "target": 24,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 53,
-      "target": 15,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 54,
-      "target": 20,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 54,
-      "target": 55,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 54,
-      "target": 21,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 54,
-      "target": 13,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 54,
-      "target": 22,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 54,
-      "target": 12,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 55,
-      "target": 2,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 56,
-      "target": 15,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 57,
       "target": 32,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 58,
-      "target": 6,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 59,
-      "target": 20,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 59,
-      "target": 16,
       "key": "http://www.nv_ontology.org/partOf"
     },
     {
       "dislay_name": "partOf",
       "weight": 1,
       "display_name": "partOf",
-      "source": 59,
-      "target": 60,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 59,
-      "target": 7,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 59,
-      "target": 14,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 59,
-      "target": 38,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 59,
-      "target": 41,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 60,
-      "target": 4,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "display_name": "type",
-      "weight": 1,
-      "source": 61,
-      "target": 20,
-      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 61,
-      "target": 56,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 61,
-      "target": 62,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 61,
-      "target": 63,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 61,
-      "target": 18,
-      "key": "http://www.nv_ontology.org/partOf"
-    },
-    {
-      "dislay_name": "partOf",
-      "weight": 1,
-      "display_name": "partOf",
-      "source": 61,
+      "source": 42,
       "target": 34,
       "key": "http://www.nv_ontology.org/partOf"
     },
@@ -1105,29 +1057,283 @@
       "dislay_name": "partOf",
       "weight": 1,
       "display_name": "partOf",
-      "source": 61,
-      "target": 17,
+      "source": 42,
+      "target": 44,
       "key": "http://www.nv_ontology.org/partOf"
     },
     {
       "display_name": "type",
       "weight": 1,
-      "source": 62,
-      "target": 8,
+      "source": 43,
+      "target": 4,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
       "display_name": "type",
       "weight": 1,
-      "source": 63,
+      "source": 44,
       "target": 2,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
       "display_name": "type",
       "weight": 1,
-      "source": 64,
+      "source": 45,
       "target": 6,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 45,
+      "target": 33,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 45,
+      "target": 43,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 45,
+      "target": 34,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 45,
+      "target": 32,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 45,
+      "target": 38,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 46,
+      "target": 15,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 47,
+      "target": 25,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 48,
+      "target": 49,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 50,
+      "target": 4,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 51,
+      "target": 25,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 52,
+      "target": 39,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 53,
+      "target": 6,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 53,
+      "target": 50,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 53,
+      "target": 54,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 53,
+      "target": 26,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 53,
+      "target": 55,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 53,
+      "target": 52,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 54,
+      "target": 27,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 55,
+      "target": 49,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 56,
+      "target": 25,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 57,
+      "target": 25,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 58,
+      "target": 15,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 59,
+      "target": 2,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 60,
+      "target": 25,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 61,
+      "target": 25,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 62,
+      "target": 6,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 62,
+      "target": 1,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 62,
+      "target": 37,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 62,
+      "target": 63,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 62,
+      "target": 48,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 62,
+      "target": 50,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 62,
+      "target": 64,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 63,
+      "target": 4,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 64,
+      "target": 39,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
@@ -1138,10 +1344,302 @@
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     },
     {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 65,
+      "target": 43,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 65,
+      "target": 34,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 65,
+      "target": 59,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 65,
+      "target": 32,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
+      "dislay_name": "partOf",
+      "weight": 1,
+      "display_name": "partOf",
+      "source": 65,
+      "target": 33,
+      "key": "http://www.nv_ontology.org/partOf"
+    },
+    {
       "display_name": "type",
       "weight": 1,
       "source": 66,
-      "target": 6,
+      "target": 25,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 67,
+      "target": 68,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 69,
+      "target": 68,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 70,
+      "target": 71,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 72,
+      "target": 73,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 74,
+      "target": 68,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 75,
+      "target": 76,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 77,
+      "target": 73,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 78,
+      "target": 73,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 79,
+      "target": 68,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 80,
+      "target": 71,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 81,
+      "target": 68,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 82,
+      "target": 71,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 83,
+      "target": 76,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 84,
+      "target": 68,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 85,
+      "target": 71,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 86,
+      "target": 73,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 87,
+      "target": 68,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 88,
+      "target": 76,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 89,
+      "target": 76,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 90,
+      "target": 73,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 91,
+      "target": 68,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 92,
+      "target": 93,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 94,
+      "target": 68,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 95,
+      "target": 93,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 96,
+      "target": 71,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 97,
+      "target": 76,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 98,
+      "target": 73,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 99,
+      "target": 76,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 100,
+      "target": 68,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 101,
+      "target": 68,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 102,
+      "target": 68,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 103,
+      "target": 73,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 104,
+      "target": 76,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 105,
+      "target": 93,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 106,
+      "target": 76,
+      "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+    },
+    {
+      "display_name": "type",
+      "weight": 1,
+      "source": 107,
+      "target": 73,
       "key": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
     }
   ]

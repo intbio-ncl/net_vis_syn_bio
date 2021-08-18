@@ -55,7 +55,7 @@ def produce_identifiers(graph):
         v_key = v_data["key"]
         if e == RDF.type and v_key == OWL.Class and not isinstance(n_key, BNode):
             _apply_var_variants(Objects,n_key)
-        if v_key == OWL.hasValue :
+        if e == OWL.hasValue :
             _apply_var_variants(Roles,v_key)
         if v_key == OWL.ObjectProperty:
             _apply_var_variants(Predicates,n_key)  

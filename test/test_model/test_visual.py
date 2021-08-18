@@ -202,9 +202,9 @@ class TestColor(unittest.TestCase):
                         val = list(color.values())[0]
                         self.assertIn(val,self._color_list)
 
-            _run_tests()
-            self.visual.set_hierarchy_view()
-            self.visual.set_hierarchy_view()
+            #_run_tests()
+            self.visual.set_requirements_view()
+            self.visual.set_requirements_view()
             view = self.visual._builder.view
             _run_tests()
 

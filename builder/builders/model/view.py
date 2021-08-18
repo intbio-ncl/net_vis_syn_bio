@@ -57,7 +57,6 @@ class ViewBuilder(AbstractViewBuilder):
                 edge = _edge_label("hasRole")
                 edges.append((requirements[0],subject,self._builder.identifiers.predicates.role,edge))
 
-
         for c,c_data in self._builder.get_classes(bnodes=False):
             node_attrs[c] = c_data
             e_classes = self._builder.get_equivalent_classes(c)
@@ -66,6 +65,21 @@ class ViewBuilder(AbstractViewBuilder):
                     _requirements_inner(c,equiv_type,requirements)
         return self._builder.sub_graph(edges,node_attrs)
 
+    def relation(self):
+        node_attrs = {}
+        edges = []
+        # For each union in each range/domain combo add and edge.
+        for p,data in self._builder.get_properties():
+            for r,r_data in self._builder.get_range(p):
+                for d,d_data in self._builder.get_domain(p):
+                    for u,u_data in self._builder.get_union(d):
+                        for e in self._builder.resolve_union(u):
+                            e,e_data = e[1]
+                            node_attrs[r] = r_data
+                            node_attrs[e] = e_data
+                            edge = _edge_label(_get_name(data["key"]))
+                            edges.append((r,e,data["key"],edge))
+        return self._builder.sub_graph(edges,node_attrs)
 
 
 def _node_label(key):

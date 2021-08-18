@@ -68,6 +68,13 @@ class TestConvertInstance(unittest.TestCase):
             v_data = graph.nodes[v]
             actual_edge = (n_data["key"],None,v_data["key"])
             self.assertIn(actual_edge,expected_edges)
+        
+    def test_sbol_interactions(self):
+        filename = os.path.join(test_dir,"test_sbol_interactions.xml")
+        model_graph = model_convert(model_fn)
+        graph = instance_convert(model_graph,filename)
+        rdf_graph = SBOLGraph(filename)
+        expected_edges = []
 
     def test_convert_sbol(self):
         filename = os.path.join(test_dir,"multiplexer.xml")

@@ -1,5 +1,5 @@
 from entities.entity import Entity
-from entities.requirement import *
+from requirements import physcial_requirement as pr
 
 class PhysicalEntity(Entity):
     def __init__(self,disjoint=True,properties=[],requirements=[]):
@@ -9,7 +9,8 @@ class PhysicalEntity(Entity):
 class DNA(PhysicalEntity):
     def __init__(self,requirements=[]):
         if requirements == []:
-            r = [DNARoleRequirement()]
+            r = [pr.PhyscialCharacteristicRequirement(),
+                pr.DNARoleRequirement()]
         else:
             r = requirements
         super().__init__(requirements=r)
@@ -17,7 +18,7 @@ class DNA(PhysicalEntity):
 class Promoter(DNA):
     def __init__(self,requirements=[]):
         if requirements == []:
-            r = [PromoterRoleRequirement()]
+            r = [pr.PromoterRoleRequirement()]
         else:
             r = requirements
         super().__init__(requirements=r)
@@ -25,7 +26,7 @@ class Promoter(DNA):
 class RBS(DNA):
     def __init__(self,requirements=[]):
         if requirements == []:
-            r = [RBSRoleRequirement()]
+            r = [pr.RBSRoleRequirement()]
         else:
             r = requirements
         super().__init__(requirements=r)
@@ -34,7 +35,7 @@ class RBS(DNA):
 class CDS(DNA):
     def __init__(self,requirements=[]):
         if requirements == []:
-            r = [CDSRoleRequirement()]
+            r = [pr.CDSRoleRequirement()]
         else:
             r = requirements
         super().__init__(requirements=r)
@@ -42,7 +43,7 @@ class CDS(DNA):
 class Terminator(DNA):
     def __init__(self,requirements=[]):
         if requirements == []:
-            r = [TerminatorRoleRequirement()]
+            r = [pr.TerminatorRoleRequirement()]
         else:
             r = requirements
         super().__init__(requirements=r)
@@ -50,7 +51,7 @@ class Terminator(DNA):
 class Gene(DNA):
     def __init__(self,requirements=[]):
         if requirements == []:
-            r = [GeneRoleRequirement()]
+            r = [pr.GeneRoleRequirement()]
         else:
             r = requirements
         super().__init__(requirements=r)
@@ -58,7 +59,7 @@ class Gene(DNA):
 class Operator(DNA):
     def __init__(self,requirements=[]):
         if requirements == []:
-            r = [OperatorRoleRequirement()]
+            r = [pr.OperatorRoleRequirement()]
         else:
             r = requirements
         super().__init__(requirements=r)
@@ -66,7 +67,7 @@ class Operator(DNA):
 class EngineeredRegion(DNA):
     def __init__(self,requirements=[]):
         if requirements == []:
-            r = [EngineeredRegionRoleRequirement()]
+            r = [pr.EngineeredRegionRoleRequirement()]
         else:
             r = requirements
         super().__init__(requirements=r)
@@ -74,7 +75,7 @@ class EngineeredRegion(DNA):
 class EngineeredTag(DNA):
     def __init__(self,requirements=[]):
         if requirements == []:
-            r = [EngineeredTagRoleRequirement()]
+            r = [pr.EngineeredTagRoleRequirement()]
         else:
             r = requirements
         super().__init__(requirements=r)
@@ -82,7 +83,7 @@ class EngineeredTag(DNA):
 class StartCodon(DNA):
     def __init__(self,requirements=[]):
         if requirements == []:
-            r = [StartCodonRoleRequirement()]
+            r = [pr.StartCodonRoleRequirement()]
         else:
             r = requirements
         super().__init__(requirements=r)
@@ -90,7 +91,7 @@ class StartCodon(DNA):
 class Tag(DNA):
     def __init__(self,requirements=[]):
         if requirements == []:
-            r = [TagRoleRequirement()]
+            r = [pr.TagRoleRequirement()]
         else:
             r = requirements
         super().__init__(requirements=r)
@@ -98,7 +99,7 @@ class Tag(DNA):
 class NonCovBindingSite(DNA):
     def __init__(self,requirements=[]):
         if requirements == []:
-            r = [NonCovBindingSiteRoleRequirement()]
+            r = [pr.NonCovBindingSiteRoleRequirement()]
         else:
             r = requirements
         super().__init__(requirements=r)
@@ -106,7 +107,7 @@ class NonCovBindingSite(DNA):
 class EngineeredGene(DNA):
     def __init__(self,requirements=[]):
         if requirements == []:
-            r = [EngineeredGeneRoleRequirement()]
+            r = [pr.EngineeredGeneRoleRequirement()]
         else:
             r = requirements
         super().__init__(requirements=r)
@@ -115,7 +116,8 @@ class EngineeredGene(DNA):
 class Complex(PhysicalEntity):
     def __init__(self,requirements=[]):
         if requirements == []:
-            r = [ComplexRoleRequirement()]
+            r = [pr.PhyscialCharacteristicRequirement(),
+                pr.ComplexRoleRequirement()]
         else:
             r = requirements
         super().__init__(requirements=r)
@@ -124,7 +126,8 @@ class Complex(PhysicalEntity):
 class Protein(PhysicalEntity):
     def __init__(self,requirements=[]):
         if requirements == []:
-            r = [ProteinRoleRequirement()]
+            r = [pr.PhyscialCharacteristicRequirement(),
+                pr.ProteinRoleRequirement()]
         else:
             r = requirements
         super().__init__(requirements=r)
@@ -132,7 +135,7 @@ class Protein(PhysicalEntity):
 class TranscriptionFactor(Protein):
     def __init__(self,requirements=[]):
         if requirements == []:
-            r = [TranscriptionFactorRoleRequirement()]
+            r = [pr.TranscriptionFactorRoleRequirement()]
         else:
             r = requirements
         super().__init__(requirements=r)
@@ -141,7 +144,8 @@ class TranscriptionFactor(Protein):
 class RNA(PhysicalEntity):
     def __init__(self,requirements=[]):
         if requirements == []:
-            r = [RNARoleRequirement()]
+            r = [pr.PhyscialCharacteristicRequirement(),
+                pr.RNARoleRequirement()]
         else:
             r = requirements
         super().__init__(requirements=r)
@@ -149,7 +153,7 @@ class RNA(PhysicalEntity):
 class mRNA(RNA):
     def __init__(self,requirements=[]):
         if requirements == []:
-            r = [mRNARoleRequirement()]
+            r = [pr.mRNARoleRequirement()]
         else:
             r = requirements
         super().__init__(requirements=r)
@@ -157,7 +161,7 @@ class mRNA(RNA):
 class sgRNA(RNA):
     def __init__(self,requirements=[]):
         if requirements == []:
-            r = [sgRNARoleRequirement()]
+            r = [pr.sgRNARoleRequirement()]
         else:
             r = requirements
         super().__init__(requirements=r)
@@ -166,7 +170,8 @@ class sgRNA(RNA):
 class SmallMolecule(PhysicalEntity):
     def __init__(self,requirements=[]):
         if requirements == []:
-            r = [SmallMoleculeRoleRequirement()]
+            r = [pr.PhyscialCharacteristicRequirement(),
+                pr.SmallMoleculeRoleRequirement()]
         else:
             r = requirements
         super().__init__(requirements=r)  
@@ -174,7 +179,7 @@ class SmallMolecule(PhysicalEntity):
 class Effector(SmallMolecule):
     def __init__(self,requirements=[]):
         if requirements == []:
-            r = [EffectorRoleRequirement()]
+            r = [pr.EffectorRoleRequirement()]
         else:
             r = requirements
         super().__init__(requirements=r)

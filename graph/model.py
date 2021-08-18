@@ -29,7 +29,7 @@ class ModelGraph(AbstractGraph):
 
     def get_child_classes(self,class_id):
         return [c[0] for c in self.search((None,RDFS.subClassOf,class_id))]
-
+    
     def get_class_depth(self,class_id):
         def _get_class_depth(c_identifier,depth):
             parent = self.get_parent_classes(c_identifier)
@@ -50,6 +50,18 @@ class ModelGraph(AbstractGraph):
                 bases.append([c,data])
         return bases
 
+    def get_properties(self):
+        return [p[0] for p in self.search((None,RDF.type,OWL.ObjectProperty))]
+
+    def get_domain(self,subject):
+        return [r[1] for r in self.search((subject,RDFS.domain,None))]
+
+    def get_range(self,subject):
+        return [r[1] for r in self.search((subject,RDFS.range,None))]
+
+    def get_union(self,subject):
+        return [r[1] for r in self.search((subject,OWL.unionOf,None))]
+
     def get_equivalent_classes(self,class_id):
         requirements = []
         # Each equivalent class (Currently, only one for each class.)
@@ -59,6 +71,9 @@ class ModelGraph(AbstractGraph):
 
     def get_requirements(self,class_id):
         requirements = []
+        class_data = self.nodes[class_id]
+        if not isinstance(class_data["key"],BNode):
+            return [(RDF.type,[class_id,class_data])]
         c_triples = self.search((class_id,None,None))
         # IntersectionOf + UnionOf are still classes so 
         # their type triples is added to direct equivalence (Direct propery check.)
@@ -66,25 +81,25 @@ class ModelGraph(AbstractGraph):
         for n,v,e in c_triples :
             if [c[0] for c in c_triples].count(n) > 1 and e == RDF.type:
                 continue
+            if e == RDFS.subClassOf or e == OWL.equivalentClass:
+                continue
             pruned_triples.append((n,v,e))
 
         for n,v,e in pruned_triples:
             if e == OWL.intersectionOf:
-                requirements.append((OWL.intersectionOf,self.get_intersection(v[0])))
+                requirements.append((OWL.intersectionOf,self.resolve_intersection(v[0])))
             elif e == OWL.unionOf:
-                requirements.append((OWL.unionOf, self.get_union(v[0])))
+                requirements.append((OWL.unionOf, self.resolve_union(v[0])))
             elif e == RDF.type:
-                #print(n)
                 requirements.append((RDF.type,n))
             else:
                 requirements.append((e,n))
-        
         return requirements    
 
-    def get_intersection(self,identifier):
+    def resolve_intersection(self,identifier):
         return self._get_operator(identifier)
 
-    def get_union(self,identifier):
+    def resolve_union(self,identifier):
         res = self._get_operator(identifier)
         return res
 

@@ -4,6 +4,9 @@ https://github.com/RDFLib/rdflib/issues/1381
 I dont think this affects the output.
 '''
 import warnings
+from rdflib.namespace import RDFS
+
+from rdflib.term import BNode
 warnings.filterwarnings("ignore")
 import sys, inspect
 
@@ -11,15 +14,18 @@ from rdflib import Graph,RDF,OWL
 from rdflib.extras import infixowl as owl 
 
 from identifiers import identifiers
-from entities import property as nv_property
 
+from property import property as nv_property
 from entities.entity import *
 from entities.physcial_entities import *
+from entities.conceptual_entities import *
 
 def produce_ontology_graph():
     graph = Graph()
     graph.bind('nv', identifiers.namespaces.nv)
     properties = {}
+    requirements = {}
+
     for name, obj in inspect.getmembers(sys.modules[__name__]):
         if not _is_entity(obj):
             continue
@@ -39,17 +45,54 @@ def produce_ontology_graph():
                 properties[p].append(obj.uri)
             else:
                 properties[p] = [obj.uri]
-        
+
+        for r in get_requirements(obj):
+            if r in requirements.keys():
+                requirements[r].append(obj.uri)
+            else:
+                requirements[r] = [obj.uri]
+
+    for requirement,domain in requirements.items():
+        owl.Property(requirement,graph=graph)
+
     for property,domain in properties.items():
-        # Unsure how to add the unionOf...
-        d = owl.Class(graph=graph)
-        owl.Property(property,graph=graph,domain=d)
+        # Never figured out how to add unions to Class so did it manually.
+        range = property.range.uri()
+        property = property.property
+
+        domain_node = BNode()
+        graph.add((property,RDF.type,OWL.ObjectProperty))
+        graph.add((property,RDFS.range,range))
+        graph.add((property,RDFS.domain,domain_node))
+
+        union_node = BNode()
+        graph.add((domain_node,RDF.type,OWL.Class))
+        graph.add((domain_node,OWL.unionOf,union_node))
+        cur_node = union_node
+
+        reduced_domain = []
+        # Use the most base classes only.
+        for index,d in enumerate(domain):
+            if not any(x in 
+                [t[2] for t in graph.triples((d,RDFS.subClassOf,None))] for x in domain):
+                reduced_domain.append(d)
+
+        for index,d in enumerate(reduced_domain):
+            if index == len(reduced_domain) - 1:
+                next_node = RDF.nil
+            else:
+                next_node = BNode()
+            graph.add((cur_node,RDF.first,d))
+            graph.add((cur_node,RDF.rest,next_node))
+            cur_node = next_node
+        
     graph.serialize("nv_model.xml",format="xml")
 
+def get_requirements(obj):
+    return [r.property.property for r in obj.requirements if "property" in dir(r)]
 
 def get_properties(obj):
-    return ([p.property for p in obj.properties if "property" in dir(p)] + 
-           [r.property.property for r in obj.requirements if "property" in dir(r)])
+    return [p for p in obj.properties if "property" in dir(p)]
 
 def _get_parents(obj):
     parents = obj.__class__.__bases__
@@ -80,19 +123,6 @@ def _get_equivalence(obj,graph):
             equivalent = equivalent & sub_equiv
         equivalents.append(equivalent)
     return equivalents
-
-def collection_trawl(graph):
-    for s,p,o in graph.triples((None,RDF.type,OWL.AllDisjointClasses)):
-        for s,p,o in graph.triples((s,OWL.members,None)):
-            rest = o
-            while rest != RDF.nil:
-                triples = list(graph.triples((rest,None,None)))
-                rest = [t for t in triples if t[1] == RDF.rest]
-                first = [t for t in triples if t[1] == RDF.first]
-                if len(rest) != 1 or len(first) != 1:
-                    raise ValueError("This Shunna happen bro")
-                first = first[0][2]
-                rest = rest[0][2]
 
 def _is_entity(entity):
     try:

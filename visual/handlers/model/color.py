@@ -1,7 +1,6 @@
-from logging import root
 import re
 
-from rdflib import BNode
+from rdflib import BNode,OWL
 
 from visual.handlers.abstract_color import AbstractNodeColorHandler
 from visual.handlers.abstract_color import AbstractEdgeColorHandler
@@ -39,21 +38,19 @@ class ColorHandler():
         def branch(self):
             colors = []
             color_map = _init_branch_map(self)
-            all_classes = [c[1]["key"] for c in self._builder.get_classes()]
+            all_classes = [c[1]["key"] for c in self._builder.get_classes(False)]
             for node,data in self._builder.v_nodes(data=True):
                 key = data["key"]
                 if isinstance(key,BNode):
                     colors.append({"BNode" : color_map[BNode]})
                     continue
                 if key not in all_classes:
-                    for o in [c[0] for c in self._builder.in_edges(node)]:
-                        o = self._builder.nodes[o]["key"]
-                        if o in color_map.keys():   
-                            name = _get_name(o)
-                            colors.append({f'Child_of_{name}' : color_map[o]})
-                            break
-                    else:
+                    k = _get_property_subject(node,color_map,self._builder,all_classes)
+                    if k is None:
                         colors.append({"No_Class" : color_map[None]})
+                        continue
+                    name = _get_name(k)
+                    colors.append({f'Child_of_{name}' : color_map[k]})
                     continue
                 if key in color_map.keys():
                     name = _get_name(key)
@@ -71,7 +68,7 @@ class ColorHandler():
                 key = data["key"]
                 if key not in colors_map.keys():
                     for o in [c[0] for c in self._builder.in_edges(n)]:
-                        o = self._builder.nodes[o]["key"]
+                        o = self._builder.get_node_data(n)["key"]
                         if o in colors_map.keys():
                             color,depth = colors_map[o]
                             colors.append({f'Depth-{depth}' : color})
@@ -99,14 +96,12 @@ class ColorHandler():
                     colors.append({"BNode" : color_map[BNode]})
                     continue
                 if key not in all_classes:
-                    for o in [c[0] for c in self._builder.in_edges(n)]:
-                        o = self._builder.nodes[o]["key"]
-                        if o in color_map.keys():   
-                            name = _get_name(o)
-                            colors.append({f'Child_of_{name}' : color_map[o]})
-                            break
-                    else:
+                    k = _get_property_subject(n,color_map,self._builder,all_classes)
+                    if k is None:
                         colors.append({"No_Class" : color_map[None]})
+                        continue
+                    name = _get_name(k)
+                    colors.append({f'Child_of_{name}' : color_map[k]})
                     continue
 
                 if key in color_map.keys():
@@ -140,18 +135,36 @@ class ColorHandler():
 
 
 
+def _get_property_subject(node,color_map,builder,classes):
+    for n in [c[0] for c in builder.in_edges(node)]:
+        n_key = builder.get_node_data(n)["key"]
+        if n_key in classes:
+            if n_key in color_map.keys():
+                return n_key
+            return _get_parent(n,color_map,builder)
+        if n_key in color_map.keys():
+            return n_key
+        else:
+            res = _get_property_subject(n,color_map,builder,classes)
+            if res is not None:
+                return res
+    return None
 
 def _get_parent(node,color_map,builder):
     for p_node,p_data in builder.get_parent_classes(node):
         if p_data["key"] in color_map.keys():
             return p_data["key"]
-        _get_parent(p_node,color_map,builder)
+        else:
+            res = _get_parent(p_node,color_map,builder)
+            if res is not None:
+                return res
+    raise ValueError(node)
 
 def _init_branch_map(handler):
     color_map = {None : handler._color_picker[0],
                 BNode : handler._color_picker[1]}
     root_nodes = handler._builder.get_base_class()
-    color_index = 0
+    color_index = len(color_map)
     for rn in root_nodes:
         color_map[rn[1]["key"]] = handler._color_picker[color_index]
         color_index +=1

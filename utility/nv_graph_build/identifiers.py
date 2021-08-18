@@ -25,10 +25,14 @@ class Predicates:
         self.rdf_type = URIRef(RDF.type)
         self.role = URIRef(namespaces.nv + "role")
         self.partOf = URIRef(namespaces.nv + "partOf")
+        self.hasCharacteristic = URIRef(namespaces.nv + "hasCharacteristic")
 
 class Roles:
     def __init__(self, namespaces):
         self.namespaces = namespaces
+
+        self.physical_entity = URIRef(self.namespaces.biopax + "PhysicalEntity")
+        self.conceptual_entity = URIRef(self.namespaces.biopax + "Interaction") # This tag isn't great.
 
         self.DNA = URIRef(self.namespaces.biopax + "Dna")
         self.DNARegion = URIRef(self.namespaces.biopax + "DnaRegion")
@@ -74,5 +78,12 @@ class Roles:
         self.reactant = URIRef(self.namespaces.sbo_biomodels + "0000010")
         self.participation_promoter = URIRef(self.namespaces.sbo_biomodels + "0000598") 
         self.template = URIRef(self.namespaces.sbo_biomodels + "0000645")
+
+        self.translation = URIRef(self.namespaces.sbo_biomodels + "0000184")
+        self.transcription = URIRef(self.namespaces.sbo_biomodels + "0000183")
+        self.dissociation = URIRef(self.namespaces.sbo_biomodels + "0000180")
+        self.hydrolysis = URIRef(self.namespaces.sbo_biomodels + "0000376")
+
+
 
 identifiers = Identifiers()

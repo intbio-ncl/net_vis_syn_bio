@@ -81,6 +81,15 @@ class ModelVisual(AbstractVisual):
         else:
            self.view =self.set_requirements_view
 
+    def set_relation_view(self):
+        '''
+        View the relationship between entities within Model.
+        '''
+        if self.view == self.set_relation_view:
+            self._builder.set_relation_view()
+        else:
+           self.view =self.set_relation_view
+
     # ---------------------- Node Labels ----------------------
 
 

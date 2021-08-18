@@ -79,6 +79,11 @@ class TestViews(unittest.TestCase):
         self.builder.set_requirements_view()
         graph = self.builder.view
         self.assertTrue(_graph_element_check(graph))
+    
+    def test_relation(self):
+        self.builder.set_relation_view()
+        graph = self.builder.view
+        self.assertTrue(_graph_element_check(graph))
 
 class TestModes(unittest.TestCase):
     def setUp(self):

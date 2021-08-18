@@ -26,6 +26,17 @@ class AbstractBuilder:
     def graph(self):
         return self.view
     
+    def get_node_data(self,node_id):
+        node_id = self._resolve_subject(node_id)
+        try:
+            return self.nodes[node_id]
+        except KeyError:
+            pass
+        try:
+            return self.v_nodes[node_id]
+        except KeyError:
+            return None
+
     def get_next_index(self):
         return max([i for i in self._graph.nodes])
 

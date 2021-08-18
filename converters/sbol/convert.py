@@ -27,9 +27,13 @@ def convert(filename,model_graph):
         return n_key,node_count
 
     nv_role = model_graph.identifiers.predicates.role
+    nv_characteristic = model_graph.identifiers.predicates.hasCharacteristic
+    physical_entity = model_graph.identifiers.roles.physical_entity
     for cd in sbol_graph.get_component_definitions():
-        roles = [(nv_role,r) for r in (sbol_graph.get_roles(cd)+sbol_graph.get_types(cd))]
-        s,p,o = _map_to_nv(cd,roles,model_roots,model_graph)
+        properties = ([(nv_characteristic,physical_entity)] + 
+                     [(nv_role,r) for r in (sbol_graph.get_roles(cd)+sbol_graph.get_types(cd))])
+
+        s,p,o = _map_to_nv(cd,properties,model_roots,model_graph)
         n,node_count = _add_node(s,node_count)
         v,node_count = _add_node(o,node_count)
         name = _get_name(p)
@@ -39,7 +43,16 @@ def convert(filename,model_graph):
             dp = _get_name(p)
             o,node_count = _add_node(o,node_count)
             graph.add_edge(n,o,key=p,dislay_name=dp,weight=1)
+
+    for i in sbol_graph.get_interactions():
+        roles = [(nv_role,r) for r in (sbol_graph.get_types(i))]
+        s,p,o = _map_to_nv(i,roles,model_roots,model_graph)
+        n,node_count = _add_node(s,node_count)
+        v,node_count = _add_node(o,node_count)
+        name = _get_name(p)
+        graph.add_edge(n,v,key=p,display_name=name,weight=1)
     return graph
+
 
 def _map_entities(cd,sbol_graph,model_graph):
     triples = []

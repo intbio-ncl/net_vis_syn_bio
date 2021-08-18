@@ -1,3 +1,5 @@
+from rdflib import OWL,RDF
+
 from converters.model import convert
 from builder.abstract import AbstractBuilder
 from builder.builders.model.view import ViewBuilder
@@ -16,6 +18,9 @@ class ModelBuilder(AbstractBuilder):
     
     def set_requirements_view(self):
         self.view = self._view_h.requirements()
+
+    def set_relation_view(self):
+        self.view = self._view_h.relation()
 
     # -------------------- Queries --------------------
     def get_classes(self,bnodes=True):
@@ -39,3 +44,25 @@ class ModelBuilder(AbstractBuilder):
     def get_equivalent_classes(self,class_id):
         class_id = self._resolve_subject(class_id)
         return self._graph.get_equivalent_classes(class_id)
+
+    def get_properties(self):
+        return self._graph.get_properties()
+    
+    def get_range(self,subject):
+        subject = self._resolve_subject(subject)
+        return self._graph.get_range(subject)
+
+    def get_domain(self,subject):
+        subject = self._resolve_subject(subject)
+        return self._graph.get_domain(subject)
+
+    def get_union(self,subject):
+        subject = self._resolve_subject(subject)
+        return self._graph.get_union(subject)
+    
+    def resolve_union(self,subject):
+        return self._graph.resolve_union(subject)
+        
+    def get_class_properties(self,class_id):
+        class_id = self._resolve_subject(class_id)
+        return self._graph.get_properties(class_id)
