@@ -4,6 +4,7 @@ https://github.com/RDFLib/rdflib/issues/1381
 I dont think this affects the output.
 '''
 import warnings
+from collections import Counter
 from rdflib.namespace import RDFS
 
 from rdflib.term import BNode
@@ -14,21 +15,22 @@ from rdflib import Graph,RDF,OWL
 from rdflib.extras import infixowl as owl 
 
 from identifiers import identifiers
-
 from property import property as nv_property
-from entities.entity import *
-from entities.physcial_entities import *
-from entities.conceptual_entities import *
+from datatype.datatype import Datatype,Input,Output
+from entities.reaction import *
+from entities.abstract_entity import *
+from entities.physcial import *
+from entities.interaction import *
 
 def produce_ontology_graph():
     graph = Graph()
     graph.bind('nv', identifiers.namespaces.nv)
     properties = {}
     requirements = {}
+    datatypes = []
 
     for name, obj in inspect.getmembers(sys.modules[__name__]):
-        if not _is_entity(obj):
-            continue
+        if not _is_entity(obj): continue
         obj = obj()
         parents = _get_parents(obj)        
         equivalents = _get_equivalence(obj,graph)
@@ -36,60 +38,141 @@ def produce_ontology_graph():
             disjointed = _get_disjoint_siblings(obj)
         else:
             disjointed = []
-
-        owl.Class(obj.uri,graph=graph,disjointWith=disjointed,
-              subClassOf=parents,equivalentClass=equivalents)
         
+        restrictions = []
+        for r in obj.restrictions:
+            annotation_n = BNode()
+            prop = r.property
+            recipe = r.recipe.recipe
+            # Just add it to the graph as annotations.
+            list_node = BNode()
+            graph.add((annotation_n,OWL.members,list_node))
+            cur_node = list_node
+            for index,d in enumerate(recipe):
+                if index == 0:
+                    properties = _get_inputs(properties,d,obj)
+                if index == len(recipe) - 1:
+                    next_node = RDF.nil
+                else:
+                    next_node = BNode()
+                graph.add((cur_node,RDF.first,d.uri))
+                graph.add((cur_node,RDF.rest,next_node))
+                cur_node = next_node
+            restrictions.append(owl.Restriction(prop.property,
+                                value=annotation_n,graph=graph))
+            # No data on the restriction node.
+            prop.range = [Interaction,Reaction]
+            if prop in properties.keys():
+                properties[prop].append(obj.uri)
+            else:
+                properties[prop] = [obj.uri]
+
         for p in get_properties(obj):
             if p in properties.keys():
                 properties[p].append(obj.uri)
             else:
                 properties[p] = [obj.uri]
-
         for r in get_requirements(obj):
             if r in requirements.keys():
                 requirements[r].append(obj.uri)
             else:
                 requirements[r] = [obj.uri]
 
+        owl.Class(obj.uri,graph=graph,disjointWith=disjointed,
+              subClassOf=parents+restrictions,equivalentClass=equivalents)
+        
     for requirement,domain in requirements.items():
         owl.Property(requirement,graph=graph)
 
     for property,domain in properties.items():
+        print(property)
+        print(domain)
+        print("\n\n")
         # Never figured out how to add unions to Class so did it manually.
-        range = property.range.uri()
-        property = property.property
-
+        prop = property.property
         domain_node = BNode()
-        graph.add((property,RDF.type,OWL.ObjectProperty))
-        graph.add((property,RDFS.range,range))
-        graph.add((property,RDFS.domain,domain_node))
+        graph.add((prop,RDF.type,OWL.ObjectProperty))
+        graph.add((prop,RDFS.domain,domain_node))
+        reduced_domain = _reduce_domain(domain,graph)
+        graph = _add_union(graph, domain_node, reduced_domain)
+        p_range = property.range
+        if p_range != [None]:
+            range_node = BNode()
+            graph.add((prop,RDFS.range,range_node))
+            p_range = [p.uri() for p in p_range]
+            graph = _add_union(graph, range_node, p_range)
+        for p in property.properties:
+            if p.default_value is not None:
+                default_v_uri = p.default_value.uri
+                graph.add((prop,p.property,default_v_uri))
+                if isinstance(p.default_value, Datatype):
+                    datatypes.append(p.default_value)
 
-        union_node = BNode()
-        graph.add((domain_node,RDF.type,OWL.Class))
-        graph.add((domain_node,OWL.unionOf,union_node))
-        cur_node = union_node
+    for datatype in datatypes:
+        graph.add((datatype.uri,RDF.type,RDFS.Datatype))
 
-        reduced_domain = []
-        # Use the most base classes only.
-        for index,d in enumerate(domain):
-            if not any(x in 
-                [t[2] for t in graph.triples((d,RDFS.subClassOf,None))] for x in domain):
-                reduced_domain.append(d)
+    graph.serialize("nv_model.xml",format="pretty-xml")
 
-        for index,d in enumerate(reduced_domain):
-            if index == len(reduced_domain) - 1:
-                next_node = RDF.nil
-            else:
-                next_node = BNode()
-            graph.add((cur_node,RDF.first,d))
-            graph.add((cur_node,RDF.rest,next_node))
-            cur_node = next_node
-        
-    graph.serialize("nv_model.xml",format="xml")
 
+def _get_inputs(properties,recipe,entity):
+    for i in [e for e in recipe.properties for x in e.properties if isinstance(x.default_value, Input)]:
+        if i in properties.keys():
+            properties[i].append(entity.uri)
+        else:
+            properties[i] = [entity.uri]
+    return properties
+
+def _get_inheritence(identifier,graph):
+    parents = []
+    def _get_class_depth(c_identifier):
+        nonlocal parents
+        parent = [t[2] for t in graph.triples((c_identifier,RDFS.subClassOf,None)) 
+                 if not isinstance(t[2], BNode)]
+        if parent == []:
+            return parents
+        parents+=parent
+        for p in parent:
+            return _get_class_depth(p)
+    return _get_class_depth(identifier)
+
+def _reduce_domain(domain,graph):
+    # Use the most base classes only.
+    parents = []
+    for d in domain:
+        parents.append([d,*_get_inheritence(d,graph)])
+    result = set(parents[0])
+    for s in parents[1:]:
+        result.intersection_update(s)
+    result = list(result)
+    for p in parents[0]:
+        if p in result:
+            return [p]
+
+def _add_union(graph,subject,union):
+    union_node = BNode()
+    graph.add((subject,RDF.type,OWL.Class))
+    graph.add((subject,OWL.unionOf,union_node))
+    cur_node = union_node
+    for index,d in enumerate(union):
+        if index == len(union) - 1:
+            next_node = RDF.nil
+        else:
+            next_node = BNode()
+        graph.add((cur_node,RDF.first,d))
+        graph.add((cur_node,RDF.rest,next_node))
+        cur_node = next_node
+    return graph
+
+def get_recipes(obj):
+    if not hasattr(obj, "recipes"):
+        return []
+    return obj.recipes
+    
 def get_requirements(obj):
-    return [r.property.property for r in obj.requirements if "property" in dir(r)]
+    for e in obj.equivalents:
+        for r in e.restrictions:
+            if "property" in dir(r):
+                yield r.property.property
 
 def get_properties(obj):
     return [p for p in obj.properties if "property" in dir(p)]
@@ -112,15 +195,16 @@ def _get_equivalence(obj,graph):
         if parent == object:
             continue
         equivalent = owl.Class(parent().uri,graph=graph)
-        for r in obj.requirements:
-            sub_equiv = None
-            property = r.property
-            for index,value in enumerate(r.values):
-                if index == 0:
-                    sub_equiv = owl.Restriction(property.property,value=value,graph=graph)
-                else:
-                    sub_equiv = sub_equiv | owl.Restriction(property.property,value=value,graph=graph)
-            equivalent = equivalent & sub_equiv
+        for e in obj.equivalents:
+            for r in e.restrictions:
+                sub_equiv = None
+                property = r.property
+                for index,value in enumerate(r.values):
+                    if index == 0:
+                        sub_equiv = owl.Restriction(property.property,value=value,graph=graph)
+                    else:
+                        sub_equiv = sub_equiv | owl.Restriction(property.property,value=value,graph=graph)
+                equivalent = equivalent & sub_equiv
         equivalents.append(equivalent)
     return equivalents
 

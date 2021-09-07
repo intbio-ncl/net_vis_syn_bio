@@ -25,6 +25,7 @@ class Predicates:
         self.rdf_type = URIRef(RDF.type)
         self.role = URIRef(namespaces.nv + "role")
         self.partOf = URIRef(namespaces.nv + "partOf")
+        self.consistsOf = URIRef(namespaces.nv + "consistsOf")
         self.hasCharacteristic = URIRef(namespaces.nv + "hasCharacteristic")
 
 class Roles:

@@ -62,6 +62,7 @@ class TestConvertInstance(unittest.TestCase):
         e_e_edges = [k for k in edge_keys if k == part_of_pred]
         self.assertEqual(len(e_e_edges),len(expected_edges))
         for n,v,k in graph.edges(keys=True):
+            print(n,v,k)
             if k != part_of_pred:
                 continue
             n_data = graph.nodes[n]

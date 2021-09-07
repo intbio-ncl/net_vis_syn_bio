@@ -27,6 +27,7 @@ def convert(filename,model_graph):
         return n_key,node_count
 
     nv_role = model_graph.identifiers.predicates.role
+    print(dir(model_graph.identifiers.predicates))
     nv_characteristic = model_graph.identifiers.predicates.hasCharacteristic
     physical_entity = model_graph.identifiers.roles.physical_entity
     for cd in sbol_graph.get_component_definitions():
@@ -51,8 +52,22 @@ def convert(filename,model_graph):
         v,node_count = _add_node(o,node_count)
         name = _get_name(p)
         graph.add_edge(n,v,key=p,display_name=name,weight=1)
+        i_triples = _get_interaction_triples(o,graph,model_graph)
+        for p,o in i_triples:
+            p_name = _get_name(p)
+            o,node_count = _add_node(o,node_count)
+            graph.add_edge(n,o,key=p,display_name=p_name,weight=1)
     return graph
 
+def _get_interaction_triples(i_type,sbol_graph,model_graph):
+    triples = []
+    i_type_c = model_graph.get_class_code(i_type)
+    for restriction in model_graph.get_sub_restrictions(i_type_c):
+        predicate,constraints = model_graph.get_constraint(restriction)
+        for c in constraints:
+            print(c)
+            triples.append((predicate,c))
+    return triples
 
 def _map_entities(cd,sbol_graph,model_graph):
     triples = []

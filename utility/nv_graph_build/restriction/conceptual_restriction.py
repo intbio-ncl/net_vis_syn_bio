@@ -1,47 +1,47 @@
-from requirements.requirement import RoleRequirement
+from Restrictions.Restriction import RoleRestriction
 from identifiers import identifiers
 
-class TranslationRoleRequirement(RoleRequirement):
+class TranslationRoleRestriction(RoleRestriction):
     def __init__(self):
         values = [identifiers.roles.translation]
         super().__init__(values)
 
-class TranscriptionRoleRequirement(RoleRequirement):
+class TranscriptionRoleRestriction(RoleRestriction):
     def __init__(self):
         values = [identifiers.roles.transcription]
         super().__init__(values)
 
-class DegradationRoleRequirement(RoleRequirement):
+class DegradationRoleRestriction(RoleRestriction):
     def __init__(self):
         values = [identifiers.roles.degradation]
         super().__init__(values)
 
-class NonCovBondingRoleRequirement(RoleRequirement):
+class NonCovBondingRoleRestriction(RoleRestriction):
     def __init__(self):
         values = [identifiers.roles.noncovalent_bonding]
         super().__init__(values)
 
-class DissociationRoleRequirement(RoleRequirement):
+class DissociationRoleRestriction(RoleRestriction):
     def __init__(self):
         values = [identifiers.roles.dissociation]
         super().__init__(values)
 
-class HydrolysisRoleRequirement(RoleRequirement):
+class HydrolysisRoleRestriction(RoleRestriction):
     def __init__(self):
         values = [identifiers.roles.hydrolysis]
         super().__init__(values)
 
-class ActivationRoleRequirement(RoleRequirement):
+class ActivationRoleRestriction(RoleRestriction):
     def __init__(self):
         values = [identifiers.roles.stimulation]
         super().__init__(values)
 
-class RepressionRoleRequirement(RoleRequirement):
+class RepressionRoleRestriction(RoleRestriction):
     def __init__(self):
         values = [identifiers.roles.inhibition]
         super().__init__(values)
 
-class GeneticProductionRoleRequirement(RoleRequirement):
+class GeneticProductionRoleRestriction(RoleRestriction):
     def __init__(self):
         values = [identifiers.roles.genetic_production]
         super().__init__(values)

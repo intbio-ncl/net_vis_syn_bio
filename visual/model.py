@@ -31,7 +31,7 @@ class ModelVisual(AbstractVisual):
     # ---------------------- Preset ----------------------------
     def set_hierarchy_preset(self):
         '''
-        Pre-set methods with an affinity for displaying the pruned graph view.
+        Methods for displaying the inheritence tree encoded within the model.
         '''
         preset_functions = [self.set_tree_mode,
                             self.set_hierarchy_view,
@@ -47,7 +47,7 @@ class ModelVisual(AbstractVisual):
 
     def set_requirements_preset(self):
         '''
-        Pre-set methods with an affinity for displaying the pruned graph view.
+        Methods for displaying what is required to realise a given class within the model.
         '''
         preset_functions = [self.set_network_mode,
                             self.set_requirements_view,
@@ -58,6 +58,22 @@ class ModelVisual(AbstractVisual):
                             self.add_branch_edge_color,
                             self.add_standard_node_size,
                             self.add_logic_node_shape,
+                            self.set_straight_edge_shape]
+        return self._set_preset(preset_functions)
+
+    def set_relation_preset(self):
+        '''
+        Method for displaying relationships between classes within the model.
+        '''
+        preset_functions = [self.set_network_mode,
+                            self.set_relation_view,
+                            self.set_cola_layout,
+                            self.add_node_name_labels,
+                            self.add_edge_name_labels,
+                            self.add_class_node_color,
+                            self.add_type_edge_color,
+                            self.add_standard_node_size,
+                            self.set_circle_node_shape,
                             self.set_straight_edge_shape]
         return self._set_preset(preset_functions)
 

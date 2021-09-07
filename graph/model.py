@@ -9,6 +9,12 @@ class ModelGraph(AbstractGraph):
         self.identifiers = produce_identifiers(self)
         self._generate_labels()
         
+    def get_class_code(self,label):
+        for n,v,k in self.search((None,None,None)):
+            if label in n[1]["key"]:
+                return n[0]
+        raise ValueError(f'{label} is not in graph.')
+
     def get_child_predicate(self):
         return self.identifiers.predicates.partOf
 
@@ -49,6 +55,33 @@ class ModelGraph(AbstractGraph):
             if len(parents) == 0:
                 bases.append([c,data])
         return bases
+
+    def get_sub_restrictions(self,class_id):
+        restrictions = []
+        for p,p_data in self.get_parent_classes(class_id):
+            rdf_type = self.get_rdf_type(p)[1]["key"]
+            if rdf_type == OWL.Restriction:
+                restrictions.append(p)
+        return restrictions
+
+    def get_constraint(self,restriction_id):
+        constraints = [OWL.allValuesFrom,
+                       OWL.someValuesFrom,
+                       OWL.hasValue]
+        p = None
+        c_p = None
+        c_v = None
+        for n,v,k in self.search((restriction_id,None,None)):
+            if k == OWL.onProperty:
+                p = v[1]["key"]
+            elif k in constraints:
+                c_p = k
+                c_v = v[0]
+        if p is None or c_p is None or c_v is None:
+            raise ValueError(f'{restriction_id} is malformed, no constraint.')
+        for n,v,k in self.search((c_v,OWL.members,None)):
+            constraint = [o[1] for o in self._get_operator(v[0])]
+        return p,constraint
 
     def get_properties(self):
         return [p[0] for p in self.search((None,RDF.type,OWL.ObjectProperty))]
@@ -114,8 +147,12 @@ class ModelGraph(AbstractGraph):
         r = identifier
         while True:
             res = self.search((r,None,None))
-            f,f_data = [c[1] for c in res if c[2] == RDF.first][0]
-            r,r_data = [c[1] for c in res if c[2] == RDF.rest][0]
+            f = [c[1] for c in res if c[2] == RDF.first]
+            r = [c[1] for c in res if c[2] == RDF.rest]
+            if f == [] or r == []:
+                return requirements
+            f,f_data = f[0]
+            r,r_data = r[0]
             if isinstance(f_data["key"], BNode):
                 f_type = self.get_rdf_type(f)[1]["key"]
                 if f_type == OWL.Restriction:
