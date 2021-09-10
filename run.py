@@ -15,6 +15,8 @@ def process_input(filename,summary,knowledge):
     else:
         dashboard = SBOLDash(__name__,server)
     dashboard.load_graph(filename)
+
+    dashboard.visualiser.set_single_module_view()
     dashboard.run()
 
 def language_processor_args():

@@ -35,7 +35,33 @@ class SBOLBuilder(AbstractBuilder):
             pruned_graph.remove_node(node)
         pruned_graph.remove_isolated_nodes()
         return pruned_graph
-         
+    
+    def _get_cds(self,identity):
+        cds = []
+        def _get_children(parent):
+            children = []
+            definition = self._graph.get_definition(parent[0])
+            components = self._graph.get_components(definition[0])
+            if len(components) == 0:
+                return [parent]
+            for c in components:
+                children += _get_children(c)
+            return children
+
+
+        for fc in self._graph.get_functional_components(identity):
+            cds += _get_children(fc)
+        return cds
+
+    def produce_single_module_graph(self):
+        '''
+        Just dead simple single module node all components edges.
+        '''
+        edges,attrs = self._produce_heirachy_edges(self._graph.get_module_definitions,
+                                                    self._get_cds) 
+        graph = self._graph.sub_graph(edges,attrs)
+        return graph
+
     def produce_heirarchy_graph(self):
         edges,attrs = self._produce_heirachy_edges(self._graph.get_component_definitions,
                                                     self._graph.get_components) 

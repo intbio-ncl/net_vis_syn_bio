@@ -153,6 +153,20 @@ class SBOLVisualiser(AbstractVisualiser):
                             self.add_node_name_labels]
         return self._set_preset(preset_functions)
 
+    def set_single_module_preset(self):
+        '''
+        Pre-set methods with an affinity for displaying the maps view.
+        '''
+        preset_functions = [self.set_network_mode,
+                            self.set_single_module_view,
+                            self.set_cose_layout,
+                            self.add_centrality_node_size,
+                            self.add_standard_edge_color,
+                            self.add_class_node_color,
+                            self.add_edge_no_labels,
+                            self.add_node_name_labels]
+        return self._set_preset(preset_functions)
+
 
     
     # ---------------------- Set Graph (Set a different graph view) ----------------------
@@ -224,6 +238,12 @@ class SBOLVisualiser(AbstractVisualiser):
         maps_preset = self._graph.produce_maps_graph()
         self.graph_view = maps_preset
 
+    def set_single_module_view(self):
+        '''
+        Sub graph viewing both heirarchy and module views with maps between.
+        '''
+        maps_preset = self._graph.produce_single_module_graph()
+        self.graph_view = maps_preset
    
     # ---------------------- Pick the node content ----------------------            
     def add_node_role_labels(self):
