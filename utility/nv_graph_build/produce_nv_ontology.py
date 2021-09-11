@@ -85,16 +85,15 @@ def produce_ontology_graph():
         owl.Property(requirement,graph=graph)
 
     for property,domain in properties.items():
-        print(property)
-        print(domain)
-        print("\n\n")
+        #print(property)
+        #print(domain)
+        #print("\n\n")
         # Never figured out how to add unions to Class so did it manually.
         prop = property.property
         domain_node = BNode()
         graph.add((prop,RDF.type,OWL.ObjectProperty))
         graph.add((prop,RDFS.domain,domain_node))
-        reduced_domain = _reduce_domain(domain,graph)
-        graph = _add_union(graph, domain_node, reduced_domain)
+        graph = _add_union(graph, domain_node, domain)
         p_range = property.range
         if p_range != [None]:
             range_node = BNode()
@@ -134,19 +133,6 @@ def _get_inheritence(identifier,graph):
         for p in parent:
             return _get_class_depth(p)
     return _get_class_depth(identifier)
-
-def _reduce_domain(domain,graph):
-    # Use the most base classes only.
-    parents = []
-    for d in domain:
-        parents.append([d,*_get_inheritence(d,graph)])
-    result = set(parents[0])
-    for s in parents[1:]:
-        result.intersection_update(s)
-    result = list(result)
-    for p in parents[0]:
-        if p in result:
-            return [p]
 
 def _add_union(graph,subject,union):
     union_node = BNode()

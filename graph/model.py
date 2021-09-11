@@ -56,6 +56,18 @@ class ModelGraph(AbstractGraph):
                 bases.append([c,data])
         return bases
 
+    def get_class_properties(self,class_id):
+        properties = []
+        def up_search(identifier):
+            for q,w,e in self.search((None,None,identifier)):
+                if e == RDFS.domain:
+                    properties.append(q)
+                else:
+                    up_search(q[0])
+        for n,v,k in self.search((None,RDF.first,class_id)):
+            up_search(n[0])
+        return properties
+
     def get_sub_restrictions(self,class_id):
         restrictions = []
         for p,p_data in self.get_parent_classes(class_id):

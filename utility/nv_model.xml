@@ -1,17 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rdf:RDF
-  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
   xmlns:ns1="http://www.w3.org/2002/07/owl#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
   xmlns:nv="http://www.nv_ontology.org/"
 >
-  <ns1:Class rdf:about="http://www.nv_ontology.org/TranscriptionFactor">
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="Ncb71f5d38623494bbc3282be1eebad2b">
-        <ns1:intersectionOf rdf:parseType="Collection">
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/template">
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="Nf61526802fe246008cec11654d370ee5">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+    <nv:direction>
+      <rdfs:Datatype rdf:about="http://www.nv_ontology.org/Input"/>
+    </nv:direction>
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="Ne8854d2592e6484d81ca435bf042e4ab">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/GeneticProduction"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Transcription"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Translation"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/product">
+    <nv:direction>
+      <rdfs:Datatype rdf:about="http://www.nv_ontology.org/Output"/>
+    </nv:direction>
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="Nb84d04d807954e92ae074364b825d309">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Degradation"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Dissociation"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Hydrolysis"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/NonCovalentBonding"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Transcription"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Translation"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="N58638655a9614e69a6f1629cc8c83412">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/reactant">
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="N9256c29c866849e4872b7f3cb5b45f91">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Activation"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Degradation"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Dissociation"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Hydrolysis"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/NonCovalentBonding"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Repression"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+    <nv:direction rdf:resource="http://www.nv_ontology.org/Input"/>
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="Nb0da7400f49d4ba1a568ffdd70ff8ba5">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/partOf">
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="Na47bd13a86594fc586273f7dab911daa">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/CDS"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Complex"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Effector"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/EngineeredGene"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/EngineeredRegion"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/EngineeredTag"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Gene"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/NonCovBindingSite"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Operator"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Promoter"/>
           <rdf:Description rdf:about="http://www.nv_ontology.org/Protein"/>
-          <ns1:Restriction rdf:nodeID="N1794f782e5034916bcb9787190964a37">
-            <ns1:hasValue rdf:resource="http://identifiers.org/go/GO:0003700"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/RBS"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/RNA"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/SmallMolecule"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/StartCodon"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Tag"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Terminator"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/TranscriptionFactor"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/mRNA"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/sgRNA"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="Ne9ea7f5fd84f4f59bc5764cf998186b9">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+  </ns1:ObjectProperty>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/GeneticProduction">
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N757e269f9589421fafca94047701210a">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Interaction"/>
+          <ns1:Restriction rdf:nodeID="Ne2f838be81f44bceaf707f7735dd8988">
+            <ns1:hasValue rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000589"/>
             <ns1:onProperty>
               <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/role"/>
             </ns1:onProperty>
@@ -19,626 +123,13 @@
         </ns1:intersectionOf>
       </ns1:Class>
     </ns1:equivalentClass>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Protein"/>
-  </ns1:Class>
-  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/product">
-    <rdfs:domain>
-      <ns1:Class rdf:nodeID="Nf319519af1694d059e6a7dfa400cd516">
-        <ns1:unionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/Reaction"/>
-        </ns1:unionOf>
-      </ns1:Class>
-    </rdfs:domain>
-    <rdfs:range>
-      <ns1:Class rdf:nodeID="N5854124bc4414c32a5015f8117a63bd2">
-        <ns1:unionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
-        </ns1:unionOf>
-      </ns1:Class>
-    </rdfs:range>
-    <nv:direction>
-      <rdfs:Datatype rdf:about="http://www.nv_ontology.org/Output"/>
-    </nv:direction>
-  </ns1:ObjectProperty>
-  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/template">
-    <nv:direction>
-      <rdfs:Datatype rdf:about="http://www.nv_ontology.org/Input"/>
-    </nv:direction>
-    <rdfs:domain>
-      <ns1:Class rdf:nodeID="N12ce8ae5f1014dc99f5cf089935f5ff7">
-        <ns1:unionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/ConceptualEntity"/>
-        </ns1:unionOf>
-      </ns1:Class>
-    </rdfs:domain>
-    <rdfs:range>
-      <ns1:Class rdf:nodeID="N0278b5bee2714a61a84b4209f58f5d21">
-        <ns1:unionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
-        </ns1:unionOf>
-      </ns1:Class>
-    </rdfs:range>
-  </ns1:ObjectProperty>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/Hydrolysis">
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="N6e4ad8c796e54973a8e68173a70f67a1">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/Dissociation"/>
-          <ns1:Restriction rdf:nodeID="Nb90b147d0b19438a9d9ab7587a924c6e">
-            <ns1:hasValue rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000376"/>
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Dissociation"/>
-  </ns1:Class>
-  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/partOf">
-    <rdfs:domain>
-      <ns1:Class rdf:nodeID="Ncfaf1c4b2949428d9a78b4a0d5a1d80d">
-        <ns1:unionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
-        </ns1:unionOf>
-      </ns1:Class>
-    </rdfs:domain>
-    <rdfs:range>
-      <ns1:Class rdf:nodeID="N4a63b2d9f75349b79362c10c12f158b7">
-        <ns1:unionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
-        </ns1:unionOf>
-      </ns1:Class>
-    </rdfs:range>
-  </ns1:ObjectProperty>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/Effector">
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/SmallMolecule"/>
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="Nac3e79bb2bcc4f5296f7401d80189618">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/SmallMolecule"/>
-          <ns1:Restriction rdf:nodeID="Nc51d83f2e1fa4aefa63f6eecfa174c9f">
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-            <ns1:hasValue rdf:resource="http://identifiers.org/chebi/CHEBI:35224"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-  </ns1:Class>
-  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/reactant">
-    <rdfs:domain>
-      <ns1:Class rdf:nodeID="N50dab87e5d3f40ebaa097c74025cbf2e">
-        <ns1:unionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/ConceptualEntity"/>
-        </ns1:unionOf>
-      </ns1:Class>
-    </rdfs:domain>
-    <nv:direction rdf:resource="http://www.nv_ontology.org/Input"/>
-    <rdfs:range>
-      <ns1:Class rdf:nodeID="N93f3aea62bb14800bf32a0539407c140">
-        <ns1:unionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
-        </ns1:unionOf>
-      </ns1:Class>
-    </rdfs:range>
-  </ns1:ObjectProperty>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/RBS">
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredTag"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Operator"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/CDS"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovBindingSite"/>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Terminator"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Gene"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Promoter"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/StartCodon"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Tag"/>
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="N8c807251546c4c9e8301f6da6b3fadf5">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
-          <ns1:Restriction rdf:nodeID="Nd2eff87a58fa4f77aea7d37038460af1">
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000139"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredGene"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredRegion"/>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/Tag">
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/StartCodon"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredRegion"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredGene"/>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Gene"/>
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="N125c3318380a4b76a0b57a506d944cff">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
-          <ns1:Restriction rdf:nodeID="N02a29ea6af59469292e03202622af0a7">
-            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000324"/>
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/CDS"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Terminator"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredTag"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Promoter"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RBS"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovBindingSite"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Operator"/>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/mRNA">
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="Ne205c2bb2bc5455aa5e2277898e9deb5">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/RNA"/>
-          <ns1:Restriction rdf:nodeID="N211aa8a1fdb041038a47c8260724d28c">
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000234"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/sgRNA"/>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/RNA"/>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/Gene">
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/StartCodon"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Tag"/>
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="Na4eb6c323f2940b5ac32e61cd7009141">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
-          <ns1:Restriction rdf:nodeID="Nee6790f9eb1f497c9ecc2b1e973bf33c">
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000704"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredTag"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredGene"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RBS"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/CDS"/>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredRegion"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Operator"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Promoter"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Terminator"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovBindingSite"/>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/Degradation">
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Reaction"/>
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="Nfbff44492db441a88682161b5ff69ada">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/Reaction"/>
-          <ns1:Restriction rdf:nodeID="Neeca0b475385476bb0eb18f91f3f1a69">
-            <ns1:hasValue rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000179"/>
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Translation"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dissociation"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovalentBonding"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transcription"/>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/Repression">
-    <rdfs:subClassOf>
-      <ns1:Restriction rdf:nodeID="N8e933ac3c7ab46b28a4384d8c7b39fc0">
-        <ns1:onProperty rdf:resource="http://www.nv_ontology.org/consistsOf"/>
-        <ns1:hasValue>
-          <rdf:Description rdf:nodeID="N94af6e0dbcd94091a9963082d951cd48">
-            <ns1:members rdf:parseType="Collection">
-              <rdf:Description rdf:about="http://www.nv_ontology.org/NonCovalentBonding"/>
-            </ns1:members>
-          </rdf:Description>
-        </ns1:hasValue>
-      </ns1:Restriction>
-    </rdfs:subClassOf>
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="N368cf916f2574913ab869ba0ffaba226">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/Interaction"/>
-          <ns1:Restriction rdf:nodeID="N8c9faf0e78a74c1bbf77342dce77ae78">
-            <ns1:hasValue rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000169"/>
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
     <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Activation"/>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Interaction"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/GeneticProduction"/>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/Operator">
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovBindingSite"/>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Gene"/>
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="N01e5c2832c0a406aa43a36de7065ffc8">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
-          <ns1:Restriction rdf:nodeID="Nd5003cdeb7034f67b04e0c96bda49a7b">
-            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000057"/>
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/StartCodon"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Tag"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredTag"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredGene"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RBS"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredRegion"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/CDS"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Terminator"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Promoter"/>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/NonCovalentBonding">
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dissociation"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Degradation"/>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Reaction"/>
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="Na1be064815e74837898700f3f5d9e4eb">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/Reaction"/>
-          <ns1:Restriction rdf:nodeID="Nfa1cebaa447343d084cb87fea4a621d0">
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-            <ns1:hasValue rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000177"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Translation"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transcription"/>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/EngineeredGene">
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Gene"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Operator"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovBindingSite"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/CDS"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Tag"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredTag"/>
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="Na4be4344a6ad47a987a682ba9c21695c">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
-          <ns1:Restriction rdf:nodeID="N4151ee43c24e4d2fafc824e6aa605a5f">
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000280"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RBS"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredRegion"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/StartCodon"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Terminator"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Promoter"/>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/PhysicalEntity">
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ConceptualEntity"/>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Entity"/>
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="Nd4d642addab440a5afd3555a349a27a0">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/Entity"/>
-          <ns1:Restriction rdf:nodeID="N51280352f61f468bb0c46648ee131a18">
-            <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#PhysicalEntity"/>
-            <ns1:onProperty>
-              <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/hasCharacteristic"/>
-            </ns1:onProperty>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/StartCodon">
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Tag"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovBindingSite"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredGene"/>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Gene"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/CDS"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Terminator"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredTag"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Promoter"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RBS"/>
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="N5c3421234ef447f1894cee8ca987e27e">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
-          <ns1:Restriction rdf:nodeID="Ncf09f0cb90574689a71913cbd80ffa81">
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000318"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredRegion"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Operator"/>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/RNA">
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Complex"/>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/PhysicalEntity"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/DNA"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SmallMolecule"/>
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="Nea79238d5b6b479896b1e7dec2292cf5">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
-          <ns1:Restriction rdf:nodeID="N21ec713c86364ef1b1cb582f8818df2f">
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-            <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#RnaRegion"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Protein"/>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/Dissociation">
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovalentBonding"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transcription"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Degradation"/>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Reaction"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Translation"/>
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="N8b19b546998845b6bce23a5e9ff1023d">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/Reaction"/>
-          <ns1:Restriction rdf:nodeID="Ndaba4f45e19444fda5b6ca7cf3a1a35c">
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-            <ns1:hasValue rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000180"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/ConceptualEntity">
-    <ns1:equivalentClass rdf:resource="http://www.nv_ontology.org/Entity"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PhysicalEntity"/>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Entity"/>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/SmallMolecule">
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/PhysicalEntity"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RNA"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/DNA"/>
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="N76bf56c35a7f4d75a2cb88a3e1ad4a39">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
-          <ns1:Restriction rdf:nodeID="N3d35d7be743d408695ddf34620cdde94">
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-            <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#SmallMolecule"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Protein"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Complex"/>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/Transcription">
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Degradation"/>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Reaction"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dissociation"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovalentBonding"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Translation"/>
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="N532c037ccf9a4de785bce095d4c65bb2">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/Reaction"/>
-          <ns1:Restriction rdf:nodeID="Ndcb348634d574b34a3341eb901902a7a">
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-            <ns1:hasValue rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000183"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/EngineeredRegion">
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredTag"/>
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="N63b6c64fa0214b7d84af4b77dd089698">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
-          <ns1:Restriction rdf:nodeID="N68dac69e68bf47efbf8888d8b4e38689">
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000280"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/CDS"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Operator"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovBindingSite"/>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Terminator"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Gene"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Promoter"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/StartCodon"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Tag"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredGene"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RBS"/>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/DNA">
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="N5ee90d7ca36940eeb4bbc1cb334d6821">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
-          <ns1:Class rdf:nodeID="Ncb2c6fb6977948a9be5a4f9d0ddf3782">
-            <ns1:unionOf rdf:parseType="Collection">
-              <ns1:Restriction rdf:nodeID="Nebf2c765fef440e1a7681a9e911c664d">
-                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-                <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#Dna"/>
-              </ns1:Restriction>
-              <ns1:Restriction rdf:nodeID="Nc9e5be4b8cea4cff81f59bffeb40565c">
-                <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
-                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-              </ns1:Restriction>
-            </ns1:unionOf>
-          </ns1:Class>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Complex"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Protein"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RNA"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SmallMolecule"/>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/PhysicalEntity"/>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/Promoter">
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovBindingSite"/>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/CDS"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Operator"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredTag"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Tag"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RBS"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredRegion"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredGene"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/StartCodon"/>
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="N93e8a6d594a742aaa69511ae1647a191">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
-          <ns1:Restriction rdf:nodeID="Ne628e87cf78140319738c06a8d8cf68f">
-            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000167"/>
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Terminator"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Gene"/>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/NonCovBindingSite">
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Operator"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Gene"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredGene"/>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="Ne26e97cfb4d342cbb84a465711ec5b2f">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
-          <ns1:Restriction rdf:nodeID="Na420fdbaf2784a53987b338263f9cdab">
-            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0001091"/>
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/CDS"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RBS"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredRegion"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredTag"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Promoter"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Terminator"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Tag"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/StartCodon"/>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/Terminator">
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Promoter"/>
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="N321dbabd5c0849379bff7e81b2d0545f">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
-          <ns1:Restriction rdf:nodeID="N0bc692b7919647aebbdfac8d3c15c150">
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000141"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Operator"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/CDS"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RBS"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredRegion"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredGene"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredTag"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/StartCodon"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Tag"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Gene"/>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovBindingSite"/>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/sgRNA">
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/RNA"/>
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="N15072cdda82041ff8dc13026e230627e">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/RNA"/>
-          <ns1:Restriction rdf:nodeID="N03ec2f45d5444d75831c8c8b2df652d7">
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0001998"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/mRNA"/>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/Translation">
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Degradation"/>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Reaction"/>
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="Neceed2f3c13b470b9ae44317dabbab71">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/Reaction"/>
-          <ns1:Restriction rdf:nodeID="Nc9e6ff8c6b50427d80b6cf8038fd254e">
-            <ns1:hasValue rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000184"/>
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transcription"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dissociation"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovalentBonding"/>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/EngineeredTag">
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Terminator"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/StartCodon"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Tag"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Operator"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredGene"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RBS"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredRegion"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/CDS"/>
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="Nb7b80b90dd96446fa89728e01bb63daa">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
-          <ns1:Restriction rdf:nodeID="N984324b9947f463b849b33f263e87a73">
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000280"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovBindingSite"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Gene"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Promoter"/>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/Reaction">
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Interaction"/>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/ConceptualEntity"/>
-    <ns1:equivalentClass rdf:resource="http://www.nv_ontology.org/ConceptualEntity"/>
-  </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/GeneticProduction">
     <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Repression"/>
     <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Interaction"/>
     <rdfs:subClassOf>
-      <ns1:Restriction rdf:nodeID="N44f2cb3db5dd4ddebe1414a4b5b2e427">
+      <ns1:Restriction rdf:nodeID="N9c546c727f2a4b3089b863d7139a7746">
         <ns1:hasValue>
-          <rdf:Description rdf:nodeID="N20db753a1d40403a8b0bf61c2012d879">
+          <rdf:Description rdf:nodeID="Nd0e799a7605b435f85b97983d80edf9a">
             <ns1:members rdf:parseType="Collection">
               <rdf:Description rdf:about="http://www.nv_ontology.org/Transcription"/>
               <rdf:Description rdf:about="http://www.nv_ontology.org/Translation"/>
@@ -648,73 +139,167 @@
         <ns1:onProperty rdf:resource="http://www.nv_ontology.org/consistsOf"/>
       </ns1:Restriction>
     </rdfs:subClassOf>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Activation"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Promoter">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Tag"/>
     <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="N112b3afa128f41d5be4474b916f9f0db">
+      <ns1:Class rdf:nodeID="Nd0ff69f5d0fa4835a7fa68775b4ada38">
         <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/Interaction"/>
-          <ns1:Restriction rdf:nodeID="Nb0d677fc6c7b4e3585eabd97d8e72ad3">
-            <ns1:hasValue rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000589"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
+          <ns1:Restriction rdf:nodeID="N28db3fba4eda4e36b64f5e37692d19cb">
+            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000167"/>
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredTag"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovBindingSite"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RBS"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredGene"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Gene"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Operator"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/StartCodon"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredRegion"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Terminator"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/CDS"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/StartCodon">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovBindingSite"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredTag"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Tag"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/CDS"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Gene"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredRegion"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RBS"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nd9e31a4110f3457fa1d2e99f43f0aec8">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
+          <ns1:Restriction rdf:nodeID="N517359ff96234ec38b4bf343b8aec3a9">
+            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000318"/>
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Terminator"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Promoter"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredGene"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Operator"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/EngineeredTag">
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N26d445e916054dee8c5ab8d0029f6550">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
+          <ns1:Restriction rdf:nodeID="Nf51be1bf5f264608b056a0e5bc731854">
+            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000280"/>
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/CDS"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredRegion"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Gene"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Promoter"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/StartCodon"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Tag"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RBS"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Terminator"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredGene"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovBindingSite"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Operator"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Operator">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RBS"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredGene"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredTag"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovBindingSite"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nac01eb032f6046488992ca1fc9da7a96">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
+          <ns1:Restriction rdf:nodeID="N69f753d03a274490b81a62e7fe0e4ef5">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000057"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Tag"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/CDS"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Terminator"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredRegion"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Gene"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Promoter"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/StartCodon"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Terminator">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovBindingSite"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredTag"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N6aef78a5144e4214ade1bd907efc2a1a">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
+          <ns1:Restriction rdf:nodeID="N32e675a9d06f4f05aa8c76ac9e23d7b3">
+            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000141"/>
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/CDS"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Tag"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Operator"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Gene"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/StartCodon"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredRegion"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredGene"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RBS"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Promoter"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/EngineeredRegion">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Terminator"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RBS"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/StartCodon"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredGene"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Promoter"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Tag"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Operator"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredTag"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Gene"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovBindingSite"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/CDS"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N5266f5404fee44dba3031d00a309c2c5">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
+          <ns1:Restriction rdf:nodeID="N3b20b05a09764e659faea4ae987d8516">
+            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000280"/>
             <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
           </ns1:Restriction>
         </ns1:intersectionOf>
       </ns1:Class>
     </ns1:equivalentClass>
   </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/Activation">
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/GeneticProduction"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Repression"/>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Interaction"/>
-    <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="N6a9d034d2e96435ba0b9392008b91cd1">
-        <ns1:intersectionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/Interaction"/>
-          <ns1:Restriction rdf:nodeID="N7576146d23d54392a234060835b7bf4f">
-            <ns1:hasValue rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000170"/>
-            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
-          </ns1:Restriction>
-        </ns1:intersectionOf>
-      </ns1:Class>
-    </ns1:equivalentClass>
-    <rdfs:subClassOf>
-      <ns1:Restriction rdf:nodeID="N3968c5fcde634e45905dc90995c73939">
-        <ns1:onProperty rdf:resource="http://www.nv_ontology.org/consistsOf"/>
-        <ns1:hasValue>
-          <rdf:Description rdf:nodeID="N06e886794df244659fee46dfa3ee7cd6">
-            <ns1:members rdf:parseType="Collection">
-              <rdf:Description rdf:about="http://www.nv_ontology.org/NonCovalentBonding"/>
-            </ns1:members>
-          </rdf:Description>
-        </ns1:hasValue>
-      </ns1:Restriction>
-    </rdfs:subClassOf>
-  </ns1:Class>
-  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/consistsOf">
-    <rdfs:range>
-      <ns1:Class rdf:nodeID="N74fb3225dc754bb5bceadc2363fb04eb">
-        <ns1:unionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/Interaction"/>
-          <rdf:Description rdf:about="http://www.nv_ontology.org/Reaction"/>
-        </ns1:unionOf>
-      </ns1:Class>
-    </rdfs:range>
-    <rdfs:domain>
-      <ns1:Class rdf:nodeID="N98e5129229324567a7a262d0070f5615">
-        <ns1:unionOf rdf:parseType="Collection">
-          <rdf:Description rdf:about="http://www.nv_ontology.org/Interaction"/>
-        </ns1:unionOf>
-      </ns1:Class>
-    </rdfs:domain>
-  </ns1:ObjectProperty>
   <ns1:Class rdf:about="http://www.nv_ontology.org/Complex">
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SmallMolecule"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Protein"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/DNA"/>
     <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RNA"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Protein"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SmallMolecule"/>
     <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="N60a1725585f04d69876b06071f01ee03">
+      <ns1:Class rdf:nodeID="N86874eeb245a47efb7035f4ee1cabc85">
         <ns1:intersectionOf rdf:parseType="Collection">
           <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
-          <ns1:Restriction rdf:nodeID="N168a28a9c2c54b1ca3bd2095b08fa241">
+          <ns1:Restriction rdf:nodeID="N9dc599b69c1d4e0faccead63257a022d">
             <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
             <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#Complex"/>
           </ns1:Restriction>
@@ -722,55 +307,509 @@
       </ns1:Class>
     </ns1:equivalentClass>
     <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/PhysicalEntity"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/DNA"/>
   </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/Protein">
+  <ns1:Class rdf:about="http://www.nv_ontology.org/DNA">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RNA"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Complex"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Protein"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SmallMolecule"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/PhysicalEntity"/>
     <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="N7ce2c0b13e6a4721a0fbeb692f74fa18">
+      <ns1:Class rdf:nodeID="N3e2c1196e16f4596ab10cb26f050698f">
         <ns1:intersectionOf rdf:parseType="Collection">
           <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
-          <ns1:Restriction rdf:nodeID="Nc0c367ba309f4d2e953b3d909a75753f">
-            <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#Protein"/>
+          <ns1:Class rdf:nodeID="Nfd9da4bc3f22436e817de6af353e02b1">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N890b7bd4a5f34ae3afe253e516c262c8">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+                <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#Dna"/>
+              </ns1:Restriction>
+              <ns1:Restriction rdf:nodeID="N8c2aced9acc448ffac10ac744ec14228">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+                <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/RNA">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/DNA"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Complex"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Protein"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SmallMolecule"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/PhysicalEntity"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Naa66a0d5792e4ecd91dd3f6a95a1e8c6">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
+          <ns1:Restriction rdf:nodeID="Nccf8cfe022d14bbabbdbc725d936663f">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+            <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#RnaRegion"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/SmallMolecule">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Protein"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Complex"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RNA"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/DNA"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N6a5c94860d73409f94453d928ff9ada8">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
+          <ns1:Restriction rdf:nodeID="N1ac695a15f1f4e8fb1752f4ac2678d42">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+            <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#SmallMolecule"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/PhysicalEntity"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Tag">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Gene"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/StartCodon"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Operator"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredRegion"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RBS"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredGene"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Promoter"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredTag"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovBindingSite"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/CDS"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Terminator"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N253077ac8327449ba846175c83987399">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
+          <ns1:Restriction rdf:nodeID="N0f4d7ed4fea940df83caa95977c48013">
+            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000324"/>
             <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
           </ns1:Restriction>
         </ns1:intersectionOf>
       </ns1:Class>
     </ns1:equivalentClass>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SmallMolecule"/>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/PhysicalEntity"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/DNA"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RNA"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Complex"/>
   </ns1:Class>
-  <ns1:Class rdf:about="http://www.nv_ontology.org/CDS">
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/StartCodon"/>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Degradation">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dissociation"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovalentBonding"/>
     <ns1:equivalentClass>
-      <ns1:Class rdf:nodeID="Nf93a406905c84d0cbb25f6549616ee6a">
+      <ns1:Class rdf:nodeID="Nf146120c2cc04a22885c9e9f5920fd39">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Reaction"/>
+          <ns1:Restriction rdf:nodeID="Nf306239ec2154a728377f1efac8ef095">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+            <ns1:hasValue rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000179"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transcription"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Translation"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Reaction"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/TranscriptionFactor">
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N5a9b482cf3fd485c9ad9b2a07ed477da">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protein"/>
+          <ns1:Restriction rdf:nodeID="Naaddbf28bd0140d0aa9bc0982326fd8c">
+            <ns1:hasValue rdf:resource="http://identifiers.org/go/GO:0003700"/>
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Protein"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/RBS">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Operator"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/CDS"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nbf8040926c9840538af6952f314c2784">
         <ns1:intersectionOf rdf:parseType="Collection">
           <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
-          <ns1:Restriction rdf:nodeID="N2e97bcc758764af8986c4473b6bce6c7">
-            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000316"/>
+          <ns1:Restriction rdf:nodeID="N914c339992884efdae27f95f36cf866e">
+            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000139"/>
             <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
           </ns1:Restriction>
         </ns1:intersectionOf>
       </ns1:Class>
     </ns1:equivalentClass>
     <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredRegion"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Tag"/>
     <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Gene"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredGene"/>
-    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredTag"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/StartCodon"/>
     <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Promoter"/>
     <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Terminator"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Tag"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredGene"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredTag"/>
     <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovBindingSite"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RBS"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Operator"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Repression">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/GeneticProduction"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Interaction"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N33e78f61fc3a444b9f8a7fb6468c6bbe">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Interaction"/>
+          <ns1:Restriction rdf:nodeID="N580e2c194a5f4a9594458018dd9747ae">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+            <ns1:hasValue rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000169"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Activation"/>
+    <rdfs:subClassOf>
+      <ns1:Restriction rdf:nodeID="N7534892072414faa8ceb2af52b48a134">
+        <ns1:hasValue>
+          <rdf:Description rdf:nodeID="N22b98e1f65664774aa5d06631298db6e">
+            <ns1:members rdf:parseType="Collection">
+              <rdf:Description rdf:about="http://www.nv_ontology.org/NonCovalentBonding"/>
+            </ns1:members>
+          </rdf:Description>
+        </ns1:hasValue>
+        <ns1:onProperty rdf:resource="http://www.nv_ontology.org/consistsOf"/>
+      </ns1:Restriction>
+    </rdfs:subClassOf>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/mRNA">
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nacf7cf4e03c041a3957f2fe7ccaa3477">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/RNA"/>
+          <ns1:Restriction rdf:nodeID="N1f79964f521c41f9b3cb920d7081b84e">
+            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000234"/>
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/RNA"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/sgRNA"/>
+  </ns1:Class>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/consistsOf">
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="Nc5179f82f6b54c7ea2388a526e6f87bb">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Interaction"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Reaction"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="N473879ec8d984b5aa32063af41b6b2b0">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Activation"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/GeneticProduction"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Repression"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+  </ns1:ObjectProperty>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/PhysicalEntity">
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N8c76674d3d0649bfb9a05aed6b4c2aa0">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Entity"/>
+          <ns1:Restriction rdf:nodeID="N787f8788a0b74a688a466215b7066e59">
+            <ns1:onProperty>
+              <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/hasCharacteristic"/>
+            </ns1:onProperty>
+            <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#PhysicalEntity"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Entity"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ConceptualEntity"/>
   </ns1:Class>
   <ns1:Class rdf:about="http://www.nv_ontology.org/Interaction">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reaction"/>
     <ns1:equivalentClass rdf:resource="http://www.nv_ontology.org/ConceptualEntity"/>
     <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/ConceptualEntity"/>
-    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reaction"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Protein">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SmallMolecule"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/PhysicalEntity"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nefaafba1d1334dfa9cced32650b2b3f3">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
+          <ns1:Restriction rdf:nodeID="N0f8ad02b9fb84a7caacf5f8e5b450be2">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+            <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#Protein"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Complex"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/DNA"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RNA"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/EngineeredGene">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Operator"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/CDS"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredRegion"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Gene"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/StartCodon"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Promoter"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Terminator"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N8fa29ca74ff74325abc06f6ef8857549">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
+          <ns1:Restriction rdf:nodeID="N424e203aad48419cbf6ba0ead20ffd22">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000280"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RBS"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Tag"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredTag"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovBindingSite"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/CDS">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Tag"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nbd84b2cd09b844d0896403441dd4793b">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
+          <ns1:Restriction rdf:nodeID="Nc860e35d1ae440b094e00b78f9f28fa8">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000316"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovBindingSite"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredTag"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RBS"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredGene"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Promoter"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Operator"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Gene"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/StartCodon"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredRegion"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Terminator"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/NonCovalentBonding">
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N7acf42f3102c44c89f2c6099b7cc8a9d">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Reaction"/>
+          <ns1:Restriction rdf:nodeID="N98cfd7026949477abbe5fef2a9be0c3c">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+            <ns1:hasValue rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000177"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transcription"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Translation"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dissociation"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Reaction"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Degradation"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/NonCovBindingSite">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredTag"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/CDS"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N7ff43b5661e747849739f4fbf5db51c5">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
+          <ns1:Restriction rdf:nodeID="Na080c467a0394afea86035ef66985be9">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0001091"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Gene"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/StartCodon"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredRegion"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Terminator"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RBS"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredGene"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Promoter"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Tag"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Operator"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/ConceptualEntity">
+    <ns1:equivalentClass rdf:resource="http://www.nv_ontology.org/Entity"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Entity"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PhysicalEntity"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/sgRNA">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/mRNA"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nbe799848ec42428aab2255c9b2abbaf3">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/RNA"/>
+          <ns1:Restriction rdf:nodeID="Nfb2f7858b79f42b1991b003963141221">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0001998"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/RNA"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Gene">
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N168c785d99ee4645a50ade85a96c389c">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/DNA"/>
+          <ns1:Restriction rdf:nodeID="Nd058be6806024240b3ce5ac4ed540c47">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+            <ns1:hasValue rdf:resource="http://identifiers.org/so/SO:0000704"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovBindingSite"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredTag"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/CDS"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/StartCodon"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredRegion"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RBS"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Terminator"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Tag"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Promoter"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/EngineeredGene"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/DNA"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Operator"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Dissociation">
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Reaction"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Translation"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Degradation"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Ndc2197e15d0c4795a9d8830efe8cb3a4">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Reaction"/>
+          <ns1:Restriction rdf:nodeID="N8113744441834cca99f17dbfb93d89d1">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+            <ns1:hasValue rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000180"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transcription"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovalentBonding"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Activation">
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Interaction"/>
+    <rdfs:subClassOf>
+      <ns1:Restriction rdf:nodeID="Nc447a6644d9f4856bc8bf7d80f234f66">
+        <ns1:onProperty rdf:resource="http://www.nv_ontology.org/consistsOf"/>
+        <ns1:hasValue>
+          <rdf:Description rdf:nodeID="N2623f3996fe340dcac6941b440698970">
+            <ns1:members rdf:parseType="Collection">
+              <rdf:Description rdf:about="http://www.nv_ontology.org/NonCovalentBonding"/>
+            </ns1:members>
+          </rdf:Description>
+        </ns1:hasValue>
+      </ns1:Restriction>
+    </rdfs:subClassOf>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/GeneticProduction"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Repression"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N4b7f18286dc547b0990e044f00366963">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Interaction"/>
+          <ns1:Restriction rdf:nodeID="N20a5d920992d418aaafea703d13d203c">
+            <ns1:hasValue rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000170"/>
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Hydrolysis">
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Dissociation"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Na5f787ecfe7a413f8840b233a424c065">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Dissociation"/>
+          <ns1:Restriction rdf:nodeID="N1cb0dd25f3524ee6a4d1d5b0bcfc0af4">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+            <ns1:hasValue rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000376"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Transcription">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Translation"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovalentBonding"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dissociation"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Reaction"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Na4b83797fa2b47efbe9fb8a2cd5c816b">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Reaction"/>
+          <ns1:Restriction rdf:nodeID="N76479569ca2f4f5a9dc3ac47ca7c00e9">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+            <ns1:hasValue rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000183"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Degradation"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Translation">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/NonCovalentBonding"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nc360997c504c4cc1bcd739996d92dced">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Reaction"/>
+          <ns1:Restriction rdf:nodeID="Nfa1105751054428cadbdd7dd1ca474fd">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+            <ns1:hasValue rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000184"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transcription"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Degradation"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Reaction"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dissociation"/>
   </ns1:Class>
   <ns1:Class rdf:about="http://www.nv_ontology.org/Entity"/>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Reaction">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Interaction"/>
+    <ns1:equivalentClass rdf:resource="http://www.nv_ontology.org/ConceptualEntity"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/ConceptualEntity"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Effector">
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N4c9f5597a37b49f48aaae5b0638d512e">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/SmallMolecule"/>
+          <ns1:Restriction rdf:nodeID="Nba9c1bb368fb4c0fa11f8a44debf04f8">
+            <ns1:hasValue rdf:resource="http://identifiers.org/chebi/CHEBI:35224"/>
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/SmallMolecule"/>
+  </ns1:Class>
+  <rdf:Description rdf:nodeID="N285d525574194a48b4489cd52bd0784f">
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    <rdf:first rdf:resource="http://www.nv_ontology.org/Translation"/>
+  </rdf:Description>
 </rdf:RDF>
