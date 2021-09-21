@@ -45,6 +45,8 @@ class ColorHandler():
                     colors.append({depth : color})
             return colors
 
+        def genetic(self):
+            raise NotImplementedError("Not Implemented.")
 
     class EdgeColorHandler(AbstractEdgeColorHandler):
         def __init__(self,builder):

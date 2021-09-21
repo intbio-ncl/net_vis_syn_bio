@@ -62,7 +62,6 @@ class TestConvertInstance(unittest.TestCase):
         e_e_edges = [k for k in edge_keys if k == part_of_pred]
         self.assertEqual(len(e_e_edges),len(expected_edges))
         for n,v,k in graph.edges(keys=True):
-            print(n,v,k)
             if k != part_of_pred:
                 continue
             n_data = graph.nodes[n]
@@ -74,8 +73,14 @@ class TestConvertInstance(unittest.TestCase):
         filename = os.path.join(test_dir,"test_sbol_interactions.xml")
         model_graph = model_convert(model_fn)
         graph = instance_convert(model_graph,filename)
-        rdf_graph = SBOLGraph(filename)
-        expected_edges = []
+        self._run_type_test(graph,model_graph)
+
+    def test_sbol_nor_gate(self):
+        filename = os.path.join(test_dir,"nor_gate.xml")
+        model_graph = model_convert(model_fn)
+        graph = instance_convert(model_graph,filename)
+        self._run_type_test(graph,model_graph)
+
 
     def test_convert_sbol(self):
         filename = os.path.join(test_dir,"multiplexer.xml")
@@ -83,7 +88,6 @@ class TestConvertInstance(unittest.TestCase):
         graph = instance_convert(model_graph,filename)
         rdf_graph = SBOLGraph(filename)
         expected_edges = []
-
         for cd in rdf_graph.get_component_definitions():
             related_cds = [rdf_graph.get_definition(c) for c in rdf_graph.get_components(cd)]
             [expected_edges.append((cd,None,rc)) for rc in related_cds]
@@ -92,6 +96,7 @@ class TestConvertInstance(unittest.TestCase):
         edge_keys = [k for n,v,k in graph.edges(keys=True)]
         e_e_edges = [k for k in edge_keys if k == part_of_pred]
         self.assertEqual(len(e_e_edges),len(expected_edges))
+        self._run_type_test(graph,model_graph)
         for n,v,k in graph.edges(keys=True):
             if k != part_of_pred:
                 continue
@@ -111,17 +116,61 @@ class TestConvertInstance(unittest.TestCase):
         with open(json_file) as f:
             data = json.load(f)
         expected_g = InstanceGraph(json_graph.node_link_graph(data))
-        self.assertTrue(graph == expected_g)
+        for k,v,e in expected_g.edges(keys=True):
+            k_d = expected_g.nodes[k]
+            v_d = expected_g.nodes[v]
+        self._run_type_test(graph,model_graph)
 
-    def test_convert_combined(self):
-        model_graph = model_convert(model_fn)
-        filename = os.path.join(test_dir,"multiplexer.xml")
-        json_file = os.path.join(test_dir,"multiplexer.json")
-        sbol_graph = instance_convert(model_graph,filename)
-        sbol_graph.save(json_file)
-        nv_graph = instance_convert(model_graph,json_file)
-        self.assertTrue(nv_graph == sbol_graph)
+    def _run_type_test(self,graph,model):
+        i_code = model.get_class_code(model.identifiers.objects.interaction)
+        r_code = model.get_class_code(model.identifiers.objects.reaction)
+        for n,v,e in graph.search((None,RDF.type,None)):
+            v,v_data = v
+            self.assertTrue(v_data["key"],model.identifiers.objects)
+            if model.is_derived(v_data["key"],i_code):
+                self._run_interaction_tests(n,graph,model)
 
+    def _run_interaction_tests(self,n,graph,model):
+        n,n_data = n
+        consistsOf = [c[1] for c in graph.search((n,model.identifiers.predicates.consistsOf,None))]
+        i_code = model.get_class_code(model.identifiers.objects.interaction)
+        r_code = model.get_class_code(model.identifiers.objects.reaction)
+        rdf_type = graph.get_rdf_type(n)
+        model_code = model.get_class_code(rdf_type[1]["key"])
+
+        restrictions = {}
+        for restriction in model.get_restrictions_on(model_code):
+            predicate,constraints = model.get_constraint(restriction)
+            restrictions[predicate] = constraints
+        for c in consistsOf:
+            c,c_data = c
+            r_key = None
+            count = 0
+            while r_key != RDF.nil:
+                cur = [c[1] for c in graph.search((c,RDF.first,None))]
+                rest = [r[1] for r in graph.search((c,RDF.rest,None))]
+                self.assertEqual(len(cur),1)
+                self.assertEqual(len(rest),1)
+                r_key = rest[0][1]["key"]
+                cur = cur[0]
+                element_type = graph.get_rdf_type(cur[0])
+                e_t_key = element_type[1]["key"]
+                for pred,restriction in restrictions.items():
+                    if e_t_key != restriction[count][1][1]["key"]:
+                        raise ValueError(e_t_key,restriction[count][1][1]["key"],count)
+                    
+                if model.is_derived(e_t_key,r_code):
+                    self._run_reaction_tests(cur[0],graph,model)
+                elif model.is_derived(e_t_key,i_code):
+                    self._run_interaction_tests(cur[0],graph,model)
+                else:
+                    self.fail("Interaction consists of something not interaction or reaction.")
+                count +=1
+                c = rest[0][0]
+    
+    def _run_reaction_tests(self,n,graph,model):
+        n_type = graph.get_rdf_type(n)
+        self.assertTrue(n_type[1]["key"],model.identifiers.objects)
 
 def _get_name(subject):
     split_subject = _split(subject)

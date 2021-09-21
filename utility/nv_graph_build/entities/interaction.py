@@ -1,6 +1,8 @@
 from entities.abstract_entity import ConceptualEntity
+from entities.abstract_entity import PhysicalEntity
 from equivalent import interaction_equivalent as ce
 from restriction import recipe_restriction as rr
+from property import interactions as ir
 
 class Interaction(ConceptualEntity):
     def __init__(self,properties=[],equivalents=[],restrictions=[]):
@@ -12,7 +14,7 @@ class Interaction(ConceptualEntity):
             res = []
         else:
             res = restrictions
-        p = properties + []
+        p = properties
         super().__init__(properties=p,
         equivalents=equiv,restrictions=res)
 
@@ -26,8 +28,10 @@ class Activation(Interaction):
             res = [rr.ActivationRecipe()]
         else:
             res = restrictions
-        super().__init__(properties=properties,
-        equivalents=equiv,restrictions=res)
+        
+        p = properties + [ir.Activator(PhysicalEntity),
+                          ir.Activated(PhysicalEntity)]
+        super().__init__(properties=p,equivalents=equiv,restrictions=res)
 
 class Repression(Interaction):
     def __init__(self,properties=[],equivalents=[],restrictions=[]):
@@ -39,8 +43,10 @@ class Repression(Interaction):
             res = [rr.RepressionRecipe()]
         else:
             res = restrictions
-        super().__init__(properties=properties,
-        equivalents=equiv,restrictions=res)
+        
+        p = properties + [ir.Repressor(PhysicalEntity),
+                          ir.Repressed(PhysicalEntity)]
+        super().__init__(properties=p,equivalents=equiv,restrictions=res)
 
 class GeneticProduction(Interaction):
     def __init__(self,properties=[],equivalents=[],restrictions=[]):

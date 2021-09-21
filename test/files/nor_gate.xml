@@ -226,7 +226,7 @@
           <sbol:Participation rdf:about="http://shortbol.org/v2#NOR_gate_module/CI_LVA_fc_i_genetic_production_with_CI_p_fc/CI_LVA_fc_i_genetic_production_with_CI_p_fc_CI_LVA_fc_i_participation_promoter/1">
             <sbol:displayId>CI_LVA_fc_i_genetic_production_with_CI_p_fc_CI_LVA_fc_i_participation_promoter</sbol:displayId>
             <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#NOR_gate_module/CI_LVA_fc_i_genetic_production_with_CI_p_fc/CI_LVA_fc_i_genetic_production_with_CI_p_fc_CI_LVA_fc_i_participation_promoter"/>
-            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000598"/>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000645"/>
             <sbol:participant rdf:resource="http://shortbol.org/v2#NOR_gate_module/CI_LVA_fc/1"/>
             <sbol:version>1</sbol:version>
           </sbol:Participation>
@@ -412,7 +412,7 @@
           <sbol:Participation rdf:about="http://shortbol.org/v2#NOR_gate_module/araC_fc_i_genetic_production_with_araC_p_fc/araC_fc_i_genetic_production_with_araC_p_fc_araC_fc_i_participation_promoter/1">
             <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#NOR_gate_module/araC_fc_i_genetic_production_with_araC_p_fc/araC_fc_i_genetic_production_with_araC_p_fc_araC_fc_i_participation_promoter"/>
             <sbol:participant rdf:resource="http://shortbol.org/v2#NOR_gate_module/araC_fc/1"/>
-            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000598"/>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000645"/>
             <sbol:version>1</sbol:version>
             <sbol:displayId>araC_fc_i_genetic_production_with_araC_p_fc_araC_fc_i_participation_promoter</sbol:displayId>
           </sbol:Participation>
@@ -640,7 +640,7 @@
         <sbol:version>1</sbol:version>
         <sbol:participation>
           <sbol:Participation rdf:about="http://shortbol.org/v2#NOR_gate_module/tetR_fc_i_genetic_production_with_tetR_p_fc/tetR_fc_i_genetic_production_with_tetR_p_fc_tetR_fc_i_participation_promoter/1">
-            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000598"/>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000645"/>
             <sbol:participant rdf:resource="http://shortbol.org/v2#NOR_gate_module/tetR_fc/1"/>
             <sbol:version>1</sbol:version>
             <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#NOR_gate_module/tetR_fc_i_genetic_production_with_tetR_p_fc/tetR_fc_i_genetic_production_with_tetR_p_fc_tetR_fc_i_participation_promoter"/>

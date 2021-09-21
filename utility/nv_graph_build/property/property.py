@@ -3,13 +3,14 @@ from identifiers import identifiers
 from datatype.datatype import Input,Output
 
 class Property:
-    def __init__(self,range=None,properties=[],default_value=None):
+    def __init__(self,range=None,properties=[],equivalents = [],default_value=None):
         name = self.__class__.__name__.lower()[0] + self.__class__.__name__[1:]
         self.property = URIRef(identifiers.namespaces.nv + name)
         if not isinstance(range, list):
             range = [range]
         self.range = range
         self.properties = properties
+        self.equivalents = equivalents
         self.default_value = default_value
     
     def __repr__(self):

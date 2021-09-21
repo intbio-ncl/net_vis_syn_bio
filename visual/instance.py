@@ -49,7 +49,7 @@ class InstanceVisual(AbstractVisual):
                             self.set_pruned_view,
                             self.set_cose_layout,
                             self.add_centrality_node_size,
-                            self.add_class_edge_color,
+                            self.add_type_edge_color,
                             self.add_node_name_labels,
                             self.add_edge_no_labels]
         return self._set_preset(preset_functions)
@@ -62,7 +62,7 @@ class InstanceVisual(AbstractVisual):
                             self.set_interaction_verbose_view,
                             self.set_dagre_layout,
                             self.add_type_edge_color,
-                            self.add_type_node_color,
+                            self.add_role_node_color,
                             self.add_edge_no_labels,
                             self.add_node_name_labels]
         return self._set_preset(preset_functions)
@@ -135,7 +135,7 @@ class InstanceVisual(AbstractVisual):
         participants by merging interaction node and participant edges into a single edge. 
         '''
         if self.view == self.set_interaction_view:
-            self._builder.set_interaction_verbose_view()
+            self._builder.set_interaction_view()
         else:
            self.view =self.set_interaction_view
         self._builder.set_interaction_view()
@@ -189,6 +189,16 @@ class InstanceVisual(AbstractVisual):
             return self._color_h.node.hierarchy()
         else:
             self.node_color = self.add_hierarchy_node_color
+
+    def add_genetic_node_color(self):
+        '''
+        Each genetic role is mapped to a shape of a color.
+        '''
+        if self.node_color == self.add_genetic_node_color:
+            return self._color_h.node.genetic()
+        else:
+            self.node_color = self.add_genetic_node_color
+
 
     # ---------------------- Edge Color ----------------------
     def add_hierarchy_edge_color(self):

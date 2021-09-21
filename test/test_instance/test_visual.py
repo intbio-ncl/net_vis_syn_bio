@@ -326,6 +326,7 @@ class TestColor(unittest.TestCase):
             self.visual.set_hierarchy_view()
             view = self.visual._builder.view
             _run_tests()
+            
 class TestShape(unittest.TestCase):
     def setUp(self):
         filename = os.path.join(test_dir,"0x3B.xml")

@@ -4,13 +4,12 @@ https://github.com/RDFLib/rdflib/issues/1381
 I dont think this affects the output.
 '''
 import warnings
-from collections import Counter
-from rdflib.namespace import RDFS
-
-from rdflib.term import BNode
 warnings.filterwarnings("ignore")
 import sys, inspect
 
+from collections import Counter
+from rdflib.namespace import RDFS
+from rdflib.term import BNode
 from rdflib import Graph,RDF,OWL
 from rdflib.extras import infixowl as owl 
 
@@ -50,9 +49,10 @@ def produce_ontology_graph():
             cur_node = list_node
             for index,d in enumerate(recipe):
                 if index == 0:
-                    properties = _get_inputs(properties,d,obj)
+                    properties = _get_inputs(obj,properties,d,obj)
                 if index == len(recipe) - 1:
                     next_node = RDF.nil
+                    properties = _get_outputs(obj,properties,d,obj)
                 else:
                     next_node = BNode()
                 graph.add((cur_node,RDF.first,d.uri))
@@ -67,12 +67,12 @@ def produce_ontology_graph():
             else:
                 properties[prop] = [obj.uri]
 
-        for p in get_properties(obj):
+        for p in _get_properties(obj):
             if p in properties.keys():
                 properties[p].append(obj.uri)
             else:
                 properties[p] = [obj.uri]
-        for r in get_requirements(obj):
+        for r in _get_requirements(obj):
             if r in requirements.keys():
                 requirements[r].append(obj.uri)
             else:
@@ -80,14 +80,11 @@ def produce_ontology_graph():
 
         owl.Class(obj.uri,graph=graph,disjointWith=disjointed,
               subClassOf=parents+restrictions,equivalentClass=equivalents)
-        
+    from rdflib import URIRef
     for requirement,domain in requirements.items():
         owl.Property(requirement,graph=graph)
 
     for property,domain in properties.items():
-        #print(property)
-        #print(domain)
-        #print("\n\n")
         # Never figured out how to add unions to Class so did it manually.
         prop = property.property
         domain_node = BNode()
@@ -106,6 +103,9 @@ def produce_ontology_graph():
                 graph.add((prop,p.property,default_v_uri))
                 if isinstance(p.default_value, Datatype):
                     datatypes.append(p.default_value)
+        for equivalents in property.equivalents:
+            for equivalent in equivalents.equivalents:
+                graph.add((prop,OWL.equivalentProperty,equivalent))
 
     for datatype in datatypes:
         graph.add((datatype.uri,RDF.type,RDFS.Datatype))
@@ -113,14 +113,36 @@ def produce_ontology_graph():
     graph.serialize("nv_model.xml",format="pretty-xml")
 
 
-def _get_inputs(properties,recipe,entity):
-    for i in [e for e in recipe.properties for x in e.properties if isinstance(x.default_value, Input)]:
-        if i in properties.keys():
-            properties[i].append(entity.uri)
-        else:
-            properties[i] = [entity.uri]
-    return properties
 
+def _get_requirements(obj):
+    for e in obj.equivalents:
+        for r in e.restrictions:
+            if "property" in dir(r):
+                yield r.property.property
+
+def _get_properties(obj):
+    return [p for p in obj.properties if "property" in dir(p)]
+
+def _get_inputs(obj,properties,recipe,entity):
+    return _get_io(obj,properties,recipe,entity,Input)
+
+def _get_outputs(obj,properties,recipe,entity):
+    return _get_io(obj,properties,recipe,entity,Output)
+
+def _get_io(o,p,r,e,t):
+    # Check if object has a i/o property set already.
+    for prop in o.properties:
+        for pp in prop.properties:
+            if isinstance(pp.default_value,t):
+                return p
+
+    for i in [e for e in r.properties for x in e.properties if isinstance(x.default_value, t)]:
+        if i in p.keys():
+            p[i].append(e.uri)
+        else:
+            p[i] = [e.uri]
+    return p
+    
 def _get_inheritence(identifier,graph):
     parents = []
     def _get_class_depth(c_identifier):
@@ -148,20 +170,6 @@ def _add_union(graph,subject,union):
         graph.add((cur_node,RDF.rest,next_node))
         cur_node = next_node
     return graph
-
-def get_recipes(obj):
-    if not hasattr(obj, "recipes"):
-        return []
-    return obj.recipes
-    
-def get_requirements(obj):
-    for e in obj.equivalents:
-        for r in e.restrictions:
-            if "property" in dir(r):
-                yield r.property.property
-
-def get_properties(obj):
-    return [p for p in obj.properties if "property" in dir(p)]
 
 def _get_parents(obj):
     parents = obj.__class__.__bases__

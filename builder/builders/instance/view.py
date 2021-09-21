@@ -37,26 +37,31 @@ class ViewBuilder:
     def interaction_verbose(self):
         edges = []
         node_attrs = {}
+        raise NotImplementedError()
         return self._builder.sub_graph(edges,node_attrs)
 
     def interaction(self):
         edges = []
         node_attrs = {}
+        raise NotImplementedError()
         return self._builder.sub_graph(edges,node_attrs)
 
     def interaction_genetic(self):
         edges = []
         node_attrs = {}
+        raise NotImplementedError()
         return self._builder.sub_graph(edges,node_attrs)
 
-    def ppi(self):
+    def protein_interaction(self):
         edges = []
         node_attrs = {}
+        raise NotImplementedError()
         return self._builder.sub_graph(edges,node_attrs)
 
     def module(self):
         edges = []
         node_attrs = {}
+        raise NotImplementedError()
         return self._builder.sub_graph(edges,node_attrs)
                                               
     def _build_edge_attr(self,key):

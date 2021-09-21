@@ -1,5 +1,10 @@
-from Restrictions.Restriction import RoleRestriction
+from restriction.abstract_restriction import RoleRestriction
+from restriction.abstract_restriction import CharacteristicRestriction
 from identifiers import identifiers
+
+class ConceptualCharacteristicRestriction(CharacteristicRestriction):
+    def __init__(self):
+        super().__init__(identifiers.roles.conceptual_entity)
 
 class TranslationRoleRestriction(RoleRestriction):
     def __init__(self):

@@ -10,9 +10,9 @@ class ModelGraph(AbstractGraph):
         self._generate_labels()
         
     def get_class_code(self,label):
-        for n,v,k in self.search((None,None,None)):
-            if label in n[1]["key"]:
-                return n[0]
+        for n,data in self.nodes(data=True):
+            if label == data["key"]:
+                return n
         raise ValueError(f'{label} is not in graph.')
 
     def get_child_predicate(self):
@@ -30,11 +30,33 @@ class ModelGraph(AbstractGraph):
                 f_classes.append(s)
         return f_classes
     
+    def is_base(self,parent,child):
+        def up_search(p,c):
+            for cp in self.get_parent_classes(c):
+                if cp[0] == parent:
+                    return True
+                if up_search(cp[0],p):
+                    return True
+            return False
+        return up_search(parent,child)
+
+    def is_derived(self,child,parent):
+        def down_search(c,p):
+            for cc in self.get_child_classes(p):
+                if cc[1]["key"] == child:
+                    return True
+                if down_search(c,cc[0]):
+                    return True
+            return False
+        return down_search(child,parent)
+
     def get_parent_classes(self,class_id):
-        return [c[1] for c in self.search((class_id,RDFS.subClassOf,None))]
+        return [c[1] for c in self.search((class_id,RDFS.subClassOf,None)) 
+                if not isinstance(c[1][1]["key"],BNode)]
 
     def get_child_classes(self,class_id):
-        return [c[0] for c in self.search((None,RDFS.subClassOf,class_id))]
+        return [c[0] for c in self.search((None,RDFS.subClassOf,class_id)) 
+                if not isinstance(c[1][1]["key"],BNode)]
     
     def get_class_depth(self,class_id):
         def _get_class_depth(c_identifier,depth):
@@ -62,15 +84,15 @@ class ModelGraph(AbstractGraph):
             for q,w,e in self.search((None,None,identifier)):
                 if e == RDFS.domain:
                     properties.append(q)
-                else:
+                elif e == RDF.rest or e == OWL.unionOf:                    
                     up_search(q[0])
         for n,v,k in self.search((None,RDF.first,class_id)):
             up_search(n[0])
         return properties
 
-    def get_sub_restrictions(self,class_id):
+    def get_restrictions_on(self,class_id):
         restrictions = []
-        for p,p_data in self.get_parent_classes(class_id):
+        for p,p_data in [c[1] for c in self.search((class_id,RDFS.subClassOf,None)) if isinstance(c[1][1]["key"],BNode)]:
             rdf_type = self.get_rdf_type(p)[1]["key"]
             if rdf_type == OWL.Restriction:
                 restrictions.append(p)
@@ -92,17 +114,23 @@ class ModelGraph(AbstractGraph):
         if p is None or c_p is None or c_v is None:
             raise ValueError(f'{restriction_id} is malformed, no constraint.')
         for n,v,k in self.search((c_v,OWL.members,None)):
-            constraint = [o[1] for o in self._get_operator(v[0])]
+            constraint = self._get_operator(v[0])
         return p,constraint
 
     def get_properties(self):
         return [p[0] for p in self.search((None,RDF.type,OWL.ObjectProperty))]
 
     def get_domain(self,subject):
-        return [r[1] for r in self.search((subject,RDFS.domain,None))]
+        r = self.search((subject,RDFS.domain,None),True)
+        if r is not None and r != []:
+            r = r[1]
+        return r
 
     def get_range(self,subject):
-        return [r[1] for r in self.search((subject,RDFS.range,None))]
+        r = self.search((subject,RDFS.range,None),True)
+        if r is not None and r != []:
+            r = r[1]
+        return r
 
     def get_union(self,subject):
         return [r[1] for r in self.search((subject,OWL.unionOf,None))]
@@ -113,6 +141,9 @@ class ModelGraph(AbstractGraph):
         for n,v,e in self.search((class_id,OWL.equivalentClass,None)):
             requirements.append(self.get_requirements(v[0]))
         return requirements
+
+    def get_equivalent_properties(self,property_id):
+        return [e[1] for e in self.search((property_id,OWL.equivalentProperty,None))]
 
     def get_requirements(self,class_id):
         requirements = []

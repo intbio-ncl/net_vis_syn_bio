@@ -1,0 +1,285 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:sbol="http://sbols.org/v2#" xmlns:ns0="http://purl.org/dc/terms/">
+  <sbol:Sequence rdf:about="http://shortbol.org/v2#pLlac_sequence/1">
+    <sbol:displayId>pLlac_sequence</sbol:displayId>
+    <sbol:elements>aattgtgagcggataacaattgacattgtgagcggataacaagatactgagcaca</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+    <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#pLlac_sequence"/>
+    <sbol:version>1</sbol:version>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="http://shortbol.org/v2#pBAD_sequence/1">
+    <sbol:version>1</sbol:version>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+    <sbol:displayId>pBAD_sequence</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#pBAD_sequence"/>
+    <sbol:elements>atgccatagcatttttatcc</sbol:elements>
+  </sbol:Sequence>
+  <sbol:ComponentDefinition rdf:about="http://shortbol.org/v2#Elowitz_rbs/1">
+    <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#Elowitz_rbs"/>
+    <ns0:description>I-GEM ID: BBa_B0034</ns0:description>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000139"/>
+    <sbol:displayId>Elowitz_rbs</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <sbol:sequence rdf:resource="http://shortbol.org/v2#Elowitz_rbs_sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://shortbol.org/v2#TetR/1">
+    <sbol:version>1</sbol:version>
+    <sbol:displayId>TetR</sbol:displayId>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#TetR"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://shortbol.org/v2#pBAD/1">
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:displayId>pBAD</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#pBAD"/>
+    <sbol:version>1</sbol:version>
+    <sbol:sequence rdf:resource="http://shortbol.org/v2#pBAD_sequence/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://shortbol.org/v2#lacI_repressor/1">
+    <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#lacI_repressor"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:version>1</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:sequence rdf:resource="http://shortbol.org/v2#lacI_repressor_sequence/1"/>
+    <sbol:displayId>lacI_repressor</sbol:displayId>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://shortbol.org/v2#arabinose/1">
+    <sbol:displayId>arabinose</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#arabinose"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#SmallMolecule"/>
+    <sbol:version>1</sbol:version>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://shortbol.org/v2#pLlac/1">
+    <sbol:version>1</sbol:version>
+    <sbol:displayId>pLlac</sbol:displayId>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#pLlac"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:sequence rdf:resource="http://shortbol.org/v2#pLlac_sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:Sequence rdf:about="http://shortbol.org/v2#lacI_repressor_sequence/1">
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+    <sbol:elements>atggtgaatgtgaaaccagtaacgttatacgatgtcgcagagtatgccggtgtctcttatcagaccgtttcccgcgtggtgaaccaggccagccacgtttctgcgaaaacgcgggaaaaagtggaagcggcgatggcggagctgaattacattcccaaccgcgtggcacaacaactggcgggcaaacagtcgttgctgattggcgttgccacctccagtctggccctgcacgcgccgtcgcaaattgtcgcggcgattaaatctcgcgccgatcaactgggtgccagcgtggtggtgtcgatggtagaacgaagcggcgtcgaagcctgtaaagcggcggtgcacaatcttctcgcgcaacgcgtcagtgggctgatcattaactatccgctggatgaccaggatgccattgctgtggaagctgcctgcactaatgttccggcgttatttcttgatgtctctgaccagacacccatcaacagtattattttctcccatgaagacggtacgcgactgggcgtggagcatctggtcgcattgggtcaccagcaaatcgcgctgttagcgggcccattaagttctgtctcggcgcgtctgcgtctggctggctggcataaatatctcactcgcaatcaaattcagccgatagcggaacgggaaggcgactggagtgccatgtccggttttcaacaaaccatgcaaatgctgaatgagggcatcgttcccactgcgatgctggttgccaacgatcagatggcgctgggcgcaatgcgcgccattaccgagtccgggctgcgcgttggtgcggatatctcggtagtgggatacgacgataccgaagacagctcatgttatatcccgccgttaaccaccatcaaacaggattttcgcctgctggggcaaaccagcgtggaccgcttgctgcaactctctcagggccaggcggtgaagggcaatcagctgttgcccgtctcactggtgaaaagaaaaaccaccctggcgcccaatacgcaaaccgcctctccccgcgcgttggccgattcattaatgcagctggcacgacaggtttcccgactggaaagcgggcaggctgcaaacgacgaaaactacgctttagtagcttaataactctgatagtgctagtgtagatctc</sbol:elements>
+    <sbol:version>1</sbol:version>
+    <sbol:displayId>lacI_repressor_sequence</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#lacI_repressor_sequence"/>
+  </sbol:Sequence>
+  <sbol:ComponentDefinition rdf:about="http://shortbol.org/v2#pTeT/1">
+    <sbol:sequence rdf:resource="http://shortbol.org/v2#pTeT_sequence/1"/>
+    <sbol:displayId>pTeT</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#pTeT"/>
+    <sbol:version>1</sbol:version>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://shortbol.org/v2#mCherry_cds/1">
+    <sbol:version>1</sbol:version>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:sequence rdf:resource="http://shortbol.org/v2#mCherry_cds_sequence/1"/>
+    <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#mCherry_cds"/>
+    <sbol:displayId>mCherry_cds</sbol:displayId>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+  </sbol:ComponentDefinition>
+  <sbol:ModuleDefinition rdf:about="http://shortbol.org/v2#NOR_gate/1">
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="http://shortbol.org/v2#NOR_gate/pBAD_fc/1">
+        <sbol:direction rdf:resource="http://sbols.org/v2#inout"/>
+        <sbol:definition rdf:resource="http://shortbol.org/v2#pBAD/1"/>
+        <sbol:displayId>pBAD_fc</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#NOR_gate/pBAD_fc"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:version>1</sbol:version>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:interaction>
+      <sbol:Interaction rdf:about="http://shortbol.org/v2#NOR_gate/arabinose_fc_i_stimulation_with_pBAD_fc/1">
+        <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#NOR_gate/arabinose_fc_i_stimulation_with_pBAD_fc"/>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://shortbol.org/v2#NOR_gate/arabinose_fc_i_stimulation_with_pBAD_fc/arabinose_fc_i_stimulation_with_pBAD_fc_arabinose_fc_i_stimulator/1">
+            <sbol:version>1</sbol:version>
+            <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#NOR_gate/arabinose_fc_i_stimulation_with_pBAD_fc/arabinose_fc_i_stimulation_with_pBAD_fc_arabinose_fc_i_stimulator"/>
+            <sbol:participant rdf:resource="http://shortbol.org/v2#NOR_gate/arabinose_fc/1"/>
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000459"/>
+            <sbol:displayId>arabinose_fc_i_stimulation_with_pBAD_fc_arabinose_fc_i_stimulator</sbol:displayId>
+          </sbol:Participation>
+        </sbol:participation>
+        <sbol:participation>
+          <sbol:Participation rdf:about="http://shortbol.org/v2#NOR_gate/arabinose_fc_i_stimulation_with_pBAD_fc/arabinose_fc_i_stimulation_with_pBAD_fc_pBAD_fc_i_stimulated/1">
+            <sbol:role rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000643"/>
+            <sbol:version>1</sbol:version>
+            <sbol:displayId>arabinose_fc_i_stimulation_with_pBAD_fc_pBAD_fc_i_stimulated</sbol:displayId>
+            <sbol:participant rdf:resource="http://shortbol.org/v2#NOR_gate/pBAD_fc/1"/>
+            <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#NOR_gate/arabinose_fc_i_stimulation_with_pBAD_fc/arabinose_fc_i_stimulation_with_pBAD_fc_pBAD_fc_i_stimulated"/>
+          </sbol:Participation>
+        </sbol:participation>
+        <sbol:version>1</sbol:version>
+        <sbol:displayId>arabinose_fc_i_stimulation_with_pBAD_fc</sbol:displayId>
+        <sbol:type rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000170"/>
+      </sbol:Interaction>
+    </sbol:interaction>
+    <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#NOR_gate"/>
+    <sbol:displayId>NOR_gate</sbol:displayId>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="http://shortbol.org/v2#NOR_gate/arabinose_fc/1">
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://shortbol.org/v2#arabinose/1"/>
+        <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#NOR_gate/arabinose_fc"/>
+        <sbol:displayId>arabinose_fc</sbol:displayId>
+        <sbol:direction rdf:resource="http://sbols.org/v2#inout"/>
+        <sbol:version>1</sbol:version>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:version>1</sbol:version>
+  </sbol:ModuleDefinition>
+  <sbol:Sequence rdf:about="http://shortbol.org/v2#Elowitz_rbs_sequence/1">
+    <sbol:version>1</sbol:version>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+    <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#Elowitz_rbs_sequence"/>
+    <sbol:elements>aaagaggagaaa</sbol:elements>
+    <sbol:displayId>Elowitz_rbs_sequence</sbol:displayId>
+  </sbol:Sequence>
+  <sbol:ComponentDefinition rdf:about="http://shortbol.org/v2#double_term/1">
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:displayId>double_term</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#double_term"/>
+    <ns0:description>I-GEM ID: BBa_B0015</ns0:description>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000141"/>
+    <sbol:sequence rdf:resource="http://shortbol.org/v2#double_term_sequence/1"/>
+    <sbol:version>1</sbol:version>
+  </sbol:ComponentDefinition>
+  <sbol:Sequence rdf:about="http://shortbol.org/v2#double_term_sequence/1">
+    <sbol:version>1</sbol:version>
+    <sbol:displayId>double_term_sequence</sbol:displayId>
+    <sbol:elements>ccaggcatcaaataaaacgaaaggctcagtcgaaagactgggcctttcgttttatctgttgtttgtcggtgaacgctctctactagagtcacactggctcaccttcgggtgggcctttctgcgtttata</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+    <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#double_term_sequence"/>
+  </sbol:Sequence>
+  <sbol:ComponentDefinition rdf:about="http://shortbol.org/v2#lacI_gene/1">
+    <sbol:displayId>lacI_gene</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="http://shortbol.org/v2#lacI_gene/lacI_gene_Elowitz_rbs_c_i_precedes_lacI_repressor_c/1">
+        <sbol:subject rdf:resource="http://shortbol.org/v2#lacI_gene/lacI_gene_Elowitz_rbs_c/1"/>
+        <sbol:displayId>lacI_gene_Elowitz_rbs_c_i_precedes_lacI_repressor_c</sbol:displayId>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:object rdf:resource="http://shortbol.org/v2#lacI_gene/lacI_gene_lacI_repressor_c/1"/>
+        <sbol:version>1</sbol:version>
+        <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#lacI_gene/lacI_gene_Elowitz_rbs_c_i_precedes_lacI_repressor_c"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+    <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#lacI_gene"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://shortbol.org/v2#lacI_gene/lacI_gene_double_term_c/1">
+        <sbol:version>1</sbol:version>
+        <sbol:definition rdf:resource="http://shortbol.org/v2#double_term/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:displayId>lacI_gene_double_term_c</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#lacI_gene/lacI_gene_double_term_c"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://shortbol.org/v2#lacI_gene/lacI_gene_lacI_repressor_c/1">
+        <sbol:version>1</sbol:version>
+        <sbol:definition rdf:resource="http://shortbol.org/v2#lacI_repressor/1"/>
+        <sbol:displayId>lacI_gene_lacI_repressor_c</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#lacI_gene/lacI_gene_lacI_repressor_c"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://shortbol.org/v2#lacI_gene/lacI_gene_Elowitz_rbs_c/1">
+        <sbol:displayId>lacI_gene_Elowitz_rbs_c</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#lacI_gene/lacI_gene_Elowitz_rbs_c"/>
+        <sbol:version>1</sbol:version>
+        <sbol:definition rdf:resource="http://shortbol.org/v2#Elowitz_rbs/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="http://shortbol.org/v2#lacI_gene/lacI_gene_lacI_repressor_c_i_precedes_double_term_c/1">
+        <sbol:object rdf:resource="http://shortbol.org/v2#lacI_gene/lacI_gene_double_term_c/1"/>
+        <sbol:version>1</sbol:version>
+        <sbol:displayId>lacI_gene_lacI_repressor_c_i_precedes_double_term_c</sbol:displayId>
+        <sbol:subject rdf:resource="http://shortbol.org/v2#lacI_gene/lacI_gene_lacI_repressor_c/1"/>
+        <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#lacI_gene/lacI_gene_lacI_repressor_c_i_precedes_double_term_c"/>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="http://shortbol.org/v2#mCherry/1">
+    <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#mCherry"/>
+    <sbol:component>
+      <sbol:Component rdf:about="http://shortbol.org/v2#mCherry/mCherry_Elowitz_rbs_c/1">
+        <sbol:displayId>mCherry_Elowitz_rbs_c</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <sbol:definition rdf:resource="http://shortbol.org/v2#Elowitz_rbs/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#mCherry/mCherry_Elowitz_rbs_c"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="http://shortbol.org/v2#mCherry/mCherry_mCherry_cds_c_i_precedes_double_term_c/1">
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:version>1</sbol:version>
+        <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#mCherry/mCherry_mCherry_cds_c_i_precedes_double_term_c"/>
+        <sbol:displayId>mCherry_mCherry_cds_c_i_precedes_double_term_c</sbol:displayId>
+        <sbol:object rdf:resource="http://shortbol.org/v2#mCherry/mCherry_double_term_c/1"/>
+        <sbol:subject rdf:resource="http://shortbol.org/v2#mCherry/mCherry_mCherry_cds_c/1"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+    <sbol:component>
+      <sbol:Component rdf:about="http://shortbol.org/v2#mCherry/mCherry_mCherry_cds_c/1">
+        <sbol:displayId>mCherry_mCherry_cds_c</sbol:displayId>
+        <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#mCherry/mCherry_mCherry_cds_c"/>
+        <sbol:definition rdf:resource="http://shortbol.org/v2#mCherry_cds/1"/>
+        <sbol:version>1</sbol:version>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="http://shortbol.org/v2#mCherry/mCherry_double_term_c/1">
+        <sbol:displayId>mCherry_double_term_c</sbol:displayId>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:definition rdf:resource="http://shortbol.org/v2#double_term/1"/>
+        <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#mCherry/mCherry_double_term_c"/>
+        <sbol:version>1</sbol:version>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="http://shortbol.org/v2#mCherry/mCherry_Elowitz_rbs_c_i_precedes_mCherry_cds_c/1">
+        <sbol:subject rdf:resource="http://shortbol.org/v2#mCherry/mCherry_Elowitz_rbs_c/1"/>
+        <sbol:version>1</sbol:version>
+        <sbol:object rdf:resource="http://shortbol.org/v2#mCherry/mCherry_mCherry_cds_c/1"/>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#mCherry/mCherry_Elowitz_rbs_c_i_precedes_mCherry_cds_c"/>
+        <sbol:displayId>mCherry_Elowitz_rbs_c_i_precedes_mCherry_cds_c</sbol:displayId>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+    <sbol:displayId>mCherry</sbol:displayId>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:version>1</sbol:version>
+  </sbol:ComponentDefinition>
+  <sbol:Sequence rdf:about="http://shortbol.org/v2#pTeT_sequence/1">
+    <sbol:version>1</sbol:version>
+    <sbol:elements>ttgacagcttatcatcgataagctttaat</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+    <sbol:displayId>pTeT_sequence</sbol:displayId>
+    <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#pTeT_sequence"/>
+  </sbol:Sequence>
+  <sbol:ComponentDefinition rdf:about="http://shortbol.org/v2#ATC/1">
+    <sbol:displayId>ATC</sbol:displayId>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#SmallMolecule"/>
+    <sbol:version>1</sbol:version>
+    <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#ATC"/>
+  </sbol:ComponentDefinition>
+  <sbol:Sequence rdf:about="http://shortbol.org/v2#mCherry_cds_sequence/1">
+    <sbol:persistentIdentity rdf:resource="http://shortbol.org/v2#mCherry_cds_sequence"/>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+    <sbol:displayId>mCherry_cds_sequence</sbol:displayId>
+    <sbol:elements>atggcttcctccgaagacgttatcaaagagttcatgcgtttcaaagttcgtatggaaggttccgttaacggtcacgagttcgaaatcgaaggtgaaggtgaaggtcgtccgtacgaaggtacccagaccgctaaactgaaagttaccaaaggtggtccgctgccgttcgcttgggacatcctgtccccgcagttccagtacggttccaaagcttacgttaaacacccggctgacatcccggactacctgaaactgtccttcccggaaggtttcaaatgggaacgtgttatgaacttcgaagacggtggtgttgttaccgttacccaggactcctccctgcaagacggtgagttcatctacaaagttaaactgcgtggtaccaacttcccgtccgacggtccggttatgcagaaaaaaaccatgggttgggaagcttccaccgaacgtatgtacccggaagacggtgctctgaaaggtgaaatcaaaatgcgtctgaaactgaaagacggtggtcactacgacgctgaagttaaaaccacctacatggctaaaaaaccggttcagctgccgggtgcttacaaaaccgacatcaaactggacatcacctcccacaacgaagactacaccatcgttgaacagtacgaacgtgctgaaggtcgtcactccaccggtgcttaataacgctgatagtgctagtgtagatcgc</sbol:elements>
+    <sbol:version>1</sbol:version>
+  </sbol:Sequence>
+</rdf:RDF>

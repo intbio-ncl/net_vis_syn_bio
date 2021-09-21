@@ -24,6 +24,13 @@ class TestModelGraph(unittest.TestCase):
             edge_label = e["display_name"]
             self.assertIn(edge_label,k)
 
+    def test_get_class_code(self):
+        for n,v,e in self.mg.edges(keys=True):
+            n_key = self.mg.nodes[n]["key"]
+            if e == RDF.type:
+                actual_code = self.mg.get_class_code(n_key)
+                self.assertEqual(actual_code,n)
+
     def test_search(self):
         all_edges = self.mg.edges(data=True,keys=True)
         res = list(self.mg.search((None,None,None)))
@@ -53,7 +60,7 @@ class TestModelGraph(unittest.TestCase):
             elif isinstance(node[1]["key"],BNode):
                 self.assertEqual(len(parent),0)
             else:
-                self.assertEqual(parent,[c[1] for c in self.mg.search((node[0],RDFS.subClassOf,None))])
+                self.assertEqual(parent,[c[1] for c in self.mg.search((node[0],RDFS.subClassOf,None)) if not isinstance(c[1][1]["key"],BNode)])
 
     def test_get_child_classes(self):
         all_classes = self.mg.get_classes(False)
@@ -78,7 +85,7 @@ class TestModelGraph(unittest.TestCase):
                 expected_depth += 1
                 next_level = []
                 for child,c_data in children:
-                    self.assertEqual(self.mg.get_class_depth(child),expected_depth)
+                    self.assertEqual(self.mg.get_class_depth(child),expected_depth,c_data)
                     next_level += self.mg.get_child_classes(child)
                 children = next_level
 
@@ -86,6 +93,30 @@ class TestModelGraph(unittest.TestCase):
         a_result = self.mg.get_base_class()
         e_result = URIRef("http://www.nv_ontology.org/Entity")
         self.assertEqual(e_result,a_result[0][1]["key"])
+
+    def test_get_restrictions(self):
+        i_t = URIRef("http://www.nv_ontology.org/Repression")
+        cc = self.mg.get_class_code(i_t)
+        restrictions = self.mg.get_restrictions_on(cc)
+        self.assertTrue(len(restrictions) > 0)
+        for restriction in restrictions:
+            self.assertEqual(self.mg.get_rdf_type(restriction)[1]["key"],OWL.Restriction)
+
+
+    def test_get_constraint(self):
+        i_t = URIRef("http://www.nv_ontology.org/Repression")
+        cc = self.mg.get_class_code(i_t)
+        restrictions = {}
+        for restriction in self.mg.get_restrictions_on(cc):
+            predicate,constraints = self.mg.get_constraint(restriction)
+            restrictions[predicate] = constraints
+        self.assertTrue(len(restrictions) > 0)
+        ce_code = self.mg.get_class_code(self.mg.identifiers.objects.conceptual_entity)
+        for k,v in restrictions.items():
+            self.assertEqual(k,self.mg.identifiers.predicates.consistsOf)
+            for pred,constraint in v:
+                self.assertTrue(self.mg.is_base(ce_code,constraint[0]))
+
 
 def diff(list1,list2):
     diff = []

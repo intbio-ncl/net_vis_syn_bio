@@ -68,7 +68,6 @@ class ViewBuilder(AbstractViewBuilder):
     def relation(self):
         node_attrs = {}
         edges = []
-
         def _handle_union(r):
             for r,r_data in self._builder.get_union(r):
                 for r in self._builder.resolve_union(r):
@@ -76,14 +75,17 @@ class ViewBuilder(AbstractViewBuilder):
 
         # For each union in each range/domain combo add and edge.
         for p,data in self._builder.get_properties():
-            for r,r_data in self._builder.get_range(p):
-                for r,r_data in _handle_union(r):
-                    for d,d_data in self._builder.get_domain(p):
-                        for e,e_data in _handle_union(d):
-                            node_attrs[r] = r_data
-                            node_attrs[e] = e_data
-                            edge = _edge_label(_get_name(data["key"]))
-                            edges.append((r,e,data["key"],edge))
+            range_data = self._builder.get_range(p)
+            if len(range_data) == 0:
+                continue
+            r,r_data = range_data
+            for r,r_data in _handle_union(r):
+                d,d_data = self._builder.get_domain(p)
+                for e,e_data in _handle_union(d):
+                    node_attrs[r] = r_data
+                    node_attrs[e] = e_data
+                    edge = _edge_label(_get_name(data["key"]))
+                    edges.append((r,e,data["key"],edge))
         return self._builder.sub_graph(edges,node_attrs)
 
 

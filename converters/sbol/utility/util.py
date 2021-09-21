@@ -69,6 +69,20 @@ class SBOLGraphUtil:
         return roles
     
     def search(self,pattern,lazy=False):
+        if any([isinstance(p,list) for p in pattern]):
+            results = []
+            sp,pp,op = pattern
+            for s,p,o in self.graph:
+                if sp and s not in sp and s != sp:
+                    continue
+                if pp and p not in pp and p != pp:
+                    continue
+                if op and o not in op and o != op:
+                    continue
+                if lazy:
+                    return (s,p,o)
+                results.append((s,p,o))
+            return results
         if lazy:
             for res in self.graph.triples(pattern):
                 return res

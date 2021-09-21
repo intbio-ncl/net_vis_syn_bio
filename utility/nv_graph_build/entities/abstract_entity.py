@@ -2,6 +2,7 @@ from rdflib import URIRef
 from identifiers import identifiers
 from property.property import PartOf
 from equivalent.abstract_equivalent import PhysicalEquivalent
+from equivalent.abstract_equivalent import ConceptualEquivalent
 
 default_properties = []
 class Entity:
@@ -29,5 +30,9 @@ class PhysicalEntity(Entity):
         
 class ConceptualEntity(Entity):
     def __init__(self,disjoint=True,properties=[],equivalents=[],restrictions=[]):
+        if equivalents == []:
+            equiv = [ConceptualEquivalent()]
+        else:
+            equiv = equivalents
         super().__init__(disjoint,properties=properties,
-        equivalents=equivalents,restrictions=restrictions)  
+        equivalents=equiv,restrictions=restrictions)  

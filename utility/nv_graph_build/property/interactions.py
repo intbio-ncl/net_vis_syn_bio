@@ -3,31 +3,30 @@ from property.property import Direction
 from datatype.datatype import Input,Output
 from equivalent import property_equivalent as pe
 
-class ReactionProperty(Property):
+class InteractionProperty(Property):
     def __init__(self,range,properties=[],equivalents=[]):
         super().__init__(range,properties=properties,equivalents=equivalents)
 
-class Reactant(ReactionProperty):
+class Activator(InteractionProperty):
     def __init__(self,range):
         p = [Direction(Input())]
-        e = [pe.ReactantEquivalent(),
-             pe.InhibitorEquivalent(),
-             pe.StimulatorEquivalent(),
-             pe.PromoterEquivalent(),
-             pe.ModifierEquivalent()]
+        e = [pe.ActivatorEquivalent()]
         super().__init__(range,p,e)
 
-class Product(ReactionProperty):
+class Activated(InteractionProperty):
     def __init__(self,range):
         p = [Direction(Output())]
-        e = [pe.ProductEquivalent(),
-             pe.InhibitedEquivalent(),
-             pe.StimulatedEquivalent(),
-             pe.ModifiedEquivalent()]
+        e = [pe.ActivatedEquivalent()]
         super().__init__(range,p,e)
 
-class Template(ReactionProperty):
+class Repressor(InteractionProperty):
     def __init__(self,range):
         p = [Direction(Input())]
-        e = [pe.TemplateEquivalent()]
+        e = [pe.RepressorEquivalent()]
+        super().__init__(range,p,e)
+
+class Repressed(InteractionProperty):
+    def __init__(self,range):
+        p = [Direction(Output())]
+        e = [pe.RepressedEquivalent()]
         super().__init__(range,p,e)

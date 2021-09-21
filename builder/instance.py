@@ -25,13 +25,16 @@ class InstanceBuilder(AbstractBuilder):
         self.view = self._view_h.hierarchy()
 
     def set_interaction_verbose_view(self):
-        self.view = self._view_h.verbose()
+        self.view = self._view_h.interaction_verbose()
 
     def set_interaction_view(self):
         self.view = self._view_h.interaction()
 
     def set_interaction_genetic_view(self):
         self.view = self._view_h.genetic_interaction()
+
+    def set_protein_protein_interaction_view(self):
+        self.view = self._view_h.protein_interaction()
 
     def set_ppi_view(self):
         self.view = self._view_h.ppi()

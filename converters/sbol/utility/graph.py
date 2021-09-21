@@ -215,6 +215,11 @@ class SBOLGraph:
         else:
             return [r[2] for r in self.graph.get_roles(subject)]
 
+    def get_metadata(self,subject):
+        m_preds = [identifiers.predicates.role,
+                   identifiers.predicates.type]
+        return [m[1:] for m in self.search((subject,m_preds,None))]
+
     def get_triples(self,subject):
         return self.graph.sub_graph((subject,None,None))
     

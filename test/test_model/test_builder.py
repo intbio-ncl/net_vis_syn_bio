@@ -91,6 +91,7 @@ class TestModes(unittest.TestCase):
 
     def tearDown(self):
         pass
+    
     def test_sub_tree(self):
         rand_sample_num = 20
         sub_edges = sample(list(self.builder.edges(keys=True,data=True)),rand_sample_num)
