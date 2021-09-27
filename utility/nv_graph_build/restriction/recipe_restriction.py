@@ -16,3 +16,13 @@ class GeneticProductionRecipe(RecipeRestriction):
     def __init__(self):
         recipe = recipes.GeneticProductionRecipe()
         super().__init__(recipe)
+
+class DegradationRecipe(RecipeRestriction):
+    def __init__(self):
+        recipe = recipes.DegradationRecipe()
+        super().__init__(recipe)
+
+class BindsRecipe(RecipeRestriction):
+    def __init__(self):
+        recipe = recipes.BindsRecipe()
+        super().__init__(recipe)

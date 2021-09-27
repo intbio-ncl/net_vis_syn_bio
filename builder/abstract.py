@@ -74,6 +74,23 @@ class AbstractBuilder:
         subject = self._resolve_subject(subject)
         return self._graph.get_rdf_type(subject)
 
+    def resolve_list(self,list_id):
+        elements = []
+        list_id = self._resolve_subject(list_id)
+        next_id = list_id
+        while True:
+            res = self._graph.search((next_id,None,None))
+            f = [c[1] for c in res if c[2] == RDF.first]
+            r = [c[1] for c in res if c[2] == RDF.rest]
+            if len(f) != 1 or len(r) != 1:
+                raise ValueError(f'{list_id} is a malformed list.')
+            elements.append(f[0])
+            r,r_data = r[0]
+            if r_data["key"] == RDF.nil:
+                break
+            next_id = r
+        return elements
+
     def _resolve_subject(self,subject):
         if subject in self._graph:
             return subject

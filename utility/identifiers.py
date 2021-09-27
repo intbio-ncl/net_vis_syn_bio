@@ -4,8 +4,7 @@ import re
 from rdflib import RDF,OWL,RDFS
 from rdflib.term import BNode, URIRef
 
-
-
+nv_namespace = URIRef("http://www.nv_ontology.org/")
 class KnowledgeGraphIdentifiers:
     def __init__(self):
         self.objects = Objects()
@@ -16,7 +15,7 @@ class KnowledgeGraphIdentifiers:
 class Namespaces:
     def __init__(self):
         identifiers = URIRef('http://identifiers.org/')
-        self.nv = URIRef("http://www.nv_ontology.org/")
+        self.nv = nv_namespace
         self.so = URIRef(identifiers + 'so/SO:')
         self.sbo = URIRef(identifiers + 'biomodels.sbo/SBO:') 
         self.i_edam = URIRef(identifiers + 'edam/')
@@ -37,34 +36,64 @@ class Namespaces:
 class Predicates:
     def __init__(self):
         pass
+    
+    def __iter__(self):
+        for i in dir(self):
+            attr = getattr(self,i)
+            if isinstance(attr,(URIRef)):
+                yield attr
 
 class Objects:
     def __init__(self):
         pass
 
+    def __iter__(self):
+        for i in dir(self):
+            attr = getattr(self,i)
+            if isinstance(attr,(URIRef)):
+                yield attr
+
 class Roles:
     def __init__(self):
         pass
+    
+    def __iter__(self):
+        for i in dir(self):
+            attr = getattr(self,i)
+            if isinstance(attr,(URIRef)):
+                yield attr
 
 def produce_identifiers(graph):
-    namespaces = [OWL,RDF.uri,RDFS.uri]
+    bl_namespaces = [OWL,RDF.uri,RDFS.uri]
+    known_namespaces = [OWL,RDF.uri,RDFS.uri]
     for n,v,e in graph.search((None,None,None)):
         n,n_data = n
         v,v_data = v
         n_key = n_data["key"]
         v_key = v_data["key"]
+
+        # Adds Classes.
         if e == RDF.type and v_key == OWL.Class and not isinstance(n_key, BNode):
             _apply_var_variants(Objects,n_key)
-        if e == OWL.hasValue :
+        # Adds external ontology terms
+        if e == OWL.hasValue:
             _apply_var_variants(Roles,v_key)
+        if nv_namespace in e:
+            _apply_var_variants(Objects,v_key)
+        
+        # Adds object properties
         if v_key == OWL.ObjectProperty:
             _apply_var_variants(Predicates,n_key)  
-        for ns in namespaces:
-            if ns in e:
-                break
-        else:
-            _apply_var_variants(Predicates,e)       
-        _extract_namespaces((n_key,v_data,e),namespaces)
+
+        if any(ext in e for ext in bl_namespaces):
+            continue
+        if e in [getattr(Predicates,i) for i in dir(Predicates)]:
+            continue
+        # Adds any predicates that aren't attached to a object
+        # (Property of properties)
+        _apply_var_variants(Predicates,e)       
+        _extract_namespaces((n_key,v_data,e),known_namespaces)
+    
     return KnowledgeGraphIdentifiers()
 
 

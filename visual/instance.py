@@ -54,7 +54,20 @@ class InstanceVisual(AbstractVisual):
                             self.add_edge_no_labels]
         return self._set_preset(preset_functions)
 
-    def set_interaction_verbose_preset(self):
+    def set_interaction_level_0_explicit_preset(self):
+        '''
+        Pre-set methods with an affinity for displaying the explicit interaction view.
+        '''
+        preset_functions = [self.set_network_mode,
+                            self.set_interaction_explicit_view,
+                            self.set_dagre_layout,
+                            self.add_type_edge_color,
+                            self.add_role_node_color,
+                            self.add_edge_no_labels,
+                            self.add_node_name_labels]
+        return self._set_preset(preset_functions)
+
+    def set_interaction_level_1_verbose_preset(self):
         '''
         Pre-set methods with an affinity for displaying the verbose interaction view.
         '''
@@ -67,7 +80,7 @@ class InstanceVisual(AbstractVisual):
                             self.add_node_name_labels]
         return self._set_preset(preset_functions)
 
-    def set_interaction_preset(self):
+    def set_interaction_level_2_standard_preset(self):
         '''
         Pre-set methods with an affinity for displaying the interaction view.
         '''
@@ -80,21 +93,7 @@ class InstanceVisual(AbstractVisual):
                             self.add_node_name_labels]
         return self._set_preset(preset_functions)
 
-    def set_protein_protein_interaction_preset(self):
-        '''
-        Pre-set methods with an affinity for displaying the ppi interaction view.
-        '''
-        preset_functions = [self.set_network_mode,
-                            self.set_protein_protein_interaction_view,
-                            self.set_dagre_layout,
-                            self.add_type_edge_color,
-                            self.add_standard_node_color,
-                            self.add_node_name_labels,
-                            self.add_edge_no_labels,
-                            self.set_bezier_edge_shape]
-        return self._set_preset(preset_functions)
-
-    def set_interaction_genetic_preset(self):
+    def set_interaction_level_3_genetic_preset(self):
         '''
         Pre-set methods with an affinity for displaying the genetic interaction view.
         '''
@@ -105,6 +104,20 @@ class InstanceVisual(AbstractVisual):
                             self.add_genetic_node_color,
                             self.add_edge_no_labels,
                             self.add_node_name_labels,
+                            self.set_bezier_edge_shape]
+        return self._set_preset(preset_functions)
+
+    def set_interaction_level_4_protein_preset(self):
+        '''
+        Pre-set methods with an affinity for displaying the ppi interaction view.
+        '''
+        preset_functions = [self.set_network_mode,
+                            self.set_protein_protein_interaction_view,
+                            self.set_dagre_layout,
+                            self.add_type_edge_color,
+                            self.add_standard_node_color,
+                            self.add_node_name_labels,
+                            self.add_edge_no_labels,
                             self.set_bezier_edge_shape]
         return self._set_preset(preset_functions)
 
@@ -119,10 +132,19 @@ class InstanceVisual(AbstractVisual):
         else:
            self.view =self.set_pruned_view
 
+    def set_interaction_explicit_view(self):
+        '''
+        Sub graph viewing all consituent reactions of each interaction. 
+        '''
+        if self.view == self.set_interaction_explicit_view:
+            self._builder.set_interaction_explicit_view()
+        else:
+           self.view =self.set_interaction_explicit_view
+
     def set_interaction_verbose_view(self):
         '''
-        Sub graph viewing all interactions within the graph including explicit 
-        visualisation to participants. 
+        Sub graph viewing all interactions within the graph 
+        including explicit inputs and outputs.
         '''
         if self.view == self.set_interaction_verbose_view:
             self._builder.set_interaction_verbose_view()

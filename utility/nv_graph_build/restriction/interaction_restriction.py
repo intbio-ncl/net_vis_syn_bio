@@ -16,3 +16,13 @@ class GeneticProductionRoleRestriction(RoleRestriction):
     def __init__(self):
         values = [identifiers.roles.genetic_production]
         super().__init__(values)
+
+class DegradationRoleRestriction(RoleRestriction):
+    def __init__(self):
+        values = [identifiers.roles.degradation]
+        super().__init__(values)
+
+class BindsRoleRestriction(RoleRestriction):
+    def __init__(self):
+        values = [identifiers.roles.noncovalent_bonding]
+        super().__init__(values)

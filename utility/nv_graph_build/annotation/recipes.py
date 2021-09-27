@@ -20,3 +20,14 @@ class GeneticProductionRecipe(Recipe):
         recipe = [reaction.Transcription(),
                   reaction.Translation()]
         super().__init__(recipe)
+
+class DegradationRecipe(Recipe):
+    def __init__(self):
+        recipe = [reaction.NonCovalentBonding()]
+        super().__init__(recipe)
+
+class BindsRecipe(Recipe):
+    def __init__(self):
+        recipe = [reaction.NonCovalentBonding()]
+        super().__init__(recipe)
+        

@@ -37,6 +37,19 @@ class TestSearch(unittest.TestCase):
 
     def tearDown(self):
         pass
+    
+    def test_get_methods(self):
+        expected_entities = [(k,v,e) for k,v,e in self.graph.search((None,RDF.type,None)) if not isinstance(k[1]["key"],BNode)]
+        actual_entities = self.builder.get_entity() 
+        a_diff = diff(expected_entities,actual_entities)
+        self.assertEqual(len(a_diff),0)
+        for k,v,e in self.builder.get_interaction():
+            k,k_data = k
+            v,v_data = v
+            actual_consists = self.builder.get_consistsof(k)            
+            expected_consists = self.graph.search((k,self.builder._model_graph.identifiers.predicates.consistsOf,None))
+            c_diff = diff(expected_consists,actual_consists)
+            self.assertEqual(len(c_diff),0)
 
     def test_get_entities(self):
         rdf_types = [c[0][1]["key"] for c in self.graph.search((None,RDF.type,None))]
@@ -69,6 +82,7 @@ class TestSearch(unittest.TestCase):
 class TestViews(unittest.TestCase):
     def setUp(self):
         self.builder = InstanceBuilder(model_file,instance_file)
+        self.model = self.builder._model_graph
 
     def tearDown(self):
         pass
@@ -76,6 +90,8 @@ class TestViews(unittest.TestCase):
     def test_pruned(self):
         self.builder.set_pruned_view()
         graph = self.builder.view
+        for n,v,e in graph.edges(keys=True):
+            self.assertIn(e,self.model.identifiers.predicates)
 
     def test_heirarchy(self):
         self.builder.set_hierarchy_view()
@@ -84,6 +100,90 @@ class TestViews(unittest.TestCase):
             actual_children = [[c[1],graph.nodes[c[1]]] for c in graph.edges(n)]
             expected_children = [c[0] for c in self.builder.get_children(n)]
             self.assertEqual(expected_children, actual_children)
+
+    def test_interaction_explicit(self):
+        self.builder.set_interaction_explicit_view()
+        graph = self.builder.view
+        self.assertTrue(_graph_element_check(graph))
+        interaction_obj = self.model.identifiers.objects.interaction
+        physical_entity_obj = self.model.identifiers.objects.physical_entity
+        direction_pred = self.model.identifiers.predicates.direction
+        input_pred = self.model.identifiers.objects.input
+        output_pred = self.model.identifiers.objects.output
+        interaction_class_code = self.model.get_class_code(interaction_obj)
+        pe_class_code = self.model.get_class_code(physical_entity_obj)
+        interactions_classes = [d[1]["key"] for d in self.model.get_derived(interaction_class_code)]
+        interaction_predicates = {k[1]["key"]:v[1]["key"] for (k,v,e) in self.model.search((None,direction_pred,None))}
+        for n,v,e in graph.edges(keys=True):
+            if self.builder.get_rdf_type(n)[1]["key"] in interactions_classes:
+                self.assertEqual(interaction_predicates[e],output_pred)
+                e_type = self.builder.get_rdf_type(v)[1]["key"]
+                self.assertTrue(self.model.is_derived(e_type,pe_class_code))
+            elif self.builder.get_rdf_type(v)[1]["key"] in interactions_classes:
+                self.assertEqual(interaction_predicates[e],input_pred)
+                e_type = self.builder.get_rdf_type(n)[1]["key"]
+                self.assertTrue(self.model.is_derived(e_type,pe_class_code))
+            else:
+                self.fail("Neither node is an interaction.")
+
+    def test_interaction_verbose(self):
+        self.builder.set_interaction_verbose_view()
+        graph = self.builder.view
+        self.assertTrue(_graph_element_check(graph))
+        interaction_obj = self.model.identifiers.objects.interaction
+        physical_entity_obj = self.model.identifiers.objects.physical_entity
+        direction_pred = self.model.identifiers.predicates.direction
+        input_pred = self.model.identifiers.objects.input
+        output_pred = self.model.identifiers.objects.output
+        interaction_class_code = self.model.get_class_code(interaction_obj)
+        pe_class_code = self.model.get_class_code(physical_entity_obj)
+        interactions_classes = [d[1]["key"] for d in self.model.get_derived(interaction_class_code)]
+        interaction_predicates = {k[1]["key"]:v[1]["key"] for (k,v,e) in self.model.search((None,direction_pred,None))}
+        for n,v,e in graph.edges(keys=True):
+            if self.builder.get_rdf_type(n)[1]["key"] in interactions_classes:
+                self.assertEqual(interaction_predicates[e],output_pred)
+                e_type = self.builder.get_rdf_type(v)[1]["key"]
+                self.assertTrue(self.model.is_derived(e_type,pe_class_code))
+            elif self.builder.get_rdf_type(v)[1]["key"] in interactions_classes:
+                self.assertEqual(interaction_predicates[e],input_pred)
+                e_type = self.builder.get_rdf_type(n)[1]["key"]
+                self.assertTrue(self.model.is_derived(e_type,pe_class_code))
+            else:
+                self.fail("Neither node is an interaction.")
+    
+    def test_interaction(self):
+        self.builder.set_interaction_view()
+        graph = self.builder.view
+        self.assertTrue(_graph_element_check(graph))
+        interaction_obj = self.model.identifiers.objects.interaction
+        physical_entity_obj = self.model.identifiers.objects.physical_entity
+        interaction_class_code = self.model.get_class_code(interaction_obj)
+        pe_class_code = self.model.get_class_code(physical_entity_obj)
+        interactions_classes = [d[1]["key"] for d in self.model.get_derived(interaction_class_code)]
+        pe_classes = [d[1]["key"] for d in self.model.get_derived(pe_class_code)]
+        for n,v,e in graph.edges(keys=True):
+            self.assertIn(e,interactions_classes)
+            self.assertIn(self.builder.get_rdf_type(n)[1]["key"],pe_classes)
+            self.assertIn(self.builder.get_rdf_type(v)[1]["key"],pe_classes)
+            
+
+    def test_interaction_genetic(self):
+        self.builder.set_interaction_genetic_view()
+        graph = self.builder.view
+        self.assertTrue(_graph_element_check(graph))
+        interaction_obj = self.model.identifiers.objects.interaction
+        physical_entity_obj = self.model.identifiers.objects.physical_entity
+        interaction_class_code = self.model.get_class_code(interaction_obj)
+        pe_class_code = self.model.get_class_code(physical_entity_obj)
+        interactions_classes = [d[1]["key"] for d in self.model.get_derived(interaction_class_code)]
+        pe_classes = [d[1]["key"] for d in self.model.get_derived(pe_class_code)]
+        for n,v,e in graph.edges(keys=True):
+            self.assertIn(e,interactions_classes)
+            self.assertIn(self.builder.get_rdf_type(n)[1]["key"],pe_classes)
+            self.assertIn(self.builder.get_rdf_type(v)[1]["key"],pe_classes)
+
+    def test_interaction_protein(self):
+        self.fail("Not Implemented.")
 
 class TestModes(unittest.TestCase):
         def setUp(self):
@@ -162,6 +262,15 @@ class TestModes(unittest.TestCase):
 
 
 
+def diff(list1,list2):
+    diff = []
+    for n,v,e in list1:
+        for n1,v1,e1 in list2:
+            if n == n1 and v == v1 and e == e1:
+                break
+        else:
+            diff.append((n,v,e,k))
+    return diff
 
 
 if __name__ == '__main__':

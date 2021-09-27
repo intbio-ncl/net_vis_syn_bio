@@ -11,11 +11,6 @@ class TranscriptionRoleEquivalent(ConceptualEquivalent):
         restrictions = [rr.TranscriptionRoleRestriction()]
         super().__init__(restrictions)
 
-class DegradationRoleEquivalent(ConceptualEquivalent):
-    def __init__(self):
-        restrictions = [rr.DegradationRoleRestriction()]
-        super().__init__(restrictions)
-
 class NonCovBondingRoleEquivalent(ConceptualEquivalent):
     def __init__(self):
         restrictions = [rr.NonCovBondingRoleRestriction()]

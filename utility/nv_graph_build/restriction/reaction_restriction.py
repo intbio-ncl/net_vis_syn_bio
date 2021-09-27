@@ -11,11 +11,6 @@ class TranscriptionRoleRestriction(RoleRestriction):
         values = [identifiers.roles.transcription]
         super().__init__(values)
 
-class DegradationRoleRestriction(RoleRestriction):
-    def __init__(self):
-        values = [identifiers.roles.degradation]
-        super().__init__(values)
-
 class NonCovBondingRoleRestriction(RoleRestriction):
     def __init__(self):
         values = [identifiers.roles.noncovalent_bonding]

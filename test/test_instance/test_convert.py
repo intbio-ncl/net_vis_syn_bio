@@ -57,7 +57,7 @@ class TestConvertInstance(unittest.TestCase):
             related_cds = [rdf_graph.get_definition(c) for c in rdf_graph.get_components(cd)]
             [expected_edges.append((cd,None,rc)) for rc in related_cds]
         
-        part_of_pred = URIRef("http://www.nv_ontology.org/partOf")
+        part_of_pred = URIRef("http://www.nv_ontology.org/hasPart")
         edge_keys = [k for n,v,k in graph.edges(keys=True)]
         e_e_edges = [k for k in edge_keys if k == part_of_pred]
         self.assertEqual(len(e_e_edges),len(expected_edges))
@@ -92,7 +92,7 @@ class TestConvertInstance(unittest.TestCase):
             related_cds = [rdf_graph.get_definition(c) for c in rdf_graph.get_components(cd)]
             [expected_edges.append((cd,None,rc)) for rc in related_cds]
         
-        part_of_pred = URIRef("http://www.nv_ontology.org/partOf")
+        part_of_pred = URIRef("http://www.nv_ontology.org/hasPart")
         edge_keys = [k for n,v,k in graph.edges(keys=True)]
         e_e_edges = [k for k in edge_keys if k == part_of_pred]
         self.assertEqual(len(e_e_edges),len(expected_edges))

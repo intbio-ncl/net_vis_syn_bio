@@ -16,7 +16,7 @@ class ModelGraph(AbstractGraph):
         raise ValueError(f'{label} is not in graph.')
 
     def get_child_predicate(self):
-        return self.identifiers.predicates.partOf
+        return self.identifiers.predicates.hasPart
 
     def get_classes(self,bnodes=True):
         classes = self.search((None,RDF.type,OWL.Class))
@@ -49,6 +49,15 @@ class ModelGraph(AbstractGraph):
                     return True
             return False
         return down_search(child,parent)
+
+    def get_derived(self,class_id):
+        derived = []
+        def down_search(inner_id):
+            for cc in self.get_child_classes(inner_id):
+                derived.append(cc)
+                down_search(cc[0])
+        down_search(class_id)
+        return derived
 
     def get_parent_classes(self,class_id):
         return [c[1] for c in self.search((class_id,RDFS.subClassOf,None)) 

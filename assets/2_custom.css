@@ -191,3 +191,7 @@ details{
     height: 100%;
     overflow-y: scroll;
 }
+
+#sidebar-left{
+    min-width: 10%;
+}

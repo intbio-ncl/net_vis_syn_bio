@@ -15,3 +15,13 @@ class GeneticProductionRoleEquivalent(ConceptualEquivalent):
     def __init__(self):
         restrictions = [ir.GeneticProductionRoleRestriction()]
         super().__init__(restrictions)
+
+class DegradationRoleEquivalent(ConceptualEquivalent):
+    def __init__(self):
+        restrictions = [ir.DegradationRoleRestriction()]
+        super().__init__(restrictions)
+
+class BindsRoleEquivalent(ConceptualEquivalent):
+    def __init__(self):
+        restrictions = [ir.BindsRoleRestriction()]
+        super().__init__(restrictions)

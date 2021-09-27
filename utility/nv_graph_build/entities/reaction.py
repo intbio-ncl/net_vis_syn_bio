@@ -31,16 +31,6 @@ class Translation(Reaction):
             reactions.Product(PhysicalEntity)]
         super().__init__(equivalents=r,properties=p)
 
-class Degradation(Reaction):
-    def __init__(self,equivalents=[]):
-        if equivalents == []:
-            r = [ce.DegradationRoleEquivalent()]
-        else:
-            r = equivalents
-        p = [reactions.Reactant(PhysicalEntity),
-            reactions.Product(PhysicalEntity)]
-        super().__init__(equivalents=r,properties=p)
-
 class NonCovalentBonding(Reaction):
     def __init__(self,equivalents=[]):
         if equivalents == []:

@@ -18,15 +18,10 @@ class Namespace:
         self.edam = URIRef('http://edamontology.org/format')
         self.prov = URIRef('http://www.w3.org/ns/prov#')
 
-
 class Predicates:
     def __init__(self, namespaces):
         self.namespaces = namespaces
         self.rdf_type = URIRef(RDF.type)
-        self.role = URIRef(namespaces.nv + "role")
-        self.partOf = URIRef(namespaces.nv + "partOf")
-        self.consistsOf = URIRef(namespaces.nv + "consistsOf")
-        self.hasCharacteristic = URIRef(namespaces.nv + "hasCharacteristic")
 
 class Roles:
     def __init__(self, namespaces):

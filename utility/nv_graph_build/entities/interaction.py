@@ -62,4 +62,28 @@ class GeneticProduction(Interaction):
         equivalents=equiv,restrictions=res)
 
 
+class Degradation(Interaction):
+    def __init__(self,properties=[],equivalents=[],restrictions=[]):
+        if equivalents == []:
+            equiv = [ce.DegradationRoleEquivalent()]
+        else:
+            equiv = equivalents
+        if restrictions == []:
+            res = [rr.DegradationRecipe()]
+        else:
+            res = restrictions
+        super().__init__(properties=properties,
+        equivalents=equiv,restrictions=res)
 
+class Binds(Interaction):
+    def __init__(self,properties=[],equivalents=[],restrictions=[]):
+        if equivalents == []:
+            equiv = [ce.BindsRoleEquivalent()]
+        else:
+            equiv = equivalents
+        if restrictions == []:
+            res = [rr.BindsRecipe()]
+        else:
+            res = restrictions
+        super().__init__(properties=properties,
+        equivalents=equiv,restrictions=res)

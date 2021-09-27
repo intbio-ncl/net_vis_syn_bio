@@ -94,22 +94,22 @@ def _get_interaction_properties(identity,i_type,i_graph,m_graph,s_graph):
         else:
             # Check participant is of correct NV:type
             r_id,r_data = m_graph.get_range(p)
-            potential_ios = {}
+            potential_ios = []
             for r,data in m_graph.get_union(r_id):
                 for r in m_graph.resolve_union(r):
                     pred,val = r
-                    for k,v in io_data.items():
-                        child = v[pred]
+                    for io in io_data:
+                        child = io[pred]
                         parent = val[1]["key"]
-                        if (pred in v.keys() and 
+                        if (pred in io.keys() and 
                            (child == parent or m_graph.is_derived(child,val[0]))):
-                            potential_ios[k] = v
+                            potential_ios.append(io)
             equivalents = m_graph.get_equivalent_properties(p)
-            for k,v in potential_ios.items():
-                metadata = v["meta"]
+            for io in potential_ios:
+                metadata = io["meta"]
                 for e_id,e_data in equivalents:
                     if e_data["key"] in metadata:
-                        triples.append((identity,p_key,k))
+                        triples.append((identity,p_key,io["definition"]))
                         break
     return triples
 
@@ -127,11 +127,12 @@ def _build_restriction_obj(parent,predicate,value,curr_subjects):
 
 def _get_io_data(identity,i_graph,s_graph):
     # Gets metadata and RDF type for each SBOL: participant (i/o elements).
-    object_data = {}
+    object_data = []
     for p in s_graph.get_participants(interaction=identity):
         definition = s_graph.get_definition(s_graph.get_participant(p))
-        object_data[definition] = {"meta" : [m[-1] for m in s_graph.get_metadata(p)],
-                                   RDF.type : _get_nv_type(definition,i_graph)}
+        object_data.append({"definition" : definition,
+                            "meta" : [m[-1] for m in s_graph.get_metadata(p)],
+                            RDF.type : _get_nv_type(definition,i_graph)})
     return object_data
 
 def _get_restrictions(i_type_c,m_graph):
@@ -144,7 +145,7 @@ def _get_restrictions(i_type_c,m_graph):
 
 def _map_entities(cd,sbol_graph,model_graph):
     triples = []
-    part_of = model_graph.identifiers.predicates.partOf
+    part_of = model_graph.identifiers.predicates.hasPart
     for sc in [sbol_graph.get_definition(c) for c in sbol_graph.get_components(cd)]:
         triples.append((part_of,sc))
     return triples

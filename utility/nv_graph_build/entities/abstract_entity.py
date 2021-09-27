@@ -1,6 +1,6 @@
 from rdflib import URIRef
 from identifiers import identifiers
-from property.property import PartOf
+from property.property import HasPart
 from equivalent.abstract_equivalent import PhysicalEquivalent
 from equivalent.abstract_equivalent import ConceptualEquivalent
 
@@ -20,7 +20,7 @@ class Entity:
 
 class PhysicalEntity(Entity):
     def __init__(self,disjoint=True,properties=[],equivalents=[],restrictions=[]):
-        p = properties + [PartOf(PhysicalEntity)]
+        p = properties + [HasPart(PhysicalEntity)]
         if equivalents == []:
             equiv = [PhysicalEquivalent()]
         else:
