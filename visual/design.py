@@ -2,21 +2,21 @@ import os
 
 import dash_cytoscape as cyto
 cyto.load_extra_layouts()
-from builder.instance import InstanceBuilder
+from builder.design import DesignBuilder
 from visual.abstract import AbstractVisual
 
-from visual.handlers.instance.layout import LayoutHandler
-from visual.handlers.instance.label import LabelHandler
-from visual.handlers.instance.color import ColorHandler
-from visual.handlers.instance.size import SizeHandler
-from visual.handlers.instance.shape import ShapeHandler
+from visual.handlers.design.layout import LayoutHandler
+from visual.handlers.design.label import LabelHandler
+from visual.handlers.design.color import ColorHandler
+from visual.handlers.design.size import SizeHandler
+from visual.handlers.design.shape import ShapeHandler
 
 default_stylesheet_fn = os.path.join(os.path.dirname(os.path.realpath(__file__)),"default_stylesheet.txt")
 
-class InstanceVisual(AbstractVisual):
+class DesignVisual(AbstractVisual):
     def __init__(self,model,graph=None):
         super().__init__()
-        self._builder = InstanceBuilder(model,graph)
+        self._builder = DesignBuilder(model,graph)
         self._layout_h = LayoutHandler()
         self._label_h = LabelHandler(self._builder)
         self._color_h = ColorHandler(self._builder)

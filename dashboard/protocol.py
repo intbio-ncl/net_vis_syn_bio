@@ -1,9 +1,9 @@
 from dashboard.full import FullDash
-from visual.instance import InstanceVisual
+from visual.design import DesignVisual
 
-class InstanceDash(FullDash):
+class ProtocolDash(FullDash):
     def __init__(self,name,server,model):
-        super().__init__(InstanceVisual(model),name,server,"/full_graph/")
+        super().__init__(DesignVisual(model),name,server,"/full_graph/")
 
     def load_graph(self,filename):
         self.visualiser._load_graph(filename)

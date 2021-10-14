@@ -3,12 +3,12 @@ import types
 
 from rdflib import RDF
 
-from converters.instance import convert as i_convert
+from converters.design import convert as i_convert
 from converters.model import convert as m_convert
 
 from builder.abstract import AbstractBuilder
-from builder.builders.instance.view import ViewBuilder
-from builder.builders.instance.mode import ModeBuilder
+from builder.builders.design.view import ViewBuilder
+from builder.builders.design.mode import ModeBuilder
 
 def _add_predicate(obj,predicate):
     method_name = f'get_{predicate.split("/")[-1].lower()}'
@@ -31,7 +31,7 @@ def _add_object(obj,subject):
         return produce_get_subject_inner
     obj.__dict__[method_name] = types.MethodType(produce_get_subject(subject),obj)
 
-class InstanceBuilder(AbstractBuilder):
+class DesignBuilder(AbstractBuilder):
     def __init__(self,model,graph=None):
         model_graph = m_convert(model)
         super().__init__(i_convert(model_graph,graph))

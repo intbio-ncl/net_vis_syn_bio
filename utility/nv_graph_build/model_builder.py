@@ -110,7 +110,7 @@ def produce_ontology_graph():
     for datatype in datatypes:
         graph.add((datatype.uri,RDF.type,RDFS.Datatype))
 
-    graph.serialize("nv_model.xml",format="pretty-xml")
+    graph.serialize("nv_model_ontology.xml",format="pretty-xml")
 
 
 
