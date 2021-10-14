@@ -64,11 +64,11 @@ class InstanceBuilder(AbstractBuilder):
     def set_interaction_genetic_view(self):
         self.view = self._view_h.interaction_genetic()
 
-    def set_protein_protein_interaction_view(self):
-        self.view = self._view_h.protein_interaction()
+    def set_interaction_protein_view(self):
+        self.view = self._view_h.interaction_protein()
 
-    def set_ppi_view(self):
-        self.view = self._view_h.ppi()
+    def set_interaction_io_view(self):
+        self.view = self._view_h.interaction_io()
 
     def set_module_view(self):
         self.view = self._view_h.module_view()

@@ -2,6 +2,7 @@ import json
 import networkx as nx
 from rdflib import Literal,URIRef
 
+accepted_file_types = ['json']
 def convert(input_fn,model_graph):
     graph = nx.MultiDiGraph()
     

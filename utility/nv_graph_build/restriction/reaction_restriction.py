@@ -13,7 +13,7 @@ class TranscriptionRoleRestriction(RoleRestriction):
 
 class NonCovBondingRoleRestriction(RoleRestriction):
     def __init__(self):
-        values = [identifiers.roles.noncovalent_bonding]
+        values = [identifiers.roles.association]
         super().__init__(values)
 
 class DissociationRoleRestriction(RoleRestriction):

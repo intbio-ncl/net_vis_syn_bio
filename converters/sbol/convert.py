@@ -3,6 +3,7 @@ import networkx as nx
 from rdflib import RDF,BNode,URIRef,OWL
 from converters.sbol.utility.graph import SBOLGraph
 
+accepted_file_types = ['xml','ttl','sbol','rdf']
 def convert(filename,model_graph):
     graph = nx.MultiDiGraph()
     sbol_graph = SBOLGraph(filename)
@@ -67,7 +68,7 @@ def _get_interaction_properties(identity,i_type,i_graph,m_graph,s_graph):
     subject_list = []
     i_type_c = m_graph.get_class_code(i_type)
     prop = m_graph.get_class_properties(i_type_c)
-    io_data = _get_io_data(identity,i_graph,s_graph)
+    io_data = _get_io_data(identity,i_graph,m_graph,s_graph)
     restrictions = _get_restrictions(i_type_c,m_graph)
     for p,p_data in prop:
         p_key = p_data["key"]
@@ -125,14 +126,14 @@ def _build_restriction_obj(parent,predicate,value,curr_subjects):
     triples = [(name,predicate,value)]
     return name,triples
 
-def _get_io_data(identity,i_graph,s_graph):
+def _get_io_data(identity,i_graph,m_graph,s_graph):
     # Gets metadata and RDF type for each SBOL: participant (i/o elements).
     object_data = []
     for p in s_graph.get_participants(interaction=identity):
         definition = s_graph.get_definition(s_graph.get_participant(p))
         object_data.append({"definition" : definition,
                             "meta" : [m[-1] for m in s_graph.get_metadata(p)],
-                            RDF.type : _get_nv_type(definition,i_graph)})
+                            RDF.type : _get_nv_type(definition,i_graph,m_graph)})
     return object_data
 
 def _get_restrictions(i_type_c,m_graph):
@@ -212,12 +213,13 @@ def _meets_requirements(equiv_classes,parent_class,properties):
     else:
         return False
 
-def _get_nv_type(key,graph):
+def _get_nv_type(key,graph,m_graph):
     for n,v,k in graph.edges(keys=True):
         n_data = graph.nodes[n]
         v_data = graph.nodes[v]
         if n_data["key"] == key and k == RDF.type:
             return v_data["key"]
+    return m_graph.identifiers.roles.physical_entity
 
 def _get_name(subject):
     split_subject = _split(subject)

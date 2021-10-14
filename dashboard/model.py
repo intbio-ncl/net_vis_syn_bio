@@ -3,7 +3,7 @@ from visual.model import ModelVisual
 
 class ModelDash(FullDash):
     def __init__(self,name,server):
-        super().__init__(ModelVisual(),name,server,"/full_graph/")
+        super().__init__(ModelVisual(),name,server,"/model_graph/")
 
     def load_graph(self,filename):
         self.visualiser = ModelVisual(filename)

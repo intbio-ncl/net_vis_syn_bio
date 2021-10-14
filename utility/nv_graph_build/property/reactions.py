@@ -28,6 +28,10 @@ class Product(ReactionProperty):
 
 class Template(ReactionProperty):
     def __init__(self,range):
+        '''
+        Note: Promoter is just to appease SBOL it doesn't make much sense.
+        '''
         p = [Direction(Input())]
-        e = [pe.TemplateEquivalent()]
+        e = [pe.TemplateEquivalent(),
+            pe.PromoterEquivalent()]
         super().__init__(range,p,e)

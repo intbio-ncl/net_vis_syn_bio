@@ -1,8 +1,11 @@
+from re import L
 import unittest
 import os
 import sys
 from random import sample
 from rdflib import RDF,BNode
+import networkx as nx
+from rdflib.term import URIRef
 
 sys.path.insert(0, os.path.join(".."))
 sys.path.insert(0, os.path.join("..",".."))
@@ -10,7 +13,7 @@ sys.path.insert(0, os.path.join("..",".."))
 from builder.instance import InstanceBuilder
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))
-instance_file = os.path.join(curr_dir,"..","files","nor_gate.xml")
+instance_file = os.path.join(curr_dir,"..","files","nor_full.xml")
 model_file = os.path.join(curr_dir,"..","..","utility","nv_model.xml")
 
 def _graph_element_check(graph):
@@ -107,24 +110,20 @@ class TestViews(unittest.TestCase):
         self.assertTrue(_graph_element_check(graph))
         interaction_obj = self.model.identifiers.objects.interaction
         physical_entity_obj = self.model.identifiers.objects.physical_entity
-        direction_pred = self.model.identifiers.predicates.direction
-        input_pred = self.model.identifiers.objects.input
-        output_pred = self.model.identifiers.objects.output
-        interaction_class_code = self.model.get_class_code(interaction_obj)
+        reaction_entity_obj = self.model.identifiers.objects.reaction
+        reaction_class_code = self.model.get_class_code(reaction_entity_obj)
         pe_class_code = self.model.get_class_code(physical_entity_obj)
-        interactions_classes = [d[1]["key"] for d in self.model.get_derived(interaction_class_code)]
-        interaction_predicates = {k[1]["key"]:v[1]["key"] for (k,v,e) in self.model.search((None,direction_pred,None))}
+
         for n,v,e in graph.edges(keys=True):
-            if self.builder.get_rdf_type(n)[1]["key"] in interactions_classes:
-                self.assertEqual(interaction_predicates[e],output_pred)
-                e_type = self.builder.get_rdf_type(v)[1]["key"]
-                self.assertTrue(self.model.is_derived(e_type,pe_class_code))
-            elif self.builder.get_rdf_type(v)[1]["key"] in interactions_classes:
-                self.assertEqual(interaction_predicates[e],input_pred)
-                e_type = self.builder.get_rdf_type(n)[1]["key"]
-                self.assertTrue(self.model.is_derived(e_type,pe_class_code))
+            n_type = self.builder.get_rdf_type(n)[1]["key"]
+            v_type = self.builder.get_rdf_type(v)[1]["key"]
+            if self.model.is_derived(n_type,pe_class_code):
+                self.assertTrue(self.model.is_derived(v_type,reaction_class_code))
+            elif self.model.is_derived(n_type,reaction_class_code):
+                self.assertTrue(self.model.is_derived(v_type,reaction_class_code) or 
+                                self.model.is_derived(v_type,pe_class_code))
             else:
-                self.fail("Neither node is an interaction.")
+                self.fail("n is not a physc, inter or react.")
 
     def test_interaction_verbose(self):
         self.builder.set_interaction_verbose_view()
@@ -172,19 +171,56 @@ class TestViews(unittest.TestCase):
         graph = self.builder.view
         self.assertTrue(_graph_element_check(graph))
         interaction_obj = self.model.identifiers.objects.interaction
-        physical_entity_obj = self.model.identifiers.objects.physical_entity
+        dna_obj = self.model.identifiers.objects.dna
         interaction_class_code = self.model.get_class_code(interaction_obj)
-        pe_class_code = self.model.get_class_code(physical_entity_obj)
+        dna_class_code = self.model.get_class_code(dna_obj)
         interactions_classes = [d[1]["key"] for d in self.model.get_derived(interaction_class_code)]
-        pe_classes = [d[1]["key"] for d in self.model.get_derived(pe_class_code)]
+        dna_classes = [d[1]["key"] for d in self.model.get_derived(dna_class_code)]
         for n,v,e in graph.edges(keys=True):
             self.assertIn(e,interactions_classes)
-            self.assertIn(self.builder.get_rdf_type(n)[1]["key"],pe_classes)
-            self.assertIn(self.builder.get_rdf_type(v)[1]["key"],pe_classes)
+            self.assertIn(self.builder.get_rdf_type(n)[1]["key"],dna_classes)
+            self.assertIn(self.builder.get_rdf_type(v)[1]["key"],dna_classes)
+
+    def test_interaction_genetic_complex(self):
+        instance_file = os.path.join(curr_dir,"..","files","test_genetic_interaction.xml")
+        builder = InstanceBuilder(model_file,instance_file)
+        model = self.builder._model_graph
+        builder.set_interaction_genetic_view()
+        self.assertEqual(len(builder.view.nodes),4)
+        self.assertEqual(len(builder.view.edges),3)
 
     def test_interaction_protein(self):
-        self.fail("Not Implemented.")
+        self.builder.set_interaction_protein_view()
+        graph = self.builder.view
+        self.assertTrue(_graph_element_check(graph))
+        interaction_obj = self.model.identifiers.objects.interaction
+        prot_obj = self.model.identifiers.objects.protein
+        interaction_class_code = self.model.get_class_code(interaction_obj)
+        prot_class_code = self.model.get_class_code(prot_obj)
+        interactions_classes = [d[1]["key"] for d in self.model.get_derived(interaction_class_code)]
+        protein_classes = [prot_obj] + [d[1]["key"] for d in self.model.get_derived(prot_class_code)]
+        for n,v,e in graph.edges(keys=True):
+            self.assertIn(e,interactions_classes)
+            self.assertIn(self.builder.get_rdf_type(n)[1]["key"],protein_classes)
+            self.assertIn(self.builder.get_rdf_type(v)[1]["key"],protein_classes)
 
+    def test_interaction_io(self):
+        #instance_file = os.path.join(curr_dir,"..","files","nor_full.xml")
+        #builder = InstanceBuilder(model_file,instance_file)
+        self.builder.set_interaction_io_view()
+        graph = self.builder.view
+        interaction_obj = self.model.identifiers.objects.interaction
+        prot_obj = self.model.identifiers.objects.protein
+        interaction_class_code = self.model.get_class_code(interaction_obj)
+        prot_class_code = self.model.get_class_code(prot_obj)
+        interactions_classes = [d[1]["key"] for d in self.model.get_derived(interaction_class_code)]
+        protein_classes = [prot_obj] + [d[1]["key"] for d in self.model.get_derived(prot_class_code)]
+        for n,v,e in graph.edges(keys=True):
+            print(graph.nodes[n]["key"],graph.nodes[v]["key"],e)
+            #self.assertIn(e,interactions_classes)
+            #self.assertIn(self.builder.get_rdf_type(n)[1]["key"],protein_classes)
+            #self.assertIn(self.builder.get_rdf_type(v)[1]["key"],protein_classes)
+    
 class TestModes(unittest.TestCase):
         def setUp(self):
             self.builder = InstanceBuilder(model_file,instance_file)

@@ -7,7 +7,7 @@ sat_mod = 0.8
 light_mod = 0.8
 max_hue = 340
 min_sat = 20
-min_light = 20
+min_light = 18
 
 class ColorPicker:
     def __init__(self,shuffle=True):

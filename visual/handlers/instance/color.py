@@ -1,5 +1,6 @@
 import re
-from visual.handlers.abstract_color import AbstractNodeColorHandler , AbstractEdgeColorHandler
+from visual.handlers.abstract_color import AbstractNodeColorHandler
+from visual.handlers.abstract_color import AbstractEdgeColorHandler
 
 class ColorHandler():
     def __init__(self,builder):
@@ -9,8 +10,8 @@ class ColorHandler():
     class NodeColorHandler(AbstractNodeColorHandler):
         def __init__(self,builder):
             super().__init__(builder)
-            
-        def role(self):
+        
+        def type(self):
             colors = []
             col_map = {None : {"No_Role" : self._color_picker[0]}}
             col_index = len(col_map)
@@ -24,6 +25,56 @@ class ColorHandler():
                         col_map[name] = self._color_picker[col_index]
                         col_index += 1
                     colors.append({name : col_map[name]})
+            return colors
+
+        def role(self):
+            '''
+            Overview:
+            The first layer of non-abstract classes 
+            (Reaction,Interaction,DNA etc) are given a color.
+            Each derived class within the design is given a 
+            shade of that color.
+            Why this looks so complicated is because we need 
+            to find the last shade of that color used.
+            '''
+            colors = []
+            col_map = {None : {"No_Role" : self._color_picker[0]}}
+            shade_map = {}
+            col_index = len(col_map)
+
+            mg = self._builder._model_graph
+            pe_id = mg.identifiers.objects.physical_entity
+            c_id = mg.identifiers.objects.conceptual_entity
+            pe_code = mg.get_class_code(pe_id)
+            c_code = mg.get_class_code(c_id)
+            pe_derived = [d[1]["key"] for d in mg.get_child_classes([pe_code,c_code])]
+            for d in pe_derived:
+                name = _get_name(d)
+                col_map[name] = self._color_picker[col_index]
+                col_index += 1
+            for n in self._builder.v_nodes():
+                n_type = self._builder.get_rdf_type(n)
+                if n_type is None:
+                    colors.append(col_map[None])
+                    continue
+                n_type = n_type[1]["key"]
+                name = _get_name(n_type)
+                if name not in col_map.keys():
+                    n_t_code = mg.get_class_code(n_type)
+                    for b in [i[1]["key"] for i in mg.get_bases(n_t_code)]:
+                        if b in pe_derived:
+                            base = b
+                            p_col = col_map[_get_name(b)]
+                            break
+                    else:
+                        raise ValueError(f'{n_type} is a unknown class.')
+                    if base not in shade_map.keys():
+                        shade_map[base] = p_col
+                    p_col = shade_map[base]
+                    shade = self._color_picker.increase_shade(p_col)
+                    shade_map[base] = shade
+                    col_map[name] = shade
+                colors.append({name : col_map[name]})
             return colors
 
         def hierarchy(self):
@@ -44,9 +95,6 @@ class ColorHandler():
                     color,depth = colors_map[key]
                     colors.append({depth : color})
             return colors
-
-        def genetic(self):
-            raise NotImplementedError("Not Implemented.")
 
     class EdgeColorHandler(AbstractEdgeColorHandler):
         def __init__(self,builder):
@@ -71,14 +119,6 @@ class ColorHandler():
                     color,depth = color_map[key]
                     colors.append({f"Depth-{depth}" : color})
             return colors
-
-        def interaction(self):
-            print("WARN:: Not Implemented")
-            colors = []
-            for n,v,k,e in self._builder.v_edges(keys=True,data=True):
-                colors.append({"standard" : "#888"})
-            return colors
-
 
 def _init_hierarchy_map(handler):
     # Currently root is only one node but 

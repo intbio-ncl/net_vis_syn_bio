@@ -1,7 +1,5 @@
 import re
 
-from rdflib.term import URIRef
-
 class ViewBuilder:
     def __init__(self,builder):
         self._builder = builder
@@ -13,8 +11,11 @@ class ViewBuilder:
         edges = []
         node_attrs = {}
         w_predicates = self._builder._model_graph.identifiers.predicates
+        blacklist = [self._builder._model_graph.identifiers.predicates.consistsOf]
         for n,v,k,e in self._builder.edges(keys=True,data=True):
             if k not in w_predicates:
+                continue
+            if k in blacklist:
                 continue
             node_attrs[n] = self._builder.nodes[n]
             node_attrs[v] = self._builder.nodes[v]
@@ -106,35 +107,126 @@ class ViewBuilder:
         return self._builder.sub_graph(edges,node_attrs)
 
     def interaction_genetic(self):
+        genetic_pred = self._builder._model_graph.identifiers.objects.DNA
+        return self._produce_interaction_graph(genetic_pred)
+
+    def interaction_protein(self):
+        p_pred = self._builder._model_graph.identifiers.objects.protein
+        return self._produce_interaction_graph(p_pred,True)
+
+    def interaction_io(self):
         edges = []
         node_attrs = {}
         i_graph = self.interaction()
-        genetic_pred = self._builder._model_graph.identifiers.objects.DNA
-        g_p_model_code = self._builder._model_graph.get_class_code(genetic_pred)
-        for n,v,e in i_graph.edges(keys=True):
-            n_data = i_graph.nodes[n]
+        for input,outputs in self._get_interaction_io(i_graph):
+            i,i_data = input
+            node_attrs[i] = i_data
+            for o,e in outputs:
+                node_attrs[o] = i_graph.nodes[o]
+                edge = self._build_edge_attr(e)
+                edges.append((i,o,e,edge))
+        return self._builder.sub_graph(edges,node_attrs)
+
+    def _get_interaction_io(self,graph):
+        inputs = [n for n in graph.nodes(data=True) if len(graph.in_edges(n[0])) == 0]
+        io = []
+        ends = list(set(self._get_loop_ends(inputs,graph)))
+        for inp in inputs:
+            for n,v,e in graph.out_edges(inp[0],keys=True):
+                io.append((inp,self._get_outputs_inner(v,e,graph,ends)))
+        return io
+
+    def _get_outputs_inner(self,subject,predicate,graph,l_ends):
+        i_targets = []
+        out_edges = graph.out_edges(subject,keys=True)
+        if len(out_edges) == 0:
+            i_targets.append((subject,predicate))
+            return i_targets
+        for n1,v1,e1 in out_edges:
+            if v1 in l_ends:
+                i_targets.append((v1,predicate))
+            else:
+                i_targets += self._get_outputs_inner(v1,e1,graph,l_ends)
+        return i_targets
+
+    def _get_loop_ends(self,inputs,graph):
+        l_ends = []
+        def _get_target_inner(subject,seens=[]):
+            out_edges = graph.out_edges(subject,keys=True)
+            for n1,v1,e1 in out_edges:
+                if n1 in l_ends:
+                    return 
+                if v1 in seens:
+                    l_ends.append(n1)
+                    continue
+                else:
+                    seens.append(n1)
+                    _get_target_inner(v1,seens.copy())
+        for n,data in inputs:
+            _get_target_inner(n)
+        for e in l_ends:
+            print(graph.nodes[e]["key"])
+        return l_ends
+
+    def _produce_interaction_graph(self,predicate,first_pred=False):
+        edges = []
+        node_attrs = {}
+        i_graph = self.interaction()
+        g_code = [self._builder._model_graph.get_class_code(predicate)]
+        for n,n_data in i_graph.nodes(data=True):
             n_type = self._builder.get_rdf_type(n)[1]["key"]
-            if not self._builder._model_graph.is_derived(n_type,g_p_model_code):
+            if not self._builder._model_graph.is_derived(n_type,g_code):
                 continue
-            end_nodes = self._find_nearest_interaction(n,g_p_model_code,) 
-
-            print(n_data["key"],v_data["key"],e)
+            node_attrs[n] = n_data
+            for v,e in self._find_nearest_interaction(n,g_code,i_graph,first_pred):
+                node_attrs[v] = i_graph.nodes[v]
+                edge = self._build_edge_attr(e)
+                edges.append((n,v,e,edge))
         return self._builder.sub_graph(edges,node_attrs)
 
-    def protein_interaction(self):
-        edges = []
-        node_attrs = {}
-        raise NotImplementedError()
-        return self._builder.sub_graph(edges,node_attrs)
-
-    def module(self):
-        edges = []
-        node_attrs = {}
-        raise NotImplementedError()
-        return self._builder.sub_graph(edges,node_attrs)
-
-    def _find_nearest_interaction(self,node):
-        pass      
+    def _find_nearest_interaction(self,node,target_types,graph,use_first=False):
+        def _find_nearest_inner(c_node,index=0,first_pred=None):
+            i_targets = []
+            for n,v,e in graph.edges(c_node,keys=True):
+                # Self Loops.
+                if n == v:
+                    continue
+                if index == 0 :
+                    first_pred = e
+                node_type = self._builder.get_rdf_type(v)
+                if node_type is None:
+                    continue
+                node_type = node_type[1]["key"]
+                if self._builder._model_graph.is_derived(node_type,target_types):
+                    if use_first:
+                        e = first_pred
+                    i_targets.append((v,e,index))
+                    continue
+                i_targets += _find_nearest_inner(v,index+1,first_pred)
+            return i_targets
+            
+        targets = _find_nearest_inner(node)
+        f_targets = []
+        # Remove paths to same object (Remove longest.)
+        if len(targets) < 2:
+            return [t[:2] for t in targets]
+        for index1,(t1,e1,distance1) in enumerate(targets):
+            if [t[0] for t in targets].count(t1) == 1:
+                f_targets.append((t1,e1))
+                continue
+            for index2,(t2,e2,distance2) in enumerate(targets):
+                if index1 == index2:
+                    continue
+                if t1 != t2:
+                    continue
+                if distance2 > distance1:
+                    f_targets.append((t1,e1))
+                elif distance1 > distance2:
+                    f_targets.append((t2,e2))
+                else:
+                    f_targets.append((t1,e1))
+                    f_targets.append((t2,e2))
+        return f_targets
 
     def _build_edge_attr(self,key):
         return {"display_name" : self._get_name(key)}

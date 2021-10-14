@@ -60,6 +60,7 @@ class Roles:
         self.stimulation = URIRef(self.namespaces.sbo_biomodels + "0000170")
         self.biochemical_reaction = URIRef(self.namespaces.sbo_biomodels + "0000176")
         self.noncovalent_bonding = URIRef(self.namespaces.sbo_biomodels + "0000177")
+        self.association = URIRef(self.namespaces.biopax + "ComplexAssembly")
         self.degradation = URIRef(self.namespaces.sbo_biomodels + "0000179")
         self.genetic_production = URIRef(self.namespaces.sbo_biomodels + "0000589")
         self.control = URIRef(self.namespaces.sbo_biomodels + "0000168")
@@ -72,7 +73,7 @@ class Roles:
         self.modified = URIRef(self.namespaces.sbo_biomodels + "0000644")
         self.product = URIRef(self.namespaces.sbo_biomodels + "0000011")
         self.reactant = URIRef(self.namespaces.sbo_biomodels + "0000010")
-        self.participation_promoter = URIRef(self.namespaces.sbo_biomodels + "0000598") 
+        self.gp_promoter = URIRef(self.namespaces.sbo_biomodels + "0000598") 
         self.template = URIRef(self.namespaces.sbo_biomodels + "0000645")
 
         self.translation = URIRef(self.namespaces.sbo_biomodels + "0000184")

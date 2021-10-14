@@ -1,9 +1,11 @@
 import networkx as nx
 from converters.sbol import convert as sbol_convert
 from converters.nv import convert as nv_convert
+from converters.gbk import convert as gbk_convert
 from graph.instance import InstanceGraph
 
 convert_dict = {"sbol" : sbol_convert,
+                "gbk"  : gbk_convert, # Not Implemented..
                 "nv"   : nv_convert}
 
 def convert(model_graph,filename=None,convert_type=None):
@@ -18,7 +20,9 @@ def get_converter_names():
     return list(convert_dict.keys())
     
 def derive_convert_type(filename):
-    if filename.endswith(".xml"):
+    if filename.lower().endswith(tuple(v.lower() for v in sbol_convert.accepted_file_types)):
         return "sbol"
-    elif filename.endswith(".json"):
+    elif filename.lower().endswith(tuple(v.lower() for v in gbk_convert.accepted_file_types)):
+        return 'gbk'
+    elif filename.lower().endswith(tuple(v.lower() for v in nv_convert.accepted_file_types)):
         return "nv"

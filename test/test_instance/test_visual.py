@@ -200,12 +200,12 @@ class TestColor(unittest.TestCase):
             view = self.visual._builder.view
             run_tests(view)
 
-        def test_role(self):
+        def test_type(self):
             view = self.visual._builder.view
-            ret_val = self.visual.add_role_node_color()
+            ret_val = self.visual.add_type_node_color()
             self.assertIsNone(ret_val)
             def run_tests(view):
-                colors = self.visual.add_role_node_color()
+                colors = self.visual.add_type_node_color()
                 col_map = {}
                 index = 1
 
@@ -262,6 +262,36 @@ class TestColor(unittest.TestCase):
             self.visual.set_hierarchy_view()
             view = self.visual._builder.view
             _run_tests()
+
+        def test_role(self):
+            for e in self._color_list:
+                print(e)
+            view = self.visual._builder.view
+            ret_val = self.visual.add_role_node_color()
+            self.assertIsNone(ret_val)
+            def run_tests(view):
+                colors = self.visual.add_role_node_color()
+                col_map = {}
+                index = 1
+
+                self.assertEqual(len(colors), len(view.nodes))
+                for index,(node,data) in enumerate(view.nodes(data=True)):
+                    color = colors[index]
+                    rdf_type = self.visual._builder.get_rdf_type(node) 
+                    if rdf_type is None:
+                        self.assertEqual(color, {"No_Role" : self._color_list[0]} )
+                    else:
+                        color = colors[index]
+                        key = list(color.keys())[0]
+                        val = list(color.values())[0]
+                        self.assertIn(key,rdf_type[1]["key"])
+                        self.assertIn(val,self._color_list)
+
+            run_tests(view)
+            self.visual.set_hierarchy_view()
+            self.visual.set_hierarchy_view()
+            view = self.visual._builder.view
+            run_tests(view)
         
     class TestEdge(unittest.TestCase):
 
@@ -356,7 +386,10 @@ class TestShape(unittest.TestCase):
                     n_type = n_type[1]["key"]
                     if n_type not in shape_map.keys():
                         shape_map[n_type] = shapes_l[counter]
-                        counter = counter + 1
+                        if counter == len(shapes_l) - 1:
+                            counter = 0
+                        else:
+                            counter = counter + 1 
                     expected_shape = {_get_name(n_type) : shape_map[n_type]}
                 self.assertEqual(shapes[index], expected_shape)
 
@@ -469,7 +502,7 @@ class TestSize(unittest.TestCase):
                 node_size = node_sizes[index]
                 key = data["key"]
                 if self.builder.get_rdf_type(node) is None:
-                    self.assertEqual(node_size,self.max_node_size)
+                    pass
                 else:
                     depth = self.builder.get_entity_depth(node)
                     if depth == 0:

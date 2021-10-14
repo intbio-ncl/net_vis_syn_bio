@@ -33,7 +33,7 @@ class AbstractNodeShapeHandler:
                 else:
                     shape = shapes[counter]
                     shape_map[obj_type] = shape
-                    if counter == len(shapes):
+                    if counter == len(shapes) - 1:
                         counter = 0
                     else:
                         counter = counter + 1 

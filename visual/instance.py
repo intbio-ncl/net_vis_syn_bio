@@ -22,11 +22,12 @@ class InstanceVisual(AbstractVisual):
         self._color_h = ColorHandler(self._builder)
         self._size_h = SizeHandler(self._builder)
         self._shape_h = ShapeHandler(self._builder)
+        self.set_concentric_layout()
 
     def _load_graph(self,fn):
         return self._builder.load(fn)
 
-        # ---------------------- Preset ------------------------------------
+    # ---------------------- Preset ------------------------------------
     def set_hierarchy_preset(self):
         '''
         Pre-set methods with an affinity for displaying the hierarchy view.
@@ -34,24 +35,29 @@ class InstanceVisual(AbstractVisual):
         preset_functions = [self.set_tree_mode,
                             self.set_hierarchy_view,
                             self.set_dagre_layout,
-                            self.add_hierarchy_edge_color,
                             self.add_hierarchy_node_color,
+                            self.add_hierarchy_edge_color,
+                            self.add_node_name_labels, 
                             self.add_edge_no_labels,
-                            self.add_node_name_labels,
-                            self.add_hierarchy_node_size]
+                            self.add_hierarchy_node_size,
+                            self.set_circle_node_shape,
+                            self.set_bezier_edge_shape]
         return self._set_preset(preset_functions)
 
     def set_prune_preset(self):
         '''
         Pre-set methods with an affinity for displaying the pruned graph view.
         '''
-        preset_functions = [self.set_tree_mode,
+        preset_functions = [self.set_network_mode,
                             self.set_pruned_view,
                             self.set_cose_layout,
-                            self.add_centrality_node_size,
+                            self.add_type_node_color, 
                             self.add_type_edge_color,
                             self.add_node_name_labels,
-                            self.add_edge_no_labels]
+                            self.add_edge_no_labels,
+                            self.add_centrality_node_size,
+                            self.set_circle_node_shape,
+                            self.set_bezier_edge_shape]
         return self._set_preset(preset_functions)
 
     def set_interaction_level_0_explicit_preset(self):
@@ -61,10 +67,13 @@ class InstanceVisual(AbstractVisual):
         preset_functions = [self.set_network_mode,
                             self.set_interaction_explicit_view,
                             self.set_dagre_layout,
-                            self.add_type_edge_color,
                             self.add_role_node_color,
+                            self.add_type_edge_color,
                             self.add_edge_no_labels,
-                            self.add_node_name_labels]
+                            self.add_node_name_labels,
+                            self.add_standard_node_size,
+                            self.set_circle_node_shape,
+                            self.set_bezier_edge_shape]
         return self._set_preset(preset_functions)
 
     def set_interaction_level_1_verbose_preset(self):
@@ -74,10 +83,13 @@ class InstanceVisual(AbstractVisual):
         preset_functions = [self.set_network_mode,
                             self.set_interaction_verbose_view,
                             self.set_dagre_layout,
-                            self.add_type_edge_color,
                             self.add_role_node_color,
+                            self.add_type_edge_color,
                             self.add_edge_no_labels,
-                            self.add_node_name_labels]
+                            self.add_node_name_labels,
+                            self.add_standard_node_size,
+                            self.set_circle_node_shape,
+                            self.set_bezier_edge_shape]
         return self._set_preset(preset_functions)
 
     def set_interaction_level_2_standard_preset(self):
@@ -87,10 +99,13 @@ class InstanceVisual(AbstractVisual):
         preset_functions = [self.set_network_mode,
                             self.set_interaction_view,
                             self.set_dagre_layout,
-                            self.add_type_edge_color,
                             self.add_role_node_color,
+                            self.add_type_edge_color,
                             self.add_edge_no_labels,
-                            self.add_node_name_labels]
+                            self.add_node_name_labels,
+                            self.add_standard_node_size,
+                            self.set_circle_node_shape,
+                            self.set_bezier_edge_shape]
         return self._set_preset(preset_functions)
 
     def set_interaction_level_3_genetic_preset(self):
@@ -98,12 +113,14 @@ class InstanceVisual(AbstractVisual):
         Pre-set methods with an affinity for displaying the genetic interaction view.
         '''
         preset_functions = [self.set_network_mode,
-                            self.set_genetic_interaction_view,
+                            self.set_interaction_genetic_view,
                             self.set_dagre_layout,
-                            self.add_type_edge_color,
-                            self.add_genetic_node_color,
+                            self.add_type_node_color,
+                            self.add_type_edge_color,   
                             self.add_edge_no_labels,
                             self.add_node_name_labels,
+                            self.add_standard_node_size,
+                            self.set_circle_node_shape,
                             self.set_bezier_edge_shape]
         return self._set_preset(preset_functions)
 
@@ -112,12 +129,30 @@ class InstanceVisual(AbstractVisual):
         Pre-set methods with an affinity for displaying the ppi interaction view.
         '''
         preset_functions = [self.set_network_mode,
-                            self.set_protein_protein_interaction_view,
+                            self.set_interaction_protein_view,
+                            self.set_dagre_layout,
+                            self.add_type_edge_color,
+                            self.add_type_node_color,
+                            self.add_node_name_labels,
+                            self.add_edge_no_labels,
+                            self.add_standard_node_size,
+                            self.set_circle_node_shape,
+                            self.set_bezier_edge_shape]
+        return self._set_preset(preset_functions)
+
+    def set_interaction_level_5_io_preset(self):
+        '''
+        Pre-set methods with an affinity for displaying the ppi interaction view.
+        '''
+        preset_functions = [self.set_network_mode,
+                            self.set_interaction_io_view,
                             self.set_dagre_layout,
                             self.add_type_edge_color,
                             self.add_standard_node_color,
                             self.add_node_name_labels,
                             self.add_edge_no_labels,
+                            self.add_standard_node_size,
+                            self.set_circle_node_shape,
                             self.set_bezier_edge_shape]
         return self._set_preset(preset_functions)
 
@@ -162,25 +197,34 @@ class InstanceVisual(AbstractVisual):
            self.view =self.set_interaction_view
         self._builder.set_interaction_view()
 
-    def set_genetic_interaction_view(self):
+    def set_interaction_genetic_view(self):
         '''
         Sub graph viewing genetic interactions within the graph.
         Abstracts proteins and non-genetic actors.
         '''
-        if self.view == self.set_genetic_interaction_view:
-            self._builder.set_genetic_interaction_view()
+        if self.view == self.set_interaction_genetic_view:
+            self._builder.set_interaction_genetic_view()
         else:
-           self.view =self.set_genetic_interaction_view
+           self.view =self.set_interaction_genetic_view
 
-    def set_protein_protein_interaction_view(self):
+    def set_interaction_protein_view(self):
         '''
         Sub graph viewing interactions between proteins. Abstracts DNA + Non-genetic actors. 
         Only visulises what the effect the presence of a protein has upon other proteins.
         '''
-        if self.view == self.set_protein_protein_interaction_view:
-            self._builder.set_protein_protein_interaction_view()
+        if self.view == self.set_interaction_protein_view:
+            self._builder.set_interaction_protein_view()
         else:
-           self.view =self.set_protein_protein_interaction_view
+           self.view =self.set_interaction_protein_view
+
+    def set_interaction_io_view(self):
+        '''
+        Sub graph viewing inputs and outputs of interaction network only.
+        '''
+        if self.view == self.set_interaction_io_view:
+            self._builder.set_interaction_io_view()
+        else:
+           self.view =self.set_interaction_io_view
 
     def set_hierarchy_view(self):
         '''
@@ -193,10 +237,21 @@ class InstanceVisual(AbstractVisual):
     
     # ---------------------- Node Labels ----------------------
     # ---------------------- Edge Labels ----------------------
-    # ---------------------- Node Color ----------------------  
+    # ---------------------- Node Color ---------------------- 
+
+    def add_type_node_color(self):
+        '''
+        Each Class is mapped to a distinct color.
+        '''
+        if self.node_color == self.add_type_node_color:
+            return self._color_h.node.type()
+        else:
+            self.node_color = self.add_type_node_color
+
     def add_role_node_color(self):
         '''
-        Each Role is mapped to a distinct color.
+        Each Physical Entity is given a color, 
+        each derived class is a shade.
         '''
         if self.node_color == self.add_role_node_color:
             return self._color_h.node.role()
@@ -211,16 +266,6 @@ class InstanceVisual(AbstractVisual):
             return self._color_h.node.hierarchy()
         else:
             self.node_color = self.add_hierarchy_node_color
-
-    def add_genetic_node_color(self):
-        '''
-        Each genetic role is mapped to a shape of a color.
-        '''
-        if self.node_color == self.add_genetic_node_color:
-            return self._color_h.node.genetic()
-        else:
-            self.node_color = self.add_genetic_node_color
-
 
     # ---------------------- Edge Color ----------------------
     def add_hierarchy_edge_color(self):

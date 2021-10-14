@@ -26,6 +26,7 @@ class ModelVisual(AbstractVisual):
         self._color_h = ColorHandler(self._builder)
         self._size_h = SizeHandler(self._builder)
         self._shape_h = ShapeHandler(self._builder)
+        self.set_concentric_layout()
 
 
     # ---------------------- Preset ----------------------------

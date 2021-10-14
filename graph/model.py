@@ -1,3 +1,4 @@
+from re import L
 from rdflib import RDFS,OWL,RDF,BNode,URIRef
 
 from graph.abstract import AbstractGraph
@@ -48,7 +49,20 @@ class ModelGraph(AbstractGraph):
                 if down_search(c,cc[0]):
                     return True
             return False
+        if not isinstance(parent,(list,tuple,set)):
+            parent = [parent]
+        if self.get_class_code(child) in parent:
+            return True
         return down_search(child,parent)
+
+    def get_bases(self,class_id):
+        bases = []
+        def up_search(inner_id):
+            for cc in self.get_parent_classes(inner_id):
+                bases.append(cc)
+                up_search(cc[0])
+        up_search(class_id)
+        return bases
 
     def get_derived(self,class_id):
         derived = []
