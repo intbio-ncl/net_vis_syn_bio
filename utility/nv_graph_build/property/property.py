@@ -17,10 +17,10 @@ class Property:
         return f'{self.property} : {self.range}'
 
     def __hash__(self):
-        return hash((self.property, *self.range))
+        return hash((self.property))
 
     def __eq__(self, other):
-        return (self.property, self.range) == (other.property, other.range)
+        return (self.property) == (other.property)
             
 class Role(Property):
     def __init__(self):

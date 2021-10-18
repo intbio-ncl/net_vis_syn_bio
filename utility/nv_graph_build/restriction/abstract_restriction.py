@@ -3,6 +3,7 @@ from property.property import Property
 from property.property import Role
 from property.property import HasCharacteristic
 from property.property import ConsistsOf
+from property.protocols import Actions
 
 class Restriction:
     def __init__(self,property):
@@ -25,6 +26,11 @@ class CharacteristicRestriction(Restriction):
         self.values = values
 
 class RecipeRestriction(Restriction):
-    def __init__(self,recipe):
-        super().__init__(ConsistsOf())
+    def __init__(self,recipe,r_range):
+        super().__init__(ConsistsOf(r_range))
         self.recipe = recipe
+
+class ActionsRestriction(Restriction):
+    def __init__(self,actions):
+        super().__init__(Actions())
+        self.actions = actions

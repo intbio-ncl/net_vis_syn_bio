@@ -7,17 +7,17 @@ from rdflib import BNode,OWL,URIRef,Literal
 sys.path.insert(0, os.path.join(".."))
 sys.path.insert(0, os.path.join("..",".."))
 from visual.handlers.color_producer import ColorPicker
-from visual.instance import InstanceVisual
+from visual.design import DesignVisual
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))
 test_dir = os.path.join(curr_dir,"..","files")
-model_fn = os.path.join(curr_dir,"..","..","utility","nv_model.xml")
+model_fn = os.path.join(curr_dir,"..","..","utility","nv_design.xml")
 
 
 class TestPresets(unittest.TestCase):
     def setUp(self):
         filename = os.path.join(test_dir,"nor_gate.xml")
-        self.visual = InstanceVisual(model_fn,filename)
+        self.visual = DesignVisual(model_fn,filename)
 
     def tearDown(self):
         None
@@ -30,7 +30,7 @@ class TestLabels(unittest.TestCase):
 
     def setUp(self):
         filename = os.path.join(test_dir,"0x3B.xml")
-        self.visual = InstanceVisual(model_fn,filename)
+        self.visual = DesignVisual(model_fn,filename)
 
     def tearDown(self):
         None
@@ -38,7 +38,7 @@ class TestLabels(unittest.TestCase):
     class TestNode(unittest.TestCase):
         def setUp(self):
             filename = os.path.join(test_dir,"0x3B.xml")
-            self.visual = InstanceVisual(model_fn,filename)
+            self.visual = DesignVisual(model_fn,filename)
 
         def tearDown(self):
             None
@@ -105,9 +105,9 @@ class TestLabels(unittest.TestCase):
                         actual_type = labels[index]
                         expected_type = _get_name(n_type[1]["key"])
                         self.assertEqual(expected_type,actual_type)
-                    elif isinstance(data["key"],URIRef):
+                    elif isdesign(data["key"],URIRef):
                         self.assertEqual(labels[index], "Identifier")
-                    elif isinstance(data["key"],Literal):
+                    elif isdesign(data["key"],Literal):
                         self.assertEqual(labels[index], "Literal")
                     else:
                         self.assertEqual(labels[index], "?")
@@ -123,7 +123,7 @@ class TestLabels(unittest.TestCase):
 
         def setUp(self):
             filename = os.path.join(test_dir,"0x3B.xml")
-            self.visual = InstanceVisual(model_fn,filename)
+            self.visual = DesignVisual(model_fn,filename)
 
         def tearDown(self):
             None
@@ -162,7 +162,7 @@ class TestColor(unittest.TestCase):
 
         def setUp(self):
             filename = os.path.join(test_dir,"nor_gate.xml")
-            self.visual = InstanceVisual(model_fn,filename)
+            self.visual = DesignVisual(model_fn,filename)
             self._color_list = ColorPicker()
 
         def tearDown(self):
@@ -297,7 +297,7 @@ class TestColor(unittest.TestCase):
 
         def setUp(self):
             filename = os.path.join(test_dir,"0x3B.xml")
-            self.visual = InstanceVisual(model_fn,filename)
+            self.visual = DesignVisual(model_fn,filename)
             self._color_list = ColorPicker()
 
         def tearDown(self):
@@ -360,7 +360,7 @@ class TestColor(unittest.TestCase):
 class TestShape(unittest.TestCase):
     def setUp(self):
         filename = os.path.join(test_dir,"0x3B.xml")
-        self.visual = InstanceVisual(model_fn,filename)
+        self.visual = DesignVisual(model_fn,filename)
 
     def tearDown(self):
         None
@@ -402,7 +402,7 @@ class TestShape(unittest.TestCase):
 class TestSize(unittest.TestCase):
     def setUp(self):
         filename = os.path.join(test_dir,"0x3B.xml")
-        self.visual = InstanceVisual(model_fn,filename)
+        self.visual = DesignVisual(model_fn,filename)
         self.builder = self.visual._builder
         self.standard_node_size = self.visual._size_h._standard_node_size
         self.max_node_size = self.visual._size_h._max_node_size

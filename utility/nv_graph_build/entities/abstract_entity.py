@@ -1,12 +1,13 @@
 from rdflib import URIRef
 from identifiers import identifiers
-from property.property import HasPart
 from equivalent.abstract_equivalent import PhysicalEquivalent
 from equivalent.abstract_equivalent import ConceptualEquivalent
 
 default_properties = []
+
+
 class Entity:
-    def __init__(self,disjoint=False,properties=[],equivalents=[],restrictions=[]):
+    def __init__(self, disjoint=False, properties=[], equivalents=[], restrictions=[]):
         class_name = self.__class__.__name__
         self.uri = URIRef(identifiers.namespaces.nv + class_name)
         self.disjoint = disjoint
@@ -16,23 +17,24 @@ class Entity:
 
     @classmethod
     def uri(cls):
-        return URIRef(identifiers.namespaces.nv + cls.__name__) 
+        return URIRef(identifiers.namespaces.nv + cls.__name__)
+
 
 class PhysicalEntity(Entity):
-    def __init__(self,disjoint=True,properties=[],equivalents=[],restrictions=[]):
-        p = properties + [HasPart(PhysicalEntity)]
+    def __init__(self, disjoint=True, properties=[], equivalents=[], restrictions=[]):
         if equivalents == []:
             equiv = [PhysicalEquivalent()]
         else:
             equiv = equivalents
-        super().__init__(disjoint,properties=p,
-        equivalents=equiv,restrictions=restrictions)  
-        
+        super().__init__(disjoint, properties=properties,
+                         equivalents=equiv, restrictions=restrictions)
+
+
 class ConceptualEntity(Entity):
-    def __init__(self,disjoint=True,properties=[],equivalents=[],restrictions=[]):
+    def __init__(self, disjoint=True, properties=[], equivalents=[], restrictions=[]):
         if equivalents == []:
             equiv = [ConceptualEquivalent()]
         else:
             equiv = equivalents
-        super().__init__(disjoint,properties=properties,
-        equivalents=equiv,restrictions=restrictions)  
+        super().__init__(disjoint, properties=properties,
+                         equivalents=equiv, restrictions=restrictions)

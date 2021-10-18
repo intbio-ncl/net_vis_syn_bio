@@ -1,14 +1,16 @@
 from entities.abstract_entity import PhysicalEntity
 from equivalent import physcial_equivalent as pe
+from property.property import HasPart
 
 # -------------- DNA --------------
 class DNA(PhysicalEntity):
-    def __init__(self,equivalents=[]):
+    def __init__(self,equivalents=[],properties=[]):
         if equivalents == []:
             r = [pe.DNARoleEquivalent()]
         else:
             r = equivalents
-        super().__init__(equivalents=r)
+        p = properties + [HasPart(PhysicalEntity)]
+        super().__init__(equivalents=r,properties=p)
 
 class Promoter(DNA):
     def __init__(self,equivalents=[]):
@@ -116,23 +118,6 @@ class Complex(PhysicalEntity):
             r = equivalents
         super().__init__(equivalents=r)
 
-# -------------- Protein --------------
-class Protein(PhysicalEntity):
-    def __init__(self,equivalents=[]):
-        if equivalents == []:
-            r = [pe.ProteinRoleEquivalent()]
-        else:
-            r = equivalents
-        super().__init__(equivalents=r)
-
-class TranscriptionFactor(Protein):
-    def __init__(self,equivalents=[]):
-        if equivalents == []:
-            r = [pe.TranscriptionFactorRoleEquivalent()]
-        else:
-            r = equivalents
-        super().__init__(equivalents=r)
-
 # -------------- RNA --------------
 class RNA(PhysicalEntity):
     def __init__(self,equivalents=[]):
@@ -154,23 +139,6 @@ class sgRNA(RNA):
     def __init__(self,equivalents=[]):
         if equivalents == []:
             r = [pe.sgRNARoleEquivalent()]
-        else:
-            r = equivalents
-        super().__init__(equivalents=r)
-
-# -------------- Small Molecule --------------
-class SmallMolecule(PhysicalEntity):
-    def __init__(self,equivalents=[]):
-        if equivalents == []:
-            r = [pe.SmallMoleculeRoleEquivalent()]
-        else:
-            r = equivalents
-        super().__init__(equivalents=r)  
-
-class Effector(SmallMolecule):
-    def __init__(self,equivalents=[]):
-        if equivalents == []:
-            r = [pe.EffectorRoleEquivalent()]
         else:
             r = equivalents
         super().__init__(equivalents=r)

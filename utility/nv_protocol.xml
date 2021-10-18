@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:ns1="http://www.w3.org/2002/07/owl#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/actions">
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="N29b85f8d18ba49d5834d4912942bc077">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protocol"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="N4ab4427c7edb40bcbfb14ccde167dce1">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/source">
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="N8f79bc4204a24136899d6c83716d80db">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Container"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="Nb9e451be41be48cb9f207d0e61303cb7">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Extract"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/hasInstrument">
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="Nb486ac69b4d4455eb2c835e4b7c27a59">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Instrument"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="N84bbb32507654d7e84c13f7ded0b029e">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protocol"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/hasContainer">
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="Ndc379ff185e54c5d913b886d2cbb5830">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Container"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protocol"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="N598bc1b8ddd04c86b42e03ee0cf2841a">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Container"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/hasExternal">
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="Nf4622dbd5e7546408d721657874950ba">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/ExternalMachine"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="N7f231b7f7d3545dfa4d59a2bbeb810b1">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protocol"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/destination">
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="N8473490bdbdc4a739707b51d5ee5f612">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Container"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="Nfeb842fa0c174755b03c62238c79f25c">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Dispense"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+  </ns1:ObjectProperty>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Dispense">
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nbdc43971cf5443fdbfd5d12941722ec7">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <ns1:Restriction rdf:nodeID="Nb95e6a75148248c6bf815cd860ac959c">
+            <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#Interaction"/>
+            <ns1:onProperty>
+              <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/hasCharacteristic"/>
+            </ns1:onProperty>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transfer"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Extract"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Distribute"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Consolidate"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Action"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Transfer">
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nba66810d3c3e47e6b626401876c66152">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <ns1:Restriction rdf:nodeID="Nfd0f89da0132442caf5900179a7d3f00">
+            <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#Interaction"/>
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/hasCharacteristic"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Distribute"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Action"/>
+    <rdfs:subClassOf>
+      <ns1:Restriction rdf:nodeID="N99643669124d497895cf46c4466dc5a6">
+        <ns1:onProperty rdf:resource="http://www.nv_ontology.org/consistsOf"/>
+        <ns1:hasValue>
+          <rdf:Description rdf:nodeID="N1bc01696694c4c85a0dcbae74cf2756e">
+            <ns1:members rdf:parseType="Collection">
+              <rdf:Description rdf:about="http://www.nv_ontology.org/Extract"/>
+              <rdf:Description rdf:about="http://www.nv_ontology.org/Dispense"/>
+            </ns1:members>
+          </rdf:Description>
+        </ns1:hasValue>
+      </ns1:Restriction>
+    </rdfs:subClassOf>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dispense"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Extract"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Consolidate"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Consolidate">
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N7235073ae0cc4295bf9fa76d08f9c24f">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <ns1:Restriction rdf:nodeID="Nd41237ddfd564ef1b85ce442368ec8db">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/hasCharacteristic"/>
+            <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#Interaction"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dispense"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transfer"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Extract"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Distribute"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Action"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Instrument">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ExternalMachine"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Container"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/PhysicalEntity"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N0fa3eb08546041a1907f353ca55e378f">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
+          <ns1:Restriction rdf:nodeID="N7d4be3203a9f44a484c3aef99c615853">
+            <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#PhysicalEntity"/>
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/hasCharacteristic"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Distribute">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transfer"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N125b3451b32b4382ac2c953442cd0f9d">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <ns1:Restriction rdf:nodeID="N8e1822ac98c7445d8d7d4181a84a0138">
+            <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#Interaction"/>
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/hasCharacteristic"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dispense"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Extract"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Action"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Consolidate"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/ExternalMachine">
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nbfb6f517a0a844b5b575efa559307158">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
+          <ns1:Restriction rdf:nodeID="N8278561a091b4efba77d3d674994fc72">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/hasCharacteristic"/>
+            <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#PhysicalEntity"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/PhysicalEntity"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Container"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Instrument"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Action">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Protocol"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/ConceptualEntity"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N298cb190c9da4b2dafea2093b0259404">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/ConceptualEntity"/>
+          <ns1:Restriction rdf:nodeID="N659e307f2c2c4f548ee7c555937f8114">
+            <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#Interaction"/>
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/hasCharacteristic"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Protocol">
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N33f1bc5cc14842168e913944fcbfd716">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/ConceptualEntity"/>
+          <ns1:Restriction rdf:nodeID="Nbdf29c7eeee5496db70e55dea78b730b">
+            <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#Interaction"/>
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/hasCharacteristic"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/ConceptualEntity"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Action"/>
+  </ns1:Class>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/consistsOf">
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="N345ef4b4e0e94daabf0c0f20204f4311">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="N4631dbb2c308438ca2f7be4b44dc2086">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Transfer"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Transfer"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+  </ns1:ObjectProperty>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/ConceptualEntity">
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N73e83900db97487fb8a611daf06c6395">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Entity"/>
+          <ns1:Restriction rdf:nodeID="Nc3cf8b393a374f6297303c7269aca23b">
+            <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#Interaction"/>
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/hasCharacteristic"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Entity"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PhysicalEntity"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Extract">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Consolidate"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Action"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Distribute"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dispense"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transfer"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nce659caabb12460c87ca8b1e2b000b01">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <ns1:Restriction rdf:nodeID="N96266b8f934144e6a4e859c8c6077fb6">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/hasCharacteristic"/>
+            <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#Interaction"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Container">
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nb3a3e44b5940494299a9e56a04193d05">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
+          <ns1:Restriction rdf:nodeID="N22467f8930564f0bb6bef4f3a9a176f4">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/hasCharacteristic"/>
+            <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#PhysicalEntity"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ExternalMachine"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/PhysicalEntity"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Instrument"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/PhysicalEntity">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ConceptualEntity"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nc5885ba8a6ab46a99a9c07f5c164d090">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Entity"/>
+          <ns1:Restriction rdf:nodeID="N470bdadfcbeb45a2a92c003c8147b3de">
+            <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#PhysicalEntity"/>
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/hasCharacteristic"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Entity"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Entity"/>
+</rdf:RDF>

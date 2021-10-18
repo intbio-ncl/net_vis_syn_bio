@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.join("..",".."))
 from converters.model import convert as m_convert
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))
-model_fn = os.path.join(curr_dir,"..","..","utility","nv_model.xml")
+model_fn = os.path.join(curr_dir,"..","..","utility","nv_design.xml")
 
 class TestModelGraph(unittest.TestCase):
     def setUp(self):

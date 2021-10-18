@@ -10,7 +10,7 @@ from visual.handlers.color_producer import ColorPicker
 from visual.model import ModelVisual
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))
-model_fn = os.path.join(curr_dir,"..","..","utility","nv_model.xml")
+model_fn = os.path.join(curr_dir,"..","..","utility","nv_design.xml")
 
 
 

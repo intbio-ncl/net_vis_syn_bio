@@ -10,11 +10,11 @@ from rdflib.term import URIRef
 sys.path.insert(0, os.path.join(".."))
 sys.path.insert(0, os.path.join("..",".."))
 
-from builder.instance import InstanceBuilder
+from builder.design import DesignBuilder
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))
 instance_file = os.path.join(curr_dir,"..","files","nor_full.xml")
-model_file = os.path.join(curr_dir,"..","..","utility","nv_model.xml")
+model_file = os.path.join(curr_dir,"..","..","utility","nv_design.xml")
 
 def _graph_element_check(graph):
     node_id_map = {}
@@ -35,7 +35,7 @@ def _graph_element_check(graph):
 
 class TestSearch(unittest.TestCase):
     def setUp(self):
-        self.builder = InstanceBuilder(model_file,instance_file)
+        self.builder = DesignBuilder(model_file,instance_file)
         self.graph = self.builder._graph
 
     def tearDown(self):
@@ -84,7 +84,7 @@ class TestSearch(unittest.TestCase):
 
 class TestViews(unittest.TestCase):
     def setUp(self):
-        self.builder = InstanceBuilder(model_file,instance_file)
+        self.builder = DesignBuilder(model_file,instance_file)
         self.model = self.builder._model_graph
 
     def tearDown(self):
@@ -183,7 +183,7 @@ class TestViews(unittest.TestCase):
 
     def test_interaction_genetic_complex(self):
         instance_file = os.path.join(curr_dir,"..","files","test_genetic_interaction.xml")
-        builder = InstanceBuilder(model_file,instance_file)
+        builder = DesignBuilder(model_file,instance_file)
         model = self.builder._model_graph
         builder.set_interaction_genetic_view()
         self.assertEqual(len(builder.view.nodes),4)
@@ -206,7 +206,7 @@ class TestViews(unittest.TestCase):
 
     def test_interaction_io(self):
         #instance_file = os.path.join(curr_dir,"..","files","nor_full.xml")
-        #builder = InstanceBuilder(model_file,instance_file)
+        #builder = DesignBuilder(model_file,instance_file)
         self.builder.set_interaction_io_view()
         graph = self.builder.view
         interaction_obj = self.model.identifiers.objects.interaction
@@ -223,7 +223,7 @@ class TestViews(unittest.TestCase):
     
 class TestModes(unittest.TestCase):
         def setUp(self):
-            self.builder = InstanceBuilder(model_file,instance_file)
+            self.builder = DesignBuilder(model_file,instance_file)
 
         def tearDown(self):
             pass

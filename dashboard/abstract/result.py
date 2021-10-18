@@ -1,6 +1,6 @@
 import os
 from utility.summarise import get_all_views
-from dashboard.abstract import AbstractDash
+from dashboard.abstract.abstract import AbstractDash
 from visual.instance import InstanceVisual
 
 

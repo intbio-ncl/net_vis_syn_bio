@@ -4,12 +4,11 @@ from flask import Flask
 
 from dashboard.design import DesignDash
 from dashboard.protocol import ProtocolDash
-
 from dashboard.model import ModelDash
 #from dashboard.result import ResultDash
 assets_dir = "assets"
-visual_modes = {"design" : [os.path.join("utility","nv_design_model.xml"),DesignDash],
-                "protocol" : [os.path.join("utility","nv_protocol_model.xml"),ProtocolDash]}
+visual_modes = {"design" : [os.path.join("utility","nv_design.xml"),DesignDash],
+                "protocol" : [os.path.join("utility","nv_protocol.xml"),ProtocolDash]}
 
 def process_input(filename,v_type,summary,model):
     server = Flask(__name__)

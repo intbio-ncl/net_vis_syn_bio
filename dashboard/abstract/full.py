@@ -7,7 +7,7 @@ from dash import callback_context
 from collections import OrderedDict
 
 from visual.abstract import AbstractVisual
-from dashboard.abstract import AbstractDash
+from dashboard.abstract.abstract import AbstractDash
 
 id_prefix = "cyto"
 graph_id = "full_graph"

@@ -12,16 +12,16 @@ sys.path.insert(0, os.path.join(".."))
 sys.path.insert(0, os.path.join("..",".."))
 sys.path.insert(0, os.path.join("..","..",".."))
 
-from converters.instance import convert as instance_convert
+from converters.design import convert as design_convert
 from converters.model import convert as model_convert
 from converters.sbol.utility.graph import SBOLGraph
-from graph.instance import InstanceGraph
+from graph.design import DesignGraph
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))
-model_fn = os.path.join(curr_dir,"..","..","utility","nv_model.xml")
+model_fn = os.path.join(curr_dir,"..","..","utility","nv_design.xml")
 test_dir = os.path.join(curr_dir,"..","files")
 
-class TestConvertInstance(unittest.TestCase):
+class TestConvertDesign(unittest.TestCase):
 
     def setUp(self):
         None
@@ -32,7 +32,7 @@ class TestConvertInstance(unittest.TestCase):
     def test_sbol_cds(self):
         filename = os.path.join(test_dir,"test_convert_sbol_cds.xml")
         model_graph = model_convert(model_fn)
-        graph = instance_convert(model_graph,filename)
+        graph = design_convert(model_graph,filename)
         rdf_graph = SBOLGraph(filename)
         subjects = [t[0] for t in rdf_graph.search((None,None,None))]
 
@@ -49,7 +49,7 @@ class TestConvertInstance(unittest.TestCase):
     def test_sbol_entity_entity(self):
         filename = os.path.join(test_dir,"test_convert_sbol_entity_entity.xml")
         model_graph = model_convert(model_fn)
-        graph = instance_convert(model_graph,filename)
+        graph = design_convert(model_graph,filename)
         rdf_graph = SBOLGraph(filename)
         expected_edges = []
 
@@ -72,20 +72,20 @@ class TestConvertInstance(unittest.TestCase):
     def test_sbol_interactions(self):
         filename = os.path.join(test_dir,"test_sbol_interactions.xml")
         model_graph = model_convert(model_fn)
-        graph = instance_convert(model_graph,filename)
+        graph = design_convert(model_graph,filename)
         self._run_type_test(graph,model_graph)
 
     def test_sbol_nor_gate(self):
         filename = os.path.join(test_dir,"nor_gate.xml")
         model_graph = model_convert(model_fn)
-        graph = instance_convert(model_graph,filename)
+        graph = design_convert(model_graph,filename)
         self._run_type_test(graph,model_graph)
 
 
     def test_convert_sbol(self):
         filename = os.path.join(test_dir,"multiplexer.xml")
         model_graph = model_convert(model_fn)
-        graph = instance_convert(model_graph,filename)
+        graph = design_convert(model_graph,filename)
         rdf_graph = SBOLGraph(filename)
         expected_edges = []
         for cd in rdf_graph.get_component_definitions():
@@ -109,13 +109,13 @@ class TestConvertInstance(unittest.TestCase):
         model_graph = model_convert(model_fn)
         filename = os.path.join(test_dir,"multiplexer.xml")
         json_file = os.path.join(test_dir,"multiplexer.json")
-        graph = instance_convert(model_graph,filename)
+        graph = design_convert(model_graph,filename)
         
         graph.save(json_file)
-        graph = instance_convert(model_graph,json_file)
+        graph = design_convert(model_graph,json_file)
         with open(json_file) as f:
             data = json.load(f)
-        expected_g = InstanceGraph(json_graph.node_link_graph(data))
+        expected_g = DesignGraph(json_graph.node_link_graph(data))
         for k,v,e in expected_g.edges(keys=True):
             k_d = expected_g.nodes[k]
             v_d = expected_g.nodes[v]
