@@ -3,8 +3,8 @@ import types
 
 from rdflib import RDF
 
-from converters.design import convert as i_convert
-from converters.model import convert as m_convert
+from converters.design_handler import convert as i_convert
+from converters.model_handler import convert as m_convert
 
 from builder.abstract import AbstractBuilder
 from builder.builders.design.view import ViewBuilder

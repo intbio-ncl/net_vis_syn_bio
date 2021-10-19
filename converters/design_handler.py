@@ -1,7 +1,7 @@
 import networkx as nx
-from converters.sbol import convert as sbol_convert
-from converters.nv import convert as nv_convert
-from converters.gbk import convert as gbk_convert
+from converters.design import sbol_convert
+from converters.design import nv_convert
+from converters.design import gbk_convert
 from graph.design import DesignGraph
 
 convert_dict = {"sbol" : sbol_convert,

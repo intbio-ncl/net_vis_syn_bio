@@ -1,4 +1,3 @@
-import os
 from rdflib import Graph
 import networkx as nx
 from graph.model import ModelGraph

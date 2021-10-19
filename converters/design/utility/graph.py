@@ -1,7 +1,7 @@
 import re
 
-from converters.sbol.utility.util import SBOLGraphUtil
-from converters.sbol.utility.identifiers import identifiers
+from converters.design.utility.util import SBOLGraphUtil
+from converters.design.utility.identifiers import identifiers
 
 class SBOLGraph:
     def __init__(self,graph):

@@ -1,7 +1,7 @@
 import re
 import networkx as nx
 from rdflib import RDF,BNode,URIRef,OWL
-from converters.sbol.utility.graph import SBOLGraph
+from converters.design.utility.graph import SBOLGraph
 
 accepted_file_types = ['xml','ttl','sbol','rdf']
 def convert(filename,model_graph):

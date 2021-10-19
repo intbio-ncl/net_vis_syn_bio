@@ -1,5 +1,5 @@
 from rdflib import Graph,RDF
-from converters.sbol.utility.identifiers import identifiers
+from converters.design.utility.identifiers import identifiers
 
 
 rdf_type = RDF.type
