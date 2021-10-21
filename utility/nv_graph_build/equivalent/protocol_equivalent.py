@@ -46,3 +46,8 @@ class ProtocolEquivalent(PhysicalEquivalent):
     def __init__(self):
         restrictions = [pr.ProtocolRestriction()]
         super().__init__(restrictions)
+
+class ExternalMachineEquivalent(PhysicalEquivalent):
+    def __init__(self):
+        restrictions = [pr.ExternalMachineRestriction()]
+        super().__init__(restrictions)

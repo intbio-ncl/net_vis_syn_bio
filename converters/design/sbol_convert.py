@@ -1,7 +1,8 @@
 import re
 import networkx as nx
-from rdflib import RDF,BNode,URIRef,OWL
+from rdflib import RDF,BNode,URIRef
 from converters.design.utility.graph import SBOLGraph
+from converters.utility import map_to_nv, get_name
 
 accepted_file_types = ['xml','ttl','sbol','rdf']
 def convert(filename,model_graph):
@@ -32,14 +33,14 @@ def convert(filename,model_graph):
         properties = ([(nv_characteristic,physical_entity)] + 
                      [(nv_role,r) for r in (sbol_graph.get_roles(cd)+sbol_graph.get_types(cd))])
 
-        s,p,o = _map_to_nv(cd,properties,model_roots,model_graph)
+        s,p,o = map_to_nv(cd,properties,model_roots,model_graph)
         n,node_count = _add_node(s,node_count)
         v,node_count = _add_node(o,node_count)
-        name = _get_name(p)
+        name = get_name(p)
         graph.add_edge(n,v,key=p,display_name=name,weight=1)
 
         for p,o in _map_entities(cd,sbol_graph,model_graph):
-            dp = _get_name(p)
+            dp = get_name(p)
             o,node_count = _add_node(o,node_count)
             graph.add_edge(n,o,key=p,dislay_name=dp,weight=1)
 
@@ -51,15 +52,15 @@ def convert(filename,model_graph):
         conceptual_entity = model_graph.identifiers.roles.interaction
         roles = ([(nv_characteristic,conceptual_entity)] + 
                 [(nv_role,r) for r in (sbol_graph.get_types(i))])
-        s,p,o = _map_to_nv(i,roles,model_roots,model_graph)
+        s,p,o = map_to_nv(i,roles,model_roots,model_graph)
         n,node_count = _add_node(s,node_count)
         v,node_count = _add_node(o,node_count)
-        name = _get_name(p)
+        name = get_name(p)
         graph.add_edge(n,v,key=p,display_name=name,weight=1)
         for s,p,o in _get_interaction_properties(i,o,graph,model_graph,sbol_graph):
             s,node_count = _add_node(s,node_count)
             o,node_count = _add_node(o,node_count)
-            p_name = _get_name(p)
+            p_name = get_name(p)
             graph.add_edge(s,o,key=p,display_name=p_name,weight=1)
     return graph
 
@@ -118,7 +119,7 @@ def _get_interaction_properties(identity,i_type,i_graph,m_graph,s_graph):
 def _build_restriction_obj(parent,predicate,value,curr_subjects):
     if parent[-1].isdigit:
         parent = parent[:-1]
-    name = URIRef(parent + _get_name(value))
+    name = URIRef(parent + get_name(value))
     count = 1
     while name in curr_subjects:
         name = URIRef(f'{name}/{count}')
@@ -151,68 +152,6 @@ def _map_entities(cd,sbol_graph,model_graph):
         triples.append((part_of,sc))
     return triples
 
-def _map_to_nv(identifier,properties,roots,model):
-    def model_requirement_depth(nv_class,parent_class=None,depth=0):
-        def is_equivalent_class(class_id):
-            ecs = model.get_equivalent_classes(class_id)
-            if len(ecs) == 0:
-                # Classes with no equivalents
-                # For us that is just the base class.
-                return True
-            return _meets_requirements(ecs,parent_class,properties)
-        class_id,c_data = nv_class
-        if not is_equivalent_class(class_id):
-            return (depth,parent_class)
-        depth +=1
-        # All Requirements met.
-        children = model.get_child_classes(class_id)
-        cur_lowest_child = (depth,nv_class)
-        for child in children:
-            ret_val = model_requirement_depth(child,nv_class,depth)
-            if ret_val[0] > cur_lowest_child[0]:
-                cur_lowest_child = ret_val
-        # Get most specialised children or self
-        return cur_lowest_child
-    for root in roots:
-        possible_class = model_requirement_depth(root)
-        return (identifier,RDF.type,possible_class[1][1]["key"])
-
-def _meets_requirements(equiv_classes,parent_class,properties):
-    def _meets_requirements_inner(equiv_type,requirements,parent_class):
-        if equiv_type == OWL.intersectionOf:
-            # Equivalent Class with extras.
-            # All extras must be met.
-            for r in requirements:
-                if not _meets_requirements_inner(*r,parent_class):
-                    return False
-        elif equiv_type == OWL.unionOf:
-            # Equiv Class with optional extras.
-            for r in requirements:
-                if _meets_requirements_inner(*r,parent_class):
-                    return True
-            else:
-                return False
-        elif equiv_type == RDF.type:
-            # Direct Equivalent Class.
-            if requirements[1] == RDF.type and requirements[0]["key"] != parent_class[1]["key"]:
-                return False
-        else:
-            # Single properties (Not Class)
-            p_o = (equiv_type,requirements[1]["key"])
-            if p_o not in properties:
-                return False
-        return True
-
-    for equiv_class in equiv_classes:
-        # Each Requirement must be met.
-        for equiv_type,requirements in equiv_class:
-            if not _meets_requirements_inner(equiv_type,requirements,parent_class):
-                break
-        else:
-            return True
-    else:
-        return False
-
 def _get_nv_type(key,graph,m_graph):
     for n,v,k in graph.edges(keys=True):
         n_data = graph.nodes[n]
@@ -221,12 +160,3 @@ def _get_nv_type(key,graph,m_graph):
             return v_data["key"]
     return m_graph.identifiers.roles.physical_entity
 
-def _get_name(subject):
-    split_subject = _split(subject)
-    if len(split_subject[-1]) == 1 and split_subject[-1].isdigit():
-        return split_subject[-2]
-    else:
-        return split_subject[-1]
-
-def _split(uri):
-    return re.split('#|\/|:', uri)

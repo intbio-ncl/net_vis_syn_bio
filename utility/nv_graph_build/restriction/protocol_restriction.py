@@ -46,3 +46,7 @@ class ProtocolRestriction(RoleRestriction):
         values = [identifiers.roles.protocol]
         super().__init__(values)
 
+class ExternalMachineRestriction(RoleRestriction):
+    def __init__(self):
+        values = [identifiers.roles.external_machine]
+        super().__init__(values)

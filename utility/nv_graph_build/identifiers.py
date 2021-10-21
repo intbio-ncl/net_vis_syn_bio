@@ -97,5 +97,6 @@ class Roles:
         self.distribute = URIRef(namespaces.nv + "Distribute")
         self.pick = URIRef(namespaces.nv + "Pick")
         self.drop = URIRef(namespaces.nv + "Drop")
+        self.external_machine = URIRef(namespaces.nv + "ExternalMachine")
 
 identifiers = Identifiers()

@@ -4,7 +4,7 @@ from equivalent import protocol_equivalent as pe
 class ExternalMachine(PhysicalEntity):
     def __init__(self,equivalents=[]):
         if equivalents == []:
-            r = []
+            e = [pe.ExternalMachineEquivalent()]
         else:
-            r = equivalents
-        super().__init__(equivalents=r)
+            e = equivalents
+        super().__init__(equivalents=e)
