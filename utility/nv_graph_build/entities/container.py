@@ -1,11 +1,12 @@
 from entities.abstract_entity import PhysicalEntity
 from property.protocols import HasContainer
+from equivalent import protocol_equivalent as pe
 
 class Container(PhysicalEntity):
     def __init__(self,properties=[],equivalents=[],restrictions=[]):
         if equivalents == []:
-            r = []
+            e = [pe.ContainerEquivalent()]
         else:
-            r = equivalents
+            e = equivalents
         p = properties + [HasContainer(Container)]
-        super().__init__(properties=p,equivalents=r)
+        super().__init__(properties=p,equivalents=e,restrictions=restrictions)

@@ -1,5 +1,5 @@
 from entities.abstract_entity import PhysicalEntity
-from equivalent import physcial_equivalent as pe
+from equivalent import protocol_equivalent as pe
 
 class ExternalMachine(PhysicalEntity):
     def __init__(self,equivalents=[]):

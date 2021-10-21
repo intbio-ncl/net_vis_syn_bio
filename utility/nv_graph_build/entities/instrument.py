@@ -1,10 +1,18 @@
 from entities.abstract_entity import PhysicalEntity
-from equivalent import physcial_equivalent as pe
+from equivalent import protocol_equivalent as pe
 
 class Instrument(PhysicalEntity):
-    def __init__(self,equivalents=[]):
+    def __init__(self,properties=[],equivalents=[],restrictions=[]):
         if equivalents == []:
-            r = []
+            e = [pe.InstrumentEquivalent()]
         else:
-            r = equivalents
-        super().__init__(equivalents=r)
+            e = equivalents
+        super().__init__(properties=properties,equivalents=e,
+                        restrictions=restrictions)
+
+class Pipette(Instrument): # Source
+    def __init__(self,properties=[],equivalents=[],restrictions=[]):
+        e = equivalents + [pe.PipetteEquivalent()]
+        p = properties
+        super().__init__(properties=p,equivalents=e,
+                        restrictions=restrictions)

@@ -1,11 +1,11 @@
 
 import dash
-from dash import dcc
+import dash_core_components as dcc
 import dash_bootstrap_components as dbc
-from dash import html
+import dash_html_components as html
 import dash_daq as daq
 import dash_bio as dashbio
-from dash import dash_table
+import dash_table
 
 external_scripts = [
     {

@@ -29,8 +29,3 @@ class RecipeRestriction(Restriction):
     def __init__(self,recipe,r_range):
         super().__init__(ConsistsOf(r_range))
         self.recipe = recipe
-
-class ActionsRestriction(Restriction):
-    def __init__(self,actions):
-        super().__init__(Actions())
-        self.actions = actions
