@@ -1,5 +1,6 @@
 from rdflib import URIRef
 from identifiers import identifiers
+from rdflib import XSD
 
 class Datatype:
     def __init__(self,name=None):
@@ -14,3 +15,19 @@ class Input(Datatype):
 class Output(Datatype):
     def __init__(self):
         super().__init__()
+
+class Integer:
+    def __init__(self):
+        self.uri = XSD.integer
+
+    @classmethod
+    def uri(cls):
+        return XSD.integer
+
+class String:
+    def __init__(self):
+        self.uri = XSD.string
+
+    @classmethod
+    def uri(cls):
+        return XSD.string

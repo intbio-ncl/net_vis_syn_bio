@@ -6,8 +6,8 @@ from rdflib import RDF,OWL
 sys.path.insert(0, os.path.join(".."))
 sys.path.insert(0, os.path.join("..",".."))
 
-from converters.model import convert as m_convert
-from converters.design import convert as i_convert
+from converters.model_handler import convert as m_convert
+from converters.design_handler import convert as i_convert
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))
 test_fn = test_dir = os.path.join(curr_dir,"..","files","nor_gate.xml")

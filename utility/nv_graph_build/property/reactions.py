@@ -8,7 +8,7 @@ class ReactionProperty(Property):
         super().__init__(range,properties=properties,equivalents=equivalents)
 
 class Reactant(ReactionProperty):
-    def __init__(self,range):
+    def __init__(self,range=None):
         p = [Direction(Input())]
         e = [pe.ReactantEquivalent(),
              pe.InhibitorEquivalent(),
@@ -18,7 +18,7 @@ class Reactant(ReactionProperty):
         super().__init__(range,p,e)
 
 class Product(ReactionProperty):
-    def __init__(self,range):
+    def __init__(self,range=None):
         p = [Direction(Output())]
         e = [pe.ProductEquivalent(),
              pe.InhibitedEquivalent(),
@@ -27,7 +27,7 @@ class Product(ReactionProperty):
         super().__init__(range,p,e)
 
 class Template(ReactionProperty):
-    def __init__(self,range):
+    def __init__(self,range=None):
         '''
         Note: Promoter is just to appease SBOL it doesn't make much sense.
         '''

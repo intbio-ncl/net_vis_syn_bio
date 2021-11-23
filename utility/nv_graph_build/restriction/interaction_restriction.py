@@ -1,5 +1,4 @@
 from restriction.abstract_restriction import RoleRestriction
-from restriction.abstract_restriction import CharacteristicRestriction
 from identifiers import identifiers
 
 class ActivationRoleRestriction(RoleRestriction):

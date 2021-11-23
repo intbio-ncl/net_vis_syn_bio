@@ -26,8 +26,12 @@ class Role(Property):
     def __init__(self):
         super().__init__()
 
+class Name(Property):
+    def __init__(self):
+        super().__init__()
+
 class HasPart(Property):
-    def __init__(self,range):
+    def __init__(self,range=None):
         super().__init__(range)
 
 class HasCharacteristic(Property):

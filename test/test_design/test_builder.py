@@ -216,7 +216,7 @@ class TestViews(unittest.TestCase):
         interactions_classes = [d[1]["key"] for d in self.model.get_derived(interaction_class_code)]
         protein_classes = [prot_obj] + [d[1]["key"] for d in self.model.get_derived(prot_class_code)]
         for n,v,e in graph.edges(keys=True):
-            print(graph.nodes[n]["key"],graph.nodes[v]["key"],e)
+            pass
             #self.assertIn(e,interactions_classes)
             #self.assertIn(self.builder.get_rdf_type(n)[1]["key"],protein_classes)
             #self.assertIn(self.builder.get_rdf_type(v)[1]["key"],protein_classes)

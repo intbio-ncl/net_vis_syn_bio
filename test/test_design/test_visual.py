@@ -264,8 +264,6 @@ class TestColor(unittest.TestCase):
             _run_tests()
 
         def test_role(self):
-            for e in self._color_list:
-                print(e)
             view = self.visual._builder.view
             ret_val = self.visual.add_role_node_color()
             self.assertIsNone(ret_val)

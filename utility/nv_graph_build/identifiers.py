@@ -1,3 +1,4 @@
+from os import name
 from rdflib import URIRef,RDF
 
 class Identifiers:
@@ -84,7 +85,7 @@ class Roles:
         self.dissociation = URIRef(namespaces.sbo_biomodels + "0000180")
         self.hydrolysis = URIRef(namespaces.sbo_biomodels + "0000376")
 
-
+        self.action = URIRef(namespaces.nv + "Action")
         self.protocol = URIRef(namespaces.edam + "data_2531")
         self.instrument = URIRef(namespaces.efo + "0000548")
         self.pipette = URIRef(namespaces.obi + "0002488")

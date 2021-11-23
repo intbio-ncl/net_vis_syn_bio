@@ -10,6 +10,7 @@ def map_to_nv(identifier,properties,roots,model):
                 # For us that is just the base class.
                 return True
             return _meets_requirements(ecs,parent_class,properties)
+
         class_id,c_data = nv_class
         if not is_equivalent_class(class_id):
             return (depth,parent_class)
@@ -23,6 +24,7 @@ def map_to_nv(identifier,properties,roots,model):
                 cur_lowest_child = ret_val
         # Get most specialised children or self
         return cur_lowest_child
+
     for root in roots:
         possible_class = model_requirement_depth(root)
         return (identifier,RDF.type,possible_class[1][1]["key"])
@@ -48,10 +50,37 @@ def _meets_requirements(equiv_classes,parent_class,properties):
                 return False
         else:
             # Single properties (Not Class)
-            p_o = (equiv_type,requirements[1]["key"])
-            if p_o not in properties:
+            value,constraint = requirements
+            value = value[1]["key"]
+            if constraint == OWL.hasValue and (equiv_type,value) not in properties:
                 return False
+            elif constraint == OWL.cardinality:
+                for t,v in properties:
+                    if v is None:
+                        v = []
+                    if t == equiv_type and len(v) == int(value):
+                        break
+                else:
+                    return False
+            elif constraint == OWL.minCardinality:
+                for t,v in properties:
+                    if v is None:
+                        v = []
+                    if t == equiv_type and len(v) >= int(value):
+                        break
+                else:
+                    return False
+            elif constraint == OWL.maxCardinality:
+                for t,v in properties:
+                    if v is None:
+                        v = []
+                    if t == equiv_type and len(v) <= int(value):
+                        break
+                else:
+                    return False
+
         return True
+        
     for equiv_class in equiv_classes:
         # Each Requirement must be met.
         for equiv_type,requirements in equiv_class:

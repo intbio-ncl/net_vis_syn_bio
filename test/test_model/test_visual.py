@@ -6,6 +6,7 @@ import re
 from rdflib import BNode,OWL,URIRef,Literal
 sys.path.insert(0, os.path.join(".."))
 sys.path.insert(0, os.path.join("..",".."))
+sys.path.insert(0, os.path.join("..","..",".."))
 from visual.handlers.color_producer import ColorPicker
 from visual.model import ModelVisual
 

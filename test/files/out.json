@@ -1,0 +1,304 @@
+{
+  "instructions": [
+    {
+      "instructions": [
+        {
+          "instructions": [
+            {
+              "instructions": [
+                {
+                  "op": "dispense",
+                  "object": "ice",
+                  "columns": [
+                    {
+                      "column": 0,
+                      "volume": "1:microliter"
+                    }
+                  ],
+                  "reagent_source": "restriction-enzyme/0",
+                  "step_size": "0.5:microliter"
+                },
+                {
+                  "op": "dispense",
+                  "object": "ice",
+                  "columns": [
+                    {
+                      "column": 0,
+                      "volume": "50:microliter"
+                    }
+                  ],
+                  "reagent_source": "water/0",
+                  "step_size": "0.5:microliter"
+                },
+                {
+                  "op": "dispense",
+                  "object": "ice",
+                  "columns": [
+                    {
+                      "column": 0,
+                      "volume": "5:microliter"
+                    }
+                  ],
+                  "reagent_source": "restriction-buffer/0",
+                  "step_size": "0.5:microliter"
+                },
+                {
+                  "op": "dispense",
+                  "object": "ice",
+                  "columns": [
+                    {
+                      "column": 0,
+                      "volume": "1:microliter"
+                    }
+                  ],
+                  "reagent_source": "gblock-nor/0",
+                  "step_size": "0.5:microliter"
+                },
+                {
+                  "op": "dispense",
+                  "object": "reaction-output-gblock",
+                  "columns": [
+                    {
+                      "column": 0,
+                      "volume": "57:microliter"
+                    }
+                  ],
+                  "reagent_source": "ice/0",
+                  "step_size": "0.5:microliter"
+                },
+                {
+                  "op": "seal",
+                  "object": "reaction-output-gblock",
+                  "type": "ultra-clear"
+                },
+                {
+                  "op": "spin",
+                  "object": "reaction-output-gblock",
+                  "acceleration": "1000:g",
+                  "duration": "5:second"
+                },
+                {
+                  "op": "incubate",
+                  "object": "reaction-output-gblock",
+                  "where": "warm_37",
+                  "duration": "10:minute",
+                  "shaking": false,
+                  "co2_percent": 0
+                },
+                {
+                  "op": "thermocycle",
+                  "object": "reaction-output-gblock",
+                  "groups": [
+                    {
+                      "cycles": 1,
+                      "steps": [
+                        {
+                          "temperature": "80:celsius",
+                          "duration": "20:minute"
+                        }
+                      ]
+                    }
+                  ],
+                  "volume": "10:microliter"
+                }
+              ],
+              "refs": {
+                "restriction-enzyme": {
+                  "new": "micro-2.0",
+                  "discard": true
+                },
+                "water": {
+                  "new": "micro-2.0",
+                  "discard": true
+                },
+                "restriction-buffer": {
+                  "new": "micro-2.0",
+                  "discard": true
+                },
+                "ice": {
+                  "new": "384-flat",
+                  "discard": true
+                },
+                "gblock-nor": {
+                  "new": "micro-2.0",
+                  "discard": true
+                },
+                "reaction-output-gblock": {
+                  "new": "96-pcr",
+                  "discard": true
+                }
+              },
+              "op": "Restriction",
+              "type": "Action"
+            },
+            {
+              "instructions": [
+                {
+                  "op": "dispense",
+                  "object": "ice_0",
+                  "columns": [
+                    {
+                      "column": 0,
+                      "volume": "1:microliter"
+                    }
+                  ],
+                  "reagent_source": "restriction-enzyme/0",
+                  "step_size": "0.5:microliter"
+                },
+                {
+                  "op": "dispense",
+                  "object": "ice_0",
+                  "columns": [
+                    {
+                      "column": 0,
+                      "volume": "50:microliter"
+                    }
+                  ],
+                  "reagent_source": "water/0",
+                  "step_size": "0.5:microliter"
+                },
+                {
+                  "op": "dispense",
+                  "object": "ice_0",
+                  "columns": [
+                    {
+                      "column": 0,
+                      "volume": "5:microliter"
+                    }
+                  ],
+                  "reagent_source": "restriction-buffer/0",
+                  "step_size": "0.5:microliter"
+                },
+                {
+                  "op": "dispense",
+                  "object": "ice_0",
+                  "columns": [
+                    {
+                      "column": 0,
+                      "volume": "1:microliter"
+                    }
+                  ],
+                  "reagent_source": "plasmid/0",
+                  "step_size": "0.5:microliter"
+                },
+                {
+                  "op": "dispense",
+                  "object": "reaction-output-plasmid",
+                  "columns": [
+                    {
+                      "column": 0,
+                      "volume": "57:microliter"
+                    }
+                  ],
+                  "reagent_source": "ice_0/0",
+                  "step_size": "0.5:microliter"
+                },
+                {
+                  "op": "seal",
+                  "object": "reaction-output-plasmid",
+                  "type": "ultra-clear"
+                },
+                {
+                  "op": "spin",
+                  "object": "reaction-output-plasmid",
+                  "acceleration": "1000:g",
+                  "duration": "5:second"
+                },
+                {
+                  "op": "incubate",
+                  "object": "reaction-output-plasmid",
+                  "where": "warm_37",
+                  "duration": "10:minute",
+                  "shaking": false,
+                  "co2_percent": 0
+                },
+                {
+                  "op": "thermocycle",
+                  "object": "reaction-output-plasmid",
+                  "groups": [
+                    {
+                      "cycles": 1,
+                      "steps": [
+                        {
+                          "temperature": "80:celsius",
+                          "duration": "20:minute"
+                        }
+                      ]
+                    }
+                  ],
+                  "volume": "10:microliter"
+                }
+              ],
+              "refs": {
+                "restriction-enzyme": {
+                  "new": "micro-2.0",
+                  "discard": true
+                },
+                "water": {
+                  "new": "micro-2.0",
+                  "discard": true
+                },
+                "restriction-buffer": {
+                  "new": "micro-2.0",
+                  "discard": true
+                },
+                "ice_0": {
+                  "new": "384-flat",
+                  "discard": true
+                },
+                "plasmid": {
+                  "new": "micro-2.0",
+                  "discard": true
+                },
+                "reaction-output-plasmid": {
+                  "new": "96-pcr",
+                  "discard": true
+                }
+              },
+              "op": "Restriction",
+              "type": "Action"
+            }
+          ],
+          "refs": {
+            "restriction-enzyme": {
+              "new": "micro-2.0",
+              "discard": true
+            },
+            "water": {
+              "new": "micro-2.0",
+              "discard": true
+            },
+            "restriction-buffer": {
+              "new": "micro-2.0",
+              "discard": true
+            },
+            "ice": {
+              "new": "384-flat",
+              "discard": true
+            },
+            "ice_0": {
+              "new": "384-flat",
+              "discard": true
+            },
+            "gblock-nor": {
+              "new": "micro-2.0",
+              "discard": true
+            },
+            "plasmid": {
+              "new": "micro-2.0",
+              "discard": true
+            }
+          },
+          "op": "Restriction",
+          "type": "Protocol"
+        }
+      ],
+      "refs": {},
+      "op": "Assembly",
+      "type": "Protocol"
+    }
+  ],
+  "refs": {},
+  "op": "Master",
+  "type": "Protocol"
+}

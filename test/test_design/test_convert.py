@@ -12,9 +12,9 @@ sys.path.insert(0, os.path.join(".."))
 sys.path.insert(0, os.path.join("..",".."))
 sys.path.insert(0, os.path.join("..","..",".."))
 
-from converters.design import convert as design_convert
-from converters.model import convert as model_convert
-from converters.sbol.utility.graph import SBOLGraph
+from converters.design_handler import convert as design_convert
+from converters.model_handler import convert as model_convert
+from converters.design.utility.graph import SBOLGraph
 from graph.design import DesignGraph
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))

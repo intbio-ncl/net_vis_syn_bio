@@ -3,10 +3,12 @@ from opentrons.protocol_api.protocol_context import ProtocolContext
 
 from converters.protocol import ot2_file_convert
 from converters.protocol import ot2_context_convert
+from converters.protocol import open_protocol_convert
 from graph.protocol import ProtocolGraph
 
 convert_dict = {"ot2-file" : ot2_file_convert,
-                "ot2-context"  : ot2_context_convert}
+                "ot2-context"  : ot2_context_convert,
+                "open-protocol" : open_protocol_convert}
 
 def convert(model_graph,filename=None,convert_type=None):
     if filename is None:
@@ -23,4 +25,6 @@ def derive_convert_type(item):
     if item.lower().endswith(tuple(v.lower() for v in ot2_file_convert.accepted_file_types)):
         return "ot2-file"
     elif isinstance(item,ProtocolContext):
-        return 'ot2-context'
+        return "ot2-context"
+    elif item.lower().endswith(tuple(v.lower() for v in open_protocol_convert.accepted_file_types)):
+        return "open-protocol"

@@ -10,7 +10,7 @@ assets_dir = "assets"
 visual_modes = {"design" : [os.path.join("utility","nv_design.xml"),DesignDash],
                 "protocol" : [os.path.join("utility","nv_protocol.xml"),ProtocolDash]}
 
-def process_input(filename,v_type,summary,model):
+def process_input(filename,v_type,summary,model,port):
     server = Flask(__name__)
 
     model_fn,dash = visual_modes[v_type]
@@ -21,7 +21,7 @@ def process_input(filename,v_type,summary,model):
         dashboard = dash(__name__,server,model_fn)
 
     dashboard.load_graph(filename)
-    server.run()
+    server.run(port=port)
 
 def language_processor_args():
     parser = argparse.ArgumentParser(description="Network Visualisation Tool")
@@ -29,6 +29,8 @@ def language_processor_args():
     parser.add_argument('--type', '-t', help='Set type of visualisation',
                         default=list(visual_modes.keys())[0],type=str,
                         choices=visual_modes.keys())
+
+    parser.add_argument('--port', '-p', help='Provide alternative port number.',default="5000",)
 
     parser.add_argument('-s', '--summary', help="Renders Summary Dashboard.", 
                         default=None, action='store_true')
@@ -38,4 +40,4 @@ def language_processor_args():
 
 if __name__ == "__main__":
     args = language_processor_args()
-    process_input(args.filename,args.type,args.summary,args.model)
+    process_input(args.filename,args.type,args.summary,args.model,args.port)

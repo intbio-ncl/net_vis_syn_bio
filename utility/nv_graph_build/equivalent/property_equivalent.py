@@ -21,7 +21,6 @@ class RepressedEquivalent(EquivalentProperty):
         e = [identifiers.roles.inhibited]
         super().__init__(e)
 
-
 class ReactantEquivalent(EquivalentProperty):
     def __init__(self):
         e = [identifiers.roles.reactant]

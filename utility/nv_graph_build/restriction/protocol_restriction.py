@@ -1,29 +1,12 @@
+from rdflib import OWL
 from restriction.abstract_restriction import RoleRestriction
+from restriction.abstract_restriction import SourceRestriction
+from restriction.abstract_restriction import DestinationRestriction
 from identifiers import identifiers
 
-class ExtractRestriction(RoleRestriction):
+class ActionRestriction(RoleRestriction):
     def __init__(self):
-        values = [identifiers.roles.extract]
-        super().__init__(values)
-
-class DispenseRestriction(RoleRestriction):
-    def __init__(self):
-        values = [identifiers.roles.dispense]
-        super().__init__(values)
-
-class TransferRestriction(RoleRestriction):
-    def __init__(self):
-        values = [identifiers.roles.transfer]
-        super().__init__(values)
-
-class ConsolidateRestriction(RoleRestriction):
-    def __init__(self):
-        values = [identifiers.roles.consolidate]
-        super().__init__(values)
-
-class DistributeRestriction(RoleRestriction):
-    def __init__(self):
-        values = [identifiers.roles.distribute]
+        values = [identifiers.roles.action]
         super().__init__(values)
 
 class ContainerRestriction(RoleRestriction):
@@ -46,7 +29,37 @@ class ProtocolRestriction(RoleRestriction):
         values = [identifiers.roles.protocol]
         super().__init__(values)
 
-class ExternalMachineRestriction(RoleRestriction):
+class ApparatusRestriction(RoleRestriction):
     def __init__(self):
         values = [identifiers.roles.external_machine]
         super().__init__(values)
+
+class WellRestriction(RoleRestriction):
+    def __init__(self):
+        values = [identifiers.roles.well]
+        super().__init__(values)
+
+
+class ZeroSourceRestriction(SourceRestriction):
+    def __init__(self):
+        super().__init__(OWL.cardinality,0)
+
+class OneSourceRestriction(SourceRestriction):
+    def __init__(self):
+        super().__init__(OWL.cardinality,1)
+
+class ManySourceRestriction(SourceRestriction):
+    def __init__(self):
+        super().__init__(OWL.minCardinality,2)
+    
+class ZeroDestinationRestriction(DestinationRestriction):
+    def __init__(self):
+        super().__init__(OWL.cardinality,0)
+
+class OneDestinationRestriction(DestinationRestriction):
+    def __init__(self):
+        super().__init__(OWL.cardinality,1)
+
+class ManyDestinationRestriction(DestinationRestriction):
+    def __init__(self):
+        super().__init__(OWL.minCardinality,2)
