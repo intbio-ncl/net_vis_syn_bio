@@ -108,8 +108,6 @@ def convert(input_fn,model_graph):
             dp = get_name(part_of)
             graph.add_edge(f_n,f_v,key=f_p,display_name=name,weight=1)
             graph.add_edge(n,f_n,key=part_of,dislay_name=dp,weight=1)
-    for n,v,e in graph.edges(data=True):
-        print(n,v,e)
     return graph
 
 def gbk_map(ids):

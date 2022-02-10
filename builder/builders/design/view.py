@@ -149,7 +149,6 @@ class ViewBuilder(AbstractViewBuilder):
             for index, (n, v) in enumerate(dfs):
                 i_type = self._builder.get_rdf_type(v)[1]["key"]
                 if i_type == genetic_pred or self._builder._model_graph.is_derived(i_type,genetic_pred):
-                    print(graph.nodes[n])
                     continue
                 if [d[0] for d in dfs].count(v) == 0:
                     outputs.append((v, d_pred))

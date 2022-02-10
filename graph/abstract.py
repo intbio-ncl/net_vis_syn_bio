@@ -99,7 +99,6 @@ class AbstractGraph:
 
     def generate(self,d_type):
         try:
-            print(d_type)
             return save_map[d_type](self._graph)
         except KeyError:
             return
