@@ -21,7 +21,7 @@ def process_input(filename,v_type,summary,model,port):
         dashboard = dash(__name__,server,model_fn)
 
     dashboard.load_graph(filename)
-    server.run(port=port)
+    server.run(port=port,debug=True)
 
 def language_processor_args():
     parser = argparse.ArgumentParser(description="Network Visualisation Tool")

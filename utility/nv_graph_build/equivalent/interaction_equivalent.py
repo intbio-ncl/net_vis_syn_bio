@@ -25,3 +25,8 @@ class BindsRoleEquivalent(ConceptualEquivalent):
     def __init__(self):
         restrictions = [ir.BindsRoleRestriction()]
         super().__init__(restrictions)
+
+class ConversionRoleEquivalent(ConceptualEquivalent):
+    def __init__(self):
+        restrictions = [ir.ConversionRoleRestriction()]
+        super().__init__(restrictions)

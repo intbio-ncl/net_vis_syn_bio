@@ -175,10 +175,10 @@ class AbstractDash:
             default_val = max_val/2
         if marks is None:
             marks = {}
-            marks[min_val] = str(min_val)
-            marks[max_val] = str(max_val)
+            marks[min_val] = str(int(min_val))
+            marks[max_val] = str(int(max_val))
         if step is None:
-            step = max_val/10
+            step = max_val/4
         slider = dcc.Slider(id=identifier, min=min_val, max=max_val,
                             value=default_val, marks=marks, step=step, **kwargs)
         if add:
@@ -392,3 +392,11 @@ class AbstractDash:
             return self.create_div("sb", legend_body_div, add=True, className="graph-legend")
         else:
             return self.create_div("sb", legend_body_div, className="graph-legend")
+
+    def create_text_area(self,identifier,add=False,**kwargs):
+        ta = dcc.Textarea(id=identifier,style={'width': '100%', 'height': 500},**kwargs)
+        if add:
+            return self._create_element(ta)
+        else:
+            return [ta]
+

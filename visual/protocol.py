@@ -21,6 +21,8 @@ class ProtocolVisual(AbstractVisual):
         self._color_h = ColorHandler(self._builder)
         self._size_h = SizeHandler(self._builder)
         self._shape_h = ShapeHandler(self._builder)
+        self._abs_level = 3
+        self._detail_level = False
         self.set_concentric_layout()
 
     def _load_graph(self,fn):
@@ -43,63 +45,15 @@ class ProtocolVisual(AbstractVisual):
                             self.set_bezier_edge_shape]
         return self._set_preset(preset_functions)
 
-    def set_actions_level_0_io_explicit_preset(self):
+    def set_pruned_preset(self):
         '''
-        Pre-set methods with an affinity for displaying the explicit actions view.
+        Pre-set methods with an affinity for displaying the raw graph view.
         '''
-        preset_functions = [self.set_network_mode,
-                            self.set_action_io_explicit_view,
+        preset_functions = [self.set_tree_mode,
+                            self.set_pruned_view,
                             self.set_dagre_layout,
                             self.add_type_node_color,
-                            self.add_standard_edge_color,
-                            self.add_source_dest_node_labels, 
-                            self.add_edge_no_labels,
-                            self.add_standard_node_size,
-                            self.set_circle_node_shape,
-                            self.set_bezier_edge_shape]
-        return self._set_preset(preset_functions)
-
-    def set_actions_level_1_io_aggregate_preset(self):
-        '''
-        Pre-set methods with an affinity for displaying the explicit actions view with aggreagted containers.
-        '''
-        preset_functions = [self.set_network_mode,
-                            self.set_action_io_aggregate_view,
-                            self.set_dagre_layout,
-                            self.add_type_node_color,
-                            self.add_standard_edge_color,
-                            self.add_source_dest_node_labels, 
-                            self.add_edge_no_labels,
-                            self.add_standard_node_size,
-                            self.set_circle_node_shape,
-                            self.set_bezier_edge_shape]
-        return self._set_preset(preset_functions)
-
-    def set_actions_level_2_flow_preset(self):
-        '''
-        Pre-set methods with an affinity for displaying the standard actions view.
-        '''
-        preset_functions = [self.set_network_mode,
-                            self.set_action_flow_view,
-                            self.set_dagre_layout,
-                            self.add_type_node_color,
-                            self.add_standard_edge_color,
-                            self.add_explicit_source_dest_node_labels, 
-                            self.add_edge_no_labels,
-                            self.add_standard_node_size,
-                            self.set_circle_node_shape,
-                            self.set_bezier_edge_shape]
-        return self._set_preset(preset_functions)
-
-    def set_actions_level_3_io_implicit_preset(self):
-        '''
-        Pre-set methods with an affinity for displaying the implicit actions view..
-        '''
-        preset_functions = [self.set_network_mode,
-                            self.set_action_io_implicit_view,
-                            self.set_dagre_layout,
-                            self.add_parent_node_color,
-                            self.add_object_type_edge_color,
+                            self.add_type_edge_color,
                             self.add_node_name_labels, 
                             self.add_edge_no_labels,
                             self.add_standard_node_size,
@@ -107,89 +61,192 @@ class ProtocolVisual(AbstractVisual):
                             self.set_bezier_edge_shape]
         return self._set_preset(preset_functions)
 
-    def set_heirarchy_preset(self):
+    def set_hierarchy_preset(self):
         '''
         Pre-set methods with an affinity for displaying the heirarchy of objects and actions
         '''
         preset_functions = [self.set_network_mode,
-                            self.set_heirarchy_view,
+                            self.set_hierarchy_view,
                             self.set_dagre_layout,
                             self.add_type_node_color,
                             self.add_standard_edge_color,
-                            self.add_source_dest_node_labels, 
+                            self.add_node_name_labels, 
                             self.add_edge_no_labels,
                             self.add_standard_node_size,
                             self.set_circle_node_shape,
                             self.set_bezier_edge_shape]
         return self._set_preset(preset_functions)
 
+    def set_instructions_preset(self):
+        '''
+        Pre-set methods with an affinity for displaying the
+        instruction set.
+        '''
+        preset_functions = [self.set_tree_mode,
+                            self.set_no_detail_level,
+                            self.set_instructions_view,
+                            self.set_klay_layout,
+                            self.add_parent_node_color,
+                            self.add_standard_edge_color,
+                            self.add_node_name_labels, 
+                            self.add_edge_no_labels,
+                            self.add_standard_node_size,
+                            self.set_circle_node_shape,
+                            self.set_bezier_edge_shape]
+        return self._set_preset(preset_functions)
+
+    def set_flow_preset(self):
+        '''
+        Pre-set methods with an affinity for displaying flow between wells.
+        '''
+        preset_functions = [self.set_network_mode,
+                            self.set_flow_view,
+                            self.set_dagre_layout,
+                            self.add_type_node_color,
+                            self.add_standard_edge_color,
+                            self.add_node_name_labels, 
+                            self.add_well_container_edge_labels,
+                            self.add_standard_node_size,
+                            self.set_circle_node_shape,
+                            self.set_bezier_edge_shape]
+        return self._set_preset(preset_functions)
+
+    def set_io_preset(self):
+        '''
+        Pre-set methods with an affinity for displaying 
+        input and outputs of actions.
+        '''
+        preset_functions = [self.set_network_mode,
+                            self.set_io_view,
+                            self.set_klay_layout,
+                            self.add_type_node_color,
+                            self.add_type_edge_color,
+                            self.add_well_container_node_labels, 
+                            self.add_edge_no_labels,
+                            self.add_standard_node_size,
+                            self.set_circle_node_shape,
+                            self.set_bezier_edge_shape]
+        return self._set_preset(preset_functions)
+
+    def set_process_preset(self):
+        '''
+        Pre-set methods with an affinity for displaying the 
+        processes (actions) between wells.
+        '''
+        preset_functions = [self.set_network_mode,
+                            self.set_process_view,
+                            self.set_klay_layout,
+                            self.add_type_node_color,
+                            self.add_object_type_edge_color,
+                            self.add_well_container_node_labels, 
+                            self.add_edge_no_labels,
+                            self.add_standard_node_size,
+                            self.set_circle_node_shape,
+                            self.set_bezier_edge_shape,
+                            self.set_no_detail_level]
+        return self._set_preset(preset_functions)
+
     # ---------------------- View ----------------------------------------
 
-    def set_action_io_explicit_view(self):
+    def set_pruned_view(self):
         '''
-        Sub graph viewing the sequential list of actions and related containers.
+        Sub graph viewing the full graph with potentially redunant edges removed.
         '''
-        if self.view == self.set_action_io_explicit_view:
-            self._builder.set_action_io_explicit_view()
+        if self.view == self.set_pruned_view:
+            self._builder.set_pruned_view()
         else:
-           self.view =self.set_action_io_explicit_view
+           self.view =self.set_pruned_view
 
 
-    def set_action_io_aggregate_view(self):
-        '''
-        Sub graph viewing the sequential list of actions and related containers.
-        '''
-        if self.view == self.set_action_io_aggregate_view:
-            self._builder.set_action_io_aggregate_view()
-        else:
-           self.view =self.set_action_io_aggregate_view
-
-    def set_action_flow_view(self):
-        '''
-        Sub graph viewing the least sequenctial list of actions
-        '''
-        if self.view == self.set_action_flow_view:
-            self._builder.set_action_flow_view()
-        else:
-           self.view =self.set_action_flow_view
-
-    def set_action_io_implicit_view(self):
-        '''
-        Sub graph viewing the inputs and outputs of actions.
-        '''
-        if self.view == self.set_action_io_implicit_view:
-            self._builder.set_action_io_implicit_view()
-        else:
-           self.view =self.set_action_io_implicit_view
-
-    def set_heirarchy_view(self):
+    def set_hierarchy_view(self):
         '''
         Sub graph viewing heirarchy of objects/actions in protocol.
         '''
-        if self.view == self.set_heirarchy_view:
-            self._builder.set_heirarchy_view()
+        if self.view == self.set_hierarchy_view:
+            self._builder.set_hierarchy_view()
         else:
-           self.view =self.set_heirarchy_view
+           self.view =self.set_hierarchy_view
+
+    def set_instructions_view(self):
+        '''
+        Nodes:       Action | Protocol - 
+        Edges:       Flow (No Model Entity) -
+        Description: Flow of instructions based on linear input.
+                     Edges simply dictate flow.
+        '''
+        if self.view == self.set_instructions_view:
+            self._builder.set_instructions_view(self._abs_level,self._detail_level)
+        else:
+           self.view =self.set_instructions_view
+
+    def set_flow_view(self):
+        '''
+        Nodes:       Action | Protocol - 
+        Edges:       Well
+        Description: Flow of actions based on 
+                     flow of reagents between wells.
+        '''
+        if self.view == self.set_flow_view:
+            self._builder.set_flow_view(self._abs_level,self._detail_level)
+        else:
+           self.view =self.set_flow_view
+
+    def set_io_view(self):
+        '''
+        Nodes:       Well | Action | Protocol - 
+        Edges:       input | output
+        Description: Input and Output wells between actions/protocols. 
+        '''
+        if self.view == self.set_io_view:
+            self._builder.set_io_view(self._abs_level,self._detail_level)
+        else:
+           self.view =self.set_io_view
+
+    def set_process_view(self):
+        '''
+        Nodes:       Well - 
+        Edges:       Action | Protocols -
+        Description: For each action, plot physical entities and map edges actions between them. 
+                     IO but Actions as edges.
+        '''
+        if self.view == self.set_process_view:
+            self._builder.set_process_view(self._abs_level,self._detail_level)
+        else:
+           self.view =self.set_process_view
+
+    def set_container_view(self):
+        '''
+        Displaying containers,instruments and apparatus for each protocol/action.
+        '''
+        if self.view == self.set_container_view:
+            self._builder.set_container_view(self._detail_level)
+        else:
+           self.view =self.set_container_view
+
+    # ---------------------- Detail Level ---------------------------
+    def set_abstraction_level(self,level=3):
+        '''
+        Certain Views are capble of scaling abstraction (Level of detail).
+        This slider allows certain views to be modified further.
+        '''
+        self._abs_level = level
+        return level
+
+    def set_no_detail_level(self):
+        '''
+        Certain Views are capble of providing extended data in the form of extra nodes.
+        This setting disables.
+        '''
+        self._detail_level = False
+
+    def set_basic_detail_level(self):
+        '''
+        Certain Views are capble of providing extended data in the form of extra nodes.
+        This setting enables.
+        '''
+        self._detail_level = True
 
     # ---------------------- Node Labels --------------------------------- 
-    def add_source_dest_node_labels(self):
-        '''
-        Edge labels pertain to Inputs and Outputs of a action.
-        '''
-        if self.node_text == self.add_source_dest_node_labels:
-            return self._label_h.node.source_dest()
-        else:
-            self.node_text  = self.add_source_dest_node_labels
-
-    def add_explicit_source_dest_node_labels(self):
-        '''
-        Edge labels pertain to Inputs and Outputs of a action including container names.
-        '''
-        if self.node_text == self.add_explicit_source_dest_node_labels:
-            return self._label_h.node.source_dest_explicit()
-        else:
-            self.node_text  = self.add_explicit_source_dest_node_labels
-
     def add_parent_node_labels(self):
         '''
         Edge labels pertain to parents of container and action nodes.
@@ -199,15 +256,24 @@ class ProtocolVisual(AbstractVisual):
         else:
             self.node_text  = self.add_parent_node_labels
 
-    # ---------------------- Edge Labels ---------------------------------
-    def add_process_type_edge_labels(self):
+    def add_well_container_node_labels(self):
         '''
-        Edge labels pertain to process where available.
+        Well Nodes affix parent container to name. All non-well nodes have default names.
         '''
-        if self.edge_text == self.add_process_type_edge_labels:
-            return self._label_h.edge.process_type()
+        if self.node_text == self.add_well_container_node_labels:
+            return self._label_h.node.well_container()
         else:
-            self.edge_text = self.add_process_type_edge_labels
+            self.node_text  = self.add_well_container_node_labels
+
+    # ---------------------- Edge Labels ---------------------------------
+    def add_well_container_edge_labels(self):
+        '''
+        Well Edges affix parent container to name. All non-well edges have default names.
+        '''
+        if self.edge_text == self.add_well_container_edge_labels:
+            return self._label_h.edge.well_container()
+        else:
+            self.edge_text  = self.add_well_container_edge_labels
 
     # ---------------------- Node Color ----------------------------------
     def add_type_node_color(self):

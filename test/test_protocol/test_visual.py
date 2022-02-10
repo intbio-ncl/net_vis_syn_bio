@@ -10,20 +10,8 @@ from visual.protocol import ProtocolVisual
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))
 test_dir = os.path.join(curr_dir,"..","files")
+protocols_dir = os.path.join(test_dir,"protocols","autoprotocol")
 model_fn = os.path.join(curr_dir,"..","..","utility","nv_protocol.xml")
-
-
-class TestPresets(unittest.TestCase):
-    def setUp(self):
-        filename = os.path.join(test_dir,"nor_gate.xml")
-        self.visual = ProtocolVisual(model_fn,filename)
-
-    def tearDown(self):
-        None
-
-    def test_hierarchy(self):
-        self.visual.set_hierarchy_preset()
-        self.visual.build()
 
 class TestLabels(unittest.TestCase):
 
@@ -35,37 +23,11 @@ class TestLabels(unittest.TestCase):
 
     class TestNode(unittest.TestCase):
         def setUp(self):
-            filename = os.path.join(test_dir,"1_clip.ot2.py")
+            filename = os.path.join(protocols_dir,"assembly.protocol.nv")
             self.visual = ProtocolVisual(model_fn,filename)
 
         def tearDown(self):
             None
-
-        def test_source_dest(self):
-            ret_val = self.visual.add_source_dest_node_labels()
-            self.assertIsNone(ret_val)
-            def _run_test(view):
-                labels = self.visual.add_source_dest_node_labels()
-                self.assertEqual(len(labels), len(view.nodes))
-            view = self.visual._builder.view
-            _run_test(view)
-            self.visual.set_action_flow_view()
-            self.visual.set_action_flow_view()
-            view = self.visual._builder.view
-            _run_test(view)
-
-        def test_explicit_source_dest(self):
-            ret_val = self.visual.add_explicit_source_dest_node_labels()
-            self.assertIsNone(ret_val)
-            def _run_test(view):
-                labels = self.visual.add_explicit_source_dest_node_labels()
-                self.assertEqual(len(labels), len(view.nodes))
-            view = self.visual._builder.view
-            _run_test(view)
-            self.visual.set_action_flow_view()
-            self.visual.set_action_flow_view()
-            view = self.visual._builder.view
-            _run_test(view)
 
         def test_parent(self):
             ret_val = self.visual.add_parent_node_labels()
@@ -80,20 +42,67 @@ class TestLabels(unittest.TestCase):
             view = self.visual._builder.view
             _run_test(view)
 
+        def test_well_container(self):
+            nv_well = self.visual._builder._model_graph.identifiers.objects.well
+            ret_val = self.visual.add_well_container_node_labels()
+            self.assertIsNone(ret_val)
+            def _run_tests(view):
+                labels = self.visual.add_well_container_node_labels()
+                self.assertEqual(len(labels), len(view.nodes))
+                for index,(n,n_data) in enumerate(view.nodes(data=True)):
+                    rdf_type = self.visual._builder.get_rdf_type(n)
+                    if rdf_type is not None and rdf_type[1]["key"] == nv_well:
+                        parent = self.visual._builder.get_parent(n)
+                        self.assertEqual(f'{parent[1]["display_name"]} - {n_data["display_name"]}',labels[index])
+                    else:
+                        self.assertEqual(n_data["display_name"],labels[index])
+            view = self.visual._builder.view
+            _run_tests(view)
+            self.visual.set_hierarchy_view()
+            self.visual.set_hierarchy_view()
+            self.visual.set_tree_mode()
+            self.visual.set_tree_mode()
+            view = self.visual._builder.view
+            _run_tests(view)
+
     class TestEdge(unittest.TestCase):
 
         def setUp(self):
-            filename = os.path.join(test_dir,"1_clip.ot2.py")
+            filename = os.path.join(protocols_dir,"nor_full.protocol.nv")
             self.visual = ProtocolVisual(model_fn,filename)
 
         def tearDown(self):
             None
 
+        def test_well_container(self):
+            nv_well = self.visual._builder._model_graph.identifiers.objects.well
+            ret_val = self.visual.add_well_container_edge_labels()
+            self.assertIsNone(ret_val)
+            def _run_tests(view):
+                labels = self.visual.add_well_container_edge_labels()
+                self.assertEqual(len(labels), len(view.nodes))
+                for index,(n,n_data) in enumerate(view.nodes(data=True)):
+                    rdf_type = self.visual._builder.get_rdf_type(n)
+                    if rdf_type is not None and rdf_type[1]["key"] == nv_well:
+                        parent = self.visual._builder.get_parent(n)
+                        self.assertEqual(f'{parent[1]["display_name"]} - {n_data["display_name"]}',labels[index])
+                    else:
+                        self.assertEqual(n_data["display_name"],labels[index])
+            view = self.visual._builder.view
+            _run_tests(view)
+            self.visual.set_hierarchy_view()
+            self.visual.set_hierarchy_view()
+            self.visual.set_tree_mode()
+            self.visual.set_tree_mode()
+            view = self.visual._builder.view
+            _run_tests(view)
+
 class TestColor(unittest.TestCase):
+    
     class TestNode(unittest.TestCase):
 
         def setUp(self):
-            filename = os.path.join(test_dir,"1_clip.ot2.py")
+            filename = os.path.join(test_dir,"assembly.protocol.nv")
             self.visual = ProtocolVisual(model_fn,filename)
 
             self._color_list = ColorPicker()
@@ -162,7 +171,6 @@ class TestSize(unittest.TestCase):
             self.assertEqual(len(sizes),len(view.nodes()))  
             for index,(node,data) in enumerate(view.nodes(data=True)):
                 node_size = node_sizes[index]
-                print(node_size)
                     
         node_sizes = self.visual.add_action_node_size()
         view = self.visual._builder.view

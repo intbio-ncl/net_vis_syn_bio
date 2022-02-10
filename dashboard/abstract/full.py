@@ -1,5 +1,5 @@
 import re
-
+import inspect
 from inspect import signature
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
@@ -15,10 +15,6 @@ default_options = []
 preset_inputs = OrderedDict()
 preset_outputs = OrderedDict()
 update_inputs = OrderedDict()
-
-export_inputs = [Input("png", "n_clicks"),
-                 Input("jpg", "n_clicks"),
-                 Input("svg", "n_clicks")]
 
 not_modifier_identifiers = {"sidebar_id": "sidebar-left",
                             "utility_id": "utility"}
@@ -42,8 +38,16 @@ adv_modal_outputs = {"adv_modal_id": Output("adv_modal", "is_open"),
                      "graph"       : Output(graph_id,"layout")}
 adv_modal_states = [State("adv_modal", "is_open"),
                    State("adv_modal_form","children")]
+export_img_inputs = [Input("png", "n_clicks"),
+                    Input("jpg", "n_clicks"),
+                    Input("svg", "n_clicks")]
+export_img_outputs = Output(graph_id, "generateImage")
 
-export_outputs = Output(graph_id, "generateImage")
+export_map = []
+export_modal_inputs = {"close_export" : Input("close_export", "n_clicks")}
+export_modal_outputs = {"id": Output("export_modal", "is_open"),
+                        "data" : Output("export_data","children")}
+export_modal_states = State("export_modal", "is_open")
 
 assets_ignore = '.*bootstrap.*'
 
@@ -83,6 +87,9 @@ class FullDash(AbstractDash):
             not_modifier_identifiers["sidebar_id"], "Options", form_div, add=True, className="col sidebar")
         self.app.layout = self.create_div(
             "main", self.children, className="content")[0]
+        
+        for sf in visualiser._builder._graph.get_save_formats():
+            export_modal_inputs[sf] = Input(sf,"n_clicks")
 
         # Bind the callbacks
         def update_preset_inner(preset_name, *states):
@@ -97,8 +104,11 @@ class FullDash(AbstractDash):
         def advanced_modal_inner(*args):
             return self.advanced_modal(*args)
 
-        def export_graph_inner(*args):
-            return self.export_graph(*args)
+        def export_img_inner(*args):
+            return self.export_graph_img(*args)
+
+        def export_modal_inner(*args):
+            return self.export_modal(*args)
 
         self.add_callback(update_preset_inner, list(preset_inputs.values()), list(
             preset_outputs.values()), list(preset_state.values()))
@@ -108,7 +118,9 @@ class FullDash(AbstractDash):
             docs_modal_outputs.values()), doc_modal_states)
         self.add_callback(advanced_modal_inner, list(adv_modal_inputs.values()), list(
             adv_modal_outputs.values()), adv_modal_states)
-        self.add_callback(export_graph_inner, export_inputs, export_outputs)
+        self.add_callback(export_img_inner, export_img_inputs, export_img_outputs)
+        self.add_callback(export_modal_inner, list(export_modal_inputs.values()), list(
+            export_modal_outputs.values()), export_modal_states)
         self.build()
 
     def update_preset(self, preset_name, mappings, *states):
@@ -151,7 +163,7 @@ class FullDash(AbstractDash):
                     setter = getattr(self.visualiser, to_call, None)
                 if setter is not None:
                     try:
-                        if parameter is not None:
+                        if parameter is not None and len(inspect.getargspec(setter).args) > 1:
                             setter(parameter)
                         else:
                             setter()
@@ -167,7 +179,7 @@ class FullDash(AbstractDash):
             print(ex)
             raise PreventUpdate()
 
-    def export_graph(self, get_jpg_clicks, get_png_clicks, get_svg_clicks):
+    def export_graph_img(self, get_jpg_clicks, get_png_clicks, get_svg_clicks):
         action = 'store'
         input_id = None
         ctx = callback_context
@@ -176,6 +188,21 @@ class FullDash(AbstractDash):
             if input_id != "tabs":
                 action = "download"
         return {'type': input_id, 'action': action}
+
+    def export_modal(self, *args):
+        changed_id = [p['prop_id'] for p in callback_context.triggered][0].split(".")[0]
+        if changed_id == "":
+            return False,[]
+        if export_modal_inputs["close_export"].component_id in changed_id:
+            return False,[]
+        else:
+            children = []
+            try:
+                data = self.visualiser._builder.view.generate(changed_id)
+                children += self.create_text_area("export-data",value=data,disabled=True)
+            except KeyError:
+                pass
+            return True,children
 
     def docs_modal(self, n1, n2, is_open):
         if n1 or n2:
@@ -242,12 +269,13 @@ class FullDash(AbstractDash):
             element = []
 
             if isinstance(v, (int, float)):
-                min_v = v/4
-                max_v = v*4
-                default_val = (min_v + max_v) / 2
+                min_v = int(v/1.7)
+                max_v = int(v*1.7)
+                default_val = int((min_v + max_v) / 2)
                 step = 1
-                element = self.create_slider(
-                    identifier, display_name, min_v, max_v, default_val=default_val, step=step)
+                
+                element += (self.create_heading_6("", display_name)+
+                            self.create_slider(identifier, min_v, max_v, default_val=default_val, step=step))
                 identifiers[k] = Input(identifier, "value")
                 variable_input_list_map[identifier] = [min_v, max_v]
 
@@ -282,7 +310,10 @@ class FullDash(AbstractDash):
         docstrings = self.create_modal(docs_modal_outputs["id"].component_id,
                                        docs_modal_inputs["close_doc"].component_id,
                                        "Options Documentation", docstring)
-
+        export_div = self.create_div(export_modal_outputs["data"].component_id,[])
+        export_modal = self.create_modal(export_modal_outputs["id"].component_id,
+                                       export_modal_inputs["close_export"].component_id,
+                                       "Export",export_div)
         adv_button = self.create_div(
             adv_modal_inputs["open_adv"].component_id, [], className="adv-tip col")
         adv_opn = self.create_div(adv_modal_outputs["form"].component_id, [])
@@ -295,14 +326,22 @@ class FullDash(AbstractDash):
         r = self.create_horizontal_row(False)
         extra_options = self.create_div("", eo + r, className="container")
 
-        exports = self.create_heading_4("export_heading", "Export Options")
-        for e_input in export_inputs:
-            exports += self.create_button(e_input.component_id,
-                                          className="export_button")
+        exports = self.create_heading_4("export_img_heading", "Image Export")
+        for e_input in export_img_inputs:
+            exports += self.create_button(e_input.component_id,className="export_img_button")
             exports += self.create_line_break()
-        export_div = self.create_div("export_container", exports, style=style)
+        exports += self.create_heading_4("export_data_heading", "Data Export")
+        for sf in visualiser._builder._graph.get_save_formats():
+            export_modal_inputs[sf] = Input(sf,"n_clicks")
+        for e_input in export_modal_inputs.values():
+            if e_input.component_id == "close_export":
+                continue
+            exports += self.create_button(e_input.component_id,className="export_img_button")
+            exports += self.create_line_break()
+        export_div = self.create_div("export_data_container", exports, style=style)
+
         return (extra_options + elements + export_div + 
-            docstrings + adv_options, identifiers, variable_input_list_map)
+            docstrings + export_modal + adv_options, identifiers, variable_input_list_map)
 
     def _beautify_name(self, name):
         name_parts = name.split("_")
@@ -363,6 +402,8 @@ class FullDash(AbstractDash):
 
                 elif "edge" in func_str:
                     option_name = "edge" + "_" + func_str.split("_")[-1]
+                elif func_str.split("_")[-1] == "level":
+                    option_name = "detail"
                 else:
                     option_name = "misc"
 

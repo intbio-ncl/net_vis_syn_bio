@@ -4,7 +4,7 @@ from rdflib import RDF, URIRef, Literal, BNode
 
 from converters.utility import map_to_nv, get_name
 
-accepted_file_types = ['json']
+accepted_file_types = ['json',"autoprotocol"]
 ap_instructions = "instructions"
 ap_refs = "refs"
 ap_op = "op"
@@ -34,6 +34,8 @@ def convert(filename, model):
             node_count += 1
         if isinstance(entity, URIRef):
             e_type = "URI"
+        elif isinstance(entity,BNode):
+            e_type = "BNode"
         else:
             e_type = "Literal"
         graph.add_node(n_key, key=entity, type=e_type)
@@ -79,8 +81,8 @@ def convert_layer(layer, model, roots, parent_uri=None, cur_id=None):
             actions.append(action_id)
             if ap_instructions in i:
                 triples += convert_layer(i, model, roots, subject, action_id)
-
-        triples += _handle_action_list(subject, actions, ids)
+        if len(actions) > 0:
+            triples += _handle_action_list(subject, actions, ids)
     return triples
 
 
@@ -96,7 +98,7 @@ def _handle_physcial_entity(name, data, model, parent, roots, containers):
     nv_well = ids.roles.well
     nv_well_p = ids.predicates.well
 
-    subject = _build_nv_uri(name, ids, parent)
+    subject = _build_nv_uri(name, ids,unique=False)
     properties = [(nv_characteristic, nv_physical_entity),
                   (nv_role, nv_container)]
     if ap_new in data:
@@ -109,7 +111,7 @@ def _handle_physcial_entity(name, data, model, parent, roots, containers):
         well_props = [(nv_characteristic, nv_physical_entity),
                       (nv_role, nv_well)]
         for well in data[ap_wells]:
-            well_subject = _build_nv_uri(well, ids, subject, unique=False)
+            well_subject = _build_nv_uri(well, ids, name,unique=False)
             ws, wp, wo = map_to_nv(well_subject, well_props, roots, model)
             triples.append((ws, wp, wo))
             triples.append((s, nv_well_p, ws))
@@ -160,7 +162,7 @@ def _get_object_properties(subject, s_type, data, model, containers):
         predicate = p_data["key"]
         default = model.get_default_value(model_code, predicate)
         if default is not None:
-            default = default[1]["key"]
+            default = get_name(default[1]["key"])
             default_name = _build_nv_uri(
                 default, model.identifiers, unique=False)
             triples.append((default_name, RDF.type, default))
@@ -186,7 +188,6 @@ def _generalise(layer):
     specification that can't be automated.
     '''
     index = 0
-
     def _add_well(container, well):
         assert(container in refs)
         well = "w" + str(well)
@@ -283,8 +284,10 @@ def _build_nv_uri(name, identifiers, parent=None, unique=True):
     elif isinstance(parent, list):
         name = URIRef(identifiers.namespaces.nv +
                       "/".join(parent) + "/" + str(name))
-    else:
+    elif isinstance(parent,URIRef):
         name = URIRef(parent + "/" + name.lower())
+    else:
+        name = URIRef(identifiers.namespaces.nv + parent + "/" + str(name))
     count = 0
     o_name = name
     if unique:

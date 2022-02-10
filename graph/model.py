@@ -201,10 +201,6 @@ class ModelGraph(AbstractGraph):
             else:
                 requirements.append((e,n))
         return requirements    
-
-    def resolve_range(self,identifier):
-        for n,v,e in self.search((identifier,None,None)):
-            print(n,v,e)
     
     def resolve_intersection(self,identifier):
         return self._get_operator(identifier)

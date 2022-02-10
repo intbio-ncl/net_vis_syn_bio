@@ -44,10 +44,6 @@ def convert(filename,model_graph):
             o,node_count = _add_node(o,node_count)
             graph.add_edge(n,o,key=p,dislay_name=dp,weight=1)
 
-    for n,v,k in graph.edges(keys=True):
-        n_data = graph.nodes[n]
-        v_data = graph.nodes[v]
-
     for i in sbol_graph.get_interactions():
         conceptual_entity = model_graph.identifiers.roles.interaction
         roles = ([(nv_characteristic,conceptual_entity)] + 

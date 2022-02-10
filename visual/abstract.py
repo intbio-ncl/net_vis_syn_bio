@@ -1,6 +1,5 @@
 import os
 import json
-
 import dash_cytoscape as cyto
 cyto.load_extra_layouts()
 
@@ -503,7 +502,7 @@ class AbstractVisual:
                                 elements=nodes + edges,
                                 stylesheet = stylesheet,
                                 responsive=True)
-
+                                
         if legend:
             legend_dict = self._build_legend(node_color,edge_color)
             return figure,legend_dict

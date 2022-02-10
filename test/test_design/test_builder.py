@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.join("..",".."))
 from builder.design import DesignBuilder
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))
-instance_file = os.path.join(curr_dir,"..","files","nor_full.xml")
+instance_file = os.path.join(curr_dir,"..","files","nor-gate_w_arab_pathway.xml")
 model_file = os.path.join(curr_dir,"..","..","utility","nv_design.xml")
 
 def _graph_element_check(graph):
@@ -205,8 +205,6 @@ class TestViews(unittest.TestCase):
             self.assertIn(self.builder.get_rdf_type(v)[1]["key"],protein_classes)
 
     def test_interaction_io(self):
-        #instance_file = os.path.join(curr_dir,"..","files","nor_full.xml")
-        #builder = DesignBuilder(model_file,instance_file)
         self.builder.set_interaction_io_view()
         graph = self.builder.view
         interaction_obj = self.model.identifiers.objects.interaction

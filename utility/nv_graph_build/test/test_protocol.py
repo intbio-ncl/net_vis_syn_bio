@@ -31,8 +31,6 @@ class TestUtility(unittest.TestCase):
 
         first = list(graph.triples((i,URIRef('http://www.w3.org/1999/02/22-rdf-syntax-ns#first'),None)))[0][2]
         rest = list(graph.triples((i,URIRef('http://www.w3.org/1999/02/22-rdf-syntax-ns#rest'),None)))[0][2]
-
-        print(list(graph.triples((first,None,None))))
 if __name__ == '__main__':
     unittest.main()
 

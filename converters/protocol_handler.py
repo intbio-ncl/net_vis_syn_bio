@@ -2,13 +2,13 @@ import networkx as nx
 from opentrons.protocol_api.protocol_context import ProtocolContext
 
 from converters.protocol import ot2_file_convert
-from converters.protocol import ot2_context_convert
-from converters.protocol import open_protocol_convert
+from converters.protocol import nv_protocol_convert
+from converters.protocol import autoprotocol_convert
 from graph.protocol import ProtocolGraph
 
 convert_dict = {"ot2-file" : ot2_file_convert,
-                "ot2-context"  : ot2_context_convert,
-                "open-protocol" : open_protocol_convert}
+                "nv-protocol"  : nv_protocol_convert,
+                "autoprotocol" : autoprotocol_convert}
 
 def convert(model_graph,filename=None,convert_type=None):
     if filename is None:
@@ -24,7 +24,7 @@ def get_converter_names():
 def derive_convert_type(item):
     if item.lower().endswith(tuple(v.lower() for v in ot2_file_convert.accepted_file_types)):
         return "ot2-file"
-    elif isinstance(item,ProtocolContext):
-        return "ot2-context"
-    elif item.lower().endswith(tuple(v.lower() for v in open_protocol_convert.accepted_file_types)):
-        return "open-protocol"
+    elif item.lower().endswith(tuple(v.lower() for v in nv_protocol_convert.accepted_file_types)):
+        return "nv-protocol"
+    elif item.lower().endswith(tuple(v.lower() for v in autoprotocol_convert.accepted_file_types)):
+        return "autoprotocol"

@@ -29,9 +29,9 @@ class ColorHandler():
 
         def parent(self):
             colors = []
-            col_map = {None : {"No_Parent" : self._color_picker[0]}}
+            col_map = {None : {"No-Parent" : self._color_picker[0]}}
             col_index = len(col_map)
-            for n in self._builder.v_nodes():
+            for n,n_data in self._builder.v_nodes(data=True):
                 parent = self._builder.get_parent(n)
                 if not parent:
                     colors.append(col_map[None])
@@ -60,11 +60,12 @@ class ColorHandler():
                 if not rdf_type:
                     colors.append(col_map[None])
                     continue
-                rdf_type = _get_name(rdf_type[1]["key"])
-                if rdf_type not in col_map.keys():
-                    col_map[rdf_type] = self._color_picker[col_index]
+                
+                rdf_type_name = _get_name(rdf_type[1]["key"])
+                if rdf_type_name not in col_map.keys():
+                    col_map[rdf_type_name] = self._color_picker[col_index]
                     col_index +=1
-                colors.append({_get_name(rdf_type):col_map[rdf_type]})
+                colors.append({_get_name(rdf_type[1]["key"]):col_map[rdf_type_name]})
             return colors
 
 

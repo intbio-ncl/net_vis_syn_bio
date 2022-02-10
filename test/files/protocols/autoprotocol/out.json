@@ -15,7 +15,7 @@
                       "volume": "1:microliter"
                     }
                   ],
-                  "reagent_source": "restriction-enzyme/0",
+                  "reagent_source": "restriction_enzyme/0",
                   "step_size": "0.5:microliter"
                 },
                 {
@@ -39,7 +39,7 @@
                       "volume": "5:microliter"
                     }
                   ],
-                  "reagent_source": "restriction-buffer/0",
+                  "reagent_source": "restriction_buffer/0",
                   "step_size": "0.5:microliter"
                 },
                 {
@@ -51,12 +51,12 @@
                       "volume": "1:microliter"
                     }
                   ],
-                  "reagent_source": "gblock-nor/0",
+                  "reagent_source": "gblock_nor/0",
                   "step_size": "0.5:microliter"
                 },
                 {
                   "op": "dispense",
-                  "object": "reaction-output-gblock",
+                  "object": "reaction-output-gblock_nor",
                   "columns": [
                     {
                       "column": 0,
@@ -68,18 +68,18 @@
                 },
                 {
                   "op": "seal",
-                  "object": "reaction-output-gblock",
+                  "object": "reaction-output-gblock_nor",
                   "type": "ultra-clear"
                 },
                 {
                   "op": "spin",
-                  "object": "reaction-output-gblock",
+                  "object": "reaction-output-gblock_nor",
                   "acceleration": "1000:g",
                   "duration": "5:second"
                 },
                 {
                   "op": "incubate",
-                  "object": "reaction-output-gblock",
+                  "object": "reaction-output-gblock_nor",
                   "where": "warm_37",
                   "duration": "10:minute",
                   "shaking": false,
@@ -87,7 +87,7 @@
                 },
                 {
                   "op": "thermocycle",
-                  "object": "reaction-output-gblock",
+                  "object": "reaction-output-gblock_nor",
                   "groups": [
                     {
                       "cycles": 1,
@@ -103,7 +103,7 @@
                 }
               ],
               "refs": {
-                "restriction-enzyme": {
+                "restriction_enzyme": {
                   "new": "micro-2.0",
                   "discard": true
                 },
@@ -111,7 +111,7 @@
                   "new": "micro-2.0",
                   "discard": true
                 },
-                "restriction-buffer": {
+                "restriction_buffer": {
                   "new": "micro-2.0",
                   "discard": true
                 },
@@ -119,11 +119,11 @@
                   "new": "384-flat",
                   "discard": true
                 },
-                "gblock-nor": {
+                "gblock_nor": {
                   "new": "micro-2.0",
                   "discard": true
                 },
-                "reaction-output-gblock": {
+                "reaction-output-gblock_nor": {
                   "new": "96-pcr",
                   "discard": true
                 }
@@ -135,19 +135,19 @@
               "instructions": [
                 {
                   "op": "dispense",
-                  "object": "ice_0",
+                  "object": "ice_1",
                   "columns": [
                     {
                       "column": 0,
                       "volume": "1:microliter"
                     }
                   ],
-                  "reagent_source": "restriction-enzyme/0",
+                  "reagent_source": "restriction_enzyme/0",
                   "step_size": "0.5:microliter"
                 },
                 {
                   "op": "dispense",
-                  "object": "ice_0",
+                  "object": "ice_1",
                   "columns": [
                     {
                       "column": 0,
@@ -159,19 +159,19 @@
                 },
                 {
                   "op": "dispense",
-                  "object": "ice_0",
+                  "object": "ice_1",
                   "columns": [
                     {
                       "column": 0,
                       "volume": "5:microliter"
                     }
                   ],
-                  "reagent_source": "restriction-buffer/0",
+                  "reagent_source": "restriction_buffer/0",
                   "step_size": "0.5:microliter"
                 },
                 {
                   "op": "dispense",
-                  "object": "ice_0",
+                  "object": "ice_1",
                   "columns": [
                     {
                       "column": 0,
@@ -190,7 +190,7 @@
                       "volume": "57:microliter"
                     }
                   ],
-                  "reagent_source": "ice_0/0",
+                  "reagent_source": "ice_1/0",
                   "step_size": "0.5:microliter"
                 },
                 {
@@ -230,7 +230,7 @@
                 }
               ],
               "refs": {
-                "restriction-enzyme": {
+                "restriction_enzyme": {
                   "new": "micro-2.0",
                   "discard": true
                 },
@@ -238,11 +238,11 @@
                   "new": "micro-2.0",
                   "discard": true
                 },
-                "restriction-buffer": {
+                "restriction_buffer": {
                   "new": "micro-2.0",
                   "discard": true
                 },
-                "ice_0": {
+                "ice_1": {
                   "new": "384-flat",
                   "discard": true
                 },
@@ -260,7 +260,7 @@
             }
           ],
           "refs": {
-            "restriction-enzyme": {
+            "restriction_enzyme": {
               "new": "micro-2.0",
               "discard": true
             },
@@ -268,7 +268,7 @@
               "new": "micro-2.0",
               "discard": true
             },
-            "restriction-buffer": {
+            "restriction_buffer": {
               "new": "micro-2.0",
               "discard": true
             },
@@ -276,11 +276,11 @@
               "new": "384-flat",
               "discard": true
             },
-            "ice_0": {
+            "ice_1": {
               "new": "384-flat",
               "discard": true
             },
-            "gblock-nor": {
+            "gblock_nor": {
               "new": "micro-2.0",
               "discard": true
             },
@@ -300,11 +300,11 @@
                   "instructions": [
                     {
                       "op": "unseal",
-                      "object": "reaction-output-gblock"
+                      "object": "reaction-output-gblock_nor"
                     },
                     {
                       "op": "dispense",
-                      "object": "reaction-output-gblock",
+                      "object": "reaction-output-gblock_nor",
                       "columns": [
                         {
                           "column": 0,
@@ -316,18 +316,18 @@
                     },
                     {
                       "op": "seal",
-                      "object": "reaction-output-gblock",
+                      "object": "reaction-output-gblock_nor",
                       "type": "ultra-clear"
                     },
                     {
                       "op": "spin",
-                      "object": "reaction-output-gblock",
+                      "object": "reaction-output-gblock_nor",
                       "acceleration": "10000:g",
                       "duration": "30:second"
                     }
                   ],
                   "refs": {
-                    "reaction-output-gblock": {
+                    "reaction-output-gblock_nor": {
                       "new": "96-pcr",
                       "discard": true,
                       "cover": "ultra-clear"
@@ -344,11 +344,11 @@
                   "instructions": [
                     {
                       "op": "unseal",
-                      "object": "reaction-output-gblock"
+                      "object": "reaction-output-gblock_nor"
                     },
                     {
                       "op": "dispense",
-                      "object": "reaction-output-gblock",
+                      "object": "reaction-output-gblock_nor",
                       "columns": [
                         {
                           "column": 0,
@@ -360,18 +360,18 @@
                     },
                     {
                       "op": "seal",
-                      "object": "reaction-output-gblock",
+                      "object": "reaction-output-gblock_nor",
                       "type": "ultra-clear"
                     },
                     {
                       "op": "spin",
-                      "object": "reaction-output-gblock",
+                      "object": "reaction-output-gblock_nor",
                       "acceleration": "10000:g",
                       "duration": "30:second"
                     }
                   ],
                   "refs": {
-                    "reaction-output-gblock": {
+                    "reaction-output-gblock_nor": {
                       "new": "96-pcr",
                       "discard": true,
                       "cover": "ultra-clear"
@@ -388,11 +388,11 @@
                   "instructions": [
                     {
                       "op": "unseal",
-                      "object": "reaction-output-gblock"
+                      "object": "reaction-output-gblock_nor"
                     },
                     {
                       "op": "dispense",
-                      "object": "reaction-output-gblock",
+                      "object": "reaction-output-gblock_nor",
                       "columns": [
                         {
                           "column": 0,
@@ -404,12 +404,12 @@
                     },
                     {
                       "op": "seal",
-                      "object": "reaction-output-gblock",
+                      "object": "reaction-output-gblock_nor",
                       "type": "ultra-clear"
                     },
                     {
                       "op": "incubate",
-                      "object": "reaction-output-gblock",
+                      "object": "reaction-output-gblock_nor",
                       "where": "warm_37",
                       "duration": "1:minute",
                       "shaking": false,
@@ -417,29 +417,29 @@
                     },
                     {
                       "op": "spin",
-                      "object": "reaction-output-gblock",
+                      "object": "reaction-output-gblock_nor",
                       "acceleration": "10000:g",
                       "duration": "30:second"
                     },
                     {
                       "op": "unseal",
-                      "object": "reaction-output-gblock"
+                      "object": "reaction-output-gblock_nor"
                     },
                     {
                       "op": "dispense",
-                      "object": "purification-output-gblock",
+                      "object": "purification-output-gblock_nor",
                       "columns": [
                         {
                           "column": 0,
                           "volume": "63:microliter"
                         }
                       ],
-                      "reagent_source": "reaction-output-gblock/0",
+                      "reagent_source": "reaction-output-gblock_nor/0",
                       "step_size": "0.5:microliter"
                     }
                   ],
                   "refs": {
-                    "reaction-output-gblock": {
+                    "reaction-output-gblock_nor": {
                       "new": "96-pcr",
                       "discard": true,
                       "cover": "ultra-clear"
@@ -448,7 +448,7 @@
                       "new": "micro-2.0",
                       "discard": true
                     },
-                    "purification-output-gblock": {
+                    "purification-output-gblock_nor": {
                       "new": "96-pcr",
                       "discard": true
                     }
@@ -458,7 +458,7 @@
                 }
               ],
               "refs": {
-                "reaction-output-gblock": {
+                "reaction-output-gblock_nor": {
                   "new": "96-pcr",
                   "discard": true,
                   "cover": "ultra-clear"
@@ -666,7 +666,7 @@
             }
           ],
           "refs": {
-            "reaction-output-gblock": {
+            "reaction-output-gblock_nor": {
               "new": "96-pcr",
               "discard": true,
               "cover": "ultra-clear"
@@ -703,7 +703,7 @@
                   "volume": "37.5:microliter"
                 }
               ],
-              "reagent_source": "purification-output-gblock/0",
+              "reagent_source": "purification-output-gblock_nor/0",
               "step_size": "0.5:microliter"
             },
             {
@@ -727,7 +727,7 @@
                   "volume": "20:microliter"
                 }
               ],
-              "reagent_source": "water/0",
+              "reagent_source": "water_1/0",
               "step_size": "0.5:microliter"
             },
             {
@@ -773,7 +773,7 @@
             }
           ],
           "refs": {
-            "purification-output-gblock": {
+            "purification-output-gblock_nor": {
               "new": "96-pcr",
               "discard": true
             },
@@ -781,7 +781,7 @@
               "new": "96-pcr",
               "discard": true
             },
-            "water": {
+            "water_1": {
               "new": "micro-2.0",
               "discard": true
             },
@@ -1008,7 +1008,7 @@
             },
             {
               "op": "dispense",
-              "object": "ice_0",
+              "object": "ice_2",
               "columns": [
                 {
                   "column": 0,
@@ -1020,7 +1020,7 @@
             },
             {
               "op": "dispense",
-              "object": "ice_0",
+              "object": "ice_2",
               "columns": [
                 {
                   "column": 0,
@@ -1032,7 +1032,7 @@
             },
             {
               "op": "dispense",
-              "object": "ice_0",
+              "object": "ice_2",
               "columns": [
                 {
                   "column": 0,
@@ -1051,7 +1051,7 @@
                   "volume": "12:microliter"
                 }
               ],
-              "reagent_source": "ice_0/0",
+              "reagent_source": "ice_2/0",
               "step_size": "0.5:microliter"
             },
             {
@@ -1156,7 +1156,7 @@
               "new": "micro-2.0",
               "discard": true
             },
-            "ice_0": {
+            "ice_2": {
               "new": "384-flat",
               "discard": true
             },
@@ -1170,7 +1170,16 @@
         },
         {
           "instructions": [],
-          "refs": {},
+          "refs": {
+            "culture-plate": {
+              "new": "micro-2.0",
+              "discard": true
+            },
+            "reaction-intermediate-colony": {
+              "new": "96-pcr",
+              "discard": true
+            }
+          },
           "op": "Sequencing",
           "type": "Protocol"
         }

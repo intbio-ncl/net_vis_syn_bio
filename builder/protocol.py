@@ -1,7 +1,7 @@
-import os
 import types
 
-from rdflib import RDF
+from rdflib import RDF,URIRef
+from rdflib.term import BNode
 
 from converters.protocol_handler import convert as p_convert
 from converters.model_handler import convert as m_convert
@@ -48,27 +48,173 @@ class ProtocolBuilder(AbstractBuilder):
 
     def load(self,fn):
         self._graph = p_convert(self._model_graph,fn)
-
-    def set_action_io_explicit_view(self):
-        self.view = self._view_h.io_explicit()
-
-    def set_action_io_aggregate_view(self):
-        self.view = self._view_h.io_aggregate()
-
-    def set_action_flow_view(self):
-        self.view = self._view_h.flow()
-
-    def set_action_io_implicit_view(self):
-        self.view = self._view_h.io_implicit()
     
-    def set_heirarchy_view(self):
-        self.view = self._view_h.heirarchy()
+    def set_hierarchy_view(self):
+        self.view = self._view_h.hierarchy()
 
+    def set_pruned_view(self):
+        self.view = self._view_h.pruned()
+
+    def set_instructions_view(self,level,detail):
+        self.view = self._view_h.instructions(level,detail)
+
+    def set_flow_view(self,level,detail):
+        self.view = self._view_h.flow(level,detail)
+
+    def set_io_view(self,level,detail):
+        self.view = self._view_h.io(level,detail)
+
+    def set_process_view(self,level,detail):
+        self.view = self._view_h.process(level,detail)
+
+    def set_container_view(self,detail):
+        self.view = self._view_h.container(detail)
 
     # -------------------- Queries --------------------
     def get_actions(self):
         return self._graph.search((None,self._model_graph.identifiers.predicates.actions,None))
-        
+
+    def get_proto_actions(self):
+        protocol_p = self._model_graph.identifiers.objects.protocol
+        action_p = self._model_graph.identifiers.objects.action
+        protocol_p_code = self._model_graph.get_class_code(protocol_p)
+        action_p_code = self._model_graph.get_class_code(action_p)
+        objs = ([protocol_p,action_p] + 
+                [p[1]["key"] for p in self._model_graph.get_child_classes(protocol_p_code)] + 
+                [p[1]["key"] for p in self._model_graph.get_child_classes(action_p_code)])
+        return self._graph.search((None,RDF.type,objs))
+    
+    def get_action_node(self,subject):
+        res = self._graph.search((subject,self._model_graph.identifiers.predicates.actions,None),True)
+        if res == []:
+            return None
+        return res[1]
+    
+    def get_well_actions(self,well_id):
+        nv_wells = [self._model_graph.identifiers.predicates.source,
+                    self._model_graph.identifiers.predicates.destination,
+                    self._model_graph.identifiers.predicates.object]
+        return self._graph.search((None,nv_wells,well_id))
+
+    def get_io(self,subject,use_objects=True):
+        nv_source = self._model_graph.identifiers.predicates.source
+        nv_dest = self._model_graph.identifiers.predicates.destination
+        nv_object = self._model_graph.identifiers.predicates.object
+        nv_container = self._model_graph.identifiers.objects.container
+        preds = [nv_source,nv_object,nv_dest]
+
+        def _run(subj):
+            results = self._graph.search((subj,preds,None))
+            if use_objects:
+                inputs = [r[1] for r in results if r[2] == nv_source or r[2] == nv_object]
+                outputs =[r[1] for r in results if r[2] == nv_dest or r[2] == nv_object]
+            else:
+                inputs = [r[1] for r in results if r[2] == nv_source]
+                outputs =[r[1] for r in results if r[2] == nv_dest]
+            if inputs == [] and outputs == []:
+                assert(inputs ==[] and outputs == [])
+                a_node = self.get_action_node(subj)
+                if a_node is not None:
+                    for action in self.resolve_action(a_node[0]):
+                        i,o = _run(action[0])
+                        inputs += i
+                        outputs += o
+            return inputs,outputs
+        inputs,outputs = _run(subject)
+
+        def _resolve(items):
+            new_items = []
+            seens = []
+            for i_id,i_data in items:
+                i_type = self.get_rdf_type(i_id)
+                assert(i_type is not None)
+                if i_id in seens:
+                    continue
+                seens.append(i_id)
+                if self._model_graph.is_derived(i_type[1]["key"],nv_container):
+                    for _,v,_ in self.get_children(i_id):
+                        new_items.append(v)
+                else:
+                    new_items.append((i_id,i_data))
+            return new_items
+            
+        return _resolve(inputs),_resolve(outputs)
+
+    def get_properties(self,subject):
+        props = []
+        for n,v,e in self._graph.search((subject,None,None)):
+            if isinstance(v[1]["key"],BNode):
+                continue
+            if e == RDF.type:
+                continue
+            props.append((n,v,e))
+        return props
+    
+    def get_containers(self,subject):
+        return self._graph.search((subject,self._model_graph.identifiers.predicates.has_container,None))
+
+    def get_root(self):
+        m_obj = self._model_graph.identifiers.objects.master_protocol
+        res = self._graph.search((None,RDF.type,m_obj),True)
+        if res == []:
+            return None
+        return res[0]
+
+    def get_wells(self,subject,use_children=False):
+        nv_container = self._model_graph.identifiers.predicates.has_container
+        nv_well = self._model_graph.identifiers.predicates.well
+        nv_actions = self._model_graph.identifiers.predicates.actions
+        nv_object = self._model_graph.identifiers.predicates.object
+
+        nv_wells = [self._model_graph.identifiers.predicates.source,
+                    self._model_graph.identifiers.predicates.destination,
+                    nv_object,
+                    nv_well]
+        wells = []
+        seens = []
+        def _get_wells(subj):
+            nonlocal wells
+            containers = [subj] + [n[1][0] for n in self.get_containers(subj)]
+            if use_children:
+                for n,v,e in self.get_children(subj):
+                    if e == nv_container:
+                        containers.append(v[0])
+                    elif e == nv_actions:
+                        for action,action_data in self.resolve_action(v[0]):
+                            _get_wells(action)
+                    elif e == nv_well and v[0] not in seens:
+                        wells.append(v)
+                        seens.append(v[0])
+            for n,v,e in self._graph.search((containers,nv_wells,None)):
+                if e == nv_object:
+                     _get_wells(v[0])
+                     continue
+                if v[0] not in seens:
+                    wells.append(v)
+                    seens.append(v[0])
+        _get_wells(subject)
+        return wells
+
+    def get_abstraction_level(self,level):
+        ce = self.get_root()
+        if ce is None:
+            raise ValueError("No Master Protocol.")
+        entities = [ce]
+        output = []
+        cur_level = 0
+        while cur_level < level:
+            output.clear()
+            for entity in entities:
+                action = self.get_action_node(entity[0])
+                if action is None:
+                    output.append(entity)
+                    continue
+                for act in self.resolve_action(action[0]):
+                    output.append(act)
+            cur_level += 1
+            entities = output.copy()
+        return output
+
     def resolve_action(self,action):
         first = None
         rest = None
@@ -85,28 +231,44 @@ class ProtocolBuilder(AbstractBuilder):
             rest = rest[1]["key"]
             actions.append(first)
         return actions
-
-    def get_io(self,action):
-        source_p = self._model_graph.identifiers.predicates.source
-        dest_p = self._model_graph.identifiers.predicates.destination
-        res = self._graph.search((action,[source_p,dest_p],None))
-        sources = [c[1] for c in res if c[2] == source_p]
-        dest = [c[1] for c in res if c[2] == dest_p]
-        return sources,dest
-
-    def get_parent(self,identifier):
-        parent_ps = [self._model_graph.identifiers.predicates.actions,
-                    self._model_graph.identifiers.predicates.has_container]
-        res = self._graph.search((None,parent_ps,identifier),True)
+    
+    def get_parent(self,subject):
+        subject = self._resolve_subject(subject)
+        a_pred = self._model_graph.identifiers.predicates.actions
+        c_pred = self._model_graph.identifiers.predicates.has_container
+        h_pred = self._model_graph.identifiers.predicates.has_instrument
+        w_pred = self._model_graph.identifiers.predicates.well
+        parent_ps = [a_pred,c_pred,h_pred,w_pred]
+        res = self._graph.search((None,parent_ps,subject),True)
         if res:
             return res[0]
-        return None
+
+        res = self._graph.search((None,RDF.first,subject),True)
+        if not res:
+            return None
+        while res != []:
+            subj = res[0]
+            res = self._graph.search((None,RDF.rest,subj),True)
+
+        res = self._graph.search((None,a_pred,subj),True)
+        return res[0]
+
+    def get_children(self,subject):
+        child_predicates = [self._model_graph.identifiers.predicates.actions,
+                            self._model_graph.identifiers.predicates.has_container,
+                            self._model_graph.identifiers.predicates.has_instrument,
+                            self._model_graph.identifiers.predicates.well]
+        return self._graph.search((subject,child_predicates,None))
 
     def get_object_code(self,uri):
         for n_id,n_data in self.nodes(data=True):
             if uri == n_data["key"]:
                 return n_id
         return None
+
+
+    def build_nv_id(self,name):
+        return URIRef(self._model_graph.identifiers.namespaces.nv + name)
 
 
 

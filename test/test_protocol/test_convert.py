@@ -2,6 +2,7 @@ import unittest
 import os
 import sys
 import re
+import json
 
 from rdflib import RDF
 from opentrons.simulate import simulate
@@ -16,7 +17,7 @@ curr_dir = os.path.dirname(os.path.realpath(__file__))
 model_fn = os.path.join(curr_dir,"..","..","utility","nv_protocol.xml")
 test_dir = os.path.join(curr_dir,"..","files")
 
-class TestConvertOpentronsProtocol(unittest.TestCase):
+class TestConvertOT2(unittest.TestCase):
 
     def setUp(self):
         None
@@ -279,6 +280,24 @@ class TestConvertAutoProtocol(unittest.TestCase):
         filename = os.path.join(test_dir,"out.json")
         model = model_convert(model_fn)         
         graph = protocol_convert(model,filename)
+
+class TestConvertNVProtocol(unittest.TestCase):
+
+    def setUp(self):
+        None
+
+    def tearDown(self):
+        None
+
+    def test_assembly(self):
+        filename = os.path.join(test_dir,"assembly.protocol.nv")
+        with open(filename) as f:
+            json_data = json.load(f)
+        model = model_convert(model_fn)         
+        graph = protocol_convert(model,filename)
+
+        self.assertEqual(len(json_data["nodes"]),len(graph.nodes))
+        self.assertEqual(len(json_data["links"]),len(graph.edges))
 
 
 def _get_name(subject):

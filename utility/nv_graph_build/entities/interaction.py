@@ -89,3 +89,16 @@ class Binds(Interaction):
             res = restrictions
         super().__init__(properties=properties,
         equivalents=equiv,restrictions=res)
+
+class Conversion(Interaction):
+    def __init__(self,properties=[],equivalents=[],restrictions=[]):
+        if equivalents == []:
+            equiv = [ce.ConversionRoleEquivalent()]
+        else:
+            equiv = equivalents
+        if restrictions == []:
+            res = [ir.ConversionRecipe()]
+        else:
+            res = restrictions
+        super().__init__(properties=properties,
+        equivalents=equiv,restrictions=res)

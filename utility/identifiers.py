@@ -138,7 +138,6 @@ def _apply_var_variants(class_name,key):
 def _get_name(subject):
     split_subject = _split(subject)
     if len(split_subject[-1]) == 1 and split_subject[-1].isdigit():
-        print(split_subject)
         return split_subject[-2]
     else:
         return split_subject[-1]

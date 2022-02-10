@@ -52,7 +52,6 @@ class ViewBuilder(AbstractViewBuilder):
                 edges.append((requirements[0],subject,RDFS.subClassOf,edge))
 
             else:
-                print(requirements)
                 node_attrs[requirements[0][0]] = requirements[0][1]
                 edge = _edge_label("hasRole")
                 edges.append((requirements[0][0],subject,self._builder.identifiers.predicates.role,edge))

@@ -34,3 +34,7 @@ class BindsRecipe(InteractionRecipe):
         recipe = ir.BindsRecipe()
         super().__init__(recipe)
 
+class ConversionRecipe(InteractionRecipe):
+    def __init__(self):
+        recipe = ir.ConversionRecipe()
+        super().__init__(recipe)

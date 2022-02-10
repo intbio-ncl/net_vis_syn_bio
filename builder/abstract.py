@@ -1,5 +1,6 @@
 import networkx as nx
 from rdflib import RDF
+import re
 
 class AbstractBuilder:
     def __init__(self,graph):
@@ -58,15 +59,8 @@ class AbstractBuilder:
     def sub_graph(self,edges,node_attrs = {}):
         new_graph = nx.MultiDiGraph()
         new_graph.add_edges_from(edges)
-        for subject,node,edge in new_graph.edges:
-            try:
-                new_graph.nodes[subject].update(node_attrs[subject])
-            except (KeyError,ValueError):
-                pass
-            try:
-                new_graph.nodes[node].update(node_attrs[node])
-            except (KeyError,ValueError):
-                pass
+        for k,v in node_attrs.items():
+            new_graph.add_node(k,**v)
         new_graph = self._graph.__class__(new_graph)
         return new_graph
 
@@ -74,6 +68,14 @@ class AbstractBuilder:
         subject = self._resolve_subject(subject)
         return self._graph.get_rdf_type(subject)
 
+    def get_namespace(self,uri):
+        split_subject = _split(uri)
+        if len(split_subject[-1]) == 1 and split_subject[-1].isdigit():
+            name = split_subject[-2]
+        else:
+            name = split_subject[-1]
+        return uri.split(name)[0]
+    
     def resolve_list(self,list_id):
         elements = []
         list_id = self._resolve_subject(list_id)
@@ -102,3 +104,6 @@ class AbstractBuilder:
             else:
                 return subject
         raise ValueError(f'{subject} Not in either graph or viewgraph.')
+
+def _split(uri):
+    return re.split('#|\/|:', uri)

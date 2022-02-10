@@ -6,7 +6,7 @@ from opentrons.simulate import simulate
 from opentrons.protocol_api.labware import Well, Location
 from converters.utility import map_to_nv, get_name
 
-accepted_file_types = ['py']
+accepted_file_types = ['py',"ot2"]
 
 
 def convert(filename, model):
@@ -25,6 +25,8 @@ def convert(filename, model):
             node_count += 1
         if isinstance(entity, URIRef):
             e_type = "URI"
+        elif isinstance(entity,BNode):
+            e_type = "BNode"
         else:
             e_type = "Literal"
         graph.add_node(n_key, key=entity, type=e_type)

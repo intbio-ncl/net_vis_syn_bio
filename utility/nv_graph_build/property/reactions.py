@@ -13,8 +13,7 @@ class Reactant(ReactionProperty):
         e = [pe.ReactantEquivalent(),
              pe.InhibitorEquivalent(),
              pe.StimulatorEquivalent(),
-             pe.PromoterEquivalent(),
-             pe.ModifierEquivalent()]
+             pe.PromoterEquivalent()]
         super().__init__(range,p,e)
 
 class Product(ReactionProperty):
@@ -34,4 +33,11 @@ class Template(ReactionProperty):
         p = [Direction(Input())]
         e = [pe.TemplateEquivalent(),
             pe.PromoterEquivalent()]
+        super().__init__(range,p,e)
+
+
+class Modifier(ReactionProperty):
+    def __init__(self,range=None):
+        p = [Direction(Input())]
+        e = [pe.ModifierEquivalent()]
         super().__init__(range,p,e)

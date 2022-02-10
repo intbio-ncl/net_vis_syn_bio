@@ -27,3 +27,7 @@ class BindsRecipe(Recipe):
         recipe = [reaction.NonCovalentBonding()]
         super().__init__(recipe)
         
+class ConversionRecipe(Recipe):
+    def __init__(self):
+        recipe = [reaction.BiochemicalReaction()]
+        super().__init__(recipe)
