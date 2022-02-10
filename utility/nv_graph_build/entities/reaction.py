@@ -60,3 +60,14 @@ class Hydrolysis(Dissociation):
         p = [reactions.Reactant(PhysicalEntity),
             reactions.Product(PhysicalEntity)]
         super().__init__(equivalents=r,properties=p)
+
+class BiochemicalReaction(Reaction):
+    def __init__(self,equivalents=[]):
+        if equivalents == []:
+            r = [ce.BiochemicalReactionRoleEquivalent()]
+        else:
+            r = equivalents
+        p = [reactions.Reactant(PhysicalEntity),
+             reactions.Modifier(PhysicalEntity),
+            reactions.Product(PhysicalEntity)]
+        super().__init__(equivalents=r,properties=p)

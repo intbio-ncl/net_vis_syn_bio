@@ -1,4 +1,3 @@
-from re import L
 from rdflib import RDFS,OWL,RDF,BNode,URIRef
 
 from graph.abstract import AbstractGraph
@@ -109,9 +108,17 @@ class ModelGraph(AbstractGraph):
                     properties.append(q)
                 elif e == RDF.rest or e == OWL.unionOf:                    
                     up_search(q[0])
+        
         for n,v,k in self.search((None,RDF.first,class_id)):
             up_search(n[0])
         return properties
+    
+    def get_default_value(self,subject,predicate):
+        res = self.search((subject,predicate,None),True)
+        if res == []:
+            return None
+        else:
+            return res[1]
 
     def get_restrictions_on(self,class_id):
         restrictions = []
@@ -194,7 +201,7 @@ class ModelGraph(AbstractGraph):
             else:
                 requirements.append((e,n))
         return requirements    
-
+    
     def resolve_intersection(self,identifier):
         return self._get_operator(identifier)
 
@@ -203,10 +210,14 @@ class ModelGraph(AbstractGraph):
         return res
 
     def get_restriction(self,r_id):
+        vals = [OWL.hasValue,OWL.cardinality,
+                OWL.minCardinality,OWL.maxCardinality]
+
         res = self.search((r_id,None,None))
-        r_value = [c[1] for c in res if c[2] == OWL.hasValue][0]
         r_property = [c[1] for c in res if c[2] == OWL.onProperty][0]
-        return [r_property[1]["key"],r_value]
+        r_value = [c[1:] for c in res if c[2] in vals]
+        assert(len(r_value) == 1)
+        return [r_property[1]["key"],r_value[0]]
 
     def _get_operator(self,identifier):
         requirements = []

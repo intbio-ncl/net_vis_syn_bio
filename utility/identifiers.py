@@ -3,6 +3,7 @@ import re
 
 from rdflib import RDF,OWL,RDFS
 from rdflib.term import BNode, URIRef
+from utility.nv_graph_build.identifiers import identifiers as nv_ids
 
 nv_namespace = URIRef("http://www.nv_ontology.org/")
 class KnowledgeGraphIdentifiers:
@@ -66,6 +67,8 @@ class Roles:
 def produce_identifiers(graph):
     bl_namespaces = [OWL,RDF.uri,RDFS.uri]
     known_namespaces = [OWL,RDF.uri,RDFS.uri]
+    for k,v in nv_ids.roles.__dict__.items():
+        setattr(Roles, k, v)
     for n,v,e in graph.search((None,None,None)):
         n,n_data = n
         v,v_data = v
@@ -115,6 +118,8 @@ def _extract_namespaces(triple,known_namespaces):
 
 
 def _apply_var_variants(class_name,key):
+    if not isinstance(key,URIRef):
+        return
     var_name = _get_name(key)
     setattr(class_name, var_name, key)
     lower_var_name = var_name.lower()

@@ -25,3 +25,8 @@ class HydrolysisRoleEquivalent(ConceptualEquivalent):
     def __init__(self):
         restrictions = [rr.HydrolysisRoleRestriction()]
         super().__init__(restrictions)
+
+class BiochemicalReactionRoleEquivalent(ConceptualEquivalent):
+    def __init__(self):
+        restrictions = [rr.BiochemicalReactionRoleRestriction()]
+        super().__init__(restrictions)

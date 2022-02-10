@@ -28,7 +28,6 @@ class ViewBuilder(AbstractViewBuilder):
         
         def _requirements_inner(subject,equiv_type,requirements):
             nonlocal node_index
-            
             if equiv_type == OWL.intersectionOf:
                 node_index += 1
                 and_node = node_index
@@ -53,9 +52,9 @@ class ViewBuilder(AbstractViewBuilder):
                 edges.append((requirements[0],subject,RDFS.subClassOf,edge))
 
             else:
-                node_attrs[requirements[0]] = requirements[1]
+                node_attrs[requirements[0][0]] = requirements[0][1]
                 edge = _edge_label("hasRole")
-                edges.append((requirements[0],subject,self._builder.identifiers.predicates.role,edge))
+                edges.append((requirements[0][0],subject,self._builder.identifiers.predicates.role,edge))
 
         for c,c_data in self._builder.get_classes(bnodes=False):
             node_attrs[c] = c_data

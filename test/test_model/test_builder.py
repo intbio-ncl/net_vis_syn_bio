@@ -6,13 +6,12 @@ from random import sample
 from rdflib import RDF,BNode
 sys.path.insert(0, os.path.join(".."))
 sys.path.insert(0, os.path.join("..",".."))
-
+sys.path.insert(0, os.path.join("..","..",".."))
 from builder.model import ModelBuilder
-from builder.instance import InstanceBuilder
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))
 instance_file = os.path.join(curr_dir,"files","nor_gate.xml")
-model_file = os.path.join(curr_dir,"..","..","utility","nv_model.xml")
+model_file = os.path.join(curr_dir,"..","..","utility","nv_protocol.xml")
 
 def _graph_element_check(graph):
     node_id_map = {}

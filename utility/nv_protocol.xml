@@ -1,0 +1,2122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:nv="http://www.nv_ontology.org/"
+  xmlns:ns1="http://www.w3.org/2002/07/owl#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/hasContainer">
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="N09aee8695ad24a1a82e257c54f31c3db">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Container"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="N2fb1bf3953484ba3abdf90168cfb9a48">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protocol"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/volume">
+    <ns1:equivalentProperty>volume</ns1:equivalentProperty>
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="N94baa8243d904a76a8084b10da95e61a">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#integer"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="N35db3e6c0f1d46308f876de1ed78bb89">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/SeperateGel"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Transfer"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/cycles">
+    <ns1:equivalentProperty>cycles</ns1:equivalentProperty>
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="Ne0621579a2ca43f79697b744ff93e184">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#integer"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="Na63c659a3cd84ed1ae46e5483088a8c7">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Thermocycle"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/usesInstrument">
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="Ne735ffbf56f2497fa7a30047274d1309">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="Nc7867c0919384703b143ae6bc5067070">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Instrument"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/duration">
+    <ns1:equivalentProperty>duration</ns1:equivalentProperty>
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="N4d3d35f5952e4dcbb342fd1ae211dc04">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Incubate"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/SeperateGel"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Spin"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Thermocycle"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="N35908ff349754bd791f2072f4a29944f">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#string"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/hasSubProtocol">
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="Nd3af4759d69646f48d441fa6f32dbec8">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protocol"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="N8bb30a3e0fee49db8fb88822adad5bda">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protocol"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/speed">
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="Naf37ddc095f74c03b59e842cc28a1bda">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#string"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+    <ns1:equivalentProperty>acceleration</ns1:equivalentProperty>
+    <ns1:equivalentProperty>speed</ns1:equivalentProperty>
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="Nd843f4155d7846f7823cec1744600e86">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Spin"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/rowNum">
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="Na9ea8b0f3c984acb8d7f21463bf6fe51">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Deep24"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Deep96"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Echo384"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Echo96"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Flat1"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Flat384"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Flat6"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Flat96"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Micro15"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Micro2"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PCR384"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PCR96"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Reservoir12"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Reservoir8"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/hasInstrument">
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="Nfd38210e81db468b8708ad0d5a66e8eb">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Instrument"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="N7dc13f4086314a7ab6535e5b16823e00">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protocol"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/temperature">
+    <ns1:equivalentProperty>temperature</ns1:equivalentProperty>
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="Na6024072e7ca45bdaef28aa0dfed1f4c">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#string"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="Nded10616e2ec458e91b99f725afce997">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Incubate"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Thermocycle"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/object">
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="N0c486ddca1d24410acd3811e57eccf34">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Incubate"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Seal"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Spin"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Thermocycle"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Unseal"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+    <ns1:equivalentProperty>object</ns1:equivalentProperty>
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="N69351749e8f34f09919e918ccaa52ca4">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Container"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/colNum">
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="Ne1992d66249d454ba1cd3e5bad6017ed">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Deep24"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Deep96"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Echo384"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Echo96"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Flat1"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Flat384"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Flat6"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Flat96"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Micro15"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Micro2"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PCR384"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PCR96"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Reservoir12"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Reservoir8"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/hasApparatus">
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="N2fcb8cb5d7ab406f94d325f6726884d9">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protocol"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="Nba09960a479a4eea9cb2273e841fbb28">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Apparatus"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/usesApparatus">
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="N3d502e69f91f456e851cc011d4f6b053">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="N76ef03d49dfe46928ef115e50ffaa120">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Apparatus"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/actions">
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="N0abebfd8172a4bfe81085cff815710ff">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="Ndc249af721ec4fd7b416766e7c5e5c48">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protocol"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/well">
+    <rdfs:range>
+      <ns1:Class rdf:nodeID="N4efe740791ea474e97efdc233520e890">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Well"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:range>
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="N55c490439be345a0982236681a798be1">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Deep24"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Deep96"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Echo384"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Echo96"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Flat1"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Flat384"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Flat6"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Flat96"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Micro15"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Micro2"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PCR384"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PCR96"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Reservoir12"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Reservoir8"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/mayUseInstrument">
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="N29f71d66ea5948569cda1d9e306d3bc0">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Bind"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Elution"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Purify"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Restriction"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Transfer"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Wash"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+  </ns1:ObjectProperty>
+  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/mayUseApparatus">
+    <rdfs:domain>
+      <ns1:Class rdf:nodeID="Ndfab64558ea24be69dbf74a9480ea867">
+        <ns1:unionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Bind"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Elution"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Elution"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Incubate"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Purify"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Purify"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Restriction"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Restriction"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Restriction"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Spin"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Thermocycle"/>
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Wash"/>
+        </ns1:unionOf>
+      </ns1:Class>
+    </rdfs:domain>
+  </ns1:ObjectProperty>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Micro15">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro2"/>
+    <nv:colNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</nv:colNum>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR384"/>
+    <nv:rowNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</nv:rowNum>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat1"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N0c8d6b837e3942158aafc8cd93605b2b">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Container"/>
+          <ns1:Class rdf:nodeID="Nfc9aaeb211fd4bfb957ced4c3fe0ef6d">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="Nfc8a65e654f64da19017b0d85fe98b38">
+                <ns1:onProperty>
+                  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/name"/>
+                </ns1:onProperty>
+                <ns1:hasValue>micro-1.5</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Container"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir8"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep24"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir12"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat6"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo384"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Deep24">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir8"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat96"/>
+    <nv:colNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</nv:colNum>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro15"/>
+    <nv:rowNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</nv:rowNum>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir12"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat6"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro2"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N1371d877dbe8424396b85ef481e219a9">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Container"/>
+          <ns1:Class rdf:nodeID="N4591d21985364af5b0421c0636a40995">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="Nc15438788e9046948c38fe160b7ba125">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>24-deep</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep96"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Container"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat1"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/MasterProtocol">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/TransformationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PrepareCellsProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/AssemblyProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SequencingProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/HeatShockProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/LigationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RestrictionProtocol"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nacdf16884658472dba95f202d84351fe">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protocol"/>
+          <ns1:Class rdf:nodeID="Nbd594ac113ec42aba91339b68fec8451">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N38058392829d4346948526ef1e8fc5ab">
+                <ns1:hasValue>Master</ns1:hasValue>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPCRProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PurificationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ValidationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/OutGrowthProtocol"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Protocol"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Incubator">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Well"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Thermocycler"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/PhysicalEntity"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N3b9e7af2d5a344a0bf54be596e0dafe7">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
+          <ns1:Class rdf:nodeID="N798b3f2c59a84f369edae8b7898b30b5">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N1de01121ca8f43719c42ee13e4d3e828">
+                <ns1:hasValue>Incubator</ns1:hasValue>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Centrifuge"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Container"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Instrument"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Apparatus"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Echo384">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR384"/>
+    <nv:rowNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</nv:rowNum>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat384"/>
+    <nv:colNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</nv:colNum>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat1"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Container"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir8"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep24"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat6"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro2"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro15"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir12"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nfae02b09c8a042ad8a3d268f49fe9047">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Container"/>
+          <ns1:Class rdf:nodeID="Nf556b05b8172437b97afd7d08449e355">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N9c479cbd925c4e9c8c393dee2a132ef8">
+                <ns1:hasValue>384-echo</ns1:hasValue>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/RestrictionProtocol">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/OutGrowthProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ValidationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/TransformationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SequencingProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/HeatShockProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/LigationProtocol"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Protocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PurificationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPCRProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyProtocol"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Ne52c3cded03f46b4afb31cf4b3b4e083">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protocol"/>
+          <ns1:Class rdf:nodeID="Nce8b1760a40540d194897ccbabff2ab9">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N0bfbcec1209a4293976e934023954fe3">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>Restriction</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/MasterProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PrepareCellsProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/AssemblyProtocol"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Action">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Protocol"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/ConceptualEntity"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Na2deab10652741a39e7104f4baa9b9e2">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/ConceptualEntity"/>
+          <ns1:Class rdf:nodeID="N8180cd60f3dd4b4291ae98acf5e54f53">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N303dd4f2d0314a79b9dfc47f6d9a1817">
+                <ns1:hasValue rdf:resource="http://www.nv_ontology.org/Action"/>
+                <ns1:onProperty>
+                  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/role"/>
+                </ns1:onProperty>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Thermocycle">
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N1eb9395735f24ec49ff311c2618b776e">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <ns1:Class rdf:nodeID="N22d77b104f204501be285ab1a43d9373">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="Nf8f0f800542148e7aae789cca7b02307">
+                <ns1:hasValue>thermocycle</ns1:hasValue>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Seal"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Elution"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Purify"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Bind"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Incubate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Unseal"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Action"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Extract"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SeperateGel"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transfer"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Consolidate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Spin"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Restriction"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPick"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Wash"/>
+    <nv:mayUseApparatus rdf:resource="http://www.nv_ontology.org/Centrifuge"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dispense"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Distribute"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/HeatShockProtocol">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPCRProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PurificationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/MasterProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PrepareCellsProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/AssemblyProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/OutGrowthProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ValidationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RestrictionProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/TransformationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SequencingProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/LigationProtocol"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nead5bbe3152b4456b13359b8dfd2bb3a">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protocol"/>
+          <ns1:Class rdf:nodeID="Ne1e15b1fb3b34702b66582cc28e9b64a">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N9aefac7f341b4d2a8cca1efdad842b7d">
+                <ns1:hasValue>HeatShock</ns1:hasValue>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Protocol"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Elution">
+    <nv:mayUseApparatus rdf:resource="http://www.nv_ontology.org/Centrifuge"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Distribute"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dispense"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Thermocycle"/>
+    <nv:mayUseInstrument rdf:resource="http://www.nv_ontology.org/Pipette"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Seal"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N08315536d0174bc1bb2bc48df739ffca">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <ns1:Class rdf:nodeID="N39d2fcd289984127b2a71805108ebfee">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N6afcf89384fd4ccdaaeff626d6350ed1">
+                <ns1:hasValue>Elution</ns1:hasValue>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Purify"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Action"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Incubate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Bind"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Unseal"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Extract"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transfer"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Consolidate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SeperateGel"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Restriction"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Spin"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Wash"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPick"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Extract">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Bind"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Unseal"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SeperateGel"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transfer"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Consolidate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Spin"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Restriction"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPick"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Wash"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Thermocycle"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dispense"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nf301231ab2334e09b6f9e4172486ac64">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <ns1:Restriction rdf:nodeID="Nafab76680fcc4c2ab2179bc586aada11">
+            <ns1:onProperty>
+              <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/source">
+                <rdfs:range>
+                  <ns1:Class rdf:nodeID="Nb00c8b4f72e646e3a78adb65ebd4c1e8">
+                    <ns1:unionOf rdf:parseType="Collection">
+                      <rdf:Description rdf:about="http://www.nv_ontology.org/Well"/>
+                    </ns1:unionOf>
+                  </ns1:Class>
+                </rdfs:range>
+                <ns1:equivalentProperty>source</ns1:equivalentProperty>
+                <ns1:equivalentProperty>reagent_source</ns1:equivalentProperty>
+                <rdfs:domain>
+                  <ns1:Class rdf:nodeID="N329225cfe2af4ae18a0043ea9c0ce936">
+                    <ns1:unionOf rdf:parseType="Collection">
+                      <rdf:Description rdf:about="http://www.nv_ontology.org/ColonyPick"/>
+                      <rdf:Description rdf:about="http://www.nv_ontology.org/Extract"/>
+                      <rdf:Description rdf:about="http://www.nv_ontology.org/SeperateGel"/>
+                      <rdf:Description rdf:about="http://www.nv_ontology.org/Transfer"/>
+                    </ns1:unionOf>
+                  </ns1:Class>
+                </rdfs:domain>
+              </ns1:ObjectProperty>
+            </ns1:onProperty>
+            <ns1:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</ns1:cardinality>
+          </ns1:Restriction>
+          <ns1:Restriction rdf:nodeID="N79f56729bc654eb8853dee438379c9e6">
+            <ns1:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</ns1:cardinality>
+            <ns1:onProperty>
+              <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/destination">
+                <rdfs:domain>
+                  <ns1:Class rdf:nodeID="N7a08d49f20554ee68d487f2d332018ab">
+                    <ns1:unionOf rdf:parseType="Collection">
+                      <rdf:Description rdf:about="http://www.nv_ontology.org/ColonyPick"/>
+                      <rdf:Description rdf:about="http://www.nv_ontology.org/Dispense"/>
+                      <rdf:Description rdf:about="http://www.nv_ontology.org/Transfer"/>
+                    </ns1:unionOf>
+                  </ns1:Class>
+                </rdfs:domain>
+                <rdfs:range>
+                  <ns1:Class rdf:nodeID="N540aa2fd0ab14e2b8076257e0adea771">
+                    <ns1:unionOf rdf:parseType="Collection">
+                      <rdf:Description rdf:about="http://www.nv_ontology.org/Well"/>
+                    </ns1:unionOf>
+                  </ns1:Class>
+                </rdfs:range>
+                <ns1:equivalentProperty>destination</ns1:equivalentProperty>
+              </ns1:ObjectProperty>
+            </ns1:onProperty>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Distribute"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Seal"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Action"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Elution"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Purify"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Incubate"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/SequencingProtocol">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/MasterProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/OutGrowthProtocol"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Protocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/TransformationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PrepareCellsProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/AssemblyProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/LigationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ValidationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RestrictionProtocol"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N9fea5fa658494c758aeef98ef1af4d42">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protocol"/>
+          <ns1:Class rdf:nodeID="N1842070013ec42e5a28f41b8c51310cf">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="Nd7b0851a67064da294bf7ee265e753ab">
+                <ns1:hasValue>Sequencing</ns1:hasValue>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/HeatShockProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPCRProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PurificationProtocol"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Deep96">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir12"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat6"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro2"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro15"/>
+    <nv:colNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</nv:colNum>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR384"/>
+    <nv:rowNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</nv:rowNum>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N8f03455dc27b460d82764fd9a72420e9">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Container"/>
+          <ns1:Class rdf:nodeID="Na75b5416f2ea42d695730102baeb902c">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="Nebf61628199a4c81b4b0dfe566d6796a">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>96-deep</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat1"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Container"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir8"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep24"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat96"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Seal">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Elution"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Purify"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Bind"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Incubate"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Na087bba540c14e7090e2095ee5092aea">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <ns1:Class rdf:nodeID="N7eef1adb66944eee9e3cdcb7adb1a750">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="Nf22abd75f49945d2a3a98043a3b54f09">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>seal</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Unseal"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Action"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Extract"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transfer"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Consolidate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Spin"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SeperateGel"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Restriction"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPick"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Wash"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Thermocycle"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Distribute"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dispense"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/LigationProtocol">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PrepareCellsProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/AssemblyProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ValidationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RestrictionProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SequencingProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/HeatShockProtocol"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Protocol"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N815bd6cf71804213b2a1294fa4744248">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protocol"/>
+          <ns1:Class rdf:nodeID="Ne6354314a14c49848b2eb894311bd659">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="Nd570a63b00a14a63962f35dbacf39617">
+                <ns1:hasValue>Ligation</ns1:hasValue>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PurificationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPCRProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/MasterProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/OutGrowthProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/TransformationProtocol"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Echo96">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat1"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir8"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep24"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat96"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Container"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro15"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir12"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat6"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo384"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Naaa72274e2374269bb2a612b6401f5da">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Container"/>
+          <ns1:Class rdf:nodeID="N07b84de90ff14c5c89d5e6fa9ef275bf">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N42e7caf63aff44a3ac800a7d0ba0117c">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>96-echo</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro2"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR384"/>
+    <nv:colNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</nv:colNum>
+    <nv:rowNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</nv:rowNum>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat384"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/PrepareCellsProtocol">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/OutGrowthProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ValidationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RestrictionProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/TransformationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SequencingProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/HeatShockProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/LigationProtocol"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Protocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PurificationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPCRProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyProtocol"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N68f4669ee8ae44f19ec3db52b55e0419">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protocol"/>
+          <ns1:Class rdf:nodeID="Nb16c98554df74d24abcc3c04f5c115f3">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N787b7f1ae9324168a090f4957138210b">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>PrepareCells</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/MasterProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/AssemblyProtocol"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Flat1">
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N75848b2bb06a4a3fb033855597206923">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Container"/>
+          <ns1:Class rdf:nodeID="N0b747bdde21241be8ce59664fbb2b715">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="Nae0c7b0c144c4a50bce02f8238741f7e">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>1-flat</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep96"/>
+    <nv:rowNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</nv:rowNum>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR96"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Container"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir8"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep24"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro15"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir12"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat6"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro2"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR384"/>
+    <nv:colNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</nv:colNum>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/PurificationProtocol">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/MasterProtocol"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Protocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PrepareCellsProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/AssemblyProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/OutGrowthProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ValidationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SequencingProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RestrictionProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/TransformationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/HeatShockProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/LigationProtocol"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N44676d7ffdb44897aed4a038437b2557">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protocol"/>
+          <ns1:Class rdf:nodeID="N0bd77d7812304f23af321dd6beaa1622">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N87117b0752e14b029eccbd6814b4eea2">
+                <ns1:hasValue>Purification</ns1:hasValue>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPCRProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyProtocol"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Micro2">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat1"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Container"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir8"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep24"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat96"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N28ce542b8cd643ef98e05199739de8f7">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Container"/>
+          <ns1:Class rdf:nodeID="N7b725f2326ba42928ba2779509736f6a">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N44ab4a59522a4d8d9bbbb8dcd2d90972">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>micro-2.0</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir12"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat6"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro15"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR384"/>
+    <nv:colNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</nv:colNum>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep96"/>
+    <nv:rowNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</nv:rowNum>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR96"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Flat96">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep24"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Container"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro15"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir12"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat6"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro2"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR384"/>
+    <nv:colNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</nv:colNum>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nb41f21009f404c998167b11bc1e9e733">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Container"/>
+          <ns1:Class rdf:nodeID="N8b1ab90eff894a478090e60a2e6470b0">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N578c3ec41d854b809d06aea65a9c28a9">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>96-flat</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep96"/>
+    <nv:rowNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</nv:rowNum>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat1"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir8"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo96"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Reservoir12">
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N55550310526e44708d2c6fcd678c0608">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Container"/>
+          <ns1:Class rdf:nodeID="Nc932edc9284245a7b6b4b234cd5b36d3">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N9aa5c8c2b52549cc87970f558de70a01">
+                <ns1:hasValue>res-mw12-hp</ns1:hasValue>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir8"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep24"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro15"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat6"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro2"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat384"/>
+    <nv:colNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</nv:colNum>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat1"/>
+    <nv:rowNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</nv:rowNum>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Container"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Dispense">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SeperateGel"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transfer"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Consolidate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Spin"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Restriction"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPick"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Wash"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Thermocycle"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Distribute"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N13e112d4513e476eb3bc683671929771">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <ns1:Restriction rdf:nodeID="N7d1e899a6f2b43269f2aa182318e5ed0">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/source"/>
+            <ns1:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</ns1:cardinality>
+          </ns1:Restriction>
+          <ns1:Restriction rdf:nodeID="Ne8f5658cba00467f95a4d57fcce484c9">
+            <ns1:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</ns1:cardinality>
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/destination"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Seal"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Elution"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Action"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Purify"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Bind"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Incubate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Unseal"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Extract"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/PCR384">
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Na166044f6cb14d56803cfa78c98df82a">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Container"/>
+          <ns1:Class rdf:nodeID="Nfa21ad65c3d645b1bae0bdc8d91c4a3c">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N3b84429517954a798a0d538620fcd09d">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>384-pcr</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir8"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep24"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro15"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Container"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir12"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat6"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro2"/>
+    <nv:colNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</nv:colNum>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep96"/>
+    <nv:rowNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</nv:rowNum>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat1"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Incubate">
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Action"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Extract"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SeperateGel"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N75196b03e63d480b8949df36e04827b4">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <ns1:Class rdf:nodeID="Nba36de57340e4d7faf7a6cff20d3e76a">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N617917e489d84e53b1445630f76a8c59">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>incubate</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transfer"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Consolidate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Spin"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Restriction"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPick"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Thermocycle"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Wash"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dispense"/>
+    <nv:mayUseApparatus rdf:resource="http://www.nv_ontology.org/Centrifuge"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Distribute"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Seal"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Elution"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Purify"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Bind"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Unseal"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Flat6">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat96"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Container"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro15"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir12"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro2"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR384"/>
+    <nv:colNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</nv:colNum>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat384"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nc1bc2bbb226941d38cc6f9b767fc2f65">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Container"/>
+          <ns1:Class rdf:nodeID="Nef30710b9a6a4c0e9a0769ecc67e868f">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="Nc532a480063d43b69084eb32c483e0b4">
+                <ns1:hasValue>6-flat</ns1:hasValue>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat1"/>
+    <nv:rowNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</nv:rowNum>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir8"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep24"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Purify">
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Action"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Elution"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Bind"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Incubate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Unseal"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Extract"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SeperateGel"/>
+    <nv:mayUseApparatus rdf:resource="http://www.nv_ontology.org/Centrifuge"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transfer"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Consolidate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Spin"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Restriction"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPick"/>
+    <nv:mayUseInstrument rdf:resource="http://www.nv_ontology.org/Pipette"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Wash"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Thermocycle"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dispense"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Distribute"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nb5f9b5d045d74a06ae8f3709bf125fc5">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <ns1:Class rdf:nodeID="N95a787987ec34b1faaa15ed43252acaa">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N2eed61df618a4a3e88282536f760663a">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>Purify</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Seal"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Flat384">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat1"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Container"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir8"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep24"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro15"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir12"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat6"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro2"/>
+    <nv:colNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</nv:colNum>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N121ed2eed6ff4c45970500f73d301305">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Container"/>
+          <ns1:Class rdf:nodeID="Nd23660cf90214e979d0e961e0dcff76f">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N655820559a0843028806ce58d95edacb">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>384-flat</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR384"/>
+    <nv:rowNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</nv:rowNum>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR96"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Transfer">
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Action"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Extract"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SeperateGel"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Consolidate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Spin"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Restriction"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Wash"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nf6fbfefe1b874496a35580950f6a1ddc">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <ns1:Restriction rdf:nodeID="Nd8c36eb7a4ce4437bb109066176c6eef">
+            <ns1:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</ns1:cardinality>
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/source"/>
+          </ns1:Restriction>
+          <ns1:Restriction rdf:nodeID="N56169841774140cb8ba7716634ada535">
+            <ns1:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</ns1:cardinality>
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/destination"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Thermocycle"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPick"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dispense"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Distribute"/>
+    <nv:mayUseInstrument rdf:resource="http://www.nv_ontology.org/Pipette"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Seal"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Elution"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N1a472ac2250e4b2a9a3628a613808016">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <ns1:Class rdf:nodeID="N68b285c69acb43f6b534de7919bcabab">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="Nf715fd715f5445ae98b260bf158d5ffd">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>transfer</ns1:hasValue>
+              </ns1:Restriction>
+              <ns1:Restriction rdf:nodeID="N1c3b2e6fd84643c0b722d736d792f9b9">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>dispense</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Purify"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Bind"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Unseal"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Incubate"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Spin">
+    <nv:mayUseApparatus rdf:resource="http://www.nv_ontology.org/Centrifuge"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Thermocycle"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dispense"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Distribute"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Seal"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Wash"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Elution"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Purify"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Incubate"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nf6b23f110ba847d2ae80daf4f00f97de">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <ns1:Class rdf:nodeID="Nf8aed7aedf204604a847c8c1808c6f72">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N6b73b75c685744a69a6acc01e9f99a53">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>spin</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Bind"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Unseal"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Extract"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Action"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SeperateGel"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transfer"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Consolidate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Restriction"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPick"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Reservoir8">
+    <nv:colNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</nv:colNum>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat1"/>
+    <nv:rowNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</nv:rowNum>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep24"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro15"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Container"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir12"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat6"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N3b60245f59cc4788ab754985381e51e7">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Container"/>
+          <ns1:Class rdf:nodeID="Nf3c15e64efaa48369c65bb0a4ddbeb20">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N4879b7f1d3ea45c880de4c4d4c5c418a">
+                <ns1:hasValue>res-mw8-hp</ns1:hasValue>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro2"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep96"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Protocol">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Action"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/ConceptualEntity"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N1cb05cb096864244bb64e944a0275e3f">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/ConceptualEntity"/>
+          <ns1:Class rdf:nodeID="N52176e44d4ed41b2816fac38582112cb">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N6872d815b6e34e50a0705bf25cc6f085">
+                <ns1:hasValue rdf:resource="http://edamontology.org/data_2531"/>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Restriction">
+    <nv:mayUseApparatus rdf:resource="http://www.nv_ontology.org/Centrifuge"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Distribute"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dispense"/>
+    <nv:mayUseInstrument rdf:resource="http://www.nv_ontology.org/Pipette"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Seal"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Elution"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Purify"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Action"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Incubate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Bind"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Unseal"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Thermocycle"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Extract"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SeperateGel"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N443b654dc86548fc8ae4814fbb81d8b4">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <ns1:Class rdf:nodeID="Na848f9db47ed4919947ad1eb506fae82">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="Nac751c5e2f2c42d9b210026c2360af20">
+                <ns1:hasValue>Restriction</ns1:hasValue>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transfer"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Consolidate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Spin"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPick"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Wash"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/ColonyPCRProtocol">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/TransformationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/HeatShockProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/LigationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PurificationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyProtocol"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Na1c166003e2a434baf80d5c6bdf23bc5">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protocol"/>
+          <ns1:Class rdf:nodeID="N47b99a65f46442de88170a530a69eb41">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N582499c820eb48b998ec6a8043870b3a">
+                <ns1:hasValue>ColonyPCR</ns1:hasValue>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Protocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/MasterProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PrepareCellsProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/AssemblyProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/OutGrowthProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ValidationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SequencingProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RestrictionProtocol"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/SeperateGel">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Spin"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Wash"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Thermocycle"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPick"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dispense"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Distribute"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Seal"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Elution"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Purify"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Incubate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Bind"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Unseal"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Action"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Extract"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transfer"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Consolidate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Restriction"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nab98e4d67f7b40c4835fba6a44304305">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <ns1:Class rdf:nodeID="N5f96d31f0d53457b82746f9d31223d66">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="Na847425376d1448c8c6a4d26dead1d71">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>seperategel</ns1:hasValue>
+              </ns1:Restriction>
+              <ns1:Restriction rdf:nodeID="N8cd7865af44641d6acd286dea4bb613c">
+                <ns1:hasValue>gel_separate</ns1:hasValue>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/AssemblyProtocol">
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Protocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/LigationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PurificationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPCRProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/TransformationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/MasterProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PrepareCellsProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/OutGrowthProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ValidationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RestrictionProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SequencingProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/HeatShockProtocol"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Ne52efe31c41343788bb0c03ddccbb8b5">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protocol"/>
+          <ns1:Class rdf:nodeID="Nd70517d59e3d4a66a950f17ffff39e57">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="Ne749ceebc81a45e8b3ac1a9123484604">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>Assembly</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/TransformationProtocol">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/MasterProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PrepareCellsProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/AssemblyProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/OutGrowthProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ValidationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SequencingProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RestrictionProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/HeatShockProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/LigationProtocol"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Na0cfade9734c43b483abc0e34ee81ee9">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protocol"/>
+          <ns1:Class rdf:nodeID="N0c9a8a2cec204742ba4304b3d92c2096">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="Nc1408f4b50e944e39dcbfbc42ab0c3bf">
+                <ns1:hasValue>Transformation</ns1:hasValue>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Protocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PurificationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPCRProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyProtocol"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Thermocycler">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Centrifuge"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N63c4797d7e33472aab5418b639b8bbff">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
+          <ns1:Class rdf:nodeID="Nea2d12b63c1345e0a17535acad561393">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N85803cf80d534ffd8829cc5de3971ece">
+                <ns1:hasValue>Thermocycler</ns1:hasValue>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Incubator"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/PhysicalEntity"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Container"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Instrument"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Apparatus"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Well"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/PCR96">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir8"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep24"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat96"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Container"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro15"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Reservoir12"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nf72df5b5ec0d4b38946416a9839d2867">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Container"/>
+          <ns1:Class rdf:nodeID="N186d322575c64faf85c9d2705e3479c6">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N30555cfd94c04ec1b53200b974cd5924">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>96-pcr</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Echo384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat6"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Micro2"/>
+    <nv:colNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</nv:colNum>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PCR384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Deep96"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat384"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Flat1"/>
+    <nv:rowNum rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</nv:rowNum>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Consolidate">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transfer"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SeperateGel"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Restriction"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Spin"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Wash"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Thermocycle"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPick"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dispense"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Distribute"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Seal"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Action"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Purify"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Elution"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Incubate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Bind"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N0d26afbe53a849eea5a9a7dafcd236c8">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <ns1:Restriction rdf:nodeID="N307fae5c00e04035b7476d6a4eee088c">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/source"/>
+            <ns1:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</ns1:minCardinality>
+          </ns1:Restriction>
+          <ns1:Restriction rdf:nodeID="N844c078ee3834cc4abe38e963367736b">
+            <ns1:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</ns1:cardinality>
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/destination"/>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Unseal"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Extract"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Unseal">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Elution"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Purify"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Bind"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Incubate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Extract"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SeperateGel"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transfer"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Consolidate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Spin"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Restriction"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Thermocycle"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPick"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Wash"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dispense"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Distribute"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N55d87fc2e179437fadd77e7ec99a4c54">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <ns1:Class rdf:nodeID="N1ac317160f25440694d8d3c1edcc797a">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N6ca5313e2bff4045ada797e221a82d48">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>unseal</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Seal"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Action"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/ColonyProtocol">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/OutGrowthProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ValidationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RestrictionProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/TransformationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SequencingProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/HeatShockProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/LigationProtocol"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Protocol"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N5ae35875358f4ab785d4bbf0aa08ec6f">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protocol"/>
+          <ns1:Class rdf:nodeID="N1ed2d80b5e654159ba006f8c3d077467">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="Ne1a9b1d09ea843e2b09d7df8da43e705">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>Colony</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PurificationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPCRProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/MasterProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PrepareCellsProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/AssemblyProtocol"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/OutGrowthProtocol">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/MasterProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SequencingProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/TransformationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PrepareCellsProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/AssemblyProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/LigationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ValidationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPCRProtocol"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N9c747770358a433dabfb4ca681d312d2">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protocol"/>
+          <ns1:Class rdf:nodeID="Na38ec3e19a3d4a399e8c20311eb12c60">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N6331d87ca8e0468abc79bcc5eca681f8">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>OutGrowth</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RestrictionProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/HeatShockProtocol"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Protocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PurificationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyProtocol"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/ValidationProtocol">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PrepareCellsProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/AssemblyProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/OutGrowthProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SequencingProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/RestrictionProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/TransformationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/HeatShockProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/LigationProtocol"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nd62ae716f322496983e4f8ab8aa06ba1">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Protocol"/>
+          <ns1:Class rdf:nodeID="Ndd7bbf102c514417be11a7e0e3c71050">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N85581d6389ee4925bce4b70610801588">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>Validation</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PurificationProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPCRProtocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyProtocol"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Protocol"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/MasterProtocol"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Centrifuge">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Thermocycler"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Incubator"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/PhysicalEntity"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Instrument"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Apparatus"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Well"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Container"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N8e3859e2c9744b798bdaa72f5868081c">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
+          <ns1:Class rdf:nodeID="N5ee51c93028d4bf29cf1fe1f0aa95828">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="Ne7274ac43b954c3b8e4aae3e25e95396">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>Centrifuge</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Bind">
+    <nv:mayUseInstrument rdf:resource="http://www.nv_ontology.org/Pipette"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Seal"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Elution"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Action"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Purify"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Incubate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Unseal"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Extract"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N462852574e2f40ffa9bc59f34e3c40fd">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <ns1:Class rdf:nodeID="Nc7bc8c40cfb242b3bf84c3c8b65437e4">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="Nfdea3dbc16f9439d8dc176a60355f33e">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>Bind</ns1:hasValue>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SeperateGel"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transfer"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Consolidate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Spin"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Restriction"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPick"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Wash"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Thermocycle"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dispense"/>
+    <nv:mayUseApparatus rdf:resource="http://www.nv_ontology.org/Centrifuge"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Distribute"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Wash">
+    <nv:mayUseApparatus rdf:resource="http://www.nv_ontology.org/Centrifuge"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dispense"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Restriction"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Distribute"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N1234c4240dc94cddb371dff166c17840">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <ns1:Class rdf:nodeID="N2db52d5ab9b04d93bdca98b3c054db25">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N178ecbb4f5114cdc94e0248e6f1e9a78">
+                <ns1:hasValue>Wash</ns1:hasValue>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <nv:mayUseInstrument rdf:resource="http://www.nv_ontology.org/Pipette"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Seal"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Elution"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Purify"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Bind"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Incubate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Unseal"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Action"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Extract"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SeperateGel"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transfer"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Consolidate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Spin"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Thermocycle"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPick"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/ColonyPick">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Unseal"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Bind"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Extract"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transfer"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Consolidate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SeperateGel"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Restriction"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Spin"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Thermocycle"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Wash"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dispense"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Distribute"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Seal"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Elution"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Action"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Purify"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Incubate"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N5bfeeb494ead4d55bb2934c435dc6546">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <ns1:Class rdf:nodeID="N4ec28f404ff74b55880c8ca211e211d0">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N9471db2be75f4f32a4664f11790d5a94">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+                <ns1:hasValue>colonypick</ns1:hasValue>
+              </ns1:Restriction>
+              <ns1:Restriction rdf:nodeID="Nc71810626f5b4a89abaaae36662ed0a3">
+                <ns1:hasValue>autopick</ns1:hasValue>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/name"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Instrument">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Incubator"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Container"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Apparatus"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Well"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Thermocycler"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N46b4688c8eca4ea389953f1c8f2d972b">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
+          <ns1:Class rdf:nodeID="N444af33057f644bfbf8815a42cd45ca3">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N93dba2c65cb64276bf5745efcd6c559b">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+                <ns1:hasValue rdf:resource="http://www.ebi.ac.uk/efo/EFO0000548"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/PhysicalEntity"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Centrifuge"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/ConceptualEntity">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/PhysicalEntity"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Entity"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N881dee104298446982e7089503e628c3">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Entity"/>
+          <ns1:Class rdf:nodeID="Ncdb91205db384045a2b373e5630dac62">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N7459c00266244852aa0ff4f607f13f95">
+                <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#Interaction"/>
+                <ns1:onProperty>
+                  <ns1:ObjectProperty rdf:about="http://www.nv_ontology.org/hasCharacteristic"/>
+                </ns1:onProperty>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Pipette">
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Instrument"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N84eba2e99ac64832b3a39f0acfd208d5">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Instrument"/>
+          <ns1:Class rdf:nodeID="N27442015ae264909a4f212158a53de26">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N54f48e673900412c934e79ca551c204c">
+                <ns1:hasValue rdf:resource="http://purl.obolibrary.org/obo/OBI0002488"/>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Entity"/>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/PhysicalEntity">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ConceptualEntity"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N35287bf295744f128fe01048a69f1af6">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Entity"/>
+          <ns1:Class rdf:nodeID="N0a4552612b9243be9667e7179e8f1be0">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="Nb2bbb5a7d7904afc903221d8ecab15f4">
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/hasCharacteristic"/>
+                <ns1:hasValue rdf:resource="http://www.biopax.org/release/biopax-level3.owl#PhysicalEntity"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Entity"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Well">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Instrument"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Container"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/PhysicalEntity"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Thermocycler"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Apparatus"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nafc5705dc00042009624e265cdee3a3c">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
+          <ns1:Class rdf:nodeID="N29b99ebab58e4a9a98bcd1deeecd5faf">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="Nc5f1ce0111d04c4ab6a98c9f5659558f">
+                <ns1:hasValue rdf:resource="http://www.nv_ontology.org/Well"/>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Centrifuge"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Incubator"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Distribute">
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="Nf2132bd2126c4e4984c8864509a4ae8a">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/Action"/>
+          <ns1:Restriction rdf:nodeID="N80e54581c57d4c449dafa63b763d5752">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/source"/>
+            <ns1:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</ns1:cardinality>
+          </ns1:Restriction>
+          <ns1:Restriction rdf:nodeID="Naeec114f9f644977a6f0f0f11556edf0">
+            <ns1:onProperty rdf:resource="http://www.nv_ontology.org/destination"/>
+            <ns1:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</ns1:minCardinality>
+          </ns1:Restriction>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Bind"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Incubate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Unseal"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Extract"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Transfer"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Consolidate"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/SeperateGel"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Spin"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Restriction"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/ColonyPick"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Elution"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Wash"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Thermocycle"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Dispense"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Seal"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/Action"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Purify"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Container">
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/PhysicalEntity"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Instrument"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Well"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N262d2360e3f345299b745711381225b2">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
+          <ns1:Class rdf:nodeID="N8e39d0da6ec74d4e84061985d0d327d5">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N32912129e6b94e68ab49d0289b3e54df">
+                <ns1:hasValue rdf:resource="http://purl.obolibrary.org/obo/OBI0000967"/>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Thermocycler"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Apparatus"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Centrifuge"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Incubator"/>
+  </ns1:Class>
+  <ns1:Class rdf:about="http://www.nv_ontology.org/Apparatus">
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Centrifuge"/>
+    <ns1:equivalentClass>
+      <ns1:Class rdf:nodeID="N6a102dbd166e4a749bca93f36bb7c1c3">
+        <ns1:intersectionOf rdf:parseType="Collection">
+          <rdf:Description rdf:about="http://www.nv_ontology.org/PhysicalEntity"/>
+          <ns1:Class rdf:nodeID="N05defc0c843e412f8908e2261e762a93">
+            <ns1:unionOf rdf:parseType="Collection">
+              <ns1:Restriction rdf:nodeID="N607b901f1a1d44028cd6c7dcc4bf957d">
+                <ns1:hasValue rdf:resource="http://www.nv_ontology.org/ExternalMachine"/>
+                <ns1:onProperty rdf:resource="http://www.nv_ontology.org/role"/>
+              </ns1:Restriction>
+            </ns1:unionOf>
+          </ns1:Class>
+        </ns1:intersectionOf>
+      </ns1:Class>
+    </ns1:equivalentClass>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Well"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Incubator"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Instrument"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Container"/>
+    <ns1:disjointWith rdf:resource="http://www.nv_ontology.org/Thermocycler"/>
+    <rdfs:subClassOf rdf:resource="http://www.nv_ontology.org/PhysicalEntity"/>
+  </ns1:Class>
+</rdf:RDF>

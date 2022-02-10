@@ -10,8 +10,17 @@ class AbstractModeBuilder:
         seen = []
         max_key = max([node for node in self._builder.v_nodes])
         for n,v,e in self._builder.v_edges:
-            node_attrs[v] = self._builder.nodes[v]
-            node_attrs[n] = self._builder.nodes[n]
+            try:
+                node_attrs[v] = self._builder.nodes[v]
+            except KeyError:
+                node_attrs[v] = self._builder.v_nodes[v]
+
+            try:
+                node_attrs[n] = self._builder.nodes[n]
+            except KeyError:
+                node_attrs[n] = self._builder.v_nodes[n]
+
+            
             v_copy = v
             if v in seen:
                 max_key +=1

@@ -25,3 +25,8 @@ class HydrolysisRoleRestriction(RoleRestriction):
     def __init__(self):
         values = [identifiers.roles.hydrolysis]
         super().__init__(values)
+
+class BiochemicalReactionRoleRestriction(RoleRestriction):
+    def __init__(self):
+        values = [identifiers.roles.biochemical_reaction]
+        super().__init__(values)

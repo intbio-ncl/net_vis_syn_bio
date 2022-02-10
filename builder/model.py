@@ -1,6 +1,6 @@
 from rdflib import OWL,RDF
 
-from converters.model import convert
+from converters.model_handler import convert
 from builder.abstract import AbstractBuilder
 from builder.builders.model.view import ViewBuilder
 from builder.builders.model.mode import ModeBuilder

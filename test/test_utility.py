@@ -10,7 +10,7 @@ from converters.model import convert as m_convert
 from utility.identifiers import produce_identifiers
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))
-model_fn = os.path.join(curr_dir,"..","utility","nv_model.xml")
+model_fn = os.path.join(curr_dir,"..","utility","nv_design.xml")
 
 
 class TestUtility(unittest.TestCase):

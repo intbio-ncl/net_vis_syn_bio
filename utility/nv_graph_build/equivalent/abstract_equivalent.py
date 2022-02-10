@@ -1,3 +1,5 @@
+from rdflib import Literal
+from restriction.abstract_restriction import NameRestriction
 from restriction.physcial_restriction import PhyscialCharacteristicRestriction
 from restriction.conceptual_restriction import ConceptualCharacteristicRestriction
 
@@ -25,6 +27,16 @@ class ConceptualEquivalent(EquivalentClass):
             r = restrictions
         super().__init__(r)
 
-class PropertyEquivalent(EquivalentProperty):
-    def __init__(self,equivalents=[]):
-        super().__init__(equivalents)
+class NameEquivalentClass(EquivalentClass):
+    def __init__(self, names):
+        if not isinstance(names,list):
+            names = [names]
+        r = [NameRestriction(names)]
+        super().__init__(restrictions=r)
+
+class NameEquivalentProperty(EquivalentProperty):
+    def __init__(self, names):
+        if not isinstance(names,list):
+            names = [names]
+        names = [Literal(n) for n in names]
+        super().__init__(names)

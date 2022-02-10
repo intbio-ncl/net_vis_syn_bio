@@ -1,5 +1,4 @@
 from restriction.abstract_restriction import RoleRestriction
-from restriction.abstract_restriction import CharacteristicRestriction
 from identifiers import identifiers
 
 class ActivationRoleRestriction(RoleRestriction):
@@ -25,4 +24,9 @@ class DegradationRoleRestriction(RoleRestriction):
 class BindsRoleRestriction(RoleRestriction):
     def __init__(self):
         values = [identifiers.roles.noncovalent_bonding]
+        super().__init__(values)
+
+class ConversionRoleRestriction(RoleRestriction):
+    def __init__(self):
+        values = [identifiers.roles.biochemical_reaction]
         super().__init__(values)

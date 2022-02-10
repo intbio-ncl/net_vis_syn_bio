@@ -1,8 +1,10 @@
 from entities.abstract_entity import ConceptualEntity
 from entities.abstract_entity import PhysicalEntity
+from entities.reaction import Reaction
 from equivalent import interaction_equivalent as ce
-from restriction import recipe_restriction as rr
-from property import interactions as ir
+from restriction import interaction_recipes as ir
+from property.property import ConsistsOf
+from property import interactions as ins
 
 class Interaction(ConceptualEntity):
     def __init__(self,properties=[],equivalents=[],restrictions=[]):
@@ -14,7 +16,7 @@ class Interaction(ConceptualEntity):
             res = []
         else:
             res = restrictions
-        p = properties
+        p = properties + [ConsistsOf([Interaction,Reaction])]
         super().__init__(properties=p,
         equivalents=equiv,restrictions=res)
 
@@ -25,12 +27,12 @@ class Activation(Interaction):
         else:
             equiv = equivalents
         if restrictions == []:
-            res = [rr.ActivationRecipe()]
+            res = [ir.ActivationRecipe()]
         else:
             res = restrictions
         
-        p = properties + [ir.Activator(PhysicalEntity),
-                          ir.Activated(PhysicalEntity)]
+        p = properties + [ins.Activator(PhysicalEntity),
+                          ins.Activated(PhysicalEntity)]
         super().__init__(properties=p,equivalents=equiv,restrictions=res)
 
 class Repression(Interaction):
@@ -40,12 +42,12 @@ class Repression(Interaction):
         else:
             equiv = equivalents
         if restrictions == []:
-            res = [rr.RepressionRecipe()]
+            res = [ir.RepressionRecipe()]
         else:
             res = restrictions
         
-        p = properties + [ir.Repressor(PhysicalEntity),
-                          ir.Repressed(PhysicalEntity)]
+        p = properties + [ins.Repressor(PhysicalEntity),
+                          ins.Repressed(PhysicalEntity)]
         super().__init__(properties=p,equivalents=equiv,restrictions=res)
 
 class GeneticProduction(Interaction):
@@ -55,7 +57,7 @@ class GeneticProduction(Interaction):
         else:
             equiv = equivalents
         if restrictions == []:
-            res = [rr.GeneticProductionRecipe()]
+            res = [ir.GeneticProductionRecipe()]
         else:
             res = restrictions
         super().__init__(properties=properties,
@@ -69,7 +71,7 @@ class Degradation(Interaction):
         else:
             equiv = equivalents
         if restrictions == []:
-            res = [rr.DegradationRecipe()]
+            res = [ir.DegradationRecipe()]
         else:
             res = restrictions
         super().__init__(properties=properties,
@@ -82,7 +84,20 @@ class Binds(Interaction):
         else:
             equiv = equivalents
         if restrictions == []:
-            res = [rr.BindsRecipe()]
+            res = [ir.BindsRecipe()]
+        else:
+            res = restrictions
+        super().__init__(properties=properties,
+        equivalents=equiv,restrictions=res)
+
+class Conversion(Interaction):
+    def __init__(self,properties=[],equivalents=[],restrictions=[]):
+        if equivalents == []:
+            equiv = [ce.ConversionRoleEquivalent()]
+        else:
+            equiv = equivalents
+        if restrictions == []:
+            res = [ir.ConversionRecipe()]
         else:
             res = restrictions
         super().__init__(properties=properties,
