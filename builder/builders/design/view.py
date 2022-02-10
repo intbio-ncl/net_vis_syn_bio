@@ -153,7 +153,9 @@ class ViewBuilder(AbstractViewBuilder):
                 if [d[0] for d in dfs].count(v) == 0:
                     outputs.append((v, d_pred))
             io.append((inp, outputs))
+        
 
+        '''
         for io_index in range(0, len(io)):
             i, os = io[io_index]
             o_index = 0
@@ -166,6 +168,7 @@ class ViewBuilder(AbstractViewBuilder):
                         #o_index -= 1
                         break
                 o_index += 1
+        '''
         return io
         
     def _produce_interaction_graph(self, predicate, first_pred=False):
