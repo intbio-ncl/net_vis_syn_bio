@@ -31,8 +31,8 @@ NV-SB requires Python 3.x. and Python package dependencies are listed in `requir
     - Valid Files: 
         - Autoprotocol (Recommended)
         - OT2 Script.
-    To execute: `python run.py <filename> -t protocol`
-    To View: Open browser and enter: `http://127.0.0.1:5000/protocol/`
+    - To execute: `python run.py <filename> -t protocol`
+    - To View: Open browser and enter: `http://127.0.0.1:5000/protocol/`
 
 ### Loading the application
 To see an exhaustive list of inputs: `python run.py -h`
