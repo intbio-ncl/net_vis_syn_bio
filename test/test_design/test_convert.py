@@ -19,7 +19,7 @@ from graph.design import DesignGraph
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))
 model_fn = os.path.join(curr_dir,"..","..","utility","nv_design.xml")
-test_dir = os.path.join(curr_dir,"..","files")
+test_dir = os.path.join(curr_dir,"..","files","design","sbol")
 
 class TestConvertDesign(unittest.TestCase):
 
@@ -104,22 +104,6 @@ class TestConvertDesign(unittest.TestCase):
             v_data = graph.nodes[v]
             actual_edge = (n_data["key"],None,v_data["key"])
             self.assertIn(actual_edge,expected_edges)
-
-    def test_convert_nv(self):
-        model_graph = model_convert(model_fn)
-        filename = os.path.join(test_dir,"multiplexer.xml")
-        json_file = os.path.join(test_dir,"multiplexer.json")
-        graph = design_convert(model_graph,filename)
-        
-        graph.save(json_file)
-        graph = design_convert(model_graph,json_file)
-        with open(json_file) as f:
-            data = json.load(f)
-        expected_g = DesignGraph(json_graph.node_link_graph(data))
-        for k,v,e in expected_g.edges(keys=True):
-            k_d = expected_g.nodes[k]
-            v_d = expected_g.nodes[v]
-        self._run_type_test(graph,model_graph)
 
     def _run_type_test(self,graph,model):
         i_code = model.get_class_code(model.identifiers.objects.interaction)

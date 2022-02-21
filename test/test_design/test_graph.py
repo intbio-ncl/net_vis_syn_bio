@@ -10,7 +10,7 @@ from converters.model_handler import convert as m_convert
 from converters.design_handler import convert as i_convert
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))
-test_fn = test_dir = os.path.join(curr_dir,"..","files","nor_gate.xml")
+test_fn = os.path.join(curr_dir,"..","files","design","sbol","nor_gate.xml")
 model_fn = os.path.join(curr_dir,"..","..","utility","nv_design.xml")
 
 class TestDesignGraph(unittest.TestCase):

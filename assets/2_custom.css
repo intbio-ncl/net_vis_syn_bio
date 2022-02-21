@@ -100,6 +100,22 @@ details{
     color:#fff;
 }
 
+.manual-tip{
+    position: relative;
+    width:25%;
+    height:25%;
+    text-align: center;
+    background-color: #8ce3fd;
+    border-radius: 50%;
+    cursor: pointer;
+    margin:1px;
+}
+.manual-tip:before{
+    content:'M';
+    font-weight: bold;
+    color:#fff;
+}
+
 .graph-legend{
     text-align: left;
     margin-bottom: 5px;
@@ -161,9 +177,14 @@ details{
     -o-transition: margin 0.3s ease;
     transition: margin 0.3s ease;
     height: 100%;
+
+}
+    
+#sidebar-left{
+    min-width: 10%; 
     overflow-y: scroll;
 }
 
-#sidebar-left{
+#man_toolbar{
     min-width: 10%;
 }

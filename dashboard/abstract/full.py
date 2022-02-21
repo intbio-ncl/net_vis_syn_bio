@@ -1,6 +1,8 @@
+from hashlib import new
 import re
 import inspect
 from inspect import signature
+from tkinter import N
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 from dash import callback_context
@@ -34,22 +36,36 @@ adv_modal_inputs = {"open_adv": Input("open_adv", "n_clicks"),
                     "close_adv": Input("close_adv", "n_clicks"),
                     "submit_adv": Input("submit_adv", "n_clicks")}
 adv_modal_outputs = {"adv_modal_id": Output("adv_modal", "is_open"),
-                     "form"        : Output("adv_modal_form","children"),
-                     "graph"       : Output(graph_id,"layout")}
+                     "form": Output("adv_modal_form", "children"),
+                     "graph": Output(graph_id, "layout")}
 adv_modal_states = [State("adv_modal", "is_open"),
-                   State("adv_modal_form","children")]
+                    State("adv_modal_form", "children")]
 export_img_inputs = [Input("png", "n_clicks"),
-                    Input("jpg", "n_clicks"),
-                    Input("svg", "n_clicks")]
+                     Input("jpg", "n_clicks"),
+                     Input("svg", "n_clicks")]
 export_img_outputs = Output(graph_id, "generateImage")
 
 export_map = []
-export_modal_inputs = {"close_export" : Input("close_export", "n_clicks")}
+export_modal_inputs = {"close_export": Input("close_export", "n_clicks")}
 export_modal_outputs = {"id": Output("export_modal", "is_open"),
-                        "data" : Output("export_data","children")}
+                        "data": Output("export_data", "children")}
 export_modal_states = State("export_modal", "is_open")
 
+man_tool_inputs = {"open_man": Input("open_man", "n_clicks"),
+                   "close_man": Input("close_man", "n_clicks")}
+man_tool_outputs = {"id": Output("man_toolbar", "hidden"),
+                    "graph": Output(graph_id, "style")}
+man_tool_states = State("man_toolbar", "hidden")
+
+modify_node_inputs = {"remove": Input('remove-button', 'n_clicks'),
+                      "modify": Input('modify-button', 'n_clicks')}
+modify_node_outputs = [Output(graph_id, 'elements')]
+modify_node_states = [State(graph_id, 'elements'),
+                      State(graph_id, 'selectedNodeData')]
+
+
 assets_ignore = '.*bootstrap.*'
+
 
 class FullDash(AbstractDash):
     def __init__(self, visualiser, name, server, pathname):
@@ -59,19 +75,21 @@ class FullDash(AbstractDash):
     def _load_graph(self):
         figure, legend = self.visualiser.build(graph_id=graph_id, legend=True)
         graph_div = self.create_div(update_outputs["graph_id"].component_id, [
-                                    figure], className="col-10")
+                                    figure], className="col")
         legend = self.create_div(update_outputs["legend_id"].component_id, self.create_legend(
             legend), className="col sidebar")
         self.replace(graph_div[0])
         self.replace(legend[0])
-        container = self.create_div("row-main", self.children, className="row")
+        container = self.create_div(
+            "row-main", self.children, className="row flex-nowrap no-gutters")
         self.app.layout = self.create_div(
             "main", container, className="container-fluid")[0]
 
     def _build_app(self, visualiser):
         # Add Options
         form_elements, identifiers, maps = self._create_form_elements(
-            visualiser, default_vals=default_options, id_prefix=id_prefix)
+            visualiser, id_prefix=id_prefix)
+        self._create_manual_toolbar()
 
         del maps["cyto_preset"]
         preset_identifiers, identifiers, preset_output, preset_state = self._generate_inputs_outputs(
@@ -87,9 +105,9 @@ class FullDash(AbstractDash):
             not_modifier_identifiers["sidebar_id"], "Options", form_div, add=True, className="col sidebar")
         self.app.layout = self.create_div(
             "main", self.children, className="content")[0]
-        
+
         for sf in visualiser._builder._graph.get_save_formats():
-            export_modal_inputs[sf] = Input(sf,"n_clicks")
+            export_modal_inputs[sf] = Input(sf, "n_clicks")
 
         # Bind the callbacks
         def update_preset_inner(preset_name, *states):
@@ -100,6 +118,12 @@ class FullDash(AbstractDash):
 
         def docs_modal_inner(*args):
             return self.docs_modal(*args)
+
+        def man_tool_inner(*args):
+            return self.man_modal(*args)
+
+        def modify_node_inner(delete, merge, elems, data):
+            return self.modify_nodes(delete, merge, elems, data)
 
         def advanced_modal_inner(*args):
             return self.advanced_modal(*args)
@@ -116,9 +140,14 @@ class FullDash(AbstractDash):
             update_inputs.values()), list(update_outputs.values()))
         self.add_callback(docs_modal_inner, list(docs_modal_inputs.values()), list(
             docs_modal_outputs.values()), doc_modal_states)
+        self.add_callback(man_tool_inner, list(man_tool_inputs.values()), list(
+            man_tool_outputs.values()), man_tool_states)
+        self.add_callback(modify_node_inner, list(modify_node_inputs.values()),
+                          modify_node_outputs, modify_node_states)
         self.add_callback(advanced_modal_inner, list(adv_modal_inputs.values()), list(
             adv_modal_outputs.values()), adv_modal_states)
-        self.add_callback(export_img_inner, export_img_inputs, export_img_outputs)
+        self.add_callback(export_img_inner,
+                          export_img_inputs, export_img_outputs)
         self.add_callback(export_modal_inner, list(export_modal_inputs.values()), list(
             export_modal_outputs.values()), export_modal_states)
         self.build()
@@ -190,24 +219,75 @@ class FullDash(AbstractDash):
         return {'type': input_id, 'action': action}
 
     def export_modal(self, *args):
-        changed_id = [p['prop_id'] for p in callback_context.triggered][0].split(".")[0]
+        changed_id = [p['prop_id']
+                      for p in callback_context.triggered][0].split(".")[0]
         if changed_id == "":
-            return False,[]
+            return False, []
         if export_modal_inputs["close_export"].component_id in changed_id:
-            return False,[]
+            return False, []
         else:
             children = []
             try:
                 data = self.visualiser._builder.view.generate(changed_id)
-                children += self.create_text_area("export-data",value=data,disabled=True)
+                children += self.create_text_area("export-data",
+                                                  value=data, disabled=True)
             except KeyError:
                 pass
-            return True,children
+            return True, children
 
     def docs_modal(self, n1, n2, is_open):
         if n1 or n2:
             return [not is_open]
         return [is_open]
+
+    def man_modal(self, open, close, is_hidden):
+        changed_id = [p['prop_id'] for p in callback_context.triggered][0]
+        if man_tool_inputs["open_man"].component_id in changed_id:
+            style = {'width': f'{str(65)}vw', 'height': f'{str(100)}vh'}
+            is_hidden = False
+        else:
+            style = {'width': f'{str(80)}vw', 'height': f'{str(100)}vh'}
+            is_hidden = True
+        return [is_hidden, style]
+
+    def modify_nodes(self, remove, modify, elements, data):
+        changed_id = [p['prop_id'] for p in callback_context.triggered][0]
+        if not elements or not data:
+            return [elements]
+
+        if modify_node_inputs["remove"].component_id in changed_id:
+            ids_to_remove = {ele_data['id'] for ele_data in data}
+            new_elements = [
+                ele for ele in elements if ele['data']['id'] not in ids_to_remove]
+            return [new_elements]
+
+        elif modify_node_inputs["modify"].component_id in changed_id:
+            merging_node = data.pop(0)
+            ids_to_remove = {ele_data['id'] for ele_data in data}
+            new_elements = []
+            for ele in elements:
+                if str(ele["data"]["id"]) in ids_to_remove:
+                    continue
+                if "source" in ele["data"] or "target" in ele["data"]:
+                    if ele["data"]["source"] in ids_to_remove:
+                        ele["data"]["source"] = merging_node["id"]
+                        if "id" in ele["data"]:
+                            del ele["data"]["id"]
+                    if ele["data"]["target"] in ids_to_remove:
+                        ele["data"]["target"] = merging_node["id"]
+                        if "id" in ele["data"]:
+                            del ele["data"]["id"]
+                    if (ele["data"]["source"] == merging_node["id"]
+                            and ele["data"]["target"] == merging_node["id"]):
+                        continue
+                new_elements.append(ele)
+
+            print("New Set")
+            for e in new_elements:
+                print(e)
+            return [new_elements]
+
+        return [elements]
 
     def advanced_modal(self, n1, n2, n3, is_open, form):
         c = []
@@ -215,40 +295,42 @@ class FullDash(AbstractDash):
         cur_layout = self.visualiser.layout
         if adv_modal_inputs["submit_adv"].component_id in changed_id:
             form = _derive_form(form)
-            for k,v in form.items():
-                cur_layout.add_param(k,v)
-            return False,c,cur_layout.params
+            for k, v in form.items():
+                cur_layout.add_param(k, v)
+            return False, c, cur_layout.params
         if adv_modal_inputs["open_adv"].component_id in changed_id:
             cur_layout = self.visualiser.layout
-            l_children = self.create_heading_3('',f'Layout - {cur_layout.__class__.__name__}')
-            for k,v in cur_layout.settings.items():
+            l_children = self.create_heading_3(
+                '', f'Layout - {cur_layout.__class__.__name__}')
+            for k, v in cur_layout.settings.items():
                 if k in cur_layout.params.keys():
                     dv = cur_layout.params[k]
                 else:
                     dv = None
-                title = " ".join(re.findall('[A-Z][^A-Z]*', k[0].upper() + k[1:]))
+                title = " ".join(re.findall(
+                    '[A-Z][^A-Z]*', k[0].upper() + k[1:]))
                 if v == int or v == float or v == str:
-                    inp = self.create_input(k,dv)
+                    inp = self.create_input(k, dv)
                     title = title + f' - {v.__name__}'
                 elif v == bool:
-                    marks = {0:"False",1:"True"}
-                    inp = self.create_slider(k,0,1,dv,1,marks)
-                elif isinstance(v,list):
-                    choices = [{"label":c,"value":c} for c in v]
-                    inp= self.create_dropdown(k,choices,dv)
+                    marks = {0: "False", 1: "True"}
+                    inp = self.create_slider(k, 0, 1, dv, 1, marks)
+                elif isinstance(v, list):
+                    choices = [{"label": c, "value": c} for c in v]
+                    inp = self.create_dropdown(k, choices, dv)
                 else:
                     raise NotImplementedError()
-                l_children += self.create_heading_6('',title)
+                l_children += self.create_heading_6('', title)
                 l_children += inp
                 l_children += self.create_line_break(2)
-            l_div = self.create_div("layout_settings",l_children)
-            c = self.create_modal_body('adv_body',l_div)
-            return True,c,cur_layout.params
+            l_div = self.create_div("layout_settings", l_children)
+            c = self.create_modal_body('adv_body', l_div)
+            return True, c, cur_layout.params
         if adv_modal_inputs["close_adv"].component_id in changed_id:
-            return False,c,cur_layout.params
-        return is_open,c,cur_layout.params
+            return False, c, cur_layout.params
+        return is_open, c, cur_layout.params
 
-    def _create_form_elements(self, visualiser, default_vals=[], style={}, id_prefix=""):
+    def _create_form_elements(self, visualiser, style={}, id_prefix=""):
         default_options = [visualiser.set_network_mode,
                            visualiser.set_full_graph_view,
                            visualiser.set_concentric_layout,
@@ -273,8 +355,8 @@ class FullDash(AbstractDash):
                 max_v = int(v*1.7)
                 default_val = int((min_v + max_v) / 2)
                 step = 1
-                
-                element += (self.create_heading_6("", display_name)+
+
+                element += (self.create_heading_6("", display_name) +
                             self.create_slider(identifier, min_v, max_v, default_val=default_val, step=step))
                 identifiers[k] = Input(identifier, "value")
                 variable_input_list_map[identifier] = [min_v, max_v]
@@ -301,7 +383,7 @@ class FullDash(AbstractDash):
 
             breaker = self.create_horizontal_row(False)
             elements = elements + \
-                self.create_div(identifier + "_container",
+                self.create_div(identifier + "_contamanual_toolbariner",
                                 element, style=style)
             elements = elements + breaker
 
@@ -310,10 +392,11 @@ class FullDash(AbstractDash):
         docstrings = self.create_modal(docs_modal_outputs["id"].component_id,
                                        docs_modal_inputs["close_doc"].component_id,
                                        "Options Documentation", docstring)
-        export_div = self.create_div(export_modal_outputs["data"].component_id,[])
+        export_div = self.create_div(
+            export_modal_outputs["data"].component_id, [])
         export_modal = self.create_modal(export_modal_outputs["id"].component_id,
-                                       export_modal_inputs["close_export"].component_id,
-                                       "Export",export_div)
+                                         export_modal_inputs["close_export"].component_id,
+                                         "Export", export_div)
         adv_button = self.create_div(
             adv_modal_inputs["open_adv"].component_id, [], className="adv-tip col")
         adv_opn = self.create_div(adv_modal_outputs["form"].component_id, [])
@@ -322,26 +405,32 @@ class FullDash(AbstractDash):
                                         "Advanced Options", adv_opn,
                                         adv_modal_inputs['submit_adv'].component_id)
 
-        eo = self.create_div('',ds_button + adv_button,className="row")
+        manual_button = self.create_div(
+            man_tool_inputs["open_man"].component_id, [], className="manual-tip col")
+        eo = self.create_div('', ds_button + adv_button +
+                             manual_button, className="row")
         r = self.create_horizontal_row(False)
         extra_options = self.create_div("", eo + r, className="container")
 
         exports = self.create_heading_4("export_img_heading", "Image Export")
         for e_input in export_img_inputs:
-            exports += self.create_button(e_input.component_id,className="export_img_button")
+            exports += self.create_button(e_input.component_id,
+                                          className="export_img_button")
             exports += self.create_line_break()
         exports += self.create_heading_4("export_data_heading", "Data Export")
         for sf in visualiser._builder._graph.get_save_formats():
-            export_modal_inputs[sf] = Input(sf,"n_clicks")
+            export_modal_inputs[sf] = Input(sf, "n_clicks")
         for e_input in export_modal_inputs.values():
             if e_input.component_id == "close_export":
                 continue
-            exports += self.create_button(e_input.component_id,className="export_img_button")
+            exports += self.create_button(e_input.component_id,
+                                          className="export_img_button")
             exports += self.create_line_break()
-        export_div = self.create_div("export_data_container", exports, style=style)
+        export_div = self.create_div(
+            "export_data_container", exports, style=style)
 
-        return (extra_options + elements + export_div + 
-            docstrings + export_modal + adv_options, identifiers, variable_input_list_map)
+        return (extra_options + elements + export_div +
+                docstrings + export_modal + adv_options, identifiers, variable_input_list_map)
 
     def _beautify_name(self, name):
         name_parts = name.split("_")
@@ -438,8 +527,28 @@ class FullDash(AbstractDash):
         doc_body += self.create_horizontal_row(False)
         return self.create_div(doc_name + "_container", doc_body)
 
+    def _create_manual_toolbar(self):
+        t_c = self.create_heading_5("temph", "Temporary Actions")
+        t_c += self.create_button(
+            modify_node_inputs["remove"].component_id, "Remove Selected Nodes")
+        t_c += self.create_line_break(2)
+        t_c += self.create_button(
+            modify_node_inputs["modify"].component_id, "Merge Selected Nodes")
+        children = self.create_div("temp", t_c)
+        children += self.create_horizontal_row()
+
+        heading = self.create_heading_5("permh", "Persistent Actions")
+        children += self.create_div("permanent", heading)
+        children += self.create_horizontal_row()
+
+        children += self.create_button(
+            man_tool_inputs["close_man"].component_id, name="Close", className="export_img_button")
+        self.create_sidebar(man_tool_outputs["id"].component_id, "Manual Options",
+                            children, add=True, className="col sidebar", hidden="True")
+
+
 def _derive_form(form):
-    used_types = ["Input","Slider","Dropdown"]
+    used_types = ["Input", "Slider", "Dropdown"]
     elements = {}
     children = form[0]["props"]["children"][0]["props"]["children"]
     for c in children:

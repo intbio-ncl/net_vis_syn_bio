@@ -155,7 +155,7 @@ class TestShape(unittest.TestCase):
 
 class TestSize(unittest.TestCase):
     def setUp(self):
-        filename = os.path.join(test_dir,"1_clip.ot2.py")
+        filename = os.path.join(test_dir,"protocols","opentrons","1_clip.ot2.py")
         self.visual = ProtocolVisual(model_fn,filename)
         self.standard_node_size = self.visual._size_h._standard_node_size
         self.max_node_size = self.visual._size_h._max_node_size
@@ -175,8 +175,8 @@ class TestSize(unittest.TestCase):
         node_sizes = self.visual.add_action_node_size()
         view = self.visual._builder.view
         _run_tests(view,node_sizes)
-        self.visual.set_action_io_aggregate_view()
-        self.visual.set_action_io_aggregate_view()
+        self.visual.set_io_view()
+        self.visual.set_io_view()
         node_sizes = self.visual.add_action_node_size()
         view = self.visual._builder.view
         _run_tests(view,node_sizes)

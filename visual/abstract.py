@@ -457,7 +457,7 @@ class AbstractVisual:
         else:
             self.edge_shape = self.set_segments_edge_shape
 
-    def build(self,graph_id="cytoscape_graph", legend=False, width=90,height=100):
+    def build(self,graph_id="cytoscape_graph", legend=False, width=80,height=100):
         stylesheet = self._build_default_stylesheet()
         nodes = []
         edges = []

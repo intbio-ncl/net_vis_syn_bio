@@ -122,9 +122,11 @@ class AbstractDash:
         else:
             return [div]
 
-    def create_button(self, identifier, href=None, add=False, **kwargs):
+    def create_button(self, identifier, name=None,href=None, add=False, **kwargs):
         if href is None:
-            button = html.Button(identifier, id=identifier, **kwargs)
+            if not name:
+                name = identifier
+            button = html.Button(name, id=identifier, **kwargs)
         else:
             button = html.A(html.Button(identifier), href="/" +
                             href, target="_blank", **kwargs)
@@ -187,7 +189,7 @@ class AbstractDash:
             return [slider]
 
     def create_sidebar(self, id, name, content, add=False, **kwagrs):
-        children = [html.H2(name, className="display-4"), *content]
+        children = [html.H2(name, className="display"), *content]
         sidebar = html.Div(id=id, children=children, **kwagrs)
         if add:
             return self._create_element(sidebar)

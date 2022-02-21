@@ -10,8 +10,8 @@ sys.path.insert(0, os.path.join("..",".."))
 from builder.protocol import ProtocolBuilder
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))
-ot2_file = os.path.join(curr_dir,"..","files","1_clip.ot2.py")
-auto_file = os.path.join(curr_dir,"..","files","protocols","autoprotocol","nor_full.protocol.nv")
+ot2_file = os.path.join(curr_dir,"..","files","opentrons","1_clip.ot2.py")
+auto_file = os.path.join(curr_dir,"..","files","protocols","autoprotocol","nor_full.json")
 model_file = os.path.join(curr_dir,"..","..","utility","nv_protocol.xml")
 
 class TestSearch(unittest.TestCase):
@@ -21,17 +21,6 @@ class TestSearch(unittest.TestCase):
 
     def tearDown(self):
         pass
-    
-    def test_get_actions(self):
-        actions = self.builder.get_actions()
-        self.assertEqual(len(actions),5)
-        expected_subjects = [URIRef('http://www.nv_ontology.org/master'),
-                             URIRef('http://www.nv_ontology.org/master/assembly'),
-                             URIRef('http://www.nv_ontology.org/master/assembly/restriction'),
-                             URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction'),
-                             URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction/0')]
-        actual_subjects = [s[0][1]["key"] for s in actions]
-        self.assertEqual(expected_subjects,actual_subjects)
 
     def test_get_parent(self):
         code = self.builder.get_object_code(URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction'))
@@ -50,41 +39,6 @@ class TestSearch(unittest.TestCase):
             r_type = self.builder.get_rdf_type(o_id)
             self.assertEqual(r_type[1]["key"],nv_well)
 
-    def test_get_abstraction_level(self):
-        result = self.builder.get_abstraction_level(1)
-        expected_results= [URIRef('http://www.nv_ontology.org/master/assembly')]
-        self.assertEqual([k[1]["key"] for k in result],expected_results)
-
-        result = self.builder.get_abstraction_level(2)
-        expected_results= [URIRef('http://www.nv_ontology.org/master/assembly/restriction')]
-        self.assertEqual([k[1]["key"] for k in result],expected_results)
-
-        result = self.builder.get_abstraction_level(3)
-        expected_results= [URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction'),
-                           URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction/0')]
-        self.assertEqual([k[1]["key"] for k in result],expected_results)
-
-        result = self.builder.get_abstraction_level(4)
-        expected_results= [URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction/dispense'),
-                            URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction/dispense/0'),
-                            URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction/dispense/1'),
-                            URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction/dispense/2'),
-                            URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction/dispense/3'),
-                            URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction/seal'),
-                            URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction/spin'),
-                            URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction/incubate'),
-                            URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction/thermocycle'),
-                            URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction/0/dispense'),
-                            URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction/0/dispense/0'),
-                            URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction/0/dispense/1'),
-                            URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction/0/dispense/2'),
-                            URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction/0/dispense/3'),
-                            URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction/0/seal'),
-                            URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction/0/spin'),
-                            URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction/0/incubate'),
-                            URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction/0/thermocycle')]
-        self.assertEqual([k[1]["key"] for k in result],expected_results)
-
     def test_get_parent(self):
         code = self.builder.get_object_code(URIRef('http://www.nv_ontology.org/master/assembly/restriction/restriction'))
         parent = self.builder.get_parent(code)
@@ -92,7 +46,7 @@ class TestSearch(unittest.TestCase):
         self.assertEqual(parent[1]["key"],expected_parent)
 
     def test_get_abstraction_level_complex(self):
-        nor_protocol = os.path.join(curr_dir,"..","files","nor.protocol.nv")
+        nor_protocol = os.path.join(curr_dir,"..","files","protocols","autoprotocol","nor_full.protocol.nv")
         builder = ProtocolBuilder(model_file,nor_protocol)
 
         result = builder.get_abstraction_level(1)

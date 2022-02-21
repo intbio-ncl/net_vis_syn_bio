@@ -31,6 +31,7 @@ class TestConvertOT2(unittest.TestCase):
         nv_source = model.identifiers.predicates.source
         nv_dest = model.identifiers.predicates.destination
         nv_container = model.identifiers.objects.container
+        nv_well = model.identifiers.objects.well
         nv_hasContainer = model.identifiers.predicates.has_container
 
         source = [c[1] for c in graph.search((action,nv_source,None))]
@@ -47,7 +48,7 @@ class TestConvertOT2(unittest.TestCase):
             self.assertEqual(len(source),1)
             s_id,s_data = source[0]
             source = graph.search((s_id,RDF.type,None))[0]
-            self.assertTrue(model.is_derived(source[1][1]["key"],nv_container))
+            self.assertTrue(source[1][1]["key"]==nv_container or source[1][1]["key"]==nv_well)
             source_parent = graph.search((None,nv_hasContainer,source[0][0]))
             if source_parent != []:
                 source = source_parent[0][0]
@@ -58,7 +59,7 @@ class TestConvertOT2(unittest.TestCase):
             self.assertEqual(len(dest),1)
             s_id,s_data = dest[0]
             dest = graph.search((s_id,RDF.type,None))[0]
-            self.assertTrue(model.is_derived(dest[1][1]["key"],nv_container))
+            self.assertTrue(dest[1][1]["key"]==nv_container or dest[1][1]["key"]==nv_well)
             dest_parent = graph.search((None,nv_hasContainer,dest[0][0]))
             if dest_parent != []:
                 dest = dest_parent[0][0]
@@ -74,7 +75,7 @@ class TestConvertOT2(unittest.TestCase):
         pass
 
     def test_layer0(self):
-        filename = os.path.join(test_dir,"ot2_layer0.py")
+        filename = os.path.join(test_dir,"protocols","opentrons","ot2_layer0.py")
         model = model_convert(model_fn)
         nv_action = model.identifiers.objects.action
         nv_actions = model.identifiers.predicates.actions
@@ -82,6 +83,7 @@ class TestConvertOT2(unittest.TestCase):
         nv_dest = model.identifiers.predicates.destination
         nv_protocol = model.identifiers.objects.protocol
         nv_container = model.identifiers.objects.container
+        nv_well = model.identifiers.objects.well
         nv_hasContainer = model.identifiers.predicates.has_container
          
         classes = [c[1]["key"] for c in model.get_classes(False)]
@@ -104,7 +106,7 @@ class TestConvertOT2(unittest.TestCase):
                     self.assertEqual(len(source),1)
                     s_id,s_data = source[0]
                     source = graph.search((s_id,RDF.type,None))[0]
-                    self.assertTrue(model.is_derived(source[1][1]["key"],nv_container))
+                    self.assertTrue(source[1][1]["key"] == nv_container or source[1][1]["key"]== nv_well)
                     source_parent = graph.search((None,nv_hasContainer,source[0][0]))
                     if source_parent != []:
                         source = source_parent[0][0]
@@ -114,7 +116,7 @@ class TestConvertOT2(unittest.TestCase):
                     self.assertEqual(len(dest),1)
                     s_id,s_data = dest[0]
                     dest = graph.search((s_id,RDF.type,None))[0]
-                    self.assertTrue(model.is_derived(dest[1][1]["key"],nv_container))
+                    self.assertTrue(dest[1][1]["key"]==nv_container or dest[1][1]["key"]== nv_well)
                     dest_parent = graph.search((None,nv_hasContainer,dest[0][0]))
                     if dest_parent != []:
                         dest = dest_parent[0][0]
@@ -122,7 +124,7 @@ class TestConvertOT2(unittest.TestCase):
                     self.assertIn(container_trip,protocol_edges)
 
     def test_layer1(self):
-        filename = os.path.join(test_dir,"ot2_layer1.py")
+        filename = os.path.join(test_dir,"protocols","opentrons","ot2_layer1.py")
         model = model_convert(model_fn)
         nv_action = model.identifiers.objects.action
         nv_protocol = model.identifiers.objects.protocol
@@ -151,7 +153,7 @@ class TestConvertOT2(unittest.TestCase):
                 self.run_instrument_test(graph,n,model,protocol[0],protocol_edges)
 
     def test_layer_mixed(self):
-        filename = os.path.join(test_dir,"ot2_layer_mixed.py")
+        filename = os.path.join(test_dir,"protocols","opentrons","ot2_layer_mixed.py")
         model = model_convert(model_fn)
         nv_action = model.identifiers.objects.action
         nv_actions = model.identifiers.predicates.actions
@@ -203,7 +205,7 @@ class TestConvertOT2(unittest.TestCase):
             _run(action)
 
     def test_layer_complex(self):
-        filename = os.path.join(test_dir,"1_clip.ot2.py")
+        filename = os.path.join(test_dir,"protocols","opentrons","1_clip.ot2.py")
         model = model_convert(model_fn)
         nv_actions = model.identifiers.predicates.actions
         nv_action = model.identifiers.objects.action
@@ -254,33 +256,6 @@ class TestConvertOT2(unittest.TestCase):
             _run(action)
         protocol_file.close()
 
-    def test_layer_purification(self):
-        filename = os.path.join(test_dir,"3_assembly.ot2.py")
-        model = model_convert(model_fn)
-        nv_actions = model.identifiers.predicates.actions
-        nv_action = model.identifiers.objects.action
-        nv_protocol = model.identifiers.objects.protocol
-        nv_container = model.identifiers.objects.container
-        nv_instrument = model.identifiers.objects.instrument
-        graph = protocol_convert(model,filename)
-
-        protocol_file = open(filename)
-        runlog, _bundle = simulate(protocol_file)
-
-
-class TestConvertAutoProtocol(unittest.TestCase):
-
-    def setUp(self):
-        None
-
-    def tearDown(self):
-        None
-
-    def test_nor(self):
-        filename = os.path.join(test_dir,"out.json")
-        model = model_convert(model_fn)         
-        graph = protocol_convert(model,filename)
-
 class TestConvertNVProtocol(unittest.TestCase):
 
     def setUp(self):
@@ -290,7 +265,7 @@ class TestConvertNVProtocol(unittest.TestCase):
         None
 
     def test_assembly(self):
-        filename = os.path.join(test_dir,"assembly.protocol.nv")
+        filename = os.path.join(test_dir,"protocols","autoprotocol","nor_assembly.protocol.nv")
         with open(filename) as f:
             json_data = json.load(f)
         model = model_convert(model_fn)         

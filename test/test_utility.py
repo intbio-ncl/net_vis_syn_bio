@@ -6,7 +6,7 @@ import re
 from rdflib import RDF,OWL,BNode
 sys.path.insert(0, os.path.join(".."))
 
-from converters.model import convert as m_convert
+from converters.design_handler import convert as m_convert
 from utility.identifiers import produce_identifiers
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))

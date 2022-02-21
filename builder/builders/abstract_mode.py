@@ -8,6 +8,9 @@ class AbstractModeBuilder:
         tree_edges = []
         node_attrs = {}
         seen = []
+        if len(self._builder.v_nodes) == 0:
+            return self._builder.sub_graph(tree_edges,node_attrs)
+            
         max_key = max([node for node in self._builder.v_nodes])
         for n,v,e in self._builder.v_edges:
             try:

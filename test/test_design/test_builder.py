@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.join("..",".."))
 from builder.design import DesignBuilder
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))
-instance_file = os.path.join(curr_dir,"..","files","nor-gate_w_arab_pathway.xml")
+instance_file = os.path.join(curr_dir,"..","files","design","sbol","nor-gate_w_arab_pathway.xml")
 model_file = os.path.join(curr_dir,"..","..","utility","nv_design.xml")
 
 def _graph_element_check(graph):
@@ -175,14 +175,15 @@ class TestViews(unittest.TestCase):
         interaction_class_code = self.model.get_class_code(interaction_obj)
         dna_class_code = self.model.get_class_code(dna_obj)
         interactions_classes = [d[1]["key"] for d in self.model.get_derived(interaction_class_code)]
-        dna_classes = [d[1]["key"] for d in self.model.get_derived(dna_class_code)]
+        dna_classes = [d[1]["key"] for d in self.model.get_derived(dna_class_code)] + [dna_obj]
         for n,v,e in graph.edges(keys=True):
+            print(graph.nodes[n]["key"],graph.nodes[v]["key"],e)
             self.assertIn(e,interactions_classes)
             self.assertIn(self.builder.get_rdf_type(n)[1]["key"],dna_classes)
             self.assertIn(self.builder.get_rdf_type(v)[1]["key"],dna_classes)
 
     def test_interaction_genetic_complex(self):
-        instance_file = os.path.join(curr_dir,"..","files","test_genetic_interaction.xml")
+        instance_file = os.path.join(curr_dir,"..","files","design","sbol","test_genetic_interaction.xml")
         builder = DesignBuilder(model_file,instance_file)
         model = self.builder._model_graph
         builder.set_interaction_genetic_view()
