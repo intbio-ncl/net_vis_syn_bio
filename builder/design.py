@@ -3,6 +3,7 @@ import types
 
 from rdflib import RDF
 
+from graph.design import DesignGraph
 from converters.design_handler import convert as i_convert
 from converters.model_handler import convert as m_convert
 
@@ -34,8 +35,10 @@ def _add_object(obj,subject):
 class DesignBuilder(AbstractBuilder):
     def __init__(self,model,graph=None):
         model_graph = m_convert(model)
-        super().__init__(i_convert(model_graph,graph))
+        super().__init__(i_convert(model_graph))
         self._model_graph = model_graph
+        if graph:
+            self.load(graph)
         self._view_h = ViewBuilder(self)
         self._mode_h = ModeBuilder(self)
         for predicate in self._model_graph.identifiers.predicates:
@@ -43,8 +46,13 @@ class DesignBuilder(AbstractBuilder):
         for obj in self._model_graph.identifiers.objects:
             _add_object(self,obj)
     
-    def load(self,fn):
-        self._graph = i_convert(self._model_graph,fn)
+    def load(self,fns):
+        if not isinstance(fns,(set,list,tuple)):
+            fns = [fns]
+        if not self._graph:
+            self._graph = DesignGraph()
+        for fn in fns:
+            self._graph.add_graph(i_convert(self._model_graph,fn))
 
     def set_pruned_view(self):
         self.view = self._view_h.pruned()

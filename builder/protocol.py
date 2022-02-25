@@ -46,8 +46,12 @@ class ProtocolBuilder(AbstractBuilder):
         for obj in self._model_graph.identifiers.objects:
             _add_object(self,obj)
 
-    def load(self,fn):
-        self._graph = p_convert(self._model_graph,fn)
+    def load(self,fns):
+        if not isinstance(fns,(set,list,tuple)):
+            fns = [fns]
+        self._graph = p_convert(self._model_graph,fns.pop(0))
+        for fn in fns:
+            self._graph.add_graph(p_convert(self._model_graph,fn))
     
     def set_hierarchy_view(self):
         self.view = self._view_h.hierarchy()

@@ -67,7 +67,8 @@ class ColorHandler():
                             p_col = col_map[_get_name(b)]
                             break
                     else:
-                        raise ValueError(f'{n_type} is a unknown class.')
+                        colors.append(col_map[None])
+                        continue
                     if base not in shade_map.keys():
                         shade_map[base] = p_col
                     p_col = shade_map[base]

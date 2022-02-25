@@ -122,7 +122,7 @@ class AbstractDash:
         else:
             return [div]
 
-    def create_button(self, identifier, name=None,href=None, add=False, **kwargs):
+    def create_button(self, identifier, name=None, href=None, add=False, **kwargs):
         if href is None:
             if not name:
                 name = identifier
@@ -172,7 +172,7 @@ class AbstractDash:
             else:
                 return [checklist]
 
-    def create_slider(self, identifier,min_val, max_val, default_val=None, step=None, marks=None, add=False, **kwargs):
+    def create_slider(self, identifier, min_val, max_val, default_val=None, step=None, marks=None, add=False, **kwargs):
         if default_val is None:
             default_val = max_val/2
         if marks is None:
@@ -350,7 +350,8 @@ class AbstractDash:
         modal_header = dbc.ModalHeader(name)
         modal_body = dbc.ModalBody(contents)
         if submit_button is not None:
-            submit_button = [dbc.Button("Submit", id=submit_button, className="ml-auto")]
+            submit_button = [dbc.Button(
+                "Submit", id=submit_button, className="ml-auto")]
         else:
             submit_button = []
         modal_footer = dbc.ModalFooter(
@@ -362,8 +363,8 @@ class AbstractDash:
         else:
             return [modal]
 
-    def create_modal_body(self, identifiers, contents,add=False,**kwargs):
-        modal_body = dbc.ModalBody(contents,id=identifiers)
+    def create_modal_body(self, identifiers, contents, add=False, **kwargs):
+        modal_body = dbc.ModalBody(contents, id=identifiers)
         if add:
             return self._create_element(modal_body)
         else:
@@ -384,7 +385,7 @@ class AbstractDash:
             for item_name, item_val in legend_items.items():
                 style = {"background": item_val}
                 l_children.append(
-                    html.Li(children=[html.Span(style=style), item_name]))
+                    html.Li(children=[html.Span(style=style), html.P(item_name)]))
             legend_body.append(
                 html.Ul(children=l_children, className="legend-labels"))
 
@@ -395,10 +396,32 @@ class AbstractDash:
         else:
             return self.create_div("sb", legend_body_div, className="graph-legend")
 
-    def create_text_area(self,identifier,add=False,**kwargs):
-        ta = dcc.Textarea(id=identifier,style={'width': '100%', 'height': 500},**kwargs)
+    def create_text_area(self, identifier, add=False, **kwargs):
+        ta = dcc.Textarea(id=identifier, style={
+                          'width': '100%', 'height': 500}, **kwargs)
         if add:
             return self._create_element(ta)
         else:
             return [ta]
 
+    def create_card(self,heading,body,add=False,**kwargs):
+        if not isinstance(body,list):
+            body = [body]
+        heading = self.create_heading_5("",heading)
+        card_heading = self.create_div("",heading,className="card-header")
+        body_l = []
+        for b in body:
+            body_l += self.create_paragraph(b)
+        card_body = self.create_div("",body_l,className="card-body")
+        col = self.create_div("",card_heading + card_body,className="col-md")
+        if add:
+            return self._create_element(col)
+        else:
+            return col
+
+    def create_cards(self, identifier, cards, add=False, **kwargs):
+        card_range = self.create_div(identifier, cards, className="row")
+        if add:
+            return self._create_element(card_range)
+        else:
+            return card_range

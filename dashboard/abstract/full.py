@@ -1,67 +1,11 @@
-from hashlib import new
 import re
-import inspect
-from inspect import signature
-from tkinter import N
+from inspect import signature, getargspec
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
 from dash import callback_context
-from collections import OrderedDict
-
+from dashboard.abstract.utility.callback_structs import *
 from visual.abstract import AbstractVisual
 from dashboard.abstract.abstract import AbstractDash
-
-id_prefix = "cyto"
-graph_id = "full_graph"
-default_options = []
-preset_inputs = OrderedDict()
-preset_outputs = OrderedDict()
-update_inputs = OrderedDict()
-
-not_modifier_identifiers = {"sidebar_id": "sidebar-left",
-                            "utility_id": "utility"}
-
-update_outputs = {"graph_id": Output("content", "children"),
-                  "legend_id": Output("sidebar-right", "children")}
-
-graph_type_outputs = {"id": Output("options", "style"),
-                      "div": Output("div", "children")}
-
-docs_modal_inputs = {"open_doc": Input("open_doc", "n_clicks"),
-                     "close_doc": Input("close_doc", "n_clicks")}
-docs_modal_outputs = {"id": Output("doc_modal", "is_open")}
-doc_modal_states = State("doc_modal", "is_open")
-
-adv_modal_inputs = {"open_adv": Input("open_adv", "n_clicks"),
-                    "close_adv": Input("close_adv", "n_clicks"),
-                    "submit_adv": Input("submit_adv", "n_clicks")}
-adv_modal_outputs = {"adv_modal_id": Output("adv_modal", "is_open"),
-                     "form": Output("adv_modal_form", "children"),
-                     "graph": Output(graph_id, "layout")}
-adv_modal_states = [State("adv_modal", "is_open"),
-                    State("adv_modal_form", "children")]
-export_img_inputs = [Input("png", "n_clicks"),
-                     Input("jpg", "n_clicks"),
-                     Input("svg", "n_clicks")]
-export_img_outputs = Output(graph_id, "generateImage")
-
-export_map = []
-export_modal_inputs = {"close_export": Input("close_export", "n_clicks")}
-export_modal_outputs = {"id": Output("export_modal", "is_open"),
-                        "data": Output("export_data", "children")}
-export_modal_states = State("export_modal", "is_open")
-
-man_tool_inputs = {"open_man": Input("open_man", "n_clicks"),
-                   "close_man": Input("close_man", "n_clicks")}
-man_tool_outputs = {"id": Output("man_toolbar", "hidden"),
-                    "graph": Output(graph_id, "style")}
-man_tool_states = State("man_toolbar", "hidden")
-
-modify_node_inputs = {"remove": Input('remove-button', 'n_clicks'),
-                      "modify": Input('modify-button', 'n_clicks')}
-modify_node_outputs = [Output(graph_id, 'elements')]
-modify_node_states = [State(graph_id, 'elements'),
-                      State(graph_id, 'selectedNodeData')]
 
 
 assets_ignore = '.*bootstrap.*'
@@ -119,11 +63,14 @@ class FullDash(AbstractDash):
         def docs_modal_inner(*args):
             return self.docs_modal(*args)
 
+        def info_modal_inner(*args):
+            return self.info_modal(*args)
+
         def man_tool_inner(*args):
             return self.man_modal(*args)
 
-        def modify_node_inner(delete, merge, elems, data):
-            return self.modify_nodes(delete, merge, elems, data)
+        def modify_node_inner(t_delete, t_merge, elems, data):
+            return self.modify_nodes(t_delete, t_merge, elems, data)
 
         def advanced_modal_inner(*args):
             return self.advanced_modal(*args)
@@ -134,12 +81,20 @@ class FullDash(AbstractDash):
         def export_modal_inner(*args):
             return self.export_modal(*args)
 
+        def background_color_inner(*args):
+            return self.background_color(*args)
+
+        def label_color_inner(*args):
+            return self.label_color(*args)
+
         self.add_callback(update_preset_inner, list(preset_inputs.values()), list(
             preset_outputs.values()), list(preset_state.values()))
         self.add_callback(update_graph_inner, list(
             update_inputs.values()), list(update_outputs.values()))
         self.add_callback(docs_modal_inner, list(docs_modal_inputs.values()), list(
             docs_modal_outputs.values()), doc_modal_states)
+        self.add_callback(info_modal_inner, list(info_modal_inputs.values()), list(
+            info_modal_outputs.values()), info_modal_states)
         self.add_callback(man_tool_inner, list(man_tool_inputs.values()), list(
             man_tool_outputs.values()), man_tool_states)
         self.add_callback(modify_node_inner, list(modify_node_inputs.values()),
@@ -150,6 +105,10 @@ class FullDash(AbstractDash):
                           export_img_inputs, export_img_outputs)
         self.add_callback(export_modal_inner, list(export_modal_inputs.values()), list(
             export_modal_outputs.values()), export_modal_states)
+        self.add_callback(background_color_inner,
+                          [background_color_input], list(background_color_outputs.values()))
+        self.add_callback(label_color_inner,
+                          [label_color_input], [label_color_output])
         self.build()
 
     def update_preset(self, preset_name, mappings, *states):
@@ -191,22 +150,22 @@ class FullDash(AbstractDash):
                     parameter = setter_str
                     setter = getattr(self.visualiser, to_call, None)
                 if setter is not None:
-                    try:
-                        if parameter is not None and len(inspect.getargspec(setter).args) > 1:
-                            setter(parameter)
-                        else:
-                            setter()
-                    except Exception as ex:
-                        print(ex)
-                        raise PreventUpdate()
-        try:
-            figure, legend = self.visualiser.build(
-                graph_id=graph_id, legend=True)
-            legend = self.create_legend(legend)
-            return [figure], legend
-        except Exception as ex:
-            print(ex)
-            raise PreventUpdate()
+                    #try:
+                    if parameter is not None and len(getargspec(setter).args) > 1:
+                        setter(parameter)
+                    else:
+                        setter()
+                    #except Exception as ex:
+                    #    print(ex)
+                    #    raise PreventUpdate()
+        #try:
+        figure, legend = self.visualiser.build(
+            graph_id=graph_id, legend=True)
+        legend = self.create_legend(legend)
+        return [figure], legend
+        #except Exception as ex:
+        #    print(ex)
+        #    raise PreventUpdate()
 
     def export_graph_img(self, get_jpg_clicks, get_png_clicks, get_svg_clicks):
         action = 'store'
@@ -240,6 +199,162 @@ class FullDash(AbstractDash):
             return [not is_open]
         return [is_open]
 
+    def info_modal(self, n1, n2, is_open):
+        '''
+        Node + Edge Count.
+        Data table.
+        Global information
+        '''
+        changed_id = [p['prop_id'] for p in callback_context.triggered][0]
+        if info_modal_inputs["open_info"].component_id in changed_id:
+            builder = self.visualiser._builder
+
+            cards = self.create_heading_4("", "General Information")
+            card = self.create_card("Node Count", len(builder.view.nodes))
+            card += self.create_card("Edge Count", len(builder.view.edges))
+            cards += self.create_cards("", card)
+            cards += self.create_horizontal_row()
+
+            cards += self.create_heading_4("", "Connectivity")
+            card = self.create_card(
+                "Node Connectivity", builder.view.node_connectivity())
+            cards += self.create_cards("", card)
+            cards += self.create_horizontal_row()
+
+            cards += self.create_heading_4("", "Bipartite")
+            card = self.create_card(
+                "Is Bipartite", str(builder.view.is_bipartite()))
+            cards += self.create_cards("", card)
+            cards += self.create_horizontal_row()
+
+            cards += self.create_heading_4("", "Components")
+            c_str = [f'Is: {str(builder.view.is_strongly_connected())}',
+                     f'Number: {str(builder.view.number_strongly_connected_components())}']
+            card = self.create_card("Strongly Connected", c_str)
+            c_str = [f'Is: {str(builder.view.is_weakly_connected())}',
+                     f'Number: {str(builder.view.number_weakly_connected_components())}']
+            card += self.create_card("Weakly Connected", c_str)
+            c_str = [f'Is: {str(builder.view.is_attracting_component())}',
+                     f'Number: {str(builder.view.number_attracting_components())}']
+            card += self.create_card("Attracting Components", c_str)
+            card += self.create_card("Is Biconnected",
+                                     str(builder.view.is_biconnected()))
+            cards += self.create_cards("", card)
+            cards += self.create_horizontal_row()
+
+            cards += self.create_heading_4("", "DAG")
+            card = self.create_card(
+                "Is Aperiodic", str(builder.view.is_aperiodic()))
+            cards += self.create_cards("", card)
+            cards += self.create_horizontal_row()
+
+            cards += self.create_heading_4("", "Distance Measures")
+            card = self.create_card("Diameter", builder.view.diameter())
+            card += self.create_card("Radius", builder.view.radius())
+            cards += self.create_cards("", card)
+            cards += self.create_horizontal_row()
+
+            cards += self.create_heading_4("", "Assortativity")
+            card = self.create_card(
+                "Degree Assortativity Coefficient", builder.view.degree_assortativity_coefficient())
+            cards += self.create_cards("", card)
+            cards += self.create_horizontal_row()
+
+            cards += self.create_heading_4("", "Euler")
+            card = self.create_card(
+                "Is Eulerian", str(builder.view.is_eulerian()))
+            card += self.create_card("Is Semi-Eulerian",
+                                     str(builder.view.is_semieulerian()))
+            cards += self.create_cards("", card)
+            cards += self.create_horizontal_row()
+
+            cards += self.create_heading_4("", "Tree")
+            card = self.create_card("Is Tree", str(builder.view.is_tree()))
+            card += self.create_card("Is Forest",
+                                     str(builder.view.is_forest()))
+            card += self.create_card("Is Arborescence",
+                                     str(builder.view.is_arborescence()))
+            card += self.create_card("Is Branching",
+                                     str(builder.view.is_branching()))
+            cards += self.create_cards("", card)
+            cards += self.create_horizontal_row()
+
+            cards += self.create_heading_4("", "Clustering")
+            card = self.create_card("Triangles", builder.view.triangles())
+            card += self.create_card("Transitivity",
+                                     builder.view.transitivity())
+            card += self.create_card("Average Clustering Coefficient",
+                                     builder.view.average_clustering())
+            cards += self.create_cards("", card)
+
+            cards += self.create_heading_4("", "Asteroidal")
+            card = self.create_card("AT Free", str(builder.view.is_at_free()))
+            cards += self.create_cards("", card)
+            cards += self.create_horizontal_row()
+
+            cards += self.create_heading_4("", "Bridges")
+            card = self.create_card(
+                "Has Bridges", str(builder.view.has_bridges()))
+            cards += self.create_cards("", card)
+            cards += self.create_horizontal_row()
+
+            cards += self.create_heading_4("", "Chordal")
+            card = self.create_card(
+                "Is Chordal", str(builder.view.is_chordal()))
+            cards += self.create_cards("", card)
+            cards += self.create_horizontal_row()
+
+            cards += self.create_heading_4("", "Cliques")
+            card = self.create_card("Number of Cliques", str(
+                builder.view.graph_number_of_cliques()))
+            cards += self.create_cards("", card)
+            cards += self.create_horizontal_row()
+
+            cards += self.create_heading_4("", "Node Information")
+            n_cols, n_data, e_cols, e_data = self._generate_node_edge_tables(
+                builder)
+            cards += self.create_complex_table("", n_cols, n_data)
+            cards += self.create_heading_4("", "Edge Information")
+            cards += self.create_complex_table("", e_cols, e_data)
+
+            return [True, cards]
+        elif info_modal_inputs["close_info"].component_id in changed_id:
+            return [False, []]
+        return [is_open, []]
+
+    def _generate_node_edge_tables(self, builder):
+        view = builder.view
+        nodes = builder.view.nodes(data=True)
+        edges = builder.view.edges(keys=True)
+
+        e_cols = [{"name": k, "id": k} for k in ["node", "edge", "vertex"]]
+        e_data = [{"node": builder.view.nodes[n]["display_name"], "edge":e,
+                   "vertex": builder.view.nodes[v]["display_name"]} for n, v, e in edges]
+        n_cols = [{"name": k, "id": k} for k in ["Node", "Degree", "Pagerank", "Degree Centrality",
+                                                 "Closeness Centrality","Betweenness Centrality", "Is Isolated", 
+                                                 "Number Of Cliques", "Clustering", "Square Clustering"]]
+        n_data = []
+        pagerank = view.pagerank()
+        degree_centrality = view.degree_centrality()
+        closeness_centrality = view.closeness_centrality()
+        betweenness_centrality = view.betweenness_centrality()
+        number_cliques = view.number_of_cliques()
+        clustering = view.clustering()
+        square_clustering = view.square_clustering()
+        for node, data in nodes:
+            nd = {"Node": data["display_name"]}
+            nd["Degree"] = view.degree(node)
+            nd["Pagerank"] = pagerank[node]
+            nd["Degree Centrality"] = degree_centrality[node]
+            nd["Closeness Centrality"] = closeness_centrality[node]
+            nd["Betweenness Centrality"] = betweenness_centrality[node]
+            nd["Is Isolated"] = view.is_isolate(node)
+            nd["Number Of Cliques"] = number_cliques[node]
+            nd["Clustering"] = clustering[node]
+            nd["Square Clustering"] = square_clustering[node]
+            n_data.append(nd)
+        return n_cols, n_data, e_cols, e_data
+
     def man_modal(self, open, close, is_hidden):
         changed_id = [p['prop_id'] for p in callback_context.triggered][0]
         if man_tool_inputs["open_man"].component_id in changed_id:
@@ -250,43 +365,55 @@ class FullDash(AbstractDash):
             is_hidden = True
         return [is_hidden, style]
 
-    def modify_nodes(self, remove, modify, elements, data):
+    def modify_nodes(self, t_remove, t_modify, elements, data):
         changed_id = [p['prop_id'] for p in callback_context.triggered][0]
         if not elements or not data:
             return [elements]
 
-        if modify_node_inputs["remove"].component_id in changed_id:
+        if modify_node_inputs["t-remove"].component_id in changed_id:
             ids_to_remove = {ele_data['id'] for ele_data in data}
+            [self.visualiser._builder.view.remove_node(
+                int(d)) for d in ids_to_remove]
             new_elements = [
-                ele for ele in elements if ele['data']['id'] not in ids_to_remove]
+                ele for ele in elements if str(ele['data']['id']) not in ids_to_remove]
             return [new_elements]
 
-        elif modify_node_inputs["modify"].component_id in changed_id:
-            merging_node = data.pop(0)
-            ids_to_remove = {ele_data['id'] for ele_data in data}
+        elif modify_node_inputs["t-modify"].component_id in changed_id:
+            merging_node = data.pop(0)["id"]
+            ids_to_merge = {ele_data['id'] for ele_data in data}
+            self.visualiser._builder.view.merge_nodes(
+                merging_node, ids_to_merge)
             new_elements = []
             for ele in elements:
-                if str(ele["data"]["id"]) in ids_to_remove:
+                if str(ele["data"]["id"]) in ids_to_merge:
                     continue
                 if "source" in ele["data"] or "target" in ele["data"]:
-                    if ele["data"]["source"] in ids_to_remove:
-                        ele["data"]["source"] = merging_node["id"]
+                    if str(ele["data"]["source"]) in ids_to_merge:
+                        ele["data"]["source"] = merging_node
                         if "id" in ele["data"]:
                             del ele["data"]["id"]
-                    if ele["data"]["target"] in ids_to_remove:
-                        ele["data"]["target"] = merging_node["id"]
+                    if str(ele["data"]["target"]) in ids_to_merge:
+                        ele["data"]["target"] = merging_node
                         if "id" in ele["data"]:
                             del ele["data"]["id"]
-                    if (ele["data"]["source"] == merging_node["id"]
-                            and ele["data"]["target"] == merging_node["id"]):
+                    if (ele["data"]["source"] == merging_node
+                            and ele["data"]["target"] == merging_node):
                         continue
                 new_elements.append(ele)
 
-            print("New Set")
-            for e in new_elements:
-                print(e)
+            index = 0
+            # When edges are still present but source or dest nodes are removed.
+            nids = {str(ele_data["data"]['id'])
+                    for ele_data in new_elements if "id" in ele_data["data"]}
+            while index < len(new_elements):
+                e = new_elements[index]
+                if "source" in e["data"] or "target" in e["data"]:
+                    if e["data"]["source"] not in nids:
+                        del new_elements[index]
+                    if e["data"]["target"] not in nids:
+                        del new_elements[index]
+                index += 1
             return [new_elements]
-
         return [elements]
 
     def advanced_modal(self, n1, n2, n3, is_open, form):
@@ -329,6 +456,16 @@ class FullDash(AbstractDash):
         if adv_modal_inputs["close_adv"].component_id in changed_id:
             return False, c, cur_layout.params
         return is_open, c, cur_layout.params
+
+    def background_color(self, color):
+        if color is None:
+            raise PreventUpdate()
+        return [{"background-color": color["hex"]}, {"background-color": color["hex"]}]
+
+    def label_color(self, color):
+        if color is None:
+            raise PreventUpdate()
+        return [self.visualiser.stylesheet + [{"selector": "node", "style": {"color": color["hex"]}}]]
 
     def _create_form_elements(self, visualiser, style={}, id_prefix=""):
         default_options = [visualiser.set_network_mode,
@@ -392,6 +529,14 @@ class FullDash(AbstractDash):
         docstrings = self.create_modal(docs_modal_outputs["id"].component_id,
                                        docs_modal_inputs["close_doc"].component_id,
                                        "Options Documentation", docstring)
+
+        info_button = self.create_div(
+            info_modal_inputs["open_info"].component_id, [], className="info-tip col")
+        info_text = self.create_div(
+            info_modal_outputs["info"].component_id, [])
+        info_modal = self.create_modal(
+            info_modal_outputs["id"].component_id, info_modal_inputs["close_info"].component_id, "Graph Statistics", info_text)
+
         export_div = self.create_div(
             export_modal_outputs["data"].component_id, [])
         export_modal = self.create_modal(export_modal_outputs["id"].component_id,
@@ -408,7 +553,7 @@ class FullDash(AbstractDash):
         manual_button = self.create_div(
             man_tool_inputs["open_man"].component_id, [], className="manual-tip col")
         eo = self.create_div('', ds_button + adv_button +
-                             manual_button, className="row")
+                             manual_button + info_button, className="row")
         r = self.create_horizontal_row(False)
         extra_options = self.create_div("", eo + r, className="container")
 
@@ -430,7 +575,7 @@ class FullDash(AbstractDash):
             "export_data_container", exports, style=style)
 
         return (extra_options + elements + export_div +
-                docstrings + export_modal + adv_options, identifiers, variable_input_list_map)
+                docstrings + export_modal + adv_options + info_modal, identifiers, variable_input_list_map)
 
     def _beautify_name(self, name):
         name_parts = name.split("_")
@@ -502,7 +647,7 @@ class FullDash(AbstractDash):
                     options[option_name][func_str] = func
         return options
 
-    def _generate_inputs_outputs(self, identifiers):
+    def _generate_inputs_outputs(selp_modify_node_inputsf, identifiers):
         preset_identifiers = {"preset": identifiers["preset"]}
         del identifiers["preset"]
         outputs = {k: Output(v.component_id, v.component_property)
@@ -530,15 +675,20 @@ class FullDash(AbstractDash):
     def _create_manual_toolbar(self):
         t_c = self.create_heading_5("temph", "Temporary Actions")
         t_c += self.create_button(
-            modify_node_inputs["remove"].component_id, "Remove Selected Nodes")
+            modify_node_inputs["t-remove"].component_id, "Remove Selected Nodes")
         t_c += self.create_line_break(2)
         t_c += self.create_button(
-            modify_node_inputs["modify"].component_id, "Merge Selected Nodes")
+            modify_node_inputs["t-modify"].component_id, "Merge Selected Nodes")
         children = self.create_div("temp", t_c)
         children += self.create_horizontal_row()
 
-        heading = self.create_heading_5("permh", "Persistent Actions")
-        children += self.create_div("permanent", heading)
+        p_c = self.create_heading_5("vis", "Visual")
+        p_c += self.create_color_picker(
+            background_color_input.component_id, "Background Color")
+        p_c += self.create_line_break(2)
+        p_c += self.create_color_picker(
+            label_color_input.component_id, "Label Color")
+        children += self.create_div("man_visual_div", p_c)
         children += self.create_horizontal_row()
 
         children += self.create_button(

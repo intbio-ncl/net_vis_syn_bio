@@ -1,3 +1,4 @@
+from distutils.command.build import build
 from re import L
 import unittest
 import os
@@ -292,6 +293,37 @@ class TestModes(unittest.TestCase):
                 t_search = tree_graph.search((n_id,None,None))
                 for n1,v1,e1 in t_search:
                     self.assertEqual(n1,n)
+
+        def test_disconnected(self):
+            fn1 = os.path.join(curr_dir,"..","files","design","sbol","0x3B.xml")
+            fn2 = os.path.join(curr_dir,"..","files","design","sbol","0x87.xml")
+            
+            builder1 = DesignBuilder(model_file,fn1)
+            builder2 = DesignBuilder(model_file,fn2)
+            builder3 = DesignBuilder(model_file,fn1)
+            builder1.set_interaction_protein_view()
+            builder2.set_interaction_protein_view()
+            g1 = builder1.view
+            g2 = builder2.view
+
+            builder3.load(fn2)
+            builder3.set_interaction_protein_view()
+            builder3.set_disconnected_mode()
+            view = builder3.view
+
+            g1_edges = [(g1.nodes[n]["key"],e,g1.nodes[v]["key"]) for n,v,e in g1.edges(keys=True)]
+            g2_edges = [(g2.nodes[n]["key"],e,g2.nodes[v]["key"]) for n,v,e in g2.edges(keys=True)]
+            for n,v,e in g1_edges + g2_edges:
+                print(n,v,e)
+            print("\n\n")
+            for n,v,e,k in view.edges(data=True,keys=True):
+                n_data = view.nodes[n]
+                v_data = view.nodes[v]
+                edge = (n_data["key"],e,v_data["key"])
+                print(edge)
+                self.assertTrue(edge in g1_edges or edge in g2_edges)
+                
+
 
 
 

@@ -5,7 +5,7 @@ from converters.design import gbk_convert
 from graph.design import DesignGraph
 
 convert_dict = {"sbol" : sbol_convert,
-                "gbk"  : gbk_convert, # Not Implemented..
+                "gbk"  : gbk_convert,
                 "nv"   : nv_convert}
 
 def convert(model_graph,filename=None,convert_type=None):

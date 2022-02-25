@@ -14,8 +14,8 @@ from visual.handlers.design.shape import ShapeHandler
 default_stylesheet_fn = os.path.join(os.path.dirname(os.path.realpath(__file__)),"default_stylesheet.txt")
 
 class DesignVisual(AbstractVisual):
-    def __init__(self,model,graph=None):
-        super().__init__()
+    def __init__(self,model,is_multiple,graph=None):
+        super().__init__(is_multiple=is_multiple)
         self._builder = DesignBuilder(model,graph)
         self._layout_h = LayoutHandler()
         self._label_h = LabelHandler(self._builder)

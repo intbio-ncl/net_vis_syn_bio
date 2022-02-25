@@ -18,7 +18,10 @@ class ColorPicker:
             yield str(col)
 
     def __getitem__(self,index):
-        return str(self._flatten()[index])
+        try:
+            return str(self._flatten()[index])
+        except IndexError:
+            return str(self._flatten()[-1])
 
     def increase_shade(self,hsl_val):
         hsl = HSLVal.parse(hsl_val)
