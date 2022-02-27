@@ -1,5 +1,3 @@
-from distutils.command.build import build
-from re import L
 import unittest
 import os
 import sys
@@ -178,7 +176,6 @@ class TestViews(unittest.TestCase):
         interactions_classes = [d[1]["key"] for d in self.model.get_derived(interaction_class_code)]
         dna_classes = [d[1]["key"] for d in self.model.get_derived(dna_class_code)] + [dna_obj]
         for n,v,e in graph.edges(keys=True):
-            print(graph.nodes[n]["key"],graph.nodes[v]["key"],e)
             self.assertIn(e,interactions_classes)
             self.assertIn(self.builder.get_rdf_type(n)[1]["key"],dna_classes)
             self.assertIn(self.builder.get_rdf_type(v)[1]["key"],dna_classes)
@@ -294,7 +291,7 @@ class TestModes(unittest.TestCase):
                 for n1,v1,e1 in t_search:
                     self.assertEqual(n1,n)
 
-        def test_disconnected(self):
+        def test_connected(self):
             fn1 = os.path.join(curr_dir,"..","files","design","sbol","0x3B.xml")
             fn2 = os.path.join(curr_dir,"..","files","design","sbol","0x87.xml")
             
@@ -308,19 +305,16 @@ class TestModes(unittest.TestCase):
 
             builder3.load(fn2)
             builder3.set_interaction_protein_view()
-            builder3.set_disconnected_mode()
+            builder3.set_connected_mode()
             view = builder3.view
-
+            
             g1_edges = [(g1.nodes[n]["key"],e,g1.nodes[v]["key"]) for n,v,e in g1.edges(keys=True)]
             g2_edges = [(g2.nodes[n]["key"],e,g2.nodes[v]["key"]) for n,v,e in g2.edges(keys=True)]
-            for n,v,e in g1_edges + g2_edges:
-                print(n,v,e)
-            print("\n\n")
+
             for n,v,e,k in view.edges(data=True,keys=True):
                 n_data = view.nodes[n]
                 v_data = view.nodes[v]
                 edge = (n_data["key"],e,v_data["key"])
-                print(edge)
                 self.assertTrue(edge in g1_edges or edge in g2_edges)
                 
 

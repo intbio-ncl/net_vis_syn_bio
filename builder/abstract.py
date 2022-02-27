@@ -53,8 +53,8 @@ class AbstractBuilder:
     def set_tree_mode(self):
         self.view = self._mode_h.tree()
 
-    def set_disconnected_mode(self):
-        self.view = self._mode_h.disconnected()
+    def set_connected_mode(self):
+        self.view = self._mode_h.connected()
 
     def set_full_view(self):
         self.view = self._view_h.full()

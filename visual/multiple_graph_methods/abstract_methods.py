@@ -1,9 +1,9 @@
-def set_disconnected_mode(self):
+def set_connected_mode(self):
     '''
     Only for multiple graph visualisation. 
-    Seperates each input graph, i.e. doesn't connect graphs by common nodes.
+    Connects graphs by merging duplicate nodes between graphs.
     '''
-    if self.mode == self.set_disconnected_mode:
-        self._builder.set_disconnected_mode()
+    if self.mode == self.set_connected_mode:
+        self._builder.set_connected_mode()
     else:
-        self.mode = self.set_disconnected_mode
+        self.mode = self.set_connected_mode

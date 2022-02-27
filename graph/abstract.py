@@ -148,40 +148,31 @@ class AbstractGraph:
                         matches.append(([n, n_data], [v, v_data], k))
         return matches
 
-    def add_graph(self, graph):
+    def add_graph(self,graph):
         index = self._get_next_index()
-        cur_graph_map = {v["key"]: k for k, v in self.nodes(data=True)}
-        gn = self._igc
-
-        def _handle_node(data):
-            nonlocal index
-            if data["key"] in cur_graph_map:
-                nv = cur_graph_map[data["key"]]
-                if "graph_number" not in self.nodes[nv]:
-                    self.nodes[nv]["graph_number"] = [gn]
-                elif gn not in self.nodes[nv]["graph_number"]:
-                    self.nodes[nv]["graph_number"].append(gn)
-            else:
-                data["graph_number"] = [gn]
-                nv = index
-                cur_graph_map[data["key"]] = nv
-                self.add_node(nv, data)
-                index += 1
-            return nv
-
+        cur_graph_map = {}
         for n, v, e, k in graph.edges(keys=True, data=True):
             n_data = graph.nodes[n]
             v_data = graph.nodes[v]
-            nn = _handle_node(n_data)
-            nv = _handle_node(v_data)
 
-            if self.has_edge(nn, nv, e):
-                self.graph.edges[nn, nv, e]["graph_number"].append(gn)
+            if n_data["key"] in cur_graph_map:
+                n = cur_graph_map[n_data["key"]]
             else:
-                k["graph_number"] = [gn]
-                self.add_edge(nn, nv, e, **k)
-        self._igc += 1
+                n = index
+                index +=1
+                cur_graph_map[n_data["key"]] = n
 
+            if v_data["key"] in cur_graph_map:
+                v = cur_graph_map[v_data["key"]]
+            else:
+                v = index
+                index +=1
+                cur_graph_map[v_data["key"]] = v
+
+            self.add_node(n,n_data)
+            self.add_node(v,v_data)
+            self.add_edge(n,v,e,**k)
+        
     def add_node(self, n, data):
         self._graph.add_node(n, **data)
 

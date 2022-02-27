@@ -1,3 +1,4 @@
+from platform import node
 import re 
 
 class AbstractModeBuilder:
@@ -39,41 +40,29 @@ class AbstractModeBuilder:
     def network(self):
         return self._builder.view
 
-    def disconnected(self):
+    def connected(self):
         edges = []
         node_attrs = {}
-        nodes = self._builder.v_nodes(data=True)
-        max_key = max([node[0] for node in nodes]) + 1
         seens = {}          
-
-        def _handle_node(node,data):
-            nonlocal max_key
-            ids = []
-            if data["key"] in seens:
-                ids = seens[data["key"]]
-            else:
-                for index,gn in enumerate(data["graph_number"]):
-                    if index == 0:
-                        ids.append((node,gn))
-                    else:
-                        ids.append((max_key,gn))
-                        max_key += 1
-                seens[data["key"]] = ids
-            return ids
-
         for n,v,e,k in self._builder.v_edges(keys=True,data=True):
-            n_data = nodes[n]
-            v_data = nodes[v]
-            nids = _handle_node(n,n_data)
-            vids = _handle_node(v,v_data)
-            for n,gn in nids:
-                node_attrs[n] = n_data
-                for v,gn1 in vids:
-                    if gn == gn1:
-                        node_attrs[v] = v_data
-                        edge = self._create_edge_dict(e,graph_number=gn)
-                        edges.append((n,v,e,edge))
-                
+            n_data = self._builder.v_nodes[n]
+            v_data = self._builder.v_nodes[v]
+            if n_data["key"] in seens:
+                n = seens[n_data["key"]]
+            else:
+                seens[n_data["key"]] = n
+
+            if v_data["key"] in seens:
+                v = seens[v_data["key"]]
+            else:
+                seens[v_data["key"]] = v
+
+            node_attrs[n] = n_data
+            node_attrs[v] = v_data
+
+            edge = self._create_edge_dict(e,**k)
+            edges.append((n,v,e,edge))      
+
         return self._builder.sub_graph(edges,node_attrs)
 
     def _create_edge_dict(self,key,weight=1,**kwargs):
