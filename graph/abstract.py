@@ -63,10 +63,9 @@ save_map = {
     "cytoscape": _cytoscape,
 }
 
-
 class AbstractGraph:
     def __init__(self, graph=None):
-        self._igc = 1 if graph else 0
+        self.igc = 1 if graph else 0
         self._graph = graph if graph else nx.MultiDiGraph()
 
     def __len__(self):
@@ -150,28 +149,31 @@ class AbstractGraph:
 
     def add_graph(self,graph):
         index = self._get_next_index()
+        gn = self.igc
         cur_graph_map = {}
+
+        def _handle_node(d,data):
+            nonlocal index
+            if data["key"] in cur_graph_map:
+                d = cur_graph_map[data["key"]]
+            else:
+                d = index
+                index +=1
+                data["graph_number"] = gn
+                cur_graph_map[data["key"]] = d
+
+            self.add_node(d,data)
+            return d
+
         for n, v, e, k in graph.edges(keys=True, data=True):
             n_data = graph.nodes[n]
             v_data = graph.nodes[v]
 
-            if n_data["key"] in cur_graph_map:
-                n = cur_graph_map[n_data["key"]]
-            else:
-                n = index
-                index +=1
-                cur_graph_map[n_data["key"]] = n
-
-            if v_data["key"] in cur_graph_map:
-                v = cur_graph_map[v_data["key"]]
-            else:
-                v = index
-                index +=1
-                cur_graph_map[v_data["key"]] = v
-
-            self.add_node(n,n_data)
-            self.add_node(v,v_data)
+            n = _handle_node(n,n_data)
+            v = _handle_node(v,v_data)
+            k["graph_number"] = gn
             self.add_edge(n,v,e,**k)
+        self.igc += 1
         
     def add_node(self, n, data):
         self._graph.add_node(n, **data)

@@ -71,17 +71,17 @@ class TestDesignGraph(unittest.TestCase):
         m_graph = m_convert(model_fn)
         graph = DesignGraph()
         g1 = i_convert(m_graph,fn1)
-        g1_edges = [(g1.nodes[n]["key"],e,g1.nodes[v]["key"]) for n,v,e in g1.edges(keys=True)]
+        g1_edges = [(g1.nodes[n]["key"],e,g1.nodes[v]["key"],k) for n,v,e,k in g1.edges(keys=True,data=True)]
         g2 = i_convert(m_graph,fn2)
-        g2_edges = [(g2.nodes[n]["key"],e,g2.nodes[v]["key"]) for n,v,e in g2.edges(keys=True)]
+        g2_edges = [(g2.nodes[n]["key"],e,g2.nodes[v]["key"],k) for n,v,e,k in g2.edges(keys=True,data=True)]
         graph.add_graph(g1)
         graph.add_graph(g2)
 
         for n,v,e,k in graph.edges(data=True,keys=True):
             n_data = graph.nodes[n]
             v_data = graph.nodes[v]
-            trpl = (n_data["key"],e,v_data["key"])
-            self.assertTrue((trpl in g1_edges) or (trpl in g2_edges))
+            trpl = (n_data["key"],e,v_data["key"],k)
+            self.assertTrue((trpl in g1_edges) or (trpl in g2_edges),trpl)
 
 
 def node_diff(list1,list2):

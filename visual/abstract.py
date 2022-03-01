@@ -209,6 +209,16 @@ class AbstractVisual:
             return self._label_h.node.class_type()
         else:
             self.node_text = self.add_node_type_labels
+    
+    def add_node_uri_labels(self):
+        '''
+        Textual data pertaining to a nodes URI if possible else name.
+        '''
+        if self.node_text == self.add_node_uri_labels:
+            return self._label_h.node.uri()
+        else:
+            self.node_text = self.add_node_uri_labels
+
 
     # ---------------------- Edge Labels ----------------------
     def add_edge_no_labels(self):

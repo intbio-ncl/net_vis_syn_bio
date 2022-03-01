@@ -3,8 +3,6 @@ import os
 import sys
 from random import sample
 from rdflib import RDF,BNode
-import networkx as nx
-from rdflib.term import URIRef
 
 sys.path.insert(0, os.path.join(".."))
 sys.path.insert(0, os.path.join("..",".."))
@@ -79,6 +77,34 @@ class TestSearch(unittest.TestCase):
                 self.assertEqual(depth,0)
             else:
                 self.assertGreater(depth, 0)
+    
+    def test_get_graphs(self):
+        fn1 = os.path.join(curr_dir,"..","files","design","sbol","0x3B.xml")
+        fn2 = os.path.join(curr_dir,"..","files","design","sbol","0x87.xml")
+        
+        builder1 = DesignBuilder(model_file,fn1)
+        builder2 = DesignBuilder(model_file,fn2)
+        builder3 = DesignBuilder(model_file,fn1)
+        builder1.set_full_view()
+        builder2.set_full_view()
+        expected_graphs = [builder1.view,builder2.view]
+
+        builder3.load(fn2)
+        graphs = builder3.get_internal_graphs()
+
+        for g_index,g in enumerate(graphs):
+            expected_g = expected_graphs[g_index]
+            self.assertEqual(len(g.nodes),len(expected_g.nodes))
+            self.assertEqual(len(g.edges),len(expected_g.edges))
+            expected_nodes = [n_data["key"] for n,n_data in expected_g.nodes(data=True) if not isinstance(n_data["key"],BNode)]
+            expected_edges = [(expected_g.nodes[n]["key"],e,expected_g.nodes[v]["key"]) for n,v,e in expected_g.edges(keys=True) if not isinstance(expected_g.nodes[n]["key"],BNode) and not isinstance(expected_g.nodes[v]["key"],BNode)]
+
+            actual_nodes = [n_data["key"] for n,n_data in g.nodes(data=True) if not isinstance(n_data["key"],BNode)]
+            actual_edges = [(g.nodes[n]["key"],e,g.nodes[v]["key"]) for n,v,e in g.edges(keys=True) if not isinstance(g.nodes[n]["key"],BNode) and not isinstance(g.nodes[v]["key"],BNode)]
+
+            self.assertCountEqual(expected_nodes,actual_nodes)
+            self.assertCountEqual(expected_edges,actual_edges)
+
 
 
 class TestViews(unittest.TestCase):
@@ -218,6 +244,58 @@ class TestViews(unittest.TestCase):
             #self.assertIn(self.builder.get_rdf_type(n)[1]["key"],protein_classes)
             #self.assertIn(self.builder.get_rdf_type(v)[1]["key"],protein_classes)
     
+    def test_intersection(self):
+        fn1 = os.path.join(curr_dir,"..","files","design","sbol","0x3B.xml")
+        fn2 = os.path.join(curr_dir,"..","files","design","sbol","0x87.xml")
+        
+        builder1 = DesignBuilder(model_file,fn1)
+        builder2 = DesignBuilder(model_file,fn2)
+        builder3 = DesignBuilder(model_file,fn1)
+        builder1.set_full_view()
+        builder2.set_full_view()
+        g1 = builder1.view
+        g2 = builder2.view
+
+        builder3.load(fn2)
+        builder3.set_intersection_view()
+        view = builder3.view
+        
+        expected_edges = list(set([(g1.nodes[n]["key"],g1.nodes[v]["key"],e) for n,v,e in g1.edges(keys=True)]) & set([(g2.nodes[n]["key"],g2.nodes[v]["key"],e) for n,v,e in g2.edges(keys=True)]))
+        actual_edges = list([(view.nodes[n]["key"],view.nodes[v]["key"],e) for n,v,e in view.edges(keys=True)])
+
+        actual_nodes = list([data["key"] for node,data in view.nodes(data=True)])
+        expected_nodes = list(set([data["key"] for node,data in g1.nodes(data=True) if data["key"] in actual_nodes]) & set([data["key"] for node,data in g2.nodes(data=True)if data["key"] in actual_nodes]))
+
+        self.assertEqual(len(expected_edges),len(actual_edges))
+        self.assertCountEqual(expected_edges,actual_edges)
+
+        self.assertEqual(len(expected_nodes),len(actual_nodes))
+        self.assertCountEqual(expected_nodes,actual_nodes)
+
+    def test_difference(self):
+        fn1 = os.path.join(curr_dir,"..","files","design","sbol","0x3B.xml")
+        fn2 = os.path.join(curr_dir,"..","files","design","sbol","0x87.xml")
+        
+        builder1 = DesignBuilder(model_file,fn1)
+        builder2 = DesignBuilder(model_file,fn2)
+        builder3 = DesignBuilder(model_file,fn1)
+        builder1.set_full_view()
+        builder2.set_full_view()
+        g1 = builder1.view
+        g2 = builder2.view
+
+        builder3.load(fn2)
+        builder3.set_difference_view()
+        view = builder3.view
+        actual_nodes = list([data["key"] for node,data in view.nodes(data=True)  if not isinstance(data["key"],BNode)])
+        expected_nodes = list(set([data["key"] for node,data in g1.nodes(data=True) if not isinstance(data["key"],BNode) and data["key"] in actual_nodes]) - 
+                              set([data["key"] for node,data in g2.nodes(data=True) if not isinstance(data["key"],BNode) and data["key"] in actual_nodes]))
+
+
+        self.assertEqual(len(expected_nodes),len(actual_nodes))
+        self.assertCountEqual(expected_nodes,actual_nodes)
+
+
 class TestModes(unittest.TestCase):
         def setUp(self):
             self.builder = DesignBuilder(model_file,instance_file)
@@ -317,11 +395,6 @@ class TestModes(unittest.TestCase):
                 edge = (n_data["key"],e,v_data["key"])
                 self.assertTrue(edge in g1_edges or edge in g2_edges)
                 
-
-
-
-
-
 
 def diff(list1,list2):
     diff = []

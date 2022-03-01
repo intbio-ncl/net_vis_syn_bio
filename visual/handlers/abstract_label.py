@@ -36,6 +36,9 @@ class AbstractNodeLabelHandler:
             else:
                 node_text.append("?")
         return node_text
+        
+    def uri(self):
+        return [data["key"] for n,data in self._builder.v_nodes(data=True)]
 
 class AbstractEdgeLabelHandler:
     def __init__(self,builder):
