@@ -53,6 +53,8 @@ class AbstractEdgeLabelHandler:
             edge_names.append(edge[2]["display_name"])
         return edge_names
 
+    def uri(self):
+        return [edge[2] for edge in self._builder.v_edges(keys=True)]
 
 def _get_name(subject):
     split_subject = _split(subject)

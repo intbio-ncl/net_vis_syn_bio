@@ -15,7 +15,7 @@ class ModelVisual(AbstractVisual):
     def __init__(self,graph=None):
         super().__init__()
         if graph is None:
-            self._builder = None
+            self._builder = ModelBuilder(graph)
         elif isinstance(graph,ModelBuilder):
             self._builder = graph
         else:

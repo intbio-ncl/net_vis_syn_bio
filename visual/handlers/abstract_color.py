@@ -21,6 +21,8 @@ class AbstractNodeColorHandler:
             colors.append(color)
         return colors
 
+    def graph_number(self):
+        return [{f'{data["graph_number"]}' : self._color_picker[data["graph_number"]]} for node,data in self._builder.v_nodes(data=True)]
     
 class AbstractEdgeColorHandler:
     def __init__(self,builder):

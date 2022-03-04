@@ -7,29 +7,6 @@ class AbstractViewBuilder:
     def full(self):
         return self._builder._graph
 
-    def intersection(self):
-        i_graphs = self._builder.get_internal_graphs()
-        f_g = i_graphs.pop(0)
-        f_g_c = f_g.copy()
-        for n_g in i_graphs:
-            f_g_c.remove_nodes_from(n for n in f_g if n not in n_g)
-            f_g_c.remove_edges_from(e for e in f_g.edges if e not in n_g.edges)
-        g = self._builder.sub_graph(new_graph=f_g_c)
-        g.remove_isolated_nodes()
-        return g
-
-    def difference(self):
-        i_graphs = self._builder.get_internal_graphs()
-        f_g = i_graphs.pop(0)
-        f_g_c = f_g.copy()
-        for n_g in i_graphs:
-            f_g_c.remove_nodes_from(n for n in f_g if n in n_g)
-            f_g_c.remove_edges_from(e for e in f_g.edges if e in n_g.edges)
-            
-        g = self._builder.sub_graph(new_graph=f_g_c)
-        g.remove_isolated_nodes()
-        return g
-
     def _build_edge_attr(self,key):
         return {"display_name" : self._get_name(key)}
 

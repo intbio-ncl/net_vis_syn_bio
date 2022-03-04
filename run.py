@@ -12,11 +12,11 @@ visual_modes = {"design" : [os.path.join("utility","nv_design.xml"),DesignDash],
 
 def process_input(filenames,v_type,model,port,debug):
     server = Flask(__name__)
-
     model_fn,dash = visual_modes[v_type]
     if model:
-        dashboard = ModelDash(__name__,server)
+        dashboard = ModelDash(__name__,server,model_fn)
         filenames = model_fn
+        print(filenames)
     else:
         is_multiple = len(filenames) > 1
         dashboard = dash(__name__,server,model_fn,is_multiple)
@@ -26,7 +26,7 @@ def process_input(filenames,v_type,model,port,debug):
 
 def language_processor_args():
     parser = argparse.ArgumentParser(description="Network Visualisation Tool")
-    parser.add_argument('filename', default=None, nargs='+',help="File to parse as Input")
+    parser.add_argument('filename', default=None, nargs='*',help="File to parse as Input")
     parser.add_argument('--type', '-t', help='Set type of visualisation',
                         default=list(visual_modes.keys())[0],type=str,
                         choices=visual_modes.keys())

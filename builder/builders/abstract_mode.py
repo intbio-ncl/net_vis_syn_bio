@@ -1,4 +1,5 @@
-from platform import node
+from collections import Counter
+from itertools import chain
 import re 
 
 class AbstractModeBuilder:
@@ -40,30 +41,107 @@ class AbstractModeBuilder:
     def network(self):
         return self._builder.view
 
-    def connected(self):
+    def union(self):
         edges = []
         node_attrs = {}
-        seens = {}          
+        seens = {}
+        key = self._builder.connect_label        
         for n,v,e,k in self._builder.v_edges(keys=True,data=True):
             n_data = self._builder.v_nodes[n]
             v_data = self._builder.v_nodes[v]
-            if n_data["key"] in seens:
-                n = seens[n_data["key"]]
+            if n_data[key] in seens:
+                n = seens[n_data[key]]
             else:
-                seens[n_data["key"]] = n
+                seens[n_data[key]] = n
 
-            if v_data["key"] in seens:
-                v = seens[v_data["key"]]
+            if v_data[key] in seens:
+                v = seens[v_data[key]]
             else:
-                seens[v_data["key"]] = v
+                seens[v_data[key]] = v
 
             node_attrs[n] = n_data
             node_attrs[v] = v_data
 
             edge = self._create_edge_dict(e,**k)
             edges.append((n,v,e,edge))      
-
         return self._builder.sub_graph(edges,node_attrs)
+
+    def intersection(self,use_edges=False):
+        edges = []
+        node_attrs = {}
+        seens = {}
+        key = self._builder.connect_label
+        i_graphs = self._builder.get_internal_graphs(keys_as_ids=True,return_views=True)
+        for n,v,e,k in self._builder.v_edges(keys=True,data=True):
+            n_data = self._builder.v_nodes[n]
+            v_data = self._builder.v_nodes[v]
+            for graph in i_graphs:
+                if use_edges:
+                    try:
+                        graph[n_data[key],v_data[key]]
+                    except KeyError:
+                        break
+                else:
+                    if n_data[key] not in graph:
+                        break
+                    if v_data[key] not in graph:
+                        break            
+            else:
+                if n_data[key] in seens:
+                    n = seens[n_data[key]]
+                else:
+                    seens[n_data[key]] = n
+
+                if v_data[key] in seens:
+                    v = seens[v_data[key]]
+                else:
+                    seens[v_data[key]] = v
+
+                node_attrs[n] = n_data
+                node_attrs[v] = v_data
+                edge = self._create_edge_dict(e,**k)
+                edges.append((n,v,e,edge))
+        return self._builder.sub_graph(edges,node_attrs)
+
+    def difference(self,use_edges=False):
+        edges = []
+        node_attrs = {}
+        seens = {}
+        key = self._builder.connect_label
+        i_graphs = self._builder.get_internal_graphs(keys_as_ids=True)
+        if use_edges:
+            counter = Counter(chain.from_iterable(set([(x.nodes[k][key],x.nodes[v][key],e) for k,v,e in x.edges(keys=True)]) for x in i_graphs))
+        else:
+            counter = Counter(chain.from_iterable(set(x) for x in i_graphs))
+
+        for n,v,e,k in self._builder.v_edges(keys=True,data=True):
+            n_data = self._builder.v_nodes[n]
+            v_data = self._builder.v_nodes[v]
+            if use_edges:
+                count = counter[(n_data[key],v_data[key],e)]
+            else:
+                count = counter[n_data[key]]
+            if count > 1:
+                continue
+            if counter[v_data[key]] > 1:
+                continue
+
+            if n_data[key] in seens:
+                n = seens[n_data[key]]
+            else:
+                seens[n_data[key]] = n
+
+            if v_data[key] in seens:
+                v = seens[v_data[key]]
+            else:
+                seens[v_data[key]] = v
+
+            node_attrs[n] = n_data
+            node_attrs[v] = v_data
+            edge = self._create_edge_dict(e,**k)
+            edges.append((n,v,e,edge))
+        return self._builder.sub_graph(edges,node_attrs)
+        
 
     def _create_edge_dict(self,key,weight=1,**kwargs):
         edge = {'weight': weight, 

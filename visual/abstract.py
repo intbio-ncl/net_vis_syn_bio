@@ -54,7 +54,6 @@ class AbstractVisual:
     def set_network_mode(self):
         '''
         Set the graph to the standard Node-Edge-Node Network graph.
-        Duplicates are merged into the same node leading to connectedness.
         '''
         if self.mode == self.set_network_mode:
             self._builder.set_network_mode()
@@ -239,6 +238,15 @@ class AbstractVisual:
             return self._label_h.edge.name()
         else:
             self.edge_text = self.add_edge_name_labels
+
+    def add_edge_uri_labels(self):
+        '''
+        Textual data pertaining to a edges URI if possible else name.
+        '''
+        if self.edge_text == self.add_edge_uri_labels:
+            return self._label_h.edge.uri()
+        else:
+            self.edge_text = self.add_edge_uri_labels
 
     # ---------------------- Node Color ----------------------
     def add_standard_node_color(self):
