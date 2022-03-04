@@ -16,7 +16,6 @@ def process_input(filenames,v_type,model,port,debug):
     if model:
         dashboard = ModelDash(__name__,server,model_fn)
         filenames = model_fn
-        print(filenames)
     else:
         is_multiple = len(filenames) > 1
         dashboard = dash(__name__,server,model_fn,is_multiple)

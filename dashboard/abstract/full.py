@@ -331,7 +331,7 @@ class FullDash(AbstractDash):
         e_data = [{"node": builder.view.nodes[n]["display_name"], "edge":e,
                    "vertex": builder.view.nodes[v]["display_name"]} for n, v, e in edges]
         n_cols = [{"name": k, "id": k} for k in ["Node", "Degree", "Pagerank", "Degree Centrality",
-                                                 "Closeness Centrality","Betweenness Centrality", "Is Isolated", 
+                                                 "Closeness Centrality", "Betweenness Centrality", "Is Isolated",
                                                  "Number Of Cliques", "Clustering", "Square Clustering"]]
         n_data = []
         pagerank = view.pagerank()

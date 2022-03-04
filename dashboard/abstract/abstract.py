@@ -404,16 +404,16 @@ class AbstractDash:
         else:
             return [ta]
 
-    def create_card(self,heading,body,add=False,**kwargs):
-        if not isinstance(body,list):
+    def create_card(self, heading, body, add=False, **kwargs):
+        if not isinstance(body, list):
             body = [body]
-        heading = self.create_heading_5("",heading)
-        card_heading = self.create_div("",heading,className="card-header")
+        heading = self.create_heading_5("", heading)
+        card_heading = self.create_div("", heading, className="card-header")
         body_l = []
         for b in body:
             body_l += self.create_paragraph(b)
-        card_body = self.create_div("",body_l,className="card-body")
-        col = self.create_div("",card_heading + card_body,className="col-md")
+        card_body = self.create_div("", body_l, className="card-body")
+        col = self.create_div("", card_heading + card_body, className="col-md")
         if add:
             return self._create_element(col)
         else:

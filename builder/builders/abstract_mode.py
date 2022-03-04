@@ -1,6 +1,8 @@
 from collections import Counter
 from itertools import chain
-import re 
+import re
+
+from rdflib import URIRef 
 
 class AbstractModeBuilder:
     def __init__(self,builder):
@@ -66,26 +68,20 @@ class AbstractModeBuilder:
             edges.append((n,v,e,edge))      
         return self._builder.sub_graph(edges,node_attrs)
 
-    def intersection(self,use_edges=False):
+    def node_intersection(self):
         edges = []
         node_attrs = {}
         seens = {}
         key = self._builder.connect_label
-        i_graphs = self._builder.get_internal_graphs(keys_as_ids=True,return_views=True)
+        i_graphs = self._builder.get_internal_graphs(keys_as_ids=True,key=key)
         for n,v,e,k in self._builder.v_edges(keys=True,data=True):
             n_data = self._builder.v_nodes[n]
             v_data = self._builder.v_nodes[v]
             for graph in i_graphs:
-                if use_edges:
-                    try:
-                        graph[n_data[key],v_data[key]]
-                    except KeyError:
-                        break
-                else:
-                    if n_data[key] not in graph:
-                        break
-                    if v_data[key] not in graph:
-                        break            
+                if n_data[key] not in graph:
+                    break
+                if v_data[key] not in graph:
+                    break            
             else:
                 if n_data[key] in seens:
                     n = seens[n_data[key]]
@@ -103,7 +99,27 @@ class AbstractModeBuilder:
                 edges.append((n,v,e,edge))
         return self._builder.sub_graph(edges,node_attrs)
 
-    def difference(self,use_edges=False):
+    def edge_intersection(self):
+        edges = []
+        node_attrs = {}
+        seens = []
+        key = self._builder.connect_label
+        for n,v,e,k in self._builder.v_edges(keys=True,data=True):
+            n_data = self._builder.v_nodes[n]
+            v_data = self._builder.v_nodes[v]
+            pattern = (n_data[key],e,v_data[key])
+            if pattern in seens:
+                continue
+            res = self._builder.view.search(pattern,label_key=key)
+            if len(res) >= self._builder.view.igc:
+                node_attrs[n] = self._builder.v_nodes[n]
+                node_attrs[v] = self._builder.v_nodes[v]
+                edge = self._create_edge_dict(e,**k)
+                edges.append((n,v,e,edge))
+            seens.append(pattern)
+        return self._builder.sub_graph(edges,node_attrs)
+
+    def node_difference(self,use_edges=False):
         edges = []
         node_attrs = {}
         seens = {}
@@ -142,6 +158,25 @@ class AbstractModeBuilder:
             edges.append((n,v,e,edge))
         return self._builder.sub_graph(edges,node_attrs)
         
+    def edge_difference(self):
+        edges = []
+        node_attrs = {}
+        seens = []
+        key = self._builder.connect_label
+        for n,v,e,k in self._builder.v_edges(keys=True,data=True):
+            n_data = self._builder.v_nodes[n]
+            v_data = self._builder.v_nodes[v]
+            pattern = (n_data[key],e,v_data[key])
+            if pattern in seens:
+                continue
+            res = self._builder.view.search(pattern,label_key=key)
+            if len(res) == 1:
+                node_attrs[n] = self._builder.v_nodes[n]
+                node_attrs[v] = self._builder.v_nodes[v]
+                edge = self._create_edge_dict(e,**k)
+                edges.append((n,v,e,edge))
+            seens.append(pattern)
+        return self._builder.sub_graph(edges,node_attrs)
 
     def _create_edge_dict(self,key,weight=1,**kwargs):
         edge = {'weight': weight, 

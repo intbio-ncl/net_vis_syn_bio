@@ -61,11 +61,17 @@ class AbstractBuilder:
     def set_full_view(self):
         self.view = self._view_h.full()
 
-    def set_difference_mode(self,use_edges=False):
-        self.view = self._mode_h.difference(use_edges=use_edges)
+    def set_node_difference_mode(self):
+        self.view = self._mode_h.node_difference()
 
-    def set_intersection_mode(self,use_edges=False):
-        self.view = self._mode_h.intersection(use_edges)
+    def set_edge_difference_mode(self):
+        self.view = self._mode_h.edge_difference()
+
+    def set_node_intersection_mode(self):
+        self.view = self._mode_h.node_intersection()
+
+    def set_edge_intersection_mode(self):
+        self.view = self._mode_h.edge_intersection()
 
     def sub_graph(self, edges=[], node_attrs={}, new_graph=None):
         if not new_graph:
@@ -74,18 +80,18 @@ class AbstractBuilder:
             for k, v in node_attrs.items():
                 new_graph.add_node(k, **v)
         new_graph = self._graph.__class__(new_graph)
+        new_graph.igc = self._graph.igc
         return new_graph
 
     def get_rdf_type(self, subject):
         subject = self._resolve_subject(subject)
         return self._graph.get_rdf_type(subject)
 
-    def get_internal_graphs(self, create_graphs=True, keys_as_ids=False):
+    def get_internal_graphs(self, create_graphs=True, keys_as_ids=False,key="key"):
         if create_graphs:
             graphs = [nx.MultiDiGraph() for index in range(0, self._graph.igc)]
         else:
             graphs = [({}, []) for index in range(0, self._graph.igc)]
-
         seens = {}
         for n, v, e, k in self.edges(keys=True, data=True):
             n_data = self.nodes[n]
@@ -93,19 +99,19 @@ class AbstractBuilder:
 
             assert(n_data["graph_number"] ==
                    v_data["graph_number"] == k["graph_number"])
-            cg = graphs[k["graph_number"]]
+            cg = graphs[k["graph_number"]-1]
 
             if n_data[self.connect_label] in seens:
                 n = seens[n_data[self.connect_label]]
             else:
                 if keys_as_ids:
-                    n = n_data["key"]
+                    n = n_data[key]
                 seens[n_data[self.connect_label]] = n
             if v_data[self.connect_label] in seens:
                 v = seens[v_data[self.connect_label]]
             else:
                 if keys_as_ids:
-                    v = v_data["key"]
+                    v = v_data[key]
                 seens[v_data[self.connect_label]] = v
 
             if create_graphs:
@@ -124,26 +130,25 @@ class AbstractBuilder:
                     cg[0][v] = v_data
                 cg[1].append((n_data[self.connect_label], v_data[self.connect_label], e, k))
         return graphs
-
+    """
     def add_view_graph_numbers(self):
-        graphs = self.get_internal_graphs(keys_as_ids=True)
-        for n, v, e in self.v_edges(keys=True):
-            n_data = self.v_nodes[n]
-            v_data = self.v_nodes[v]
-
-            if "graph_number" not in self.v_nodes[n]:
-                gns = [index for index,graph in graphs if n_data["key"] in graph]
-                print(gns)
-                n_data["graph_number"] = gns
-            if "graph_number" not in self.v_nodes[v]:
-                gns = [index for index,graph in graphs if v_data["key"] in graph]
-                print(gns)
-                v_data["graph_number"] = gns
+        '''
+        Goal: For each n,v,e in graph get the graph number.
+        Nodes already have gns. However, there will likely be duplicates.
+        Can't assume edge will be in main graph.
+        '''
+        for n, v, e, k in self.v_edges(keys=True, data=True):
+            n_data = self.nodes[n]
+            v_data = self.nodes[v]
+            print(n_data)
+            print(v_data)
+            print(e)
+            print(k)
+            print("\n\n")
+            graph_number = []
+            k["graph_number"] = graph_number
+    """
             
-
-
-            
-
     def get_namespace(self, uri):
         split_subject = _split(uri)
         if len(split_subject[-1]) == 1 and split_subject[-1].isdigit():

@@ -1,3 +1,4 @@
+from operator import sub
 import re
 import json
 import networkx as nx
@@ -125,7 +126,7 @@ class AbstractGraph:
     def get_edge_data(self, n, v, e):
         return self.get_edge_data(n, v, e)
 
-    def search(self, pattern, lazy=False):
+    def search(self, pattern, lazy=False,label_key="key"):
         matches = []
         s, p, o = pattern
         if not isinstance(s, (list, set, tuple)):
@@ -137,18 +138,22 @@ class AbstractGraph:
         for subject in s:
             if subject is not None and subject not in self.nodes:
                 subject = self._node_from_attr(subject)
-            for n, v, k in self.edges(subject, keys=True):
-                if not p or k in p:
-                    n_data = self.nodes[n]
-                    v_data = self.nodes[v]
-                    if not o or v_data["key"] in o or v in o:
-                        if lazy:
-                            return ([n, n_data], [v, v_data], k)
-                        matches.append(([n, n_data], [v, v_data], k))
+            else:
+                subject = [subject]
+            for ns in subject:
+                for n, v, k in self.edges(ns, keys=True):
+                    if not p or k in p:
+                        n_data = self.nodes[n]
+                        v_data = self.nodes[v]
+                        if not o or v_data[label_key] in o or v in o:
+                            if lazy:
+                                return ([n, n_data], [v, v_data], k)
+                            matches.append(([n, n_data], [v, v_data], k))
         return matches
 
     def add_graph(self,graph):
         index = self._get_next_index()
+        self.igc += 1
         gn = self.igc
         cur_graph_map = {}
 
@@ -173,7 +178,6 @@ class AbstractGraph:
             v = _handle_node(v,v_data)
             k["graph_number"] = gn
             self.add_edge(n,v,e,**k)
-        self.igc += 1
         
     def add_node(self, n, data):
         self._graph.add_node(n, **data)
@@ -356,10 +360,13 @@ class AbstractGraph:
             return split_subject[-1]
 
     def _node_from_attr(self, attribute):
+        nodes = []
         for n, data in self.nodes(data=True):
             if attribute in data.values():
-                return n
-        raise ValueError("Unable to find.")
+                nodes.append(n)
+        if nodes == []:
+            raise ValueError("Unable to find.")
+        return nodes
 
     def _split(self, uri):
         return re.split('#|\/|:', uri)
