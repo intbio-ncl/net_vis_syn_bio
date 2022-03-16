@@ -192,6 +192,7 @@ def add_intersection(graph,subject,elements):
     return graph
 
 def add_union(graph, subject, union):
+    union = set(union)
     union_node = BNode()
     graph.add((subject, RDF.type, OWL.Class))
     graph.add((subject, OWL.unionOf, union_node))

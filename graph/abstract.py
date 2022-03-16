@@ -68,7 +68,8 @@ class AbstractGraph:
     def __init__(self, graph=None):
         self.igc = 1 if graph else 0
         self._graph = graph if graph else nx.MultiDiGraph()
-
+        print(len(self._graph))
+        print(len(self._graph.edges))
     def __len__(self):
         return len(self._graph)
 
